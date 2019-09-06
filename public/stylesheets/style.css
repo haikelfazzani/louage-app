@@ -1,11 +1,23 @@
-nav {
+.navbar {
   font-family: 'Lato', sans-serif !important;
   padding: 10px 130px !important;
-  height: 84px;
-  box-shadow: 0px 6px 9px 0px rgba(0, 0, 0, 0.06);
+  height: 84px;  
+}
+
+.navbar, .jumbotron {
+  background-color: #ffffff !important;
 }
 
 a {
+  color: #306d80 !important;  
+}
+
+label, .btn, a {
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.display-4 {
+  color: #007bff !important;
+  font-weight: 600;
 }

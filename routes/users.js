@@ -7,6 +7,11 @@ const UtilisateurDao = require('../dao/utilisateurs.dao');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
 
+  res.render('login')
+});
+
+router.get('/lister', function (req, res, next) {
+
   UtilisateurDao.getUsers()
     .then(result => {
       res.json(result);
