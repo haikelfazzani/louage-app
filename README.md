@@ -23,3 +23,6 @@
 ## Gestion des payments
 - [x] effectuer un payment
 - [x] annuler un payment
+  
+  
+![Class Diagram](https://i.ibb.co/x3N11S6/classe.png)
