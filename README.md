@@ -1,28 +1,44 @@
 ## Gestion des utilisateurs
 - [x] Ajout utlisateur
 - [x] supprimer utlisateur
-- [x] modifier utlisateur
+- [ ] modifier utlisateur
 - [x] lister utlisateur
 
 ## Gestion des stations
-- [x] Ajout station
-- [x] supprimer station
-- [x] modifier station
-- [x] lister station
+- [ ] Ajout station
+- [ ] supprimer station
+- [ ] modifier station
+- [ ] lister station
 
 ## Gestion des véhilcules
-- [x] Ajout véhilcule
-- [x] supprimer véhilcule
-- [x] modifier véhilcule
-- [x] lister véhilcule
+- [ ] Ajout véhilcule
+- [ ] supprimer véhilcule
+- [ ] modifier véhilcule
+- [ ] lister véhilcule
 
 ## Gestion des reservations
-- [x] effectuer une reservation
-- [x] annuler une reservation
+- [ ] effectuer une reservation
+- [ ] annuler une reservation
 
 ## Gestion des payments
-- [x] effectuer un payment
-- [x] annuler un payment
+- [ ] effectuer un payment
+- [ ] annuler un payment
   
   
-![Class Diagram](https://i.ibb.co/x3N11S6/classe.png)
+![Class Diagram](https://i.ibb.co/BGXLm6s/classe.png)
+
+## Database
+- [x] utilisateus
+- [x] stations
+- [ ] vehicules
+- [ ] reservations
+- [ ] payments
+
+## Performance
+- [ ] fork app process into clusters
+
+## Security
+- [ ] clickJacking
+- [ ] DDOS attack
+- [ ] DOS attack
+- [ ] CORS
