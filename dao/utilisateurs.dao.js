@@ -7,6 +7,7 @@ const table = {
 }
 
 const UtilisateurDao = {
+
   addUser (email, password, avatar, role) {
     const rq = `INSERT INTO 
     ${table.name} (${table.email}, ${table.password}, ${table.avatar}, ${table.role})
@@ -20,7 +21,35 @@ const UtilisateurDao = {
         else resolve(result)
       })
     })
+  },
+
+  updateUser() {},
+
+  deleteUser(email) {
+    const rq = `delete from ${table.name} where ${table.email} = ?`;
+
+    const sql = SqlString.format(rq, email);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  getUsers() {
+    const sql = `select * from ${table.name}`;
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+
   }
+
 }
 
 module.exports = UtilisateurDao;

@@ -5,8 +5,8 @@ const UtilisateurDao = require('../dao/utilisateurs.dao');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  
-  UtilisateurDao.addUser('admin@gmail.com', '123', '', 'admin')
+
+  UtilisateurDao.getUsers()
   .then(result => console.log(result))
   .catch(err => console.log(err))
 
