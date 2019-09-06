@@ -1,14 +1,25 @@
-<h2>React + Express : SSR</h2>
+## Gestion des utilisateurs
+- [x] Ajout utlisateur
+- [x] supprimer utlisateur
+- [x] modifier utlisateur
+- [x] lister utlisateur
 
-<h4>Scripts</h4>
-<pre><code>
-// client
-"start": "react-scripts start",
-"build": "react-scripts build",
-"test": "react-scripts test",
-"eject": "react-scripts eject",
+## Gestion des stations
+- [x] Ajout station
+- [x] supprimer station
+- [x] modifier station
+- [x] lister station
 
-// server
-"run-server": "node server.js",
-"dev-server": "npm run build && node server.js"
-</code></pre>
+## Gestion des véhilcules
+- [x] Ajout véhilcule
+- [x] supprimer véhilcule
+- [x] modifier véhilcule
+- [x] lister véhilcule
+
+## Gestion des reservations
+- [x] effectuer une reservations
+- [x] annuler une reservations
+
+## Gestion des payments
+- [x] effectuer un payment
+- [x] annuler un payment
