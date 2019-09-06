@@ -17,8 +17,8 @@
 - [x] lister véhilcule
 
 ## Gestion des reservations
-- [x] effectuer une reservations
-- [x] annuler une reservations
+- [x] effectuer une reservation
+- [x] annuler une reservation
 
 ## Gestion des payments
 - [x] effectuer un payment
