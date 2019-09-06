@@ -8,7 +8,10 @@ const table = {
 
 const UtilisateurDao = {
 
-  addUser (email, password, avatar, role) {
+  addUser (User) {
+
+    let { email, password, avatar, role } = User;
+
     const rq = `INSERT INTO 
     ${table.name} (${table.email}, ${table.password}, ${table.avatar}, ${table.role})
     values(?, ? , ? , ?)`;
@@ -23,9 +26,9 @@ const UtilisateurDao = {
     })
   },
 
-  updateUser() {},
+  updateUser () { },
 
-  deleteUser(email) {
+  deleteUser (email) {
     const rq = `delete from ${table.name} where ${table.email} = ?`;
 
     const sql = SqlString.format(rq, email);
@@ -38,7 +41,7 @@ const UtilisateurDao = {
     })
   },
 
-  getUsers() {
+  getUsers () {
     const sql = `select * from ${table.name}`;
 
     return new Promise((resolve, reject) => {
