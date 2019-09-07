@@ -26,14 +26,14 @@
 - [ ] effectuer un payment
 - [ ] annuler un payment
 
+> *Export ticket into PDF* and *Notify user payment*.
+
 ## Aditional fonctionnality (client et chef station)
 - [ ] utilisateur peut cree un compte
 - [ ] utilisateur peut se connecter à son compte
 - [ ] utilisateur consulter son compte
 - [ ] utilisateur peut modifier son compte
 - [ ] utilisateur peut supprimer son compte
-  
-> *Export ticket into PDF* and *Notify user payment*.
 
 ## Database
 - [x] utilisateurs
@@ -44,7 +44,7 @@
 
 ## Performance
 - [ ] fork app process into workers. (Clustering)
-- Hot reload and redirect errors. (App never crash)
+- [ ] Hot reload and redirect errors. (App never crash)
 
 ## Security
 - [ ] CORS
