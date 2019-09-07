@@ -12,10 +12,22 @@ a {
   color: #306d80 !important;  
 }
 
+.btn-primary {
+  border-bottom: 5px solid #286fbb;
+}
+
 label, .btn, a {
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+label {
+  font-size: 14px;
+}
+
+.font-s14 {
+  font-size: 14px !important;
 }
 
 .display-4 {
@@ -32,4 +44,10 @@ label, .btn, a {
     flex-direction: column-reverse;
     padding-top: 0;
     padding-bottom: 0;
+}
+
+
+.form-signin {
+  /*box-shadow: 1px 1px 6px 2px rgb(173, 173, 173);*/
+    padding: 20px;
 }

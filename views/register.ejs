@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Louage</title>
+
+  <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container d-flex flex-column align-items-center mb-5">
+
+    <div class="d-flex flex-column align-items-center mt-3 mb-3">
+      <img src="/img/log.svg" class="flipInX" alt="" width="200">
+    </div>
+
+    <form action="/register" method="POST" class="form-signin w-100 mx-auto mb-3" style="max-width: 400px">
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" id="email" name="email" class="form-control mb-3" placeholder="Entrer votre adresse email"
+          required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" class="form-control"
+          placeholder="Entrer votre mot de passe" required>
+      </div>
+
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">
+          J'accepte les termes et conditions générales et la politique de confidentialité.
+        </label>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block mt-3 font-s14" type="submit">cree un compte</button>
+    </form>
+
+    <a href="/login" class="btn btn-link">J'ai un compte</a>
+
+  </div>
+
+</body>
+
+</html>
