@@ -3,7 +3,7 @@
 let formRegister = document.querySelector('.form-signin');
 //email ou mot de passe incorrect!
 function isPureStr (str) {
-  return /^[a-z0-9@\.\-]*$/gi.test(str)
+  return !!str && (/^[a-z0-9@\.\-]*$/gi.test(str) && str.length > 5)
 }
 
 formRegister.onsubmit = e => {
