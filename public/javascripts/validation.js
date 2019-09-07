@@ -17,7 +17,7 @@ formRegister.onsubmit = e => {
   else {
     let msgForm = document.querySelector('#form-signin');
     msgForm.style.display = 'block';
-    msgForm.textContent = 'Email ou mot de passe contient des charactéres spéciaux';
+    msgForm.textContent = 'Email ou mot de passe contient des charactéres invalide!';
     return false;
   }
 }
