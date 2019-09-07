@@ -51,3 +51,7 @@ label {
   /*box-shadow: 1px 1px 6px 2px rgb(173, 173, 173);*/
     padding: 20px;
 }
+
+#form-signin {
+  display: none;
+}
