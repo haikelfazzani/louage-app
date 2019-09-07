@@ -62,3 +62,6 @@
 - h_depart -> heure de depart
 - d_depart -> date de depart
 - dc_payment -> date complet de payment (2019:06:06T10:25:40)
+
+## Bugs
+- Database Connection lost: The server closed the connection. (Fixed)
