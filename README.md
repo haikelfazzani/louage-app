@@ -36,11 +36,11 @@
 - [ ] utilisateur peut supprimer son compte
 
 ## Database
-- [x] utilisateurs (id, email, password, avatar, role)
-- [x] stations (id_station, nom_station, ville, #id_utilisateur)
-- [ ] vehicules (id_vehicule, num_serie, destination, nb_places, h_depart, d_depart, prix_place, #id_station)
-- [ ] reservations (nb_place_reserv, #id_utilisateur, #vehicule)
-- [ ] payments (id_payment, nom, prenom, tel, dc_payment, #reservation)
+- [x] **utilisateurs** (id, email, password, avatar, role)
+- [x] **stations** (id_station, nom_station, ville, #id_utilisateur)
+- [ ] **vehicules** (id_vehicule, num_serie, destination, nb_places, h_depart, d_depart, prix_place, #id_station)
+- [ ] **reservations** (nb_place_reserv, #id_utilisateur, #vehicule)
+- [ ] **payments** (id_payment, nom, prenom, tel, dc_payment, #reservation)
 
 ## Performance
 - [ ] fork app process into workers. (Clustering)
