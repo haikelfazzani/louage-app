@@ -1,3 +1,5 @@
+![Class Diagram](https://i.ibb.co/BGXLm6s/classe.png)  
+
 ## Gestion des utilisateurs
 - [x] Ajout utlisateur
 - [x] supprimer utlisateur
@@ -24,8 +26,8 @@
 - [ ] effectuer un payment
 - [ ] annuler un payment
   
-  
-![Class Diagram](https://i.ibb.co/BGXLm6s/classe.png)
+> *Export ticket into PDF*
+> *Notify user payment*
 
 ## Database
 - [x] utilisateus
@@ -35,10 +37,16 @@
 - [ ] payments
 
 ## Performance
-- [ ] fork app process into clusters
+- [ ] fork app process into workers. (Clustering)
 
 ## Security
+- [ ] CORS
+- [ ] password hashing
 - [ ] clickJacking
 - [ ] DDOS attack
 - [ ] DOS attack
-- [ ] CORS
+- [ ] CSRF
+- [ ] XSS
+
+## Additional
+- [ ] visitor reporting. (Charting)
