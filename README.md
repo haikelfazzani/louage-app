@@ -37,10 +37,10 @@
 
 ## Database
 - [x] utilisateurs (id, email, password, avatar, role)
-- [x] stations (id_station, nom_station, ville)
-- [ ] vehicules (id_vehicule, num_serie, destination, h_depart, d_depart, prix_place)
-- [ ] reservations (nb_place_reserv)
-- [ ] payments (id_payment, nom, prenom, tel, dc_payment)
+- [x] stations (id_station, nom_station, ville, #id_utilisateur)
+- [ ] vehicules (id_vehicule, num_serie, destination, nb_places, h_depart, d_depart, prix_place, #id_station)
+- [ ] reservations (nb_place_reserv, #id_utilisateur, #vehicule)
+- [ ] payments (id_payment, nom, prenom, tel, dc_payment, #reservation)
 
 ## Performance
 - [ ] fork app process into workers. (Clustering)
