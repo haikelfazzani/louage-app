@@ -36,11 +36,11 @@
 - [ ] utilisateur peut supprimer son compte
 
 ## Database
-- [x] utilisateurs
-- [x] stations
-- [ ] vehicules
-- [ ] reservations
-- [ ] payments
+- [x] utilisateurs (id, email, password, avatar, role)
+- [x] stations (id_station, nom_station, ville)
+- [ ] vehicules (id_vehicule, num_serie, destination, h_depart, d_depart, prix_place)
+- [ ] reservations (nb_place_reserv)
+- [ ] payments (id_payment, nom, prenom, tel, dc_payment)
 
 ## Performance
 - [ ] fork app process into workers. (Clustering)
@@ -57,3 +57,8 @@
 
 ## Additional
 - [ ] visitor reporting. (Charting)
+
+## Notes
+- h_depart -> heure de depart
+- d_depart -> date de depart
+- dc_payment -> date complet de payment (2019:06:06T10:25:40)
