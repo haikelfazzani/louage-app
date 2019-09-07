@@ -8,9 +8,30 @@
   background-color: #ffffff !important;
 }
 
-a {
-  color: #306d80 !important;  
+.nav-link {
+  position: relative;
+  color: #7782aa !important;  
+  transition: all .4s ease;
 }
+
+.nav-link:hover, .nav-link:active {
+  color: #292929 !important;  
+  transition: all .4s ease;
+}
+
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #000;
+  transition: width .3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
 
 .btn-primary {
   border-bottom: 5px solid #286fbb;
@@ -54,4 +75,19 @@ label {
 
 #form-signin {
   display: none;
+}
+
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    padding: 20px !important; 
+  }
+
+  .front-img {
+    display: none;
+  }
+
+  .display-4 {
+    font-size: 30px !important;
+  }
 }
