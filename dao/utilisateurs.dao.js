@@ -26,10 +26,12 @@ const UtilisateurDao = {
     })
   },
 
-  updateUser (email, password) { 
-    const rq = `update ${table.name} set ${table.email} = ? and ${table.password} = ?`;
+  updateUser (email, password) {
+    const rq = `update ${table.name} 
+    set ${table.password} = ? 
+    where ${table.email} = ? `;
 
-    const sql = SqlString.format(rq, email, password);
+    const sql = SqlString.format(rq, [password, email]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -52,7 +54,7 @@ const UtilisateurDao = {
     })
   },
 
-  getUser(email) {
+  getUser (email) {
     const rq = `select * from ${table.name} where ${table.email} = ? limit 1`;
 
     const sql = SqlString.format(rq, email);

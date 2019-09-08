@@ -3,7 +3,7 @@
 let formRegister = document.querySelector('.form-signin');
 //email ou mot de passe incorrect!
 function isPureStr (str) {
-  return !!str && (/^[a-z0-9@\.\-]*$/gi.test(str) && str.length > 5)
+  return (/^[a-z0-9@\.\-]*$/gi.test(str) && str.length > 5)
 }
 
 formRegister.onsubmit = e => {
@@ -17,7 +17,12 @@ formRegister.onsubmit = e => {
   else {
     let msgForm = document.querySelector('#form-signin');
     msgForm.style.display = 'block';
-    msgForm.textContent = 'Email ou mot de passe contient des charactéres invalide!';
+    msgForm.textContent = 'Email ou mot de passe invalide!';
+
+    setTimeout(() => {
+      msgForm.style.display = 'none';
+    }, 3000);
+    
     return false;
   }
 }

@@ -6,10 +6,10 @@
 - [x] lister des utlisateurs
 
 ## Gestion des stations (admin)
-- [ ] Ajout station
+- [x] Ajout station
 - [ ] supprimer station
 - [ ] modifier station
-- [ ] lister station
+- [x] lister station
 
 ## Gestion des véhilcules (chef stations)
 - [ ] Ajout véhilcule
@@ -32,7 +32,7 @@
 - [x] utilisateur peut se connecter à son compte
 - [x] utilisateur consulter son compte
 - [x] utilisateur peut modifier son compte
-- [x] utilisateur peut supprimer son compte
+- [ ] utilisateur peut supprimer son compte
 
 ## Database
 - [x] **utilisateurs** (id, email, password, avatar,tel, role)

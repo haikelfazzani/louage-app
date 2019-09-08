@@ -27,6 +27,9 @@ app.use('/register',  require('./routes/register'));
 app.use('/user/profile',  require('./routes/users/profile'));
 app.use('/users',  require('./routes/users'));
 
+
+app.use('/admin/station',  require('./routes/admin/station'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
