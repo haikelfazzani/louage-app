@@ -28,7 +28,8 @@ app.use('/user/profile',  require('./routes/users/profile'));
 app.use('/users',  require('./routes/users'));
 
 
-app.use('/admin/station',  require('./routes/admin/station'));
+app.use('/admin/stations',  require('./routes/admin/stations'));
+app.use('/admin/utilisateurs',  require('./routes/admin/utilisateurs'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
