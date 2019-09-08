@@ -16,15 +16,15 @@ const localDB = {
 
 const db = mysql.createConnection(remoteDB);
 
-db.connect(async (err) => {
-    if (err) {
-        setInterval(() => {
-            db.query('SELECT 1', (err, rows) => {
-                if (err) throw err;
-            });
-        }, 1000);
-    };
-    await console.log("connected")
+db.connect((err) => {
+
+    setInterval(() => {
+        db.query('SELECT 1', (err, rows) => {
+            if (err) throw err;
+        });
+    }, 1000);
+
+    console.log(err || 'connected')
 });
 
 module.exports = db;
