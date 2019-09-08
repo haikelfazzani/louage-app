@@ -29,8 +29,8 @@
 > *Export ticket into PDF* and *Notify user payment*.
 
 ## Aditional fonctionnality (client et chef station)
-- [ ] utilisateur peut cree un compte
-- [ ] utilisateur peut se connecter à son compte
+- [x] utilisateur peut cree un compte
+- [x] utilisateur peut se connecter à son compte
 - [ ] utilisateur consulter son compte
 - [ ] utilisateur peut modifier son compte
 - [ ] utilisateur peut supprimer son compte

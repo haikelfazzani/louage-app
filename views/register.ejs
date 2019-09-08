@@ -49,6 +49,12 @@
 
     <div class="alert alert-danger" id="form-signin" role="alert">alter</div>
 
+    <% if(locals.msg) { %>
+    <div class="alert alert-primary" role="alert">
+      <%= msg %> <a href="/login" class="font-s14">Se connecter</a>
+    </div>
+    <% } %>
+
     <a href="/login" class="btn btn-link">J'ai un compte</a>
 
   </div>

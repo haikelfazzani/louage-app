@@ -41,6 +41,18 @@ const UtilisateurDao = {
     })
   },
 
+  getUser(email) {
+    const rq = `select * from ${table.name} where ${table.email} = ? limit 1`;
+
+    const sql = SqlString.format(rq, email);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
   getUsers () {
     const sql = `select * from ${table.name}`;
 
