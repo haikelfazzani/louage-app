@@ -3,7 +3,6 @@
 ## Gestion des utilisateurs (admin)
 - [x] Ajout utlisateur
 - [x] supprimer un utlisateur
-- [ ] modifier compte d'un utlisateur
 - [x] lister des utlisateurs
 
 ## Gestion des stations (admin)
@@ -28,12 +27,12 @@
 
 > *Export ticket into PDF* and *Notify user payment*.
 
-## Aditional fonctionnality (client et chef station)
+## Aditional fonctionnality (Admin, client et chef station)
 - [x] utilisateur peut cree un compte
 - [x] utilisateur peut se connecter à son compte
-- [ ] utilisateur consulter son compte
-- [ ] utilisateur peut modifier son compte
-- [ ] utilisateur peut supprimer son compte
+- [x] utilisateur consulter son compte
+- [x] utilisateur peut modifier son compte
+- [x] utilisateur peut supprimer son compte
 
 ## Database
 - [x] **utilisateurs** (id, email, password, avatar,tel, role)
@@ -47,6 +46,7 @@
 - [ ] Hot reload and redirect errors. (App never crash)
 
 ## Security
+- [ ] JWT Auth
 - [ ] CORS
 - [ ] Password attack (hashing)
 - [ ] ClickJacking attack
@@ -57,6 +57,8 @@
 
 ## Additional
 - [ ] visitor reporting. (Charting)
+- [ ] Facebook login
+- [ ] Google login
 
 ## Notes
 - h_depart -> heure de depart
@@ -64,4 +66,4 @@
 - dc_payment -> date complet de payment (2019:06:06T10:25:40)
 
 ## Bugs
-- Database Connection lost: The server closed the connection. (Fixed)
+- [x] Database Connection lost: The server closed the connection. (Fixed)

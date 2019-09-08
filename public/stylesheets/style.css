@@ -1,3 +1,20 @@
+/* Util */
+.font-s14 {
+  font-size: 14px !important;
+}
+
+.display-4 {
+  font-size: 70px !important;
+  color: #007bff !important;
+  font-weight: 600;
+}
+
+.mw-400 {
+  max-width: 400px;
+}
+
+/* End Util */
+
 h2 {
   border-bottom: 2px solid #4d4d4d;
   color: #3a3a3a;
@@ -53,16 +70,6 @@ label, .btn, a {
 
 label {
   font-size: 14px;
-}
-
-.font-s14 {
-  font-size: 14px !important;
-}
-
-.display-4 {
-  font-size: 70px !important;
-  color: #007bff !important;
-  font-weight: 600;
 }
 
 .container-v50 {

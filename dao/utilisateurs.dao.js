@@ -26,7 +26,18 @@ const UtilisateurDao = {
     })
   },
 
-  updateUser () { },
+  updateUser (email, password) { 
+    const rq = `update ${table.name} set ${table.email} = ? and ${table.password} = ?`;
+
+    const sql = SqlString.format(rq, email, password);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
 
   deleteUser (email) {
     const rq = `delete from ${table.name} where ${table.email} = ?`;
