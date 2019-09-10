@@ -1,0 +1,29 @@
+<h2>Ajout utilisateur</h2>
+<form action="/admin/station/ajout" method="POST">
+
+  <div class="form-group">
+    <label for="nom">email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password">password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Enter mot de passe" required>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Role d'utilisateur</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option value="admin">admin</option>
+      <option value="chef_station">chef_station</option>
+      <option value="client">client</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-success">Ajout</button>
+  <button type="reset" class="btn btn-danger">vider</button>
+</form>
+
+<% if(locals.msg) { %>
+<div class="alert alert-primary" role="alert"><%= msg %></div>
+<% } %>
