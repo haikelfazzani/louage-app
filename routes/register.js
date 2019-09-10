@@ -9,14 +9,14 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
 
   let { email, password } = req.body;
-  let User = new UtilisateurModel(email, password, '', 'client')
+  let User = new UtilisateurModel('', '', email, password, '', 'client')
 
   UtilisateurDao.addUser(User)
     .then(result => {
-      
+
       if (Object.keys(result).length > 0 && result.affectedRows > 0) {
-        res.render('register', { 
-          msg: 'vous êtes maintenant inscrit' 
+        res.render('register', {
+          msg: 'vous êtes maintenant inscrit'
         })
       }
     })

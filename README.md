@@ -1,4 +1,4 @@
-![Class Diagram](https://i.ibb.co/Dg4Z7j2/classe.png)  
+![Class Diagram](https://i.ibb.co/sC4tjX4/classe.png)  
 
 ## Gestion des utilisateurs (admin)
 - [x] Ajout utlisateur

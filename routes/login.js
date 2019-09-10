@@ -12,8 +12,7 @@ router.post('/', function (req, res) {
 
   UtilisateurDao.getUser(email)
     .then(result => {
-      if (email === result[0].email && password === result[0].password) {
-        console.log('im her.....................')
+      if (email === result[0].email && password === result[0].password) {        
         res.redirect('/')
       }
       else {

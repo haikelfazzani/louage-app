@@ -7,7 +7,7 @@ var utilisateurDao = require('../../dao/utilisateurs.dao');
 router.post('/ajout', function (req, res) {
   let { email, password, role } = req.body;
 
-  let utilisateur = new Utilisateur(email, password, '', role);
+  let utilisateur = new Utilisateur('', '', email, password, '', role);
 
   utilisateurDao.addUser(utilisateur)
     .then(result => {
