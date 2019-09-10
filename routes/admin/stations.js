@@ -1,21 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-  res.render('admin/stations');
-});
+var Station = require('../../model/Station.model');
+var stationDao = require('../../dao/stations.dao');
 
 router.post('/ajout', function (req, res) {
-  res.render('admin/stations');
+  res.render('admin/index');
 });
 
 router.post('/modifier', function (req, res) {
-  res.render('admin/stations');
+  res.render('admin/index');
 });
 
 
 router.post('/supprimer', function (req, res) {
-  res.render('admin/stations');
+  res.render('admin/index');
 });
 
 

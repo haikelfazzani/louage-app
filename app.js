@@ -27,7 +27,8 @@ app.use('/register',  require('./routes/register'));
 app.use('/user/profile',  require('./routes/users/profile'));
 app.use('/users',  require('./routes/users'));
 
-
+// admin routes
+app.use('/admin', require('./routes/admin/admin.route'))
 app.use('/admin/stations',  require('./routes/admin/stations'));
 app.use('/admin/utilisateurs',  require('./routes/admin/utilisateurs'));
 

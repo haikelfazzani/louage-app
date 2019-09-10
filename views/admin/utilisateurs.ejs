@@ -1,91 +1,70 @@
-<%- include('../partials/head.ejs') -%>
+<div class="row">
 
-<div class="jumbotron container-v50">
-  <div class="container py-5">
+  <div class="col-md-12 mb-3">
+    <h2>Ajout utilisateur</h2>
+    <form action="/admin/station/ajout" method="POST">
 
-    <div class="row">
-
-      <div class="col-md-4">
-        <h2>Ajout utilisateur</h2>
-        <form action="/admin/station/ajout" method="POST">
-
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Chef station</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-
-
-          <div class="form-group">
-            <label for="nom">nom station</label>
-            <input type="text" class="form-control" id="nom" name="nom" placeholder="Enter nom station" required>
-          </div>
-
-          <div class="form-group">
-            <label for="ville">ville</label>
-            <input type="text" class="form-control" id="ville" name="ville" placeholder="Enter ville" required>
-          </div>
-
-          <div class="form-group">
-            <label for="tel">tel</label>
-            <input type="text" class="form-control" id="tel" name="tel" placeholder="Enter tel station" required>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Ajout</button>
-          <button type="reset" class="btn btn-danger">vider</button>
-        </form>
-
-        <% if(locals.msg) { %>
-        <div class="alert alert-primary" role="alert"><%= msg %></div>
-        <% } %>
-
+      <div class="form-group">
+        <label for="nom">email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
       </div>
 
-      <div class="col-md-8">
-        <h2>Liste des utilisateurs</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="form-group">
+        <label for="password">password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter mot de passe"
+          required>
       </div>
 
-    </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Role d'utilisateur</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option value="admin">admin</option>
+          <option value="chef_station">chef_station</option>
+          <option value="client">client</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success">Ajout</button>
+      <button type="reset" class="btn btn-danger">vider</button>
+    </form>
+
+    <% if(locals.msg) { %>
+    <div class="alert alert-primary" role="alert"><%= msg %></div>
+    <% } %>
 
   </div>
+
+  <div class="col-md-12">
+    <h2>Liste des utilisateurs</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
-
-<div class="container">
-
-</div>
-
-<%- include('../partials/footer.ejs') -%>
