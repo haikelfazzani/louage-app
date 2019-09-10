@@ -1,4 +1,4 @@
-![Class Diagram](https://i.ibb.co/BGXLm6s/classe.png)  
+![Class Diagram](https://i.ibb.co/Dg4Z7j2/classe.png)  
 
 ## Gestion des utilisateurs (admin)
 - [x] Ajout utlisateur
@@ -7,8 +7,8 @@
 
 ## Gestion des stations (admin)
 - [x] Ajout station
-- [ ] supprimer station
-- [ ] modifier station
+- [x] supprimer station
+- [x] modifier station
 - [x] lister station
 
 ## Gestion des véhilcules (chef stations)

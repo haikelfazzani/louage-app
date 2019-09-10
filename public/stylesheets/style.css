@@ -13,34 +13,49 @@
   max-width: 400px;
 }
 
-/* End Util */
-
-h2 {
-  border-bottom: 2px solid #4d4d4d;
-  color: #3a3a3a;
-  padding-bottom: 20px;
-  margin-bottom: 40px;
-  font-weight: 600;
+.page-header {
+  background: #1f2532;
+  padding: 50px 0;
+  text-align: center;
+  color: #fff;
+  position: relative;
 }
 
+.bread {
+  display: inline-block;
+}
+
+.bread a {
+  font-size: 14px;
+  font-weight: 100;  
+  color: #707d8f !important;
+  text-decoration: none;
+}
+
+.bread a:first-child { color: #007bff !important; }
+
+/* End Util */
+
 .navbar {
+  background-color: #1f2532 !important;
   font-family: 'Lato', sans-serif !important;
   padding: 10px 130px !important;
   height: 84px;  
 }
 
-.navbar, .jumbotron {
+.jumbotron {
   background-color: #ffffff !important;
 }
 
 .nav-link {
+  font-size: 14px !important;
   position: relative;
-  color: #7782aa !important;  
+  color: #707d8f !important;  
   transition: all .4s ease;
 }
 
 .nav-link:hover, .nav-link:active {
-  color: #292929 !important;  
+  color: #ffffff !important;  
   transition: all .4s ease;
 }
 
@@ -49,7 +64,7 @@ h2 {
   display: block;
   width: 0;
   height: 3px;
-  background: #000;
+  background: rgb(255, 255, 255);
   transition: width .3s;
 }
 
@@ -97,7 +112,6 @@ label {
   max-width: 300px;
   box-shadow: 0 2px 5px 0 rgba(19,41,104,.2);
 }
-
 
 @media screen and (max-width: 600px) {
   .navbar {
