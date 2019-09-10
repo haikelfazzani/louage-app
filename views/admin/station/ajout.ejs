@@ -1,16 +1,16 @@
-<h2>Ajout station</h2>
-<form action="/admin/station/ajout" method="POST" class="form-bg-gray">
+<% if(locals.chefStations) { %>
 
+<h2>Ajout station</h2>
+<form action="/admin/stations/ajout" method="POST" class="form-signin form-bg-gray">
+
+  <% chefStations.forEach(chef => { %>  
   <div class="form-group">
     <label for="exampleFormControlSelect1">Chef station</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+    <select class="form-control" id="exampleFormControlSelect1" name="chef">
+      <option value="<%= chef.id %>"><%= chef.email %></option>
     </select>
   </div>
+  <% })%>
 
 
   <div class="form-group">
@@ -34,4 +34,6 @@
 
 <% if(locals.msg) { %>
 <div class="alert alert-primary" role="alert"><%= msg %></div>
+<% } %>
+
 <% } %>

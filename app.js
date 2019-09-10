@@ -25,7 +25,6 @@ app.use('/login',  require('./routes/login'));
 app.use('/register',  require('./routes/register'));
 
 app.use('/user/profile',  require('./routes/users/profile'));
-app.use('/users',  require('./routes/users'));
 
 // admin routes
 app.use('/admin', require('./routes/admin/admin.route'))
@@ -47,5 +46,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+app.get('*', (req, res) => { res.redirect('/')})
 
 module.exports = app;

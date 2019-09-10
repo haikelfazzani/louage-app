@@ -16,7 +16,8 @@ module.exports = StationsDao = {
 
     let { nomStation, ville, tel, chefStation } = Station;
 
-    const rq = `INSERT INTO ${table.nomStation} (${table.ville}, ${table.tel}, ${table.chefStation})
+    const rq = `INSERT INTO ${table.name} 
+    (${table.nomStation}, ${table.ville}, ${table.tel}, ${table.chefStation})
     values(?, ? , ? , ?)`;
 
     const sql = SqlString.format(rq, [nomStation, ville, tel, chefStation]);
@@ -74,7 +75,8 @@ module.exports = StationsDao = {
     })
   },
   getStations () {
-    const sql = `select * from ${table.name}`;
+    const sql = `select * from ${table.name} t join utilisateurs u
+    on t.chef_station = u.id`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

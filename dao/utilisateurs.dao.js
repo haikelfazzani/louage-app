@@ -54,8 +54,21 @@ const UtilisateurDao = {
     })
   },
 
+  getUserByRole(role) {
+    const rq = `select * from ${table.name} where ${table.role} = ?`;
+
+    const sql = SqlString.format(rq, role);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
   getUser (email) {
-    const rq = `select * from ${table.name} where ${table.email} = ? limit 1`;
+    const rq = `select * from ${table.name} where ${table.email} = ?`;
 
     const sql = SqlString.format(rq, email);
 
@@ -66,6 +79,7 @@ const UtilisateurDao = {
       })
     })
   },
+
   getUsers () {
     const sql = `select * from ${table.name}`;
 
@@ -77,7 +91,6 @@ const UtilisateurDao = {
     })
 
   }
-
 }
 
 module.exports = UtilisateurDao;
