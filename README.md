@@ -1,9 +1,5 @@
 ![Class Diagram](https://i.ibb.co/BGXLm6s/classe.png)  
 
-##diagramme de classe proposition Bilel 
-
-https://api.genmymodel.com/projects/_Vi8foNQoEem_DuabqFUAEg/diagrams/_Vi8fo9QoEem_DuabqFUAEg/svg
-
 ## Gestion des utilisateurs (admin)
 - [x] Ajout utlisateur
 - [x] supprimer un utlisateur
