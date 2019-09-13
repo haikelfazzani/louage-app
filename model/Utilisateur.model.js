@@ -8,5 +8,4 @@ module.exports = class UtilisateurModel {
     this.avatar = avatar || '';
     this.role = role || '';
   }
-
 }

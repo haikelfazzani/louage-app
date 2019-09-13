@@ -6,5 +6,4 @@ module.exports = class StationModel {
     this.tel = tel || '';
     this.chefStation = chefStation || '';
   }
-
 }
