@@ -67,3 +67,5 @@
 
 ## Bugs
 - [x] Database Connection lost: The server closed the connection. (Fixed)
+
+## Tests

@@ -34,29 +34,18 @@ module.exports = VehiculesDao = {
     })
   },
 
-  updateVehicule (Vehicule) {
+  updateVehicule (conducteur) {
     let { conducteur, destination, nbrPlace, heurDepart, dateDepart, prixPalce, idStation } = Vehicule;
 
     const rq = `update ${table.name} 
-    set ${table.ville} = ? ,
-        ${table.tel} = ?,
-        ${table.chefVehicule} = ?
-    where ${table.nomVehicule} = ? `;
+    set ${table.destination} = ? ,
+        ${table.nbrPlace} = ?,
+        ${table.heurDepart} = ?,
+        ${table.dateDepart} = ?,
+        ${table.prixPalce} = ?
+    where ${table.conducteur} = ? `;
 
-    const sql = SqlString.format(rq, [ville, tel, chefVehicule, nomVehicule]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
-  },
-
-  deletVehicule (nomVehicule) {
-    const rq = `delete from ${table.name} where ${table.nomVehicule} = ?`;
-
-    const sql = SqlString.format(rq, nomVehicule);
+    const sql = SqlString.format(rq, [destination, nbrPlace, heurDepart, dateDepart, prixPalce, conducteur]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -66,10 +55,23 @@ module.exports = VehiculesDao = {
     })
   },
 
-  getVehicule (nomVehicule) {
-    const rq = `select * from ${table.name} where ${table.nomVehicule} = ? limit 1`;
+  deletVehicule (conducteur) {
+    const rq = `delete from ${table.name} where ${table.conducteur} = ?`;
 
-    const sql = SqlString.format(rq, nomVehicule);
+    const sql = SqlString.format(rq, conducteur);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  getVehicule (conducteur) {
+    const rq = `select * from ${table.name} where ${table.conducteur} = ?`;
+
+    const sql = SqlString.format(rq, conducteur);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -80,8 +82,7 @@ module.exports = VehiculesDao = {
   },
 
   getVehicules () {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.chef_station = u.id`;
+    const sql = `select * from ${table.name} t join stations u on t.id_vehicule = u.id_vehicule`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
