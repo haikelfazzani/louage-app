@@ -13,9 +13,9 @@
 
 ## Gestion des véhilcules (chef stations)
 - [x] Ajout véhilcule
-- [ ] supprimer véhilcule
-- [ ] modifier véhilcule
-- [ ] lister véhilcule
+- [x] supprimer véhilcule
+- [x] modifier véhilcule
+- [x] lister véhilcule
 
 ## Gestion des reservations (client)
 - [ ] effectuer une reservation
