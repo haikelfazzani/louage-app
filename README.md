@@ -12,7 +12,7 @@
 - [x] lister station
 
 ## Gestion des véhilcules (chef stations)
-- [ ] Ajout véhilcule
+- [x] Ajout véhilcule
 - [ ] supprimer véhilcule
 - [ ] modifier véhilcule
 - [ ] lister véhilcule
@@ -37,7 +37,7 @@
 ## Database
 - [x] **utilisateurs** (id, nom, prenom, email, password, avatar, tel, role)
 - [x] **stations** (id_station, nom_station, ville, #id_utilisateur)
-- [ ] **vehicules** (id_vehicule, num_serie, destination, nb_places, h_depart, d_depart, prix_place, tel, #id_station)
+- [x] **vehicules** (id_vehicule, num_serie, destination, nb_places, h_depart, d_depart, prix_place, tel, #id_station)
 - [ ] **reservations** (nb_place_reserv, #id_utilisateur, #vehicule)
 - [ ] **payments** (id_payment, nom, prenom, tel, dc_payment, #reservation)
 
