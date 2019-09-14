@@ -20,10 +20,9 @@ router.post('/', function (req, res) {
         })
       }
     })
-    .catch(error => {
+    .catch(error => {      
       res.render('register', { msg: 'vous êtes deja inscrit!' })
     })
 });
-
 
 module.exports = router;

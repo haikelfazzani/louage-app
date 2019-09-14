@@ -2,7 +2,6 @@ var router = require('express').Router();
 var UtilisateurDao = require('../dao/utilisateurs.dao');
 
 router.get('/', function (req, res) {
-
   res.render('login')
 });
 
@@ -20,6 +19,7 @@ router.post('/', function (req, res) {
       }
     })
     .catch(error => {
+      if(req.app.get('env') === 'development') console.log(error)
       res.render('login', {
         msg: 'Impossible de se connecter pour le moment. Veuillez réessayer ultérieurement!'
       })
