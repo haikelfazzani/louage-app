@@ -27,12 +27,14 @@
 
 .bread a {
   font-size: 14px;
-  font-weight: 100;  
+  font-weight: 100;
   color: #707d8f !important;
   text-decoration: none;
 }
 
-.bread a:first-child { color: #007bff !important; }
+.bread a:first-child {
+  color: #007bff !important;
+}
 
 /* End Util */
 
@@ -40,11 +42,11 @@
   background-color: #1f2532 !important;
   font-family: 'Lato', sans-serif !important;
   padding: 10px 130px !important;
-  height: 84px;  
+  height: 84px;
 }
 
 .jumbotron {
-  background-color: #ffffff !important;
+  background-color: #eaeaea !important;
 }
 
 h2 {
@@ -57,12 +59,13 @@ h2 {
 .nav-link {
   font-size: 14px !important;
   position: relative;
-  color: #707d8f !important;  
+  color: #707d8f !important;
   transition: all .4s ease;
 }
 
-.nav-link:hover, .nav-link:active {
-  color: #ffffff !important;  
+.nav-link:hover,
+.nav-link:active {
+  color: #ffffff !important;
   transition: all .4s ease;
 }
 
@@ -84,7 +87,9 @@ h2 {
   border-bottom: 5px solid #286fbb;
 }
 
-label, .btn, a {
+label,
+.btn,
+a {
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   text-transform: uppercase;
@@ -95,19 +100,19 @@ label {
 }
 
 .container-v50 {
-  min-height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column-reverse;
-    padding-top: 0;
-    padding-bottom: 0;
+  min-height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column-reverse;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 
 .form-signin {
   /*box-shadow: 1px 1px 6px 2px rgb(173, 173, 173);*/
-    padding: 20px;
+  padding: 20px;
 }
 
 #form-signin {
@@ -121,12 +126,12 @@ label {
 
 .img-profile {
   max-width: 300px;
-  box-shadow: 0 2px 5px 0 rgba(19,41,104,.2);
+  box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
 }
 
 @media screen and (max-width: 600px) {
   .navbar {
-    padding: 20px !important; 
+    padding: 20px !important;
   }
 
   .front-img {

@@ -60,7 +60,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #eaeaea;
 }
 
 [tabindex="-1"]:focus {
@@ -1515,6 +1515,7 @@ pre code {
   width: 100%;
   margin-bottom: 1rem;
   color: #212529;
+  background-color: #ffffff;
 }
 
 .table th,
