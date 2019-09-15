@@ -4,10 +4,25 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var nodeFileEnv = require('node-file-env');
+var session = require('express-session')
 
 var app = express();
 
 nodeFileEnv().load();
+
+app.use(session({
+  secret: 'my-secret-code',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+app.use(function (req, res, next) {
+  if(req.session['userInfo'] && Object.keys(req.session.userInfo).length > 0) {
+    res.locals.userInfo = req.session.userInfo
+  }
+  next()
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/login',  require('./routes/login'));
 app.use('/register',  require('./routes/register'));
+app.use('/se-deconnecter',  require('./routes/deconnecter'));
 
 app.use('/user/profile',  require('./routes/users/profile'));
 

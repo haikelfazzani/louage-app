@@ -11,7 +11,8 @@ router.post('/', function (req, res) {
 
   UtilisateurDao.getUser(email)
     .then(result => {
-      if (email === result[0].email && password === result[0].password) {        
+      if (email === result[0].email && password === result[0].password) {  
+        req.session.userInfo = { email, password };     
         res.redirect('/')
       }
       else {
@@ -19,15 +20,11 @@ router.post('/', function (req, res) {
       }
     })
     .catch(error => {
-      if(req.app.get('env') === 'development') console.log(error)
+      console.log(error)
       res.render('login', {
         msg: 'Impossible de se connecter pour le moment. Veuillez réessayer ultérieurement!'
       })
     })
 });
-
-
-
-process.env.bilel
 
 module.exports = router;
