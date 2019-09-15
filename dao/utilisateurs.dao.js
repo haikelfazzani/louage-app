@@ -3,7 +3,10 @@ var SqlString = require('sqlstring');
 
 const table = {
   name: 'utilisateurs',
-  id: 'id', email: 'email', password: 'password', avatar: 'avatar', role: 'role'
+  id: 'id',
+  nom: 'nom', prenom: 'prenom',
+  email: 'email', password: 'password',
+  avatar: 'avatar', role: 'role'
 }
 
 const UtilisateurDao = {
@@ -26,12 +29,17 @@ const UtilisateurDao = {
     })
   },
 
-  updateUser (email, password) {
+  updateUser (user) {
+
+    let { nom, prenom, email, password } = user;
+
     const rq = `update ${table.name} 
-    set ${table.password} = ? 
+    set ${table.password} = ? ,
+        ${table.nom} = ? ,
+        ${table.prenom} = ? 
     where ${table.email} = ? `;
 
-    const sql = SqlString.format(rq, [password, email]);
+    const sql = SqlString.format(rq, [nom, prenom, password, email]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -54,7 +62,7 @@ const UtilisateurDao = {
     })
   },
 
-  getUserByRole(role) {
+  getUserByRole (role) {
     const rq = `select * from ${table.name} where ${table.role} = ?`;
 
     const sql = SqlString.format(rq, role);
