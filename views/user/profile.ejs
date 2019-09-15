@@ -20,13 +20,26 @@
         <img src="/img/profile.png" alt="profile image" class="img-thumbnail img-profile">
       </div>
 
+      <% if(locals.userInfo) { %>
       <div class="col-md-8">
         <form action="/user/profile" method="POST" class="form-signin p-0 mb-3">
 
           <div class="form-group">
-            <label for="email">Email address</label>
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="nom"
+              placeholder="Entrer nom" value="<%= userInfo.nom  %>" required>
+          </div>
+
+          <div class="form-group">
+            <label for="prenom">prenom</label>
+            <input type="text" class="form-control" name="prenom" id="prenom"
+              placeholder="Entrer prenom" value="<%= userInfo.prenom  %>" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email adresse</label>
             <input type="email" class="form-control" name="email" id="email"
-              placeholder="Enter email" required readonly>
+              placeholder="Entrer email" value="<%= userInfo.email  %>" required>
           </div>
 
           <div class="form-group">
@@ -47,6 +60,7 @@
 
 
       </div>
+      <% } %>
 
     </div>
 
