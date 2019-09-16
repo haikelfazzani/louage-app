@@ -1,4 +1,4 @@
-![Class Diagram](https://i.ibb.co/sC4tjX4/classe.png)  
+![Class Diagram](https://i.ibb.co/HnWn5xW/classe.png)  
 
 ## Gestion des utilisateurs (admin)
 - [x] Ajout utlisateur
@@ -17,8 +17,11 @@
 - [x] modifier véhilcule
 - [x] lister véhilcule
 
-## Gestion des reservations (client)
-- [ ] effectuer une reservation
+## Gestion des voyages (client)
+- [x] reserver un voyage
+
+## Gestion des reservations (chef de station , client)
+- [ ] confirmer une reservation
 - [ ] annuler une reservation
 
 ## Gestion des payments (client)
@@ -36,10 +39,11 @@
 
 ## Database
 - [x] **utilisateurs** (id, nom, prenom, email, password, avatar, tel, role)
-- [x] **stations** (id_station, nom_station, ville, #id_utilisateur)
-- [x] **vehicules** (id_vehicule, num_serie, destination, nb_places, h_depart, d_depart, prix_place, tel, #id_station)
-- [ ] **reservations** (nb_place_reserv, #id_utilisateur, #vehicule)
-- [ ] **payments** (id_payment, nom, prenom, tel, dc_payment, #reservation)
+- [x] **stations** (id_station,	nom_station,	ville,	tel,	#chef_station)
+- [x] **vehicules** (id_vehicule,	propotaire,	nb_places,tel,#id_station)
+- [x] **voyages** (id_voyage, destination, heure_depart, date_depart, prix_place, nb_places_restes, #id_client, #id_vehicule)
+- [x] **reservations** (id_reservation, nb_place_reserver, total_prix_places, etat_reservation,  #id_utilisateur, #id_voyage)
+- [x] **payments** (id_payment, date_payment, #id_reservation,	#id_client)
 
 ## Performance
 - [ ] fork app process into workers. (Clustering)
