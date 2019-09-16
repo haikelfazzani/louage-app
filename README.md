@@ -18,7 +18,8 @@
 - [x] lister véhilcule
 
 ## Gestion des voyages (client)
-- [] reserver un voyage
+- [ ] reserver un voyage
+
 
 ## Gestion des reservations (chef de station , client)
 - [ ] confirmer une reservation
