@@ -34,12 +34,27 @@ const UtilisateurDao = {
     let { nom, prenom, email, password } = user;
 
     const rq = `update ${table.name} 
-    set ${table.password} = ? ,
-        ${table.nom} = ? ,
+    set ${table.nom} = ? ,
         ${table.prenom} = ? 
     where ${table.email} = ? `;
 
     const sql = SqlString.format(rq, [nom, prenom, password, email]);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  updateUserPassword (email, password) {
+
+    const rq = `update ${table.name} 
+    set ${table.password} = ? 
+    where ${table.email} = ? `;
+
+    const sql = SqlString.format(rq, [password, email]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

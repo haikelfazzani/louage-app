@@ -32,6 +32,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/test', (req, res) => {
+  res.render('test')
+})
+
+app.get('/404', (req, res) => {
+  res.render('404')
+})
+
 // routers
 app.use('/', require('./routes/index'));
 app.use('/login',  require('./routes/login'));

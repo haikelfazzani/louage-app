@@ -13,7 +13,6 @@ router.post('/', function (req, res) {
 
   let { email, password } = req.body;
 
-
   bcrypt.hash(password, saltRounds)
     .then(function (hash) {
 
