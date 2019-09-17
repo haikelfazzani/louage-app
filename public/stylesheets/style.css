@@ -92,7 +92,7 @@ a {
 }
 
 
-.form-signin {  
+.form-signin {
   padding: 20px;
 }
 
@@ -126,7 +126,7 @@ th {
 
 .img-nav {
   max-width: 40px;
-  border-radius: 50%; 
+  border-radius: 50%;
   cursor: pointer;
   object-fit: cover;
 }
@@ -148,18 +148,27 @@ th {
   border-radius: 0;
 }
 
-.nav-tabs .nav-link:hover, .nav-tabs .nav-link:active {
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:active {
   color: #ffffff;
   background-color: #1f2532 !important;
   border-radius: 0;
 }
 
-.box-light { box-shadow: 1px 1px 12px 13px rgb(224, 224, 224); }
+.box-light {
+  box-shadow: 1px 1px 12px 13px rgb(224, 224, 224);
+}
 
-.form-auth, .box-dark {
+.form-auth,
+.box-dark {
   color: #fff;
   box-shadow: 1px 0px 25px 1px rgb(82, 82, 82);
   max-width: 400px;
+}
+
+.mx-400 {
+  max-width: 400px;
+  margin: auto;
 }
 
 @media screen and (max-width: 600px) {
