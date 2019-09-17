@@ -1,18 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var utilisateurDao = require('../../dao/utilisateurs.dao');
-var UtilisateurModel = require('../../model/Utilisateur.model')
+var express = require('express'),
+  router = express.Router(),
+  utilisateurDao = require('../../dao/utilisateurs.dao'),
+  UtilisateurModel = require('../../model/Utilisateur.model'),
+  { checkUserConnected } = require('../../middleware/authorisation'),
+  objectTrim = require('../../util/objectTrim')
 
-var { checkUserConnected } = require('../../middleware/authorisation');
+var bcrypt = require('bcrypt'),
+  saltRounds = 10;
 
-var objectTrim = require('../../util/objectTrim')
-
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
-const multer = require('multer');
-var storage = multer.memoryStorage()
-var upload = multer({ storage: storage })
+var multer = require('multer'),
+  storage = multer.memoryStorage(),
+  upload = multer({ storage: storage })
 
 router.get('/profile', checkUserConnected, function (req, res) {
   let { email } = req.session.userInfo
@@ -41,7 +39,6 @@ router.post('/profile', checkUserConnected, function (req, res) {
         res.render('utilisateur/profile', { msg: 'votre profile a été bien modifiée' });
     })
     .catch(error => {
-      console.log(error)
       res.render('utilisateur/profile', { msg: 'erreur de modification!' });
     })
 });
@@ -93,5 +90,38 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
       res.render('utilisateur/profile', { msg: 'erreur de modification' })
     })
 });
+
+
+
+
+/** Suppression compte (profile) */
+router.get('/profile/supprimer', checkUserConnected, function (req, res) {
+  res.render('utilisateur/supprimer-compte')
+});
+
+router.post('/profile/supprimer', checkUserConnected, function (req, res) {
+  let { password } = req.body
+  let userPassword = req.session.userInfo.password
+
+  bcrypt.compare(password, userPassword)
+    .then(function (hashRes) {
+
+      if (hashRes) {
+        utilisateurDao.deleteUser(userPassword)
+          .then(result => {
+            res.redirect('/register')
+          })
+          .catch(error => {
+            res.render('utilisateur/supprimer-compte', { msg: 'erreur de suppression!' })
+          })
+      }
+      else {
+        res.render('login', { msg: 'mot de passe incorrect' })
+      }
+    })
+    .catch(errHash => {
+      res.render('utilisateur/supprimer-compte', { msg: 'erreur de suppression!' })
+    });
+})
 
 module.exports = router
