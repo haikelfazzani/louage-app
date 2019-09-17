@@ -118,7 +118,36 @@ const UtilisateurDao = {
       })
     })
 
-  }
+  },
+
+
+  updateAvatar (avatar, email) {
+
+    const rq = `update ${table.name} 
+    set ${table.avatar} = ? 
+    where ${table.email} = ? `;
+
+    const sql = SqlString.format(rq, [avatar, email]);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+  getAvatar (email) {
+    const rq = `select ${table.avatar} from ${table.name} where ${table.email} = ?`;
+
+    const sql = SqlString.format(rq, email);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
 }
 
 module.exports = UtilisateurDao;

@@ -6,10 +6,8 @@ router.get('/', function (req, res) {
   res.render('login')
 });
 
-
 router.post('/', function (req, res) {
   let { email, password } = req.body;
-
 
   UtilisateurDao.getUser(email)
     .then(result => {

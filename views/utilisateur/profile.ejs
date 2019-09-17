@@ -8,7 +8,7 @@
 
   <div class="bread">
     <a href="/">home </a>
-    <a href="/user/profile" disabled> / Profile</a>
+    <a href="/utilisateur/profile" disabled> / Profile</a>
   </div>
 </section>
 
@@ -31,7 +31,7 @@
       <%- include('avatar') -%>
 
       <% if(locals.userInfo) { %>
-      <div class="col-md-8">
+      <div class="col-md-9">
         <form action="/utilisateur/profile" method="POST" class="form-signin p-0 mb-3">
 
           <div class="form-group">

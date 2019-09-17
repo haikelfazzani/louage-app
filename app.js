@@ -17,8 +17,9 @@ app.use(session({
 }))
 
 app.use(function (req, res, next) {
-  if(req.session['userInfo'] && Object.keys(req.session.userInfo).length > 0) {
+  if (req.session['userInfo'] && Object.keys(req.session.userInfo).length > 0) {
     res.locals.userInfo = req.session.userInfo
+    res.locals.avatar = req.session.avatar
   }
   next()
 })
@@ -42,25 +43,25 @@ app.get('/404', (req, res) => {
 
 // routers
 app.use('/', require('./routes/index'));
-app.use('/login',  require('./routes/login'));
-app.use('/register',  require('./routes/register'));
-app.use('/se-deconnecter',  require('./routes/deconnecter'));
+app.use('/login', require('./routes/login'));
+app.use('/register', require('./routes/register'));
+app.use('/se-deconnecter', require('./routes/deconnecter'));
 
-app.use('/utilisateur',  require('./routes/users/profile'));
+app.use('/utilisateur', require('./routes/users/profile'));
 
 // admin routes
 app.use('/admin', require('./routes/admin/admin.route'))
-app.use('/admin/stations',  require('./routes/admin/stations'));
-app.use('/admin/utilisateurs',  require('./routes/admin/utilisateurs'));
+app.use('/admin/stations', require('./routes/admin/stations'));
+app.use('/admin/utilisateurs', require('./routes/admin/utilisateurs'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  
+app.use(function (err, req, res, next) {
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -71,6 +72,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.get('*', (req, res) => { res.redirect('/')})
+app.get('*', (req, res) => { res.redirect('/') })
 
 module.exports = app;
