@@ -34,9 +34,11 @@
 - [x] utilisateur peut cree un compte
 - [x] utilisateur peut se connecter à son compte
 - [x] utilisateur consulter son compte
-- [x] utilisateur peut modifier son compte
+
+- [x] utilisateur peut modifier ses infos de son compte
 
 - [x] utilisateur peut modifier son mot de passe
+- [ ] utilisateur peut modifier son avatar
 
 - [ ] utilisateur peut supprimer son compte
 
