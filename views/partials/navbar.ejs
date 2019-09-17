@@ -28,9 +28,11 @@
         <a class="nav-link mr-2" href="#">CONTACT</a>
       </li>
 
+      <% if(!locals.userInfo) { %>
       <li class="nav-item">
         <a href="/login" class="btn btn-primary" style="color: #fff !important">LOGIN</a>
       </li>
+      <% } else { %>
 
       <li class="nav-item dropdown">
 
@@ -47,6 +49,8 @@
           <a class="dropdown-item" href="/se-deconnecter">se deconnecter</a>
         </div>
       </li>
+
+      <% } %>
 
     </ul>
   </div>
