@@ -41,8 +41,7 @@
 .navbar {
   background-color: #1f2532 !important;
   font-family: 'Lato', sans-serif !important;
-  padding: 10px 130px !important;
-  height: 84px;
+  padding: 20px 130px !important;
 }
 
 .jumbotron {
@@ -66,22 +65,7 @@ h2 {
 .nav-link:hover,
 .nav-link:active {
   color: #ffffff !important;
-  transition: all .4s ease;
 }
-
-.nav-link::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 3px;
-  background: rgb(255, 255, 255);
-  transition: width .3s;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
 
 .btn-primary {
   border-bottom: 5px solid #286fbb;
