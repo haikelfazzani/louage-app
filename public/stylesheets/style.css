@@ -143,11 +143,23 @@ th {
   background-color: #17191f !important
 }
 
+.img-nav {
+  max-width: 40px;
+  border-radius: 50%; 
+  cursor: pointer;
+  object-fit: cover;
+}
+
 .img-profile {
   width: 255px;
   height: 255px;
   object-fit: cover;
 }
+
+.form-p20 {
+  padding: 20px !important;
+}
+
 
 @media screen and (max-width: 600px) {
   .navbar {
