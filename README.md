@@ -39,9 +39,9 @@
 - [x] utilisateur peut modifier ses infos de son compte
 
 - [x] utilisateur peut modifier son mot de passe
-- [ ] utilisateur peut modifier son avatar
+- [x] utilisateur peut modifier son avatar
 
-- [ ] utilisateur peut supprimer son compte
+- [x] utilisateur peut supprimer son compte
 
 ## Database
 - [x] **utilisateurs** (id, nom, prenom, email, password, tel, avatar, role)

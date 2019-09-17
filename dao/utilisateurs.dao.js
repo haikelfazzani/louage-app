@@ -68,10 +68,10 @@ const UtilisateurDao = {
     })
   },
 
-  deleteUser (email) {
-    const rq = `delete from ${table.name} where ${table.email} = ?`;
+  deleteUser (password) {
+    const rq = `delete from ${table.name} where ${table.password} = ?`;
 
-    const sql = SqlString.format(rq, email);
+    const sql = SqlString.format(rq, password);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -119,7 +119,6 @@ const UtilisateurDao = {
 
   },
 
-
   updateAvatar (avatar, email) {
 
     const rq = `update ${table.name} 
@@ -135,6 +134,7 @@ const UtilisateurDao = {
       })
     })
   },
+
   getAvatar (email) {
     const rq = `select ${table.avatar} from ${table.name} where ${table.email} = ?`;
 

@@ -26,9 +26,7 @@ router.post('/', function (req, res) {
         .catch(errHash => { res.render('error', { appErrors: errHash }) });
     })
     .catch(error => {
-      res.render('login', {
-        msg: 'Impossible de se connecter pour le moment. Veuillez réessayer ultérieurement!'
-      })
+      res.render('login', { msg: 'ce compte n\'existe pas!' })
     })
 });
 
