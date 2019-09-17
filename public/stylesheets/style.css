@@ -92,8 +92,7 @@ a {
 }
 
 
-.form-signin {
-  /*box-shadow: 1px 1px 6px 2px rgb(173, 173, 173);*/
+.form-signin {  
   padding: 20px;
 }
 
@@ -153,6 +152,14 @@ th {
   color: #ffffff;
   background-color: #1f2532 !important;
   border-radius: 0;
+}
+
+.box-light { box-shadow: 1px 1px 12px 13px rgb(224, 224, 224); }
+
+.form-auth, .box-dark {
+  color: #fff;
+  box-shadow: 1px 0px 25px 1px rgb(82, 82, 82);
+  max-width: 400px;
 }
 
 @media screen and (max-width: 600px) {
