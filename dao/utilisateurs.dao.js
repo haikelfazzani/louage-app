@@ -4,9 +4,13 @@ var SqlString = require('sqlstring');
 const table = {
   name: 'utilisateurs',
   id: 'id',
-  nom: 'nom', prenom: 'prenom',
-  email: 'email', password: 'password',
-  avatar: 'avatar', role: 'role'
+  nom: 'nom',
+  prenom: 'prenom',
+  email: 'email',
+  password: 'password',
+  avatar: 'avatar',
+  tel: 'tel',
+  role: 'role'
 }
 
 const UtilisateurDao = {
@@ -31,14 +35,15 @@ const UtilisateurDao = {
 
   updateUser (user) {
 
-    let { nom, prenom, email, password } = user;
+    let { nom, prenom, email, tel } = user;
 
     const rq = `update ${table.name} 
     set ${table.nom} = ? ,
-        ${table.prenom} = ? 
+        ${table.prenom} = ? ,
+        ${table.tel} = ? 
     where ${table.email} = ? `;
 
-    const sql = SqlString.format(rq, [nom, prenom, password, email]);
+    const sql = SqlString.format(rq, [nom, prenom, tel, email]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

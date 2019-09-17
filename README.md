@@ -39,7 +39,7 @@
 - [ ] utilisateur peut supprimer son compte
 
 ## Database
-- [x] **utilisateurs** (id, nom, prenom, email, password, avatar, tel, role)
+- [x] **utilisateurs** (id, nom, prenom, email, password, tel, avatar, role)
 - [x] **stations** (id_station,	nom_station,	ville,	tel,	#chef_station)
 - [x] **vehicules** (id_vehicule,	propotaire,	nb_places,tel,#id_station)
 - [x] **voyages** (id_voyage, destination, heure_depart, date_depart, prix_place, nb_places_restes, #id_client, #id_vehicule)

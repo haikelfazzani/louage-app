@@ -1,5 +1,6 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
+
 <section class="page-header">
   <div class="col-md-12">
     <h3>Profile</h3>
@@ -14,11 +15,20 @@
 
 <div class="jumbotron container-v50">
   <div class="container py-5">
-    <div class="row">      
 
-      <div class="col-md-4 mb-3">
-        <img src="/img/profile.png" alt="profile image" class="img-thumbnail img-profile">
-      </div>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active" href="/utilisateur/profile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/utilisateur/profile/password">Changer mot de passe</a>
+      </li>
+    </ul>
+
+
+    <div class="row">
+
+      <%- include('avatar') -%>
 
       <% if(locals.userInfo) { %>
       <div class="col-md-8">
@@ -26,27 +36,28 @@
 
           <div class="form-group">
             <label for="nom">Nom</label>
-            <input type="text" class="form-control" name="nom" id="nom"
-              placeholder="Entrer nom" value="<%= userInfo.nom  %>" required>
+            <input type="text" class="form-control" name="nom" id="nom" placeholder="Entrer nom"
+              value="<%= userInfo.nom  %>" required>
           </div>
 
           <div class="form-group">
             <label for="prenom">prenom</label>
-            <input type="text" class="form-control" name="prenom" id="prenom"
-              placeholder="Entrer prenom" value="<%= userInfo.prenom  %>" required>
+            <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Entrer prenom"
+              value="<%= userInfo.prenom  %>" required>
           </div>
 
           <div class="form-group">
             <label for="email">Email adresse</label>
-            <input type="email" class="form-control" name="email" id="email"
-              placeholder="Entrer email" value="<%= userInfo.email  %>" required>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Entrer email"
+              value="<%= userInfo.email  %>" required readonly>
           </div>
 
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" 
-            placeholder="Entrer mot de passe"
-              required>
+            <label for="tel">tel</label>
+            <input type="text" class="form-control" id="tel" 
+            name="tel" placeholder="Entrer numero telephone" 
+            value="<%= userInfo.tel  %>"
+            required>
           </div>
 
           <button type="submit" class="btn btn-success">mettre à jour</button>
