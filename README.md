@@ -35,6 +35,9 @@
 - [x] utilisateur peut se connecter à son compte
 - [x] utilisateur consulter son compte
 - [x] utilisateur peut modifier son compte
+
+- [x] utilisateur peut modifier son mot de passe
+
 - [ ] utilisateur peut supprimer son compte
 
 ## Database
