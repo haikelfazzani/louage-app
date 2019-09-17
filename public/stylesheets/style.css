@@ -135,6 +135,20 @@ th {
   text-transform: uppercase;
 }
 
+.btn-dark {
+  background-color: #1f2532 !important
+}
+
+.btn-dark:hover {
+  background-color: #17191f !important
+}
+
+.img-profile {
+  width: 255px;
+  height: 255px;
+  object-fit: cover;
+}
+
 @media screen and (max-width: 600px) {
   .navbar {
     padding: 20px !important;
