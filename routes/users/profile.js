@@ -29,7 +29,7 @@ router.get('/profile', checkUserConnected, function (req, res) {
     })
 });
 
-router.post('/', checkUserConnected, function (req, res) {
+router.post('/profile', checkUserConnected, function (req, res) {
 
   let { nom, prenom, email, password, tel } = req.body;
 
@@ -38,11 +38,11 @@ router.post('/', checkUserConnected, function (req, res) {
   utilisateurDao.updateUser(objectTrim(User))
     .then(result => {
       if (Object.keys(result).length > 0 && result.affectedRows)
-        res.render('user/profile', { msg: 'votre profile a été bien modifiée' });
+        res.render('utilisateur/profile', { msg: 'votre profile a été bien modifiée' });
     })
     .catch(error => {
       console.log(error)
-      res.render('user/profile', { msg: 'erreur de modification!' });
+      res.render('utilisateur/profile', { msg: 'erreur de modification!' });
     })
 });
 

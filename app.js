@@ -13,7 +13,7 @@ app.use(session({
   secret: 'my-secret-code',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: { secure: false,maxAge: 3600000 }
 }))
 
 app.use(function (req, res, next) {
