@@ -4,6 +4,21 @@ var router = express.Router();
 var Station = require('../../model/Station.model');
 var stationDao = require('../../dao/stations.dao');
 
+router.get('/', (req, res) => {
+
+  stationDao.getStations().then(function (stations) {
+    res.render('admin/station/lister', { stations })
+  })
+    .catch(error => {
+      res.render('admin/station/lister')
+    })
+})
+
+
+router.get('/ajout', (req, res) => {
+  res.render('admin/station/ajout')
+})
+
 router.post('/ajout', function (req, res) {
   let { chef, nom, ville, tel } = req.body;
 
