@@ -16,7 +16,7 @@ router.post('/', function (req, res) {
   bcrypt.hash(password, saltRounds)
     .then(function (hash) {
 
-      let User = new UtilisateurModel('', '', email, hash, '', 'client')
+      let User = new UtilisateurModel('', '', email, hash, '', '', 'client')
 
       UtilisateurDao.addUser(User)
         .then(result => {
