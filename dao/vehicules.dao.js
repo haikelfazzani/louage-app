@@ -2,29 +2,24 @@ const db = require('../database/connection');
 var SqlString = require('sqlstring');
 
 const table = {
-  name: 'stations',
+  name='vehicules',
   idVehicule: 'id_vehicule',
-  conducteur: 'conducteur',
-  destination: 'destination',
+  proprietaire: 'proprietaire',
   nbPlaces: 'nb_places',
-  heureDepart: 'heure_depart',
-  dateDepart: 'date_depart',
-  prixPlace: 'prix_place',
-  idStation: 'id_station' // clé étrangére
+  tel: "tel",
+  idStation: 'id_station' // clé étrangaire
 }
 
 module.exports = VehiculesDao = {
 
   addVehicule (Vehicule) {
 
-    let { conducteur, destination, nbrPlace, heurDepart, dateDepart, prixPalce, idStation } = Vehicule;
+    let { proprietaire, nbPlaces, tel, idStation } = Vehicule;
 
     const rq = `INSERT INTO ${table.name} 
-    (${table.conducteur}, ${table.destination}, ${table.nbrPlace}, ${table.heurDepart},
-      ${table.dateDepart}, ${table.prixPalce}, ${table.idStation})
-    values(?, ? , ? , ?, ? , ? , ?)`;
+    (${table.proprietaire}, ${table.nbPlaces}, ${table.tel}, ${table.idStation}) values(?, ? , ? , ?)`;
 
-    const sql = SqlString.format(rq, [conducteur, destination, nbrPlace, heurDepart, dateDepart, prixPalce, idStation]);
+    const sql = SqlString.format(rq, [proprietaire, nbPlaces, tel, idStation]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -34,31 +29,17 @@ module.exports = VehiculesDao = {
     })
   },
 
-  updateVehicule (conducteur) {
-    let { conducteur, destination, nbrPlace, heurDepart, dateDepart, prixPalce, idStation } = Vehicule;
+  updateVehicule (idVehicule) {
+    let { proprietaire, nbPlaces, tel, idStation } = Vehicule;
 
     const rq = `update ${table.name} 
-    set ${table.destination} = ? ,
-        ${table.nbrPlace} = ?,
-        ${table.heurDepart} = ?,
-        ${table.dateDepart} = ?,
-        ${table.prixPalce} = ?
-    where ${table.conducteur} = ? `;
+    set ${table.proprietaire} = ? ,
+        ${table.nbPlaces} = ?,
+        ${table.tel} = ?,
+        ${table.idStation} = ?
+    where ${table.idVehicule} = ? `;
 
-    const sql = SqlString.format(rq, [destination, nbrPlace, heurDepart, dateDepart, prixPalce, conducteur]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
-  },
-
-  deletVehicule (conducteur) {
-    const rq = `delete from ${table.name} where ${table.conducteur} = ?`;
-
-    const sql = SqlString.format(rq, conducteur);
+    const sql = SqlString.format(rq, [proprietaire, nbPlaces, tel, idStation, idVehicule]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -68,10 +49,23 @@ module.exports = VehiculesDao = {
     })
   },
 
-  getVehicule (conducteur) {
-    const rq = `select * from ${table.name} where ${table.conducteur} = ?`;
+  deletVehicule (idVehicule) {
+    const rq = `delete from ${table.name} where ${table.idVehicule} = ?`;
 
-    const sql = SqlString.format(rq, conducteur);
+    const sql = SqlString.format(rq, idVehicule);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  getVehicule (proprietaire) {
+    const rq = `select * from ${table.name} where ${table.proprietaire} = ?`;
+
+    const sql = SqlString.format(rq, proprietaire);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

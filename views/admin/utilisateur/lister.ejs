@@ -9,7 +9,10 @@
     <thead>
       <tr>
         <th>#</th>
+        <th>nom</th>
+        <th>prenom</th>
         <th>email</th>
+        <th>tel</th>
         <th>role</th>
         <th>action</th>
       </tr>
@@ -18,7 +21,10 @@
       <% utilisateurs.forEach((u, i) => {  %>
       <tr>
         <td><%= i %></td>
+        <td><%= u.nom %></td>
+        <td><%= u.prenom %></td>
         <td><%= u.email %></td>
+        <td><%= u.tel %></td>
         <td><%= u.role %></td>
         <td>
           <a href="#" class="btn btn-success">M</a>
@@ -29,7 +35,6 @@
     </tbody>
   </table>
   <% } %>
-
 
   
 </div>
