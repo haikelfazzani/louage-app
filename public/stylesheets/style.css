@@ -71,15 +71,13 @@ h2 {
   border-bottom: 5px solid #286fbb;
 }
 
+.dropdown-item,
 label,
 .btn,
 a {
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   text-transform: uppercase;
-}
-
-label {
   font-size: 14px;
 }
 
@@ -144,6 +142,18 @@ th {
   padding: 20px !important;
 }
 
+
+.nav-tabs .nav-link {
+  color: #1f2532;
+  background-color: #fff !important;
+  border-radius: 0;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:active {
+  color: #ffffff;
+  background-color: #1f2532 !important;
+  border-radius: 0;
+}
 
 @media screen and (max-width: 600px) {
   .navbar {
