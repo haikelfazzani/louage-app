@@ -7,15 +7,18 @@ var { checkUserConnected } = require('../../middleware/authorisation');
 
 var objectTrim = require('../../util/objectTrim')
 
-router.get('/', checkUserConnected, function (req, res) {
-  res.render('user/profile');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+router.get('/profile', checkUserConnected, function (req, res) {
+  res.render('utilisateur/profile')
 });
 
-router.post('/', function (req, res) {
+router.post('/', checkUserConnected, function (req, res) {
 
-  let { nom, prenom, email, password } = req.body;
+  let { nom, prenom, email, password, tel } = req.body;
 
-  let User = new UtilisateurModel(nom, prenom, email, password, '', '')
+  let User = new UtilisateurModel(nom, prenom, email, password, tel)
 
   utilisateurDao.updateUser(objectTrim(User))
     .then(result => {
@@ -23,8 +26,34 @@ router.post('/', function (req, res) {
         res.render('user/profile', { msg: 'votre profile a été bien modifiée' });
     })
     .catch(error => {
+      console.log(error)
       res.render('user/profile', { msg: 'erreur de modification!' });
     })
 });
 
-module.exports = router;
+
+router.get('/profile/password', checkUserConnected, function (req, res) {
+  res.render('utilisateur/password')
+});
+
+
+router.post('/profile/password', checkUserConnected, function (req, res) {
+  let { password } = req.body
+  let { email } = req.session.userInfo
+
+  bcrypt.hash(password, saltRounds)
+    .then(function (hash) {
+
+      utilisateurDao.updateUserPassword(email, hash)
+        .then(result => {
+          res.render('utilisateur/password', { msg: 'votre mot de passe a été bien modifiée' })
+        })
+        .catch(error => {
+          res.render('utilisateur/password', { msg: 'erreur de modification!' })
+        })
+    })
+    .catch(errHash => { res.render('error', { appErrors: errHash }) });
+
+});
+
+module.exports = router
