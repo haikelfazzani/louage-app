@@ -1,12 +1,9 @@
 module.exports = class VehiculeModel {
 
-    constructor (conducteur, destination, nbrPlace, heurDepart, dateDepart, prixPalce, idStation) {
-        this.conducteur = conducteur || '';
-        this.destination = destination || '';
-        this.nbrPlace = nbrPlace || '';
-        this.heurDepart = heurDepart || '';
-        this.dateDepart = dateDepart || '';
-        this.prixPalce = prixPalce || '';
+    constructor (proprietaire, nbPlaces, tel, idStation) {
+        this.proprietaire = proprietaire || '';
+        this.nbPlaces = nbPlaces || '';
+        this.tel = tel || '';
         this.idStation = idStation || '';
     }
 }
