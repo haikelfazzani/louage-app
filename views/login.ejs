@@ -1,12 +1,10 @@
 <%- include('partials/head.ejs') -%>
 
-  <div class="container d-flex flex-column align-items-center py-5">
-
-    <div class="d-flex flex-column align-items-center mb-3">
-      <img src="/img/log.svg" class="flipInX" alt="" width="200">
-    </div>
-
-    <form action="/login" method="POST" class="form-signin w-100 mx-auto mb-2" style="max-width: 400px">
+<div class="jumbotron container-v50">
+  <div class="container py-5">
+    
+    <form action="/login" method="POST" class="form-signin form-auth bg-dark w-100 mx-auto mb-2">
+      <h3 class="text-center font-bold mb-3">CONNEXION</h3>
 
       <div class="form-group">
         <label for="email">Email address</label>
@@ -20,7 +18,9 @@
           placeholder="Entrer votre mot de passe" required>
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mt-3 font-s14" type="submit">connexion</button>
+      <button class="btn btn-lg btn-primary btn-block mt-3 mb-2 font-s14" type="submit">connexion</button>
+
+      <div><a href="/register" class="btn btn-link font-s14">Vous n'avez pas encore de compte ?</a></div>
     </form>
 
     <div class="alert alert-danger" id="form-signin" role="alert">alter</div>
@@ -30,12 +30,11 @@
       <%= msg %> <a href="/register" class="font-s14">Register</a>
     </div>
     <% } %>
-
-    <a href="/register" class="btn btn-link font-s14">Vous n'avez pas encore de compte ?</a>
-
+    
   </div>
+</div>
 
-  <script src="javascripts/validation.js" defer></script>
+<script src="javascripts/validation.js" defer></script>
 
 </body>
 
