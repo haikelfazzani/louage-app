@@ -7,7 +7,8 @@ const table = {
   nomStation: 'nom_station',
   ville: 'ville',
   tel: 'tel',
-  chefStation: 'chef_station'
+  chefStation: 'chef_station',
+  timestamp: 'timestamp'
 }
 
 module.exports = StationsDao = {
@@ -17,10 +18,10 @@ module.exports = StationsDao = {
     let { nomStation, ville, tel, chefStation } = Station;
 
     const rq = `INSERT INTO ${table.name} 
-    (${table.nomStation}, ${table.ville}, ${table.tel}, ${table.chefStation})
-    values(?, ? , ? , ?)`;
+    (${table.nomStation}, ${table.ville}, ${table.tel}, ${table.chefStation}, ${table.timestamp})
+    values(?, ? , ? , ?, ?)`;
 
-    const sql = SqlString.format(rq, [nomStation, ville, tel, chefStation]);
+    const sql = SqlString.format(rq, [nomStation, ville, tel, chefStation, new Date().toString()]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
