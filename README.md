@@ -69,6 +69,7 @@
 - [ ] visitor reporting. (Charting)
 - [ ] Facebook login
 - [ ] Google login
+- [ ] Google maps station position
 
 ## Notes
 - h_depart -> heure de depart
