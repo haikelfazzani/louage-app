@@ -34,7 +34,7 @@
 
       <li class="nav-item dropdown">
 
-        <% if(locals.avatar) { %>
+        <% if(locals.avatar && locals.avatar.length > 45) { %>
         <img src="<%= avatar %>" alt="profile image" class="img-nav ml-3" id="navbarDropdown">
         <% } else { %>
         <img src="/img/profile.png" alt="profile image" class="img-nav ml-3" id="navbarDropdown">
