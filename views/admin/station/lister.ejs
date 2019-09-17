@@ -1,5 +1,11 @@
-<% if(locals.stations) {  %>
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
 
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+
+<% if(locals.stations) {  %>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -27,5 +33,9 @@
     <% }) %>
   </tbody>
 </table>
-
 <% } %>
+
+
+</div>
+
+<%- include('../../partials/footer.ejs') -%>
