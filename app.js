@@ -1,26 +1,26 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
+//var logger = require('morgan');
 var nodeFileEnv = require('node-file-env');
 var session = require('express-session')
 
-var app = express();
-
-nodeFileEnv().load();
+var app = express()
 
 app.use(session({
   secret: 'my-secret-code',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false,maxAge: 3600000 }
+  cookie: { secure: false, maxAge: 3600000 }
 }))
 
 app.use(function (req, res, next) {
-  if (req.session['userInfo'] && Object.keys(req.session.userInfo).length > 0) {
+  if (req.session.userInfo) {
     res.locals.userInfo = req.session.userInfo
     res.locals.avatar = req.session.avatar
   }
+
+  res.locals.chefStations = req.session.chefStations
   next()
 })
 
@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+//app.use(logger('prod'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,6 +40,9 @@ app.get('/test', (req, res) => {
 app.get('/404', (req, res) => {
   res.render('404')
 })
+
+// load env variables
+nodeFileEnv().load()
 
 // routers
 app.use('/', require('./routes/index'));
