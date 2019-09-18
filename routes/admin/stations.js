@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Station = require('../../model/Station.model');
 var stationDao = require('../../dao/stations.dao');
+var utilisateurDao = require('../../dao/utilisateurs.dao');
 
 var { checkUserConnected } = require('../../middleware/authorisation')
 
@@ -18,10 +19,17 @@ router.get('/', checkUserConnected, (req, res) => {
 
 
 router.get('/ajout', checkUserConnected, (req, res) => {
-  res.render('admin/station/ajout')
+  utilisateurDao.getUserByRole('chef_station')
+    .then(chefStations => {
+      req.session.chefStations = chefStations
+      res.render('admin/station/ajout', { chefStations })
+    })
+    .catch(error => {
+      res.redirect('/admin')
+    })
 })
 
-router.post('/ajout', checkUserConnected , function (req, res) {
+router.post('/ajout', checkUserConnected, function (req, res) {
   let { chef, nom, ville, tel } = req.body;
 
   let station = new Station(nom, ville, tel, chef)
