@@ -5,12 +5,9 @@ var express = require('express'),
   { checkUserConnected } = require('../../middleware/authorisation'),
   objectTrim = require('../../util/objectTrim')
 
-var bcrypt = require('bcrypt'),
-  saltRounds = 10;
+var bcrypt = require('bcrypt'), saltRounds = 10;
 
-var multer = require('multer'),
-  storage = multer.memoryStorage(),
-  upload = multer({ storage: storage })
+var multer = require('multer'), storage = multer.memoryStorage(), upload = multer({ storage: storage });
 
 router.get('/profile', checkUserConnected, function (req, res) {
   let { email } = req.session.userInfo
@@ -19,7 +16,6 @@ router.get('/profile', checkUserConnected, function (req, res) {
 
       let encode = 'data:image/png;base64,' + result[0].avatar
       req.session.avatar = encode
-
       res.render('utilisateur/profile', { avatar: encode })
     })
     .catch(error => {
@@ -43,7 +39,7 @@ router.post('/profile', checkUserConnected, function (req, res) {
     })
 });
 
-
+/** user change password */
 router.get('/profile/password', checkUserConnected, function (req, res) {
   res.render('utilisateur/password')
 });
@@ -68,7 +64,7 @@ router.post('/profile/password', checkUserConnected, function (req, res) {
 
 });
 
-
+/** user change avatar */
 router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (req, res) => {
 
   /*
@@ -90,9 +86,6 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
       res.render('utilisateur/profile', { msg: 'erreur de modification' })
     })
 });
-
-
-
 
 /** Suppression compte (profile) */
 router.get('/profile/supprimer', checkUserConnected, function (req, res) {

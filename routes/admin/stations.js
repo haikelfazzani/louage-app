@@ -8,8 +8,8 @@ var utilisateurDao = require('../../dao/utilisateurs.dao');
 var { checkUserConnected } = require('../../middleware/authorisation')
 
 router.get('/', checkUserConnected, (req, res) => {
-
-  stationDao.getStations().then(function (stations) {
+  
+  stationDao.getStations().then(function (stations) {    
     res.render('admin/station/lister', { stations })
   })
     .catch(error => {
@@ -21,7 +21,7 @@ router.get('/', checkUserConnected, (req, res) => {
 router.get('/ajout', checkUserConnected, (req, res) => {
   utilisateurDao.getUserByRole('chef_station')
     .then(chefStations => {
-      req.session.chefStations = chefStations
+      req.session.chefStations = chefStations      
       res.render('admin/station/ajout', { chefStations })
     })
     .catch(error => {
@@ -31,7 +31,7 @@ router.get('/ajout', checkUserConnected, (req, res) => {
 
 router.post('/ajout', checkUserConnected, function (req, res) {
   let { chef, nom, ville, tel } = req.body;
-
+  
   let station = new Station(nom, ville, tel, chef)
 
   stationDao.addStation(station)
