@@ -31,7 +31,9 @@
         <td><%= u.tel %></td>
         <td>
           <a href="#" class="btn btn-success">M</a>
-          <a href="#" class="btn btn-danger">S</a>
+          <a class="btn btn-danger" id="btn-delete" href="/admin/stations/supprimer?nom=<%= u.nom_station %>">
+            S
+          </a>
         </td>
       </tr>
       <% }) %>

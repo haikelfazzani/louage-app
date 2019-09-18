@@ -30,38 +30,41 @@ if (formRegister) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  /** input image file validation */
-  (function () {
-    const inputAvatar = document.getElementById("inputImage");
-    const btnChangeAvatar = document.getElementById("btn-update-avatar");
+/** input image file validation */
+(function () {
+  const inputAvatar = document.getElementById("inputImage");
+  const btnChangeAvatar = document.getElementById("btn-update-avatar");
 
-    if (btnChangeAvatar) {
-      btnChangeAvatar.disabled = true;
-      inputAvatar.onchange = (event) => {
-        let inputValue = event.target.value; // C:\fakepath\7.PNG
-        inputValue = inputValue.match(/\.[0-9a-z]+$/i)[0].toLowerCase();
+  if (btnChangeAvatar) {
+    btnChangeAvatar.disabled = true;
+    inputAvatar.onchange = (event) => {
+      let inputValue = event.target.value; // C:\fakepath\7.PNG
+      inputValue = inputValue.match(/\.[0-9a-z]+$/i)[0].toLowerCase();
 
-        const validExtensions = [".png", ".jpeg", ".jpg", ".svg"];
-        let isValid = validExtensions.includes(inputValue);
+      const validExtensions = [".png", ".jpeg", ".jpg", ".svg"];
+      let isValid = validExtensions.includes(inputValue);
 
-        btnChangeAvatar.disabled = isValid ? false : true;
+      btnChangeAvatar.disabled = isValid ? false : true;
 
-        isValid ? previewImage(event) : "";
-      }
+      isValid ? previewImage(event) : "";
     }
-  }());
-
-  function previewImage (event) {
-    const imgField = document.querySelector(".img-thumbnail");
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        imgField.src = reader.result;
-      }
-    }
-    reader.readAsDataURL(event.target.files[0]);
   }
+}());
 
-})
+function previewImage (event) {
+  const imgField = document.querySelector(".img-thumbnail");
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    if (reader.readyState === 2) {
+      imgField.src = reader.result;
+    }
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+/** alert confirm before delete */
+let btnDelete = document.getElementById('btn-delete')
+if (btnDelete) {
+  btnDelete.onclick = () => confirm('voulez-vous vraiment supprimer ?')
+}

@@ -3,12 +3,6 @@
   font-size: 14px !important;
 }
 
-.display-4 {
-  font-size: 70px !important;
-  color: #007bff !important;
-  font-weight: 600;
-}
-
 .mw-400 {
   max-width: 400px;
 }
@@ -71,6 +65,7 @@ h2 {
   border-bottom: 5px solid #286fbb;
 }
 
+button,
 .dropdown-item,
 label,
 .btn,
@@ -125,7 +120,8 @@ th {
 }
 
 .img-nav {
-  max-width: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   object-fit: cover;
@@ -140,7 +136,6 @@ th {
 .form-p20 {
   padding: 20px !important;
 }
-
 
 .nav-tabs .nav-link {
   color: #1f2532;

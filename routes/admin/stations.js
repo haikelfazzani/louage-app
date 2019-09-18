@@ -53,6 +53,18 @@ router.post('/modifier', checkUserConnected, function (req, res) {
 });
 
 
+router.get('/supprimer', checkUserConnected, function (req, res) {
+  let nomStation = req.query.nom
+
+  stationDao.deletStation(nomStation)
+  .then(result => {
+    res.redirect('/admin/stations')
+  })
+  .catch(error => {
+    res.redirect('/admin/stations')
+  })  
+});
+
 router.post('/supprimer', checkUserConnected, function (req, res) {
   res.render('admin/station/ajout');
 });
