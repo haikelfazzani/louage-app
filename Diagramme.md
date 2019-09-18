@@ -8,3 +8,5 @@
 ## Diagramme de Classe Gestion de Voyage
 
 ![Class Diagram Reservation](https://i.ibb.co/NWTrCMz/class-diagram-Gestion-Voyage.jpg)
+
+![Class Diagram](https://i.ibb.co/PjfyHmq/classe.png)  
