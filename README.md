@@ -1,5 +1,3 @@
-![Class Diagram](https://i.ibb.co/HnWn5xW/classe.png)  
-
 ## Gestion des utilisateurs (admin)
 - [x] Ajout utlisateur
 - [x] supprimer un utlisateur
@@ -17,13 +15,15 @@
 - [x] modifier véhilcule
 - [x] lister véhilcule
 
-## Gestion des voyages (client)
-- [ ] reserver un voyage
+## Gestion des voyages (chef station)
+- [ ] plannification d'un voyage
+- [ ] supprimer un voyage
+- [ ] modifier un voyage
 
-
-## Gestion des reservations (chef de station , client)
+## Gestion des reservations (client)
 - [ ] confirmer une reservation
 - [ ] annuler une reservation
+*reservation en etat d'attente sera anunler auto aprés 10min*
 
 ## Gestion des payments (client)
 - [ ] effectuer un payment
@@ -47,7 +47,7 @@
 - [x] **utilisateurs** (id, nom, prenom, email, password, tel, avatar, role)
 - [x] **stations** (id_station,	nom_station,	ville,	tel,	#chef_station)
 - [x] **vehicules** (id_vehicule,	propotaire,	nb_places,tel,#id_station)
-- [x] **voyages** (id_voyage, destination, heure_depart, date_depart, prix_place, nb_places_restes, #id_client, #id_vehicule)
+- [x] **voyages** (id_voyage, destination, heure_depart, date_depart, prix_place, nb_places_restes, #id_client)
 - [x] **reservations** (id_reservation, nb_place_reserver, total_prix_places, etat_reservation,  #id_utilisateur, #id_voyage)
 - [x] **payments** (id_payment, date_payment, #id_reservation,	#id_client)
 
