@@ -1,0 +1,43 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+  <% if(locals.vehicules) {  %>
+  <div id="root"></div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>proprietaire</th>
+        <th>nb_places</th>
+        <th>num_serie</th>
+        <th>tel</th>
+        <th>nom_station</th>
+        <th>ville</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% vehicules.forEach((u, i) => {  %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= u.proprietaire %></td>
+        <td><%= u.nb_places %></td>
+        <td><%= u.num_serie %></td>
+        <td><%= u.tel %></td>
+        <td><%= u.nom_station %></td>
+        <td><%= u.ville %></td>
+        <td>
+          <a href="#" class="btn btn-success">M</a>
+          <a href="#" class="btn btn-danger">S</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+
+  
+</div>
+<%- include('../../partials/footer.ejs') -%>

@@ -4,7 +4,9 @@ var router = express.Router();
 var Station = require('../../model/Station.model');
 var stationDao = require('../../dao/stations.dao');
 
-router.get('/', (req, res) => {
+var { checkUserConnected } = require('../../middleware/authorisation')
+
+router.get('/', checkUserConnected, (req, res) => {
 
   stationDao.getStations().then(function (stations) {
     res.render('admin/station/lister', { stations })
@@ -15,11 +17,11 @@ router.get('/', (req, res) => {
 })
 
 
-router.get('/ajout', (req, res) => {
+router.get('/ajout', checkUserConnected, (req, res) => {
   res.render('admin/station/ajout')
 })
 
-router.post('/ajout', function (req, res) {
+router.post('/ajout', checkUserConnected , function (req, res) {
   let { chef, nom, ville, tel } = req.body;
 
   let station = new Station(nom, ville, tel, chef)
@@ -27,24 +29,24 @@ router.post('/ajout', function (req, res) {
   stationDao.addStation(station)
     .then(result => {
       if (Object.keys(result) && result.affectedRows > 0) {
-        res.render('admin/index', { msg: 'une station a été bien ajoutée' });
+        res.render('admin/station/ajout', { msg: 'une station a été bien ajoutée' });
       }
       else {
-        res.render('admin/index', { msg: 'station deja existe!' });
+        res.render('admin/station/ajout', { msg: 'station deja existe!' });
       }
     })
     .catch(error => {
-      res.render('admin/index', { msg: 'erreur d\'ajout!' });
+      res.render('admin/station/ajout', { msg: 'erreur d\'ajout!' });
     })
 });
 
-router.post('/modifier', function (req, res) {
-  res.render('admin/index');
+router.post('/modifier', checkUserConnected, function (req, res) {
+  res.render('admin/station/ajout');
 });
 
 
-router.post('/supprimer', function (req, res) {
-  res.render('admin/index');
+router.post('/supprimer', checkUserConnected, function (req, res) {
+  res.render('admin/station/ajout');
 });
 
 

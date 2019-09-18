@@ -1,11 +1,11 @@
-
 var express = require('express');
 var router = express.Router();
+var { checkUserConnected } = require('../../middleware/authorisation')
 
 var utilisateurDao = require('../../dao/utilisateurs.dao');
 var stationDao = require('../../dao/stations.dao');
 
-router.get('/', function (req, res) {
+router.get('/', checkUserConnected, function (req, res) {
 
     const promises = [
         utilisateurDao.getUsers(),
