@@ -1,0 +1,40 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+
+<form action="/admin/utilisateurs/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+
+  <div class="form-group">
+    <label for="nom">email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password">password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Enter mot de passe" required>
+  </div>
+
+  <div class="form-group">
+    <label for="user_role">Role d'utilisateur</label>
+    <select class="form-control" id="user_role" name="role">
+      <option value="client">client</option>
+      <option value="admin">admin</option>
+      <option value="chef_station">chef_station</option>      
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-dark">Ajout</button>
+  <button type="reset" class="btn btn-danger">vider</button>
+</form>
+
+
+<% if(locals.msg) { %>
+<div class="alert alert-primary" role="alert"><%= msg %></div>
+<% } %>
+
+
+
+</div>
+<%- include('../../partials/footer.ejs') -%>
