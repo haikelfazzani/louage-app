@@ -3,6 +3,7 @@
 <div class="container py-5">
   <%- include('../navbar') -%>
 
+  
   <% if(locals.vehicules) {  %>
   <div id="root"></div>
   <table class="table table-hover">
@@ -30,7 +31,7 @@
         <td><%= u.ville %></td>
         <td>
           <a href="#" class="btn btn-success">M</a>
-          <a href="#" class="btn btn-danger">S</a>
+          <a href="#" class="btn btn-danger btn-delete">S</a>
         </td>
       </tr>
       <% }) %>

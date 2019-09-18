@@ -3,38 +3,50 @@
 <div class="container py-5">
   <%- include('../navbar') -%>
 
+  <% if(locals.stations && locals.stations.length > 0) { %>
+  <form action="/admin/vehicules/ajout" method="POST" class="form-signin form-bg-gray mb-3">
 
-<form action="/admin/utilisateurs/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+    <div class="form-group">
+      <label for="proprietaire">proprietaire</label>
+      <input type="text" class="form-control" id="proprietaire" name="proprietaire" placeholder="Enter proprietaire"
+        required>
+    </div>
 
-  <div class="form-group">
-    <label for="nom">email</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
-  </div>
+    <div class="form-group">
+      <label for="numSerie">num Serie</label>
+      <input type="text" class="form-control" id="numSerie" name="numSerie" placeholder="Enter numSerie" required>
+    </div>
 
-  <div class="form-group">
-    <label for="password">password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Enter mot de passe" required>
-  </div>
+    <div class="form-group">
+      <label for="nbPlaces">nbPlaces</label>
+      <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
+        required>
+    </div>
 
-  <div class="form-group">
-    <label for="user_role">Role d'utilisateur</label>
-    <select class="form-control" id="user_role" name="role">
-      <option value="client">client</option>
-      <option value="admin">admin</option>
-      <option value="chef_station">chef_station</option>      
-    </select>
-  </div>
-
-  <button type="submit" class="btn btn-dark">Ajout</button>
-  <button type="reset" class="btn btn-danger">vider</button>
-</form>
-
-
-<% if(locals.msg) { %>
-<div class="alert alert-primary" role="alert"><%= msg %></div>
-<% } %>
+    <div class="form-group">
+      <label for="nbPlaces">tel</label>
+      <input type="number" class="form-control" id="tel" name="tel" placeholder="Enter tel" required>
+    </div>
 
 
+    <div class="form-group">
+      <label for="station">station</label>
+      <select class="form-control" id="station" name="station">
+        <% stations.forEach(s => { %>
+        <option value="<%= s.id_station %>"><%= s.nom_station %></option>
+        <% }) %>
+      </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-dark">Ajout</button>
+    <button type="reset" class="btn btn-danger">vider</button>
+  </form>
+  <% } %>
+
+  <% if(locals.msg) { %>
+  <div class="alert alert-primary" role="alert"><%= msg %></div>
+  <% } %>
 
 </div>
 <%- include('../../partials/footer.ejs') -%>

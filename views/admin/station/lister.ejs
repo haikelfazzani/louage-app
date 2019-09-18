@@ -2,8 +2,7 @@
 <%- include('../../partials/navbar') -%>
 
 <div class="container py-5">
-  <%- include('../navbar') -%>
-
+  <%- include('../navbar') -%>  
 
   <% if(locals.stations) {  %>
   <table class="table table-hover">
@@ -31,9 +30,7 @@
         <td><%= u.tel %></td>
         <td>
           <a href="#" class="btn btn-success">M</a>
-          <a class="btn btn-danger" id="btn-delete" href="/admin/stations/supprimer?nom=<%= u.nom_station %>">
-            S
-          </a>
+          <a class="btn btn-danger btn-delete" href="/admin/stations/supprimer?nom=<%= u.nom_station %>">S</a>
         </td>
       </tr>
       <% }) %>
@@ -43,5 +40,4 @@
 
 
 </div>
-
 <%- include('../../partials/footer.ejs') -%>
