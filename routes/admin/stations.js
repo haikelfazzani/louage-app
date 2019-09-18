@@ -56,7 +56,7 @@ router.post('/modifier', checkUserConnected, function (req, res) {
 router.get('/supprimer', checkUserConnected, function (req, res) {
   let nomStation = req.query.nom
 
-  stationDao.deletStation(nomStation)
+  stationDao.deletStation(nomStation.trim())
   .then(result => {
     res.redirect('/admin/stations')
   })

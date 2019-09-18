@@ -64,7 +64,8 @@ function previewImage (event) {
 }
 
 /** alert confirm before delete */
-let btnDelete = document.getElementById('btn-delete')
-if (btnDelete) {
-  btnDelete.onclick = () => confirm('voulez-vous vraiment supprimer ?')
-}
+let btnDelete = document.querySelectorAll('.btn-delete')
+
+btnDelete.forEach(b => {
+  b.onclick = () => confirm('voulez-vous vraiment supprimer ?')
+})

@@ -48,12 +48,20 @@ router.post('/ajout', checkUserConnected, function (req, res) {
 });
 
 router.post('/modifier', checkUserConnected, function (req, res) {
-  res.render('admin/utilisateur/ajout');
+  res.render('admin/utilisateur');
 });
 
 
-router.post('/supprimer', checkUserConnected, function (req, res) {
-  res.render('admin/utilisateur/ajout');
+router.get('/supprimer', checkUserConnected, function (req, res) {
+  let { email } = req.query
+
+  utilisateurDao.deleteUserByEmail(email)
+    .then(result => {
+      res.redirect('/admin/utilisateurs')
+    })
+    .catch(error => {
+      res.redirect('/admin/utilisateurs')
+    })
 });
 
 

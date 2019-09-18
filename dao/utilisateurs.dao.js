@@ -82,6 +82,18 @@ const UtilisateurDao = {
       })
     })
   },
+  deleteUserByEmail (email) {
+    const rq = `delete from ${table.name} where ${table.email} = ?`;
+
+    const sql = SqlString.format(rq, email);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
 
   getUserByRole (role) {
     const rq = `select * from ${table.name} where ${table.role} = ?`;

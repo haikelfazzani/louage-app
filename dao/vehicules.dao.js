@@ -16,14 +16,16 @@ module.exports = VehiculesDao = {
 
   addVehicule (Vehicule) {
 
-    let { proprietaire, nbPlaces, tel, idStation } = Vehicule;
+    let { proprietaire, numSerie, nbPlaces, tel, idStation } = Vehicule;
 
     const rq = `INSERT INTO ${table.name} 
     (${table.proprietaire}, ${table.numSerie}, 
       ${table.nbPlaces}, ${table.tel}, ${table.idStation}, ${table.timestamp}) 
     values(?, ? , ? , ? , ?, ?)`;
 
-    const sql = SqlString.format(rq, [proprietaire, numSerie, nbPlaces, tel, idStation, new Date().toString()]);
+    const sql = SqlString.format(rq,
+      [proprietaire, numSerie, nbPlaces, tel, idStation, new Date().toString()]
+    );
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
