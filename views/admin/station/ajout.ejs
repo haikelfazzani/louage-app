@@ -4,9 +4,9 @@
   <%- include('../navbar') -%>
 
 
-<% if(locals.chefStations) { %>
+  <% if(locals.chefStations && locals.chefStations.length > 0) { %>
 
-  <form action="/admin/stations/ajout" method="POST" class="form-signin form-bg-gray">
+  <form action="/admin/stations/ajout" method="POST" class="form-signin form-bg-gray mb-3">
 
     <% chefStations.forEach(chef => { %>
     <div class="form-group">
@@ -16,7 +16,6 @@
       </select>
     </div>
     <% })%>
-
 
     <div class="form-group">
       <label for="nom">nom station</label>
