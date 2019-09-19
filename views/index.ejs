@@ -13,18 +13,22 @@
           when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </p>
 
-        <form class="w-100 form-row">
-
+        <form action="/voyages" class="w-100 form-row" method="POST">
+          <% if(locals.stations) { %>
           <div class="col-md-8">
-            <select class="form-control" id="stations" name="stations">
-              <option>monsef bey</option>
-              <option>sousse</option>
-              <option>bizerte</option>
-              <option>el kef</option>
+            <select class="form-control" id="nomstation" name="nomstation">
+              <% stations.forEach(s => { %>
+              <option value="<%= s.nom_station %>" ><%= s.nom_station %></option>
+              <% }) %>
             </select>
           </div>
-          <div class="col-md-4"><button class="btn btn-dark btn-block">chercher</button></div>
+          <% } %>
+
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-dark btn-block">chercher</button>
+          </div>
         </form>
+
       </div>
 
       <div class="col-md-6">
@@ -34,9 +38,4 @@
 
   </div>
 </div>
-
-<div class="container">
-
-</div>
-
 <%- include('partials/footer.ejs') -%>

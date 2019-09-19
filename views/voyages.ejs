@@ -1,0 +1,53 @@
+<%- include('partials/head.ejs') -%>
+<%- include('partials/navbar') -%>
+<div class="jumbotron container-v50">
+  <div class="container py-5">
+    <div class="row">
+
+      <div class="col-md-6 mb-3">
+
+        <h1 class="display-4 flipInX">BIENVENUE</h1>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        </p>
+
+
+      </div>
+
+      <% if(locals.voyages) { %>
+      <div class="col-md-6">
+        <ul class="list-group">
+
+          <% voyages.forEach(v => { %>
+          <li class="list-group-item mb-3" style="box-shadow: 0 2px 5px 0 rgba(19,41,104,.2); background-color: #fff;">            
+
+            <a href="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><%= v.nom_station %></p>
+                        <p><%= v.destination %></p>
+                    </div>
+                    <div class="col-md-3">
+                      <p><%= v.heure_depart %>h</p>
+                      <p><%= v.date_depart %></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p><%= v.prix_place %>DT</p>
+                    </div>
+                  </div>
+            </a>
+
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+      <% } %>
+    </div>
+
+  </div>
+</div>
+
+
+<%- include('partials/footer.ejs') -%>
