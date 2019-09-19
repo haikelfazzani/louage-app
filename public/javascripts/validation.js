@@ -103,3 +103,26 @@ let btnDelete = document.querySelectorAll('.btn-delete')
 btnDelete.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment supprimer ?')
 })
+
+
+
+/** form validation : changer mot de passe */
+let formPass = document.getElementById('form-pass')
+
+function isValidInput (str) {
+  return (/^[a-z0-9\s+\@\.\-\_]*$/gi.test(str) && str.length > 5)
+}
+
+formPass.onsubmit = (e) => {
+
+  let pass = e.target.password.value
+  if (isValidInput(pass) && e.target.confpassword.value === pass) {
+    return true
+  }
+
+  let alert = document.getElementById('alert-pass')
+  alert.textContent = 'mot de passe incorrect ou contient des charactére n\'ont valide';
+  alert.style.display = 'block';
+  setTimeout(() => { alert.style.display = 'none' }, 5000)
+  return false
+}

@@ -33,11 +33,24 @@ router.post('/ajout', checkUserConnected, (req, res) => {
 
   vehiculeDao.addVehicule(newVehicule)
     .then(result => {
-      res.render('admin/vehicule/ajout', { msg: 'une nouvelle véhicule à été bien ajoutée' })
+      res.redirect('/admin/vehicules')
     })
     .catch(error => {
-      res.render('admin/vehicule/ajout', { msg: 'erreur d\'ajout' })
+      res.redirect('/admin/vehicules')
     })
 })
+
+
+router.get('/supprimer', checkUserConnected, function (req, res) {
+  let { numserie } = req.query
+
+  vehiculeDao.deletVehicule(numserie)
+    .then(result => {
+      res.redirect('/admin/vehicules')
+    })
+    .catch(error => {
+      res.redirect('/admin/vehicules')
+    })
+});
 
 module.exports = router

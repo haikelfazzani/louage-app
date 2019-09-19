@@ -41,4 +41,17 @@ router.post('/ajout', checkUserConnected, (req, res) => {
     })
 })
 
+
+router.get('/supprimer', checkUserConnected, function (req, res) {
+  let { voyage } = req.query
+
+  voyagesDao.deletVoyage(voyage)
+    .then(result => {
+      res.redirect('/admin/voyages')
+    })
+    .catch(error => {
+      res.redirect('/admin/voyages')
+    })
+});
+
 module.exports = router
