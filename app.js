@@ -51,6 +51,7 @@ app.use('/register', require('./routes/register'));
 app.use('/se-deconnecter', require('./routes/deconnecter'));
 
 app.use('/utilisateur', require('./routes/users/profile'));
+app.use('/voyages', require('./routes/voyages'));
 
 // admin routes
 app.use('/admin', require('./routes/admin/admin.route'))

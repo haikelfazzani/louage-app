@@ -71,10 +71,26 @@ module.exports = VoyagesDao = {
     })
   },
 
-  getVoyage (idVoyage) {
-    const rq = `select * from ${table.name} where ${table.idVoyage} = ?`;
+  getVoyage (station) {
+    const rq = `select * from ${table.name} 
+    where ${table.idVoyage} = ?`;
 
     const sql = SqlString.format(rq, idVoyage);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  getVoyageByNomStation (nomStation) {
+    const rq = `select * from ${table.name} v
+    JOIN stations s on v.id_station = s.id_station
+    where s.nom_station = ? `;
+
+    const sql = SqlString.format(rq, nomStation);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

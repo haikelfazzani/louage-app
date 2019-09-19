@@ -9,12 +9,12 @@
     <thead>
       <tr>
         <th>#</th>
+        <th>station</th>
         <th>destination</th>
         <th>heure Depart</th>
         <th>date Depart</th>
         <th>prix Place</th>
-        <th>nb Places</th>
-        <th>station</th>
+        <th>nb Places</th>        
         <th>action</th>
       </tr>
     </thead>
@@ -22,12 +22,12 @@
       <% voyages.forEach((u, i) => {  %>
       <tr>
         <td><%= i %></td>
+        <td><%= u.nom_station %></td>
         <td><%= u.destination %></td>
         <td><%= u.heure_depart %></td>
         <td><%= u.date_depart %></td>
         <td><%= u.prix_place %></td>
-        <td><%= u.nb_places %></td>
-        <td><%= u.nom_station %></td>
+        <td><%= u.nb_places %></td>        
         <td>
           <a href="#" class="btn btn-success">M</a>
           <a class="btn btn-danger btn-delete" href="/chefstation/voyages/supprimer?voyage=<%= u.id_voyage %>">S</a>
