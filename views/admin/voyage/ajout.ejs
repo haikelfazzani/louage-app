@@ -8,7 +8,7 @@
   <form action="/admin/voyages/ajout" method="POST" class="form-signin form-bg-gray mb-3">
     
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Chef station</label>
+      <label for="exampleFormControlSelect1">nom station</label>
       <select class="form-control" id="exampleFormControlSelect1" name="station">
         <% stations.forEach(statn => { %>
         <option value="<%= statn.id_station %>"><%= statn.nom_station %></option>
