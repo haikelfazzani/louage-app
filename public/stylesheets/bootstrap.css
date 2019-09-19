@@ -5293,6 +5293,7 @@ a.badge:focus {
 }
 
 .badge-pill {
+  line-height: 1.5;
   padding-right: 0.6em;
   padding-left: 0.6em;
   border-radius: 10rem;
