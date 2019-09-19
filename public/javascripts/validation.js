@@ -17,8 +17,7 @@ if (generalForm) {
 
     let elmnts = generalForm.elements, inputValues = [];
     for (let el in elmnts) {
-      let element = elmnts[el];
-      inputValues.push(element.value)
+      inputValues.push(elmnts[el].value)
     }
 
     inputValues = inputValues.filter(vi => vi !== undefined && vi.length > 0)
@@ -28,7 +27,6 @@ if (generalForm) {
     }
 
     var x = document.getElementById("snackbar")
-
     x.className = "show";
     x.textContent = 'Entrée de données ne sont pas valide!'
 
@@ -109,20 +107,22 @@ btnDelete.forEach(b => {
 /** form validation : changer mot de passe */
 let formPass = document.getElementById('form-pass')
 
-function isValidInput (str) {
+function isValidPass (str) {
   return (/^[a-z0-9\s+\@\.\-\_]*$/gi.test(str) && str.length > 5)
 }
 
-formPass.onsubmit = (e) => {
+if(formPass) {
+  formPass.onsubmit = (e) => {
 
-  let pass = e.target.password.value
-  if (isValidInput(pass) && e.target.confpassword.value === pass) {
-    return true
+    let pass = e.target.password.value
+    if (isValidPass(pass) && e.target.confpassword.value === pass) {
+      return true
+    }
+  
+    let alert = document.getElementById('alert-pass')
+    alert.textContent = 'mot de passe incorrect ou contient des charactére n\'ont valide';
+    alert.style.display = 'block';
+    setTimeout(() => { alert.style.display = 'none' }, 5000)
+    return false
   }
-
-  let alert = document.getElementById('alert-pass')
-  alert.textContent = 'mot de passe incorrect ou contient des charactére n\'ont valide';
-  alert.style.display = 'block';
-  setTimeout(() => { alert.style.display = 'none' }, 5000)
-  return false
 }

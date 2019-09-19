@@ -101,7 +101,7 @@ a {
 }
 
 .img-profile {
-  max-width: 300px;
+  max-width: 300px;  
   box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
 }
 
@@ -122,6 +122,7 @@ th {
 .img-nav {
   width: 40px;
   height: 40px;
+  border: 2px solid #fff;
   border-radius: 50%;
   cursor: pointer;
   object-fit: cover;
