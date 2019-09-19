@@ -58,6 +58,7 @@ app.use('/admin/stations', require('./routes/admin/stations'));
 app.use('/admin/utilisateurs', require('./routes/admin/utilisateurs'));
 
 app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
+app.use('/admin/voyages', require('./routes/chefstation/voyages'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

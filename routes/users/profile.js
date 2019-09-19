@@ -9,6 +9,8 @@ var bcrypt = require('bcrypt'), saltRounds = 10;
 
 var multer = require('multer'), storage = multer.memoryStorage(), upload = multer({ storage: storage });
 
+//let IMG_BASE_URL='https://api.imgbb.com/1/upload?key=bd564129d4a8eccb275c4cc0c637cff3'
+
 router.get('/profile', checkUserConnected, function (req, res) {
   let { email } = req.session.userInfo
   utilisateurDao.getAvatar(email)

@@ -8,13 +8,14 @@
       { label : 'nombre des utilisateurs', l: data.utilisateurs.length , fa:'fas fa-user'},
       { label : 'nombre des stations' , l : data.stations.length , fa:'fab fa-hubspot'},
       { label : 'nombre des chefs Station', l:data.chefStations.length , fa:'fas fa-users-cog'},
-      { label : 'nombre des vehicules' , l : data.vehicules.length , fa:'fas fa-car'}
+      { label : 'nombre des vehicules' , l : data.vehicules.length , fa:'fas fa-car'},
+      { label : 'nombre des voyages' , l : data.voyages.length , fa:'fas fa-plane-departure'}
     ]  
   %>
   <div class="row text-uppercase mb-5">
 
     <% myData.forEach(v => { %>
-    <div class="col-md-3 text-center">
+    <div class="col-md-3 text-center mb-3">
       <div class="card box-light">
         <div class="card-body">
           <h1><i class="<%= v.fa %>"></i></h1>

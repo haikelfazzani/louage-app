@@ -1,0 +1,70 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+
+  <% if(locals.stations && locals.stations.length > 0) { %>
+  <form action="/admin/voyages/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+    
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Chef station</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="station">
+        <% stations.forEach(statn => { %>
+        <option value="<%= statn.id_station %>"><%= statn.nom_station %></option>
+        <% })%>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="destination">destination</label>
+      <input type="text" class="form-control" id="destination" name="destination" placeholder="Enter destination"
+        required>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="heureDepart">heure Depart</label>
+          <input type="number" class="form-control" id="heureDepart" name="heureDepart" placeholder="Enter heure depart"
+            required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="dateDepart">date Depart</label>
+          <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Enter date depart"
+            required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="prixPlace">prix place</label>
+          <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
+            required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="nbPlaces">nb Places</label>
+          <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
+            required>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-dark">Ajout</button>
+    <button type="reset" class="btn btn-danger">vider</button>
+  </form>
+  <% } %>
+
+  <% if(locals.msg) { %>
+  <div class="alert alert-primary" role="alert"><%= msg %></div>
+  <% } %>
+
+
+</div>
+<%- include('../../partials/footer.ejs') -%>
