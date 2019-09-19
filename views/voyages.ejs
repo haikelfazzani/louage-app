@@ -2,65 +2,79 @@
 <%- include('partials/navbar') -%>
 
 <style>
-  .row {
-    color: #000000 !important;
+  .card a {
+    color: #000000 !important
   }
 
-  .row p:first-child {
-    font-size: 22px;
+  .card h5 {
+    font-size: 30px;
     letter-spacing: 2px;
   }
 
-  .row a {
-    text-decoration: none;
+  .card h5,
+  h6 {
+    font-weight: 600;
   }
 
-  .col-md-2 {
-    display: flex
+  a {
+    cursor: pointer !important;
+    text-decoration: none !important;
   }
 
-  .row span {
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .card p {
+    margin: 0 !important
   }
 </style>
 
 <div class="container py-5">
   <div class="row">
 
-    <% if(locals.voyages) { %>
+    <% if(locals.voyages && locals.voyages.length > 0) { %>
     <div class="col-md-6">
-      <ul class="list-group">
 
-        <% voyages.forEach(v => { %>
-        <li class="list-group-item mb-3" style="box-shadow: 0 2px 5px 0 rgba(19,41,104,.2); background-color: #fff;">
+      <% voyages.forEach(v => { %>
+      <a href="#">
+        <div class="card" style="box-shadow: 0 2px 5px 0 rgba(19,41,104,.2); background-color: #fff;">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <span class="muted">De </span>
+                <h5 class="card-title"><%= v.nom_station  %></h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <p><i class="fas fa-road p-0 m-0"></i> <span class="muted">vers</span></p>
+                  <span style="color:#e91e63"><%= v.destination %></span>
+                </h6>
+              </div>
+              <div>
+                <span style="font-size: 45px; color: #007bff">
+                  <i class="fas fa-coins"></i> <%= v.prix_place %></span><span>DNT</span>
 
-          <a href="" style="font-size: 16px">
-            <div class="row">
-              <div class="col-md-4">
-                <p><i class="fas fa-map-marker-alt"></i> <%= v.nom_station %></p>
-                <p class="muted font-s14">
-                  <i class="fas fa-road"></i> <%= v.destination %>
-                </p>
-              </div>
-              <div class="col-md-4">
-                <p><i class="fas fa-clock"></i> <%= v.heure_depart %>h</p>
-                <p><i class="fas fa-table"></i> <%= v.date_depart %></p>
-              </div>
-              <div class="col-md-2">
-                <span class="badge badge-pill badge-success">
-                  <p><i class="fas fa-coins"></i></p>
-                  <div><%= v.prix_place %>DT</div>
-                </span>
+                <div class="w-100 text-right muted">
+                  <a href="#" class="card-link" style="font-size: 18px !important">
+                    <i class="far fa-clock"></i> <%= v.heure_depart %>h
+                  </a>
+                  <a href="#" class="card-link" style="font-size: 18px !important">
+                    <i class="fas fa-calendar-week"></i> <%= v.date_depart %>
+                  </a>
+                </div>
+
               </div>
             </div>
-          </a>
 
-        </li>
-        <% }) %>
-      </ul>
+          </div>
+        </div>
+      </a>
+      <% }) %>
+
+    </div>
+    <% } else { %>
+    <div class="col-md-6">
+      <div class="alert" role="alert">
+        <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolé</h1>
+        <h4>Aucun voyage trouvé pour cette station, veuillez réessayer plus tard.</h4>
+        <hr>
+        <h3 class="mb-0">Merci et bonne voyage 😊.</h3>
+      </div>
     </div>
     <% } %>
 

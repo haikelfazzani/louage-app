@@ -19,7 +19,7 @@
 - [x] plannification d'un voyage
 - [ ] supprimer un voyage
 - [ ] modifier un voyage
-- [ ] consuler la liste des voyages (client + chef station)
+- [x] consuler la liste des voyages (client + chef station)
 
 ## Gestion des reservations (client)
 - [ ] confirmer une reservation
