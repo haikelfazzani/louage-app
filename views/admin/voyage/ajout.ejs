@@ -5,7 +5,7 @@
 
 
   <% if(locals.stations && locals.stations.length > 0) { %>
-  <form action="/admin/voyages/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+  <form action="/admin/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
     
     <div class="form-group">
       <label for="exampleFormControlSelect1">nom station</label>
@@ -60,6 +60,8 @@
     <button type="reset" class="btn btn-danger">vider</button>
   </form>
   <% } %>
+
+  <%- include('../../snackbar') -%>
 
   <% if(locals.msg) { %>
   <div class="alert alert-primary" role="alert"><%= msg %></div>

@@ -75,9 +75,10 @@ module.exports = StationsDao = {
       })
     })
   },
+
   getStations () {
     const sql = `select * from ${table.name} t join utilisateurs u
-    on t.chef_station = u.id`;
+    on t.chef_station = u.id ORDER BY t.id_station DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -87,5 +88,4 @@ module.exports = StationsDao = {
     })
 
   }
-
 }

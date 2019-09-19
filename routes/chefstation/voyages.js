@@ -33,7 +33,8 @@ router.post('/ajout', checkUserConnected, (req, res) => {
 
   voyagesDao.addVoyage(newVoyage)
     .then(result => {
-      res.render('admin/voyage/ajout', { msg: 'un nouveaux voyage a été bien ajouté' })
+      //res.render('admin/voyage/ajout', { msg: 'un nouveaux voyage a été bien ajouté' })
+      res.redirect('/admin/voyages')
     })
     .catch(error => {
       res.render('admin/voyage/ajout', { msg: 'erreur d\'ajout' })

@@ -4,7 +4,7 @@
   <%- include('../navbar') -%>
 
 
-<form action="/admin/utilisateurs/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+<form action="/admin/utilisateurs/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
   <div class="form-group">
     <label for="nom">email</label>
@@ -29,11 +29,7 @@
   <button type="reset" class="btn btn-danger">vider</button>
 </form>
 
-
-<% if(locals.msg) { %>
-<div class="alert alert-primary" role="alert"><%= msg %></div>
-<% } %>
-
+<%- include('../../snackbar') -%>
 
 
 </div>
