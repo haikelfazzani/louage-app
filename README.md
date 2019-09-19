@@ -6,18 +6,18 @@
 ## Gestion des stations (admin)
 - [x] Ajout station
 - [x] supprimer station
-- [x] modifier station
+- [ ] modifier station
 - [x] lister station
 
 ## Gestion des véhilcules (chef stations)
 - [x] Ajout véhilcule
-- [x] supprimer véhilcule
+- [ ] supprimer véhilcule
 - [x] modifier véhilcule
 - [x] lister véhilcule
 
 ## Gestion des voyages (chef station)
 - [x] plannification d'un voyage
-- [ ] supprimer un voyage
+- [x] supprimer un voyage
 - [ ] modifier un voyage
 - [x] consuler la liste des voyages (client + chef station)
 
@@ -59,12 +59,12 @@
 ## Security
 - [ ] JWT Auth
 - [ ] CORS
-- [ ] Password attack (hashing)
+- [x] Password attack (hashing)
 - [ ] ClickJacking attack
 - [ ] DDOS attack
 - [ ] DOS attack
 - [ ] CSRF attack
-- [ ] XSS attack
+- [x] XSS attack
 
 ## Additional
 - [ ] visitor reporting. (Charting)
@@ -73,9 +73,7 @@
 - [ ] Google maps station position
 
 ## Notes
-- h_depart -> heure de depart
-- d_depart -> date de depart
-- dc_payment -> date complet de payment (2019:06:06T10:25:40)
+- supprimer tous les voyages si la date est expirée
 
 ## Bugs
 - [x] Database Connection lost: The server closed the connection. (Fixed)
