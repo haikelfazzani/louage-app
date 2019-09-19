@@ -3,9 +3,43 @@
 let formRegister = document.querySelector('.form-signin');
 //email ou mot de passe incorrect!
 function isPureStr (str) {
-  return (/^[a-z0-9@\.\-]*$/gi.test(str) && str.length > 5)
+  return (/^[a-z0-9@\.\-\_]*$/gi.test(str) && str.length > 5)
 }
 
+function isValidInput (str) {
+  return (/^[a-z0-9\s+\@\.\-\_]*$/gi.test(str) && str.length > 0)
+}
+
+let generalForm = document.querySelector('.form-general')
+
+if (generalForm) {
+  generalForm.onsubmit = (e) => {
+
+    let elmnts = generalForm.elements, inputValues = [];
+    for (let el in elmnts) {
+      let element = elmnts[el];
+      inputValues.push(element.value)
+    }
+
+    inputValues = inputValues.filter(vi => vi !== undefined && vi.length > 0)
+
+    if (!inputValues.some(v => !isValidInput(v))) {
+      return true
+    }
+
+    var x = document.getElementById("snackbar")
+
+    x.className = "show";
+    x.textContent = 'Entrée de données ne sont pas valide!'
+
+    setTimeout(function () { x.className = x.className.replace("show", "") }, 5000);
+
+    return false
+  }
+}
+
+
+/** form validation for forms contains email and password */
 if (formRegister) {
   formRegister.onsubmit = e => {
 

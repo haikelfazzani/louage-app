@@ -4,7 +4,7 @@
   <%- include('../navbar') -%>
 
   <% if(locals.stations && locals.stations.length > 0) { %>
-  <form action="/admin/vehicules/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+  <form action="/admin/vehicules/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
     <div class="form-group">
       <label for="proprietaire">proprietaire</label>
@@ -50,9 +50,7 @@
   </form>
   <% } %>
 
-  <% if(locals.msg) { %>
-  <div class="alert alert-primary" role="alert"><%= msg %></div>
-  <% } %>
+  <%- include('../../snackbar') -%>  
 
 </div>
 <%- include('../../partials/footer.ejs') -%>

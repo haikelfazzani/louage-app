@@ -25,7 +25,7 @@
 
       <% if(locals.userInfo) { %>
       <div class="col-md-9">
-        <form action="/utilisateur/profile" method="POST" class="form-signin form-p20 bg-light p-0 mb-3">
+        <form action="/utilisateur/profile" method="POST" class="form-general form-p20 bg-light p-0 mb-3">
 
           <div class="form-group">
             <label for="nom">Nom</label>
@@ -56,7 +56,7 @@
           <button type="submit" class="btn btn-dark">mettre à jour</button>
         </form>
 
-        <div class="alert alert-danger" id="form-signin" role="alert">alter</div>
+        <%- include('../snackbar') -%>
 
         <% if(locals.msg) { %>
         <div class="alert alert-dark" role="alert"><%= msg %></div>

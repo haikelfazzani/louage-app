@@ -30,7 +30,7 @@
   <div class="row">
 
     <% if(locals.voyages && locals.voyages.length > 0) { %>
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
 
       <% voyages.forEach(v => { %>
       <a href="#">
@@ -66,25 +66,31 @@
       </a>
       <% }) %>
 
-    </div>
-    <% } else { %>
-    <div class="col-md-6">
-      <div class="alert" role="alert">
-        <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolé</h1>
-        <h4>Aucun voyage trouvé pour cette station, veuillez réessayer plus tard.</h4>
-        <hr>
-        <h3 class="mb-0">Merci et bonne voyage 😊.</h3>
-      </div>
-    </div>
-    <% } %>
+    </div>  
+    
 
 
     <div class="col-md-6 mb-3" style="display: flex;
     justify-content: center;
     align-items: center;">
-      <img src="img/trans.png" alt="" style="max-width: 500px" class="front-img float-right">
+
+      <iframe id='mapcanvas'
+        src='https://maps.google.com/maps?q=<%= encodeURIComponent(locals.voyages[0].nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+        frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+      </iframe>
+      
     </div>
 
+    <% } else { %>
+      <div class="col-md-6">
+        <div class="alert" role="alert">
+          <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolé</h1>
+          <h4>Aucun voyage trouvé pour cette station, veuillez réessayer plus tard.</h4>
+          <hr>
+          <h3 class="mb-0">Merci et bonne voyage 😊.</h3>
+        </div>
+      </div>
+      <% } %>
 
   </div>
 

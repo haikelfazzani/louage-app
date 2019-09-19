@@ -122,7 +122,7 @@ const UtilisateurDao = {
   },
 
   getUsers () {
-    const sql = `select * from ${table.name}`;
+    const sql = `select * from ${table.name} ORDER BY ${table.id} DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

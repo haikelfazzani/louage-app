@@ -82,9 +82,8 @@ module.exports = VehiculesDao = {
   },
 
   getVehicules () {
-    const sql = `select * from ${table.name} t 
-    join stations u 
-    on t.id_station = u.id_station`;
+    const sql = `select * from ${table.name} t join stations u 
+    on t.id_station = u.id_station ORDER BY t.id_station DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

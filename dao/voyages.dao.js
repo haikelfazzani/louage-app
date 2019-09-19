@@ -86,9 +86,8 @@ module.exports = VoyagesDao = {
   },
 
   getVoyageByNomStation (nomStation) {
-    const rq = `select * from ${table.name} v
-    JOIN stations s on v.id_station = s.id_station
-    where s.nom_station = ? `;
+    const rq = `SELECT * FROM ${table.name} v JOIN stations s 
+    ON v.id_station = s.id_station WHERE s.nom_station = ? ORDER BY v.id_voyage DESC`;
 
     const sql = SqlString.format(rq, nomStation);
 
@@ -101,9 +100,8 @@ module.exports = VoyagesDao = {
   },
 
   getVoyages () {
-    const sql = `select * from ${table.name} t 
-    join stations u 
-    on t.id_station = u.id_station`;
+    const sql = `select * from ${table.name} v join stations u 
+    on v.id_station = u.id_station ORDER BY v.id_voyage DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

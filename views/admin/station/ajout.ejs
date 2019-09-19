@@ -3,10 +3,9 @@
 <div class="container py-5">
   <%- include('../navbar') -%>
 
-
   <% if(locals.chefStations && locals.chefStations.length > 0) { %>
 
-  <form action="/admin/stations/ajout" method="POST" class="form-signin form-bg-gray mb-3">
+  <form action="/admin/stations/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
     <% chefStations.forEach(chef => { %>
     <div class="form-group">
@@ -37,13 +36,9 @@
   </form>
 
 
-  <% if(locals.msg) { %>
-  <div class="alert alert-primary" role="alert"><%= msg %></div>
-  <% } %>
+  <%- include('../../snackbar') -%>
 
 
   <% } %>
-
-
 </div>
 <%- include('../../partials/footer.ejs') -%>
