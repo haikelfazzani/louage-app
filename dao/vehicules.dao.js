@@ -91,6 +91,5 @@ module.exports = VehiculesDao = {
         else resolve(result)
       })
     })
-
   }
 }

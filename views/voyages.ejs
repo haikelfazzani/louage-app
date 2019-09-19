@@ -33,7 +33,7 @@
     <div class="col-md-6 mb-3">
 
       <% voyages.forEach(v => { %>
-      <a href="#">
+      <a href="/reservations?voyage=<%= encodeURIComponent(JSON.stringify(v)) %>">
         <div class="card" style="box-shadow: 0 2px 5px 0 rgba(19,41,104,.2); background-color: #fff;">
           <div class="card-body">
             <div class="d-flex justify-content-between">

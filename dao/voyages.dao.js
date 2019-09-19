@@ -110,5 +110,19 @@ module.exports = VoyagesDao = {
       })
     })
 
+  },
+
+  nbPlacesByDestination(destination) {
+    const rq = `SELECT sum(${table.nbPlaces}) as nb
+    FROM ${table.name} where ${table.destination} = ? GROUP BY ${table.nbPlaces}`;
+
+    const sql = SqlString.format(rq, destination);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
   }
 }

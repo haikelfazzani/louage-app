@@ -1,0 +1,77 @@
+<%- include('partials/head.ejs') -%>
+<%- include('partials/navbar') -%>
+
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-6 mb-3">
+        <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">
+       
+              <div class="form-group">
+                <label for="destination">destination</label>
+                <input type="text" class="form-control" 
+                id="destination" name="destination" value="<%= voyage.destination %>"
+                  required readonly>
+              </div>
+
+          <div class="form-group">
+            <label for="nbplaces" class="d-flex justify-content-between">
+              nombre de places disponibles
+              <span class="badge badge-pill badge-danger"><%= voyage.nb_places %></span>
+            </label>
+
+            <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>"
+            id="nbplaces" name="nbplaces" placeholder="Enter nb places"
+              required>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="heureDepart">heure Depart</label>
+                <input type="number" class="form-control" id="heureDepart" name="heureDepart" placeholder="Enter heure depart"
+                  required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="dateDepart">date Depart</label>
+                <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Enter date depart"
+                  required>
+              </div>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="prixPlace">prix place</label>
+                <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
+                  required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nbPlaces">nb Places</label>
+                <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
+                  required>
+              </div>
+            </div>
+          </div>
+      
+          <button type="submit" class="btn btn-dark">Ajout</button>
+          <button type="reset" class="btn btn-danger">vider</button>
+        </form>
+    </div>  
+    
+
+
+    <div class="col-md-6 mb-3" style="display: flex">
+      
+    </div>
+
+
+  </div><!-- end row -->
+
+</div>
+<%- include('partials/footer.ejs') -%>
