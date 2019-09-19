@@ -61,6 +61,8 @@ app.use('/admin/utilisateurs', require('./routes/admin/utilisateurs'));
 app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
 app.use('/admin/voyages', require('./routes/chefstation/voyages'));
 
+app.get('*', (req, res) => { res.redirect('/404') })
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -79,6 +81,5 @@ app.use(function (err, req, res, next) {
 });
 
 
-app.get('*', (req, res) => { res.redirect('/') })
 
 module.exports = app;

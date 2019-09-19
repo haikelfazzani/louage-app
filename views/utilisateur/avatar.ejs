@@ -1,18 +1,21 @@
 <div class="col-md-3 mb-3">
 
-  <% if(locals.avatar && locals.avatar.length > 45) { %>
-  <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail img-profile fade-in mb-3">
-  <% } else { %>
-  <img src="/img/profile.png" alt="photo de profile" class="img-thumbnail img-profile fade-in mb-3">
-  <% } %>
-
   <form action="/utilisateur/profile/avatar" method="POST" enctype="multipart/form-data">
-    <div class="input-group mb-2">
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputImage" aria-describedby="inputGroupFileAddon04"
-          name="avatar">
-        <label class="custom-file-label" for="inputImage">Choose file</label>
-      </div>
+
+    <div class="input-group" style="justify-content: center">
+
+      <% if(locals.avatar && locals.avatar.length > 45) { %>
+      <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail img-profile fade-in mb-3">
+      <% } else { %>
+      <img src="/img/profile.png" alt="photo de profile" class="img-thumbnail img-profile fade-in mb-3">
+      <% } %>
+
+
+      <input type="file" class="custom-file-input" id="inputImage" aria-describedby="inputGroupFileAddon04"
+        name="avatar">
+      <label class="custom-file-label" for="inputImage" style="height: 255px; opacity: 0; cursor: pointer;">Choose
+        file</label>
+
     </div>
 
     <button class="btn btn-dark btn-block" type="submit" id="btn-update-avatar" disabled>
