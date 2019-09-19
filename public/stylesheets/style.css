@@ -49,13 +49,12 @@ h2 {
   background-color: #1f2532;
 }
 
-.btn, button, .nav-link {
+.nav-link {
   font-size: 14px !important;
   position: relative;
   color: #707d8f !important;  
+  transition: background-color .4s ease, color .4s ease;
 }
-
-.btn, button, .nav-link { transition: background-color .4s ease, color .4s ease; }
 
 .nav-link:hover,
 .nav-link:active {
