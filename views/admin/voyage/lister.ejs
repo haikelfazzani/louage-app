@@ -1,0 +1,43 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+  <% if(locals.voyages) {  %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>destination</th>
+        <th>heure Depart</th>
+        <th>date Depart</th>
+        <th>prix Place</th>
+        <th>nb Places</th>
+        <th>station</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% voyages.forEach((u, i) => {  %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= u.destination %></td>
+        <td><%= u.heure_depart %></td>
+        <td><%= u.date_depart %></td>
+        <td><%= u.prix_place %></td>
+        <td><%= u.nb_places %></td>
+        <td><%= u.nom_station %></td>
+        <td>
+          <a href="#" class="btn btn-success">M</a>
+          <a class="btn btn-danger btn-delete" href="/chefstation/voyages/supprimer?voyage=<%= u.id_voyage %>">S</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+
+
+</div>
+<%- include('../../partials/footer.ejs') -%>
