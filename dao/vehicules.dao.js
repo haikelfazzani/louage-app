@@ -9,7 +9,7 @@ const table = {
   nbPlaces: 'nb_places',
   tel: "tel",
   idStation: 'id_station', // clé étrangaire
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_vehicule'
 }
 
 module.exports = VehiculesDao = {

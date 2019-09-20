@@ -7,7 +7,7 @@ const table = {
   datePayment: 'date_payment',
   idReserv: 'id_reservation',
   idClient: 'id_client',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_payment'
 }
 
 module.exports = PaymentsDao = {

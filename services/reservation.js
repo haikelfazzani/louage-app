@@ -8,9 +8,9 @@ module.exports = (function () {
 
       result.forEach(element => {
 
-        let checkTime = Date.parse(new Date()) > (Date.parse(element.timestamp) + 600000)
+        let checkTime = Date.parse(new Date()) > (Date.parse(element.timestamp_reservation) + 600000)
 
-        console.log(Date.parse(new Date()) - (Date.parse(element.timestamp) + 600000));
+        console.log(Date.parse(new Date()) - (Date.parse(element.timestamp_reservation) + 600000));
         console.log(checkTime);
         
 

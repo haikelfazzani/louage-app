@@ -10,7 +10,7 @@ const table = {
   etatReserv: 'etat_reservation',
   idClient: 'id_client',
   idVoyage: 'id_voyage',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_reservation'
 }
 
 module.exports = ReservationsDao = {
