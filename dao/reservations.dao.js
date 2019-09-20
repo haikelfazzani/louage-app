@@ -7,7 +7,7 @@ const table = {
   nbPlaceReserv: 'nb_place_reserver',
   totalPrixPlaces: 'total_prix_places',
   etatReserv: 'etat_reservation',
-  idUtilisateur: 'id_utilisateur',
+  idClient: 'id_client',
   idVoyage: 'id_voyage',
   timestamp: 'timestamp'
 }
@@ -16,16 +16,16 @@ module.exports = ReservationsDao = {
 
   addReservation (Reservation) {
 
-    let { nbPlaceReserv, totalPrixPlaces, etatReservation, idUtilisateur, idVoyage } = Reservation;
+    let { nbPlaceReserv, totalPrixPlaces, etatReservation, idClient, idVoyage } = Reservation;
 
     const rq = `INSERT INTO ${table.name} 
     (${table.nbPlaceReserv}, ${table.totalPrixPlaces}, ${table.etatReserv}, 
-      ${table.idUtilisateur}, ${table.idVoyage}, ${table.timestamp}) values(?, ? , ? , ?, ?, ?)`;
+      ${table.idClient}, ${table.idVoyage}, ${table.timestamp}) values(?, ? , ? , ?, ?, ?)`;
 
     const sql = SqlString.format(rq,
       [
         nbPlaceReserv, totalPrixPlaces, etatReservation,
-        idUtilisateur, idVoyage, new Date().toISOString()
+        idClient, idVoyage, new Date().toISOString()
       ]
     );
 
@@ -66,8 +66,9 @@ module.exports = ReservationsDao = {
   },
 
   getReservByUser (email) {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.id_client = u.id 
+    const rq = `select * from ${table.name} t 
+    join utilisateurs u on t.id_client = u.id 
+    join voyages v on t.id_voyage = v.id_voyage
     WHERE u.email = ? ORDER BY t.id_reservation DESC`;
 
     const sql = SqlString.format(rq, email);
