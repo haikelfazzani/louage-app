@@ -52,14 +52,14 @@ total_prix_places: "45 DNT"
       .then(res => res.json())
       .then(result => {
 
-        let reservByDate = result.reservations.reduce((a, c, i) =>
-          (v = months[new Date(c.timestamp_reservation).getMonth()],
+        let voyageParMoi = result.voyages.reduce((a, c, i) =>
+          (v = months[new Date(c.date_depart).getMonth()],
             a[v] ? a[v]++ : a[v] = 1, a), []);
 
         let objReserv = [];
 
-        for (let i in reservByDate) {
-          objReserv.push({ n: reservByDate[i], m: i, indx: months.indexOf(i) })
+        for (let i in voyageParMoi) {
+          objReserv.push({ n: voyageParMoi[i], m: i, indx: months.indexOf(i) })
         }
 
         objReserv = objReserv.sort((i, j) => i.indx - j.indx);
@@ -70,7 +70,7 @@ total_prix_places: "45 DNT"
           data: {
             labels: objReserv.map(v => v.m),
             datasets: [{
-              label: 'nombre de reservation par moi',
+              label: 'nombre de voyages par moi',
               data: objReserv.map(v => v.n),
               backgroundColor: '#e91e63',
               borderWidth: 1
@@ -81,7 +81,7 @@ total_prix_places: "45 DNT"
               yAxes: [{
                 ticks: {
                   beginAtZero: true,
-                  callback: function(value) {if (value % 1 === 0) {return value;}}
+                  callback: function (value) { if (value % 1 === 0) { return value; } }
                 }
               }]
             }

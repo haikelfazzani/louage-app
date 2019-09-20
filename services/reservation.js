@@ -14,10 +14,10 @@ module.exports = (function () {
           if (element.etat_reservation === EtatReservation.enAttente) {
             reservDao.deleteReservByEtat()
               .then(resultEtat => {
-                console.log(resultEtat)
+                //console.log(resultEtat)
               })
               .catch(error => {
-                console.log(errorEtat)
+                //console.log(errorEtat)
               })
           }
         }
