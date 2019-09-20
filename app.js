@@ -45,7 +45,7 @@ app.get('/404', (req, res) => {
 nodeFileEnv().load()
 
 // triggers and services
-require('./services/reservation')
+setInterval(() => { require('./services/reservation') }, 1000 * 60 * 10);
 
 // routers
 app.use('/', require('./routes/index'));
