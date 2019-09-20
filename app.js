@@ -50,10 +50,10 @@ app.use('/login', require('./routes/login'));
 app.use('/register', require('./routes/register'));
 app.use('/se-deconnecter', require('./routes/deconnecter'));
 
-app.use('/utilisateur', require('./routes/users/profile'));
-app.use('/voyages', require('./routes/users/voyages'));
-app.use('/reservations', require('./routes/users/reservations'));
-app.use('/payments', require('./routes/users/payments'));
+app.use('/utilisateur', require('./routes/client/profile'));
+app.use('/voyages', require('./routes/client/voyages'));
+app.use('/reservations', require('./routes/client/reservations'));
+app.use('/payments', require('./routes/client/payments'));
 
 // admin routes
 app.use('/admin', require('./routes/admin/admin.route'))

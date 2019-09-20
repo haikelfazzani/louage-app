@@ -6,10 +6,10 @@ router.post('/', (req, res) => {
 
   voyagesDao.getVoyageByNomStation(nomstation)
     .then(voyages => {
-      res.render('voyages', { voyages })
+      res.render('client/voyages', { voyages })
     })
     .catch(error => {
-      res.render('voyages')
+      res.render('client/voyages')
     })
 })
 
