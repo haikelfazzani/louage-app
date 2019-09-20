@@ -14,7 +14,7 @@
         <th>heure Depart</th>
         <th>date Depart</th>
         <th>prix Place</th>
-        <th>nb Places</th>        
+        <th>nb Places</th>
         <th>action</th>
       </tr>
     </thead>
@@ -27,17 +27,36 @@
         <td><%= u.heure_depart %>h</td>
         <td><%= u.date_depart %></td>
         <td><%= u.prix_place %> DNT</td>
-        <td><%= u.nb_places %></td>        
+        <td><%= u.nb_places %></td>
         <td>
-          <a href="#" class="btn btn-success">M</a>
+          <button type="button" class="btn btn-success btn-dismiss" data-toggle="modal" data-target="#exampleModal">
+            M
+          </button>
           <a class="btn btn-danger btn-delete" href="/admin/voyages/supprimer?voyage=<%= u.id_voyage %>">S</a>
         </td>
+
+        <%- include('modifier', {u}) -%>
+
       </tr>
       <% }) %>
     </tbody>
   </table>
   <% } %>
 
+
+
+
+
+  <script>
+    let btnDismiss = document.querySelector('.close');
+
+    btnDismiss.onclick = () => {
+      let m = document.querySelector('.modal-backdrop')
+      if (m) m.style.opacity = 0
+      document.getElementById('exampleModal').style.display = 'none'
+    }
+
+  </script>
 
 </div>
 <%- include('../../partials/footer.ejs') -%>

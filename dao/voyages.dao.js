@@ -38,17 +38,21 @@ module.exports = VoyagesDao = {
     })
   },
 
-  updateVoyage (idVoyage) {
-    let { proprietaire, nbPlaces, tel, idStation } = Voyage;
+  updateVoyage (Voyage, idVoyage) {
+    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation } = Voyage;
 
     const rq = `update ${table.name} 
-    set ${table.proprietaire} = ? ,
+    set ${table.destination} = ? ,
+        ${table.heureDepart} = ?,
+        ${table.dateDepart} = ?,
+        ${table.prixPlace} = ?,
         ${table.nbPlaces} = ?,
-        ${table.tel} = ?,
         ${table.idStation} = ?
     where ${table.idVoyage} = ? `;
 
-    const sql = SqlString.format(rq, [proprietaire, nbPlaces, tel, idStation, idVoyage]);
+    const sql = SqlString.format(rq,
+      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, idVoyage]
+    );
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -112,7 +116,7 @@ module.exports = VoyagesDao = {
 
   },
 
-  nbPlacesByDestination(destination) {
+  nbPlacesByDestination (destination) {
     const rq = `SELECT sum(${table.nbPlaces}) as nb
     FROM ${table.name} where ${table.destination} = ? GROUP BY ${table.nbPlaces}`;
 

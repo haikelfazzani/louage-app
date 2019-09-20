@@ -6,13 +6,18 @@ var voyagesDao = require('../../dao/voyages.dao')
 var Voyage = require('../../model/Voyage.model')
 
 router.get('/', checkUserConnected, (req, res) => {
-  voyagesDao.getVoyages()
-    .then(voyages => {
-      res.render('admin/voyage/lister', { voyages })
-    })
+  const promises = [
+    stationDao.getStations(),
+    voyagesDao.getVoyages()
+  ];
+
+  Promise.all(promises).then(function (values) {
+
+    res.render('admin/voyage/lister', { stations: values[0], voyages: values[1] });
+  })
     .catch(error => {
-      res.render('admin/voyage/lister')
-    })
+      res.render('admin/voyage/lister');
+    });
 })
 
 
@@ -53,5 +58,21 @@ router.get('/supprimer', checkUserConnected, function (req, res) {
       res.redirect('/admin/voyages')
     })
 });
+
+
+router.post('/modifier', checkUserConnected, (req, res) => {
+
+  let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, station,idvoyage } = req.body
+
+  let newVoyage = new Voyage(destination, heureDepart, dateDepart, prixPlace, nbPlaces, station)
+
+  voyagesDao.updateVoyage(newVoyage, idvoyage)
+  .then(result => {
+    res.redirect('/admin/voyages')
+  })
+  .catch(error => {
+    res.redirect('/admin/voyages')
+  })  
+})
 
 module.exports = router
