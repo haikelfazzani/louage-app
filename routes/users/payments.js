@@ -1,9 +1,9 @@
 var router = require('express').Router()
-var { checkUserConnected } = require('../middleware/authorisation')
+var { checkUserConnected } = require('../../middleware/authorisation')
 
-var reservDao = require('../dao/reservations.dao')
-var Reservation = require('../model/Reservation')
-var voyageDao = require('../dao/voyages.dao')
+var reservDao = require('../../dao/reservations.dao')
+var Reservation = require('../../model/Reservation')
+var voyageDao = require('../../dao/voyages.dao')
 
 function checkValidParam (req, res, next) {
   try {
@@ -18,14 +18,17 @@ function checkValidParam (req, res, next) {
   }
 }
 
-router.get('/', checkValidParam, (req, res) => {
+router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
 
   let { voyage } = req.query;
 
-  voyage = JSON.parse(decodeURIComponent(voyage))  
+  voyage = JSON.parse(decodeURIComponent(voyage))
 
   voyageDao.nbPlacesByDestination(voyage.destination)
     .then(result => {
+      if(result[0].nb < 1) {
+        res.redirect('/')
+      }
       res.render('reservations', { voyage, nbPlaces: result[0].nb })
     })
     .catch(error => {
@@ -34,9 +37,22 @@ router.get('/', checkValidParam, (req, res) => {
 
 })
 
-router.post('/ajout', (req, res) => {
+router.post('/ajout', checkUserConnected , (req, res) => {
+  let { nbplaces, total, idvoyage, nbplacesv } = req.body
+  let { id } = req.session.userInfo;
 
-  res.render('reservations')
+  let reserv = new Reservation(+nbplaces, total, 'en attente', id, idvoyage)
+
+  Promise.all([
+    reservDao.addReservation(reserv),
+    voyageDao.updateNbPlaces(+(nbplacesv-nbplaces), idvoyage)
+  ])
+    .then(result => {
+      res.render('payments')
+    })
+    .catch(error => {
+      res.render('payments')
+    })
 })
 
 

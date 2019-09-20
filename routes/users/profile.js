@@ -18,10 +18,10 @@ router.get('/profile', checkUserConnected, function (req, res) {
 
       let encode = 'data:image/png;base64,' + result[0].avatar
       req.session.avatar = encode
-      res.render('utilisateur/profile', { avatar: encode })
+      res.render('utilisateur/profile/index', { avatar: encode })
     })
     .catch(error => {
-      res.render('utilisateur/profile')
+      res.render('utilisateur/profile/index')
     })
 });
 
@@ -34,16 +34,16 @@ router.post('/profile', checkUserConnected, function (req, res) {
   utilisateurDao.updateUser(objectTrim(User))
     .then(result => {
       if (Object.keys(result).length > 0 && result.affectedRows)
-        res.render('utilisateur/profile', { msg: 'votre profile a été bien modifiée' });
+        res.render('utilisateur/profile/index', { msg: 'votre profile a été bien modifiée' });
     })
     .catch(error => {
-      res.render('utilisateur/profile', { msg: 'erreur de modification!' });
+      res.render('utilisateur/profile/index', { msg: 'erreur de modification!' });
     })
 });
 
 /** user change password */
 router.get('/profile/password', checkUserConnected, function (req, res) {
-  res.render('utilisateur/password')
+  res.render('utilisateur/profile/password')
 });
 
 
@@ -56,10 +56,10 @@ router.post('/profile/password', checkUserConnected, function (req, res) {
 
       utilisateurDao.updateUserPassword(email, hash)
         .then(result => {
-          res.render('utilisateur/password', { msg: 'votre mot de passe a été bien modifiée' })
+          res.render('utilisateur/profile/password', { msg: 'votre mot de passe a été bien modifiée' })
         })
         .catch(error => {
-          res.render('utilisateur/password', { msg: 'erreur de modification!' })
+          res.render('utilisateur/profile/password', { msg: 'erreur de modification!' })
         })
     })
     .catch(errHash => { res.render('error', { appErrors: errHash }) });
@@ -85,13 +85,13 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
       res.redirect('/utilisateur/profile')
     })
     .catch(error => {
-      res.render('utilisateur/profile', { msg: 'erreur de modification' })
+      res.render('utilisateur/profile/index', { msg: 'erreur de modification' })
     })
 });
 
 /** Suppression compte (profile) */
 router.get('/profile/supprimer', checkUserConnected, function (req, res) {
-  res.render('utilisateur/supprimer-compte')
+  res.render('utilisateur/profile/supprimer')
 });
 
 router.post('/profile/supprimer', checkUserConnected, function (req, res) {
@@ -107,7 +107,7 @@ router.post('/profile/supprimer', checkUserConnected, function (req, res) {
             res.redirect('/register')
           })
           .catch(error => {
-            res.render('utilisateur/supprimer-compte', { msg: 'erreur de suppression!' })
+            res.render('utilisateur/profile/supprimer', { msg: 'erreur de suppression!' })
           })
       }
       else {
@@ -115,7 +115,7 @@ router.post('/profile/supprimer', checkUserConnected, function (req, res) {
       }
     })
     .catch(errHash => {
-      res.render('utilisateur/supprimer-compte', { msg: 'erreur de suppression!' })
+      res.render('utilisateur/profile/supprimer', { msg: 'erreur de suppression!' })
     });
 })
 
