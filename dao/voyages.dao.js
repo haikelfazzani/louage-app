@@ -61,10 +61,12 @@ module.exports = VoyagesDao = {
     })
   },
 
-  deletVoyage (idVoyage) {
-    const rq = `delete from ${table.name} where ${table.idVoyage} = ?`;
+  updateNbPlaces (nbPlaces, idVoyage) {
 
-    const sql = SqlString.format(rq, idVoyage);
+    const rq = `update ${table.name} 
+    set ${table.nbPlaces} = ? where ${table.idVoyage} = ? `;
+
+    const sql = SqlString.format(rq, [nbPlaces, idVoyage]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -74,9 +76,8 @@ module.exports = VoyagesDao = {
     })
   },
 
-  getVoyage (station) {
-    const rq = `select * from ${table.name} 
-    where ${table.idVoyage} = ?`;
+  deletVoyage (idVoyage) {
+    const rq = `delete from ${table.name} where ${table.idVoyage} = ?`;
 
     const sql = SqlString.format(rq, idVoyage);
 

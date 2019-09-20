@@ -1,5 +1,5 @@
 var router = require('express').Router()
-var voyagesDao = require('../dao/voyages.dao')
+var voyagesDao = require('../../dao/voyages.dao')
 
 router.post('/', (req, res) => {
   let { nomstation } = req.body

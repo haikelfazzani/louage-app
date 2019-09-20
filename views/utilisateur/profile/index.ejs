@@ -1,5 +1,5 @@
-<%- include('../partials/head.ejs') -%>
-<%- include('../partials/navbar') -%>
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
 
 <section class="page-header">
   <div class="col-md-12">
@@ -55,11 +55,7 @@
           <button type="submit" class="btn btn-dark">mettre à jour</button>
         </form>
 
-        <%- include('../snackbar') -%>
-
-        <% if(locals.msg) { %>
-        <div class="alert alert-dark" role="alert"><%= msg %></div>
-        <% } %>
+        <%- include('../../snackbar') -%>
 
 
       </div>
@@ -70,4 +66,4 @@
   </div>
 </div>
 
-<%- include('../partials/footer.ejs') -%>
+<%- include('../../partials/footer.ejs') -%>

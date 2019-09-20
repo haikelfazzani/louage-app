@@ -1,13 +1,21 @@
-<%- include('partials/head.ejs') -%>
-<%- include('partials/navbar') -%>
+<%- include('../partials/head.ejs') -%>
+<%- include('../partials/navbar') -%>
 
+<style>
+  #total {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+</style>
+<% if(locals.voyage) { %>
 <div class="container py-5">
   <div class="row">
+
 
     <div class="col-md-6 mb-3">
       <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
-        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
+        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" readonly>
 
         <div class="form-group">
           <label>destination</label>
@@ -35,6 +43,7 @@
             nombre de places disponibles
             <span class="badge badge-pill badge-danger"><%= voyage.nb_places %></span>
           </label>
+          <input type="number" name="nbplacesv" id="nbplacesv" value="<%= voyage.nb_places %>" hidden readonly>
           <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>" 
           id="nbplaces" name="nbplaces"
             placeholder="Enter nombre places" required>
@@ -42,10 +51,14 @@
 
         <div class="row mb-5">
           <div class="col-md-6">
+            <label>Prix place</label>
             <button type="button" class="btn btn-danger btn-block"><%=  voyage.prix_place %> DNT</button>
           </div>
           <div class="col-md-6">
-            <button type="button" class="btn btn-dark btn-block" id="total">0 DNT</button>
+            <div class="form-group">
+              <label>total</label>
+              <input type="text" class="form-control" id="total" name="total" value="0 DNT" required readonly>
+            </div>
           </div>
         </div>
 
@@ -63,15 +76,15 @@
   document.getElementById('nbplaces').onkeyup = (e) => {
     let nbPlaces = e.target.value;
     let total = document.getElementById('total')
-    total.textContent = (nbPlaces * prixPlace) + ' DNT'
+    total.value = (nbPlaces * prixPlace) + ' DNT'
   }
 
   document.getElementById('nbplaces').onchange = (e) => {
     let nbPlaces = e.target.value;
     let total = document.getElementById('total')
-    total.textContent = (nbPlaces * prixPlace) + ' DNT'
+    total.value = (nbPlaces * prixPlace) + ' DNT'
   }
 //console.log(nbPlaces)
 </script>
-
-<%- include('partials/footer.ejs') -%>
+<% } %>
+<%- include('../partials/footer.ejs') -%>
