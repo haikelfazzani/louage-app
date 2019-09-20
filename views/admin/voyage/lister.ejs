@@ -43,19 +43,17 @@
   </table>
   <% } %>
 
-
-
-
-
-  <script>
+  <script defer>
     let btnDismiss = document.querySelector('.close');
 
     btnDismiss.onclick = () => {
       let m = document.querySelector('.modal-backdrop')
-      if (m) m.style.opacity = 0
+      if (m) {
+        m.style.opacity = 0        
+        m.classList.remove("show")
+      }
       document.getElementById('exampleModal').style.display = 'none'
     }
-
   </script>
 
 </div>
