@@ -27,7 +27,7 @@ router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
 
   voyageDao.nbPlacesByDestination(voyage.destination)
     .then(result => {
-      if(result[0].nb < 1) {
+      if (result[0].nb < 1) {
         res.redirect('/')
       }
       res.render('client/reservations', { voyage, nbPlaces: result[0].nb })
@@ -38,7 +38,21 @@ router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
 
 })
 
-router.post('/ajout', checkUserConnected , (req, res) => {
+
+router.get('/all', checkUserConnected, (req, res) => {
+
+  let { email } = req.session.userInfo
+
+  reservDao.getReservByUser(email)
+    .then(reservations => {
+      res.render('client/profile/reservations', { reservations })
+    })
+    .catch(error => {
+      res.redirect('/utilisateur/profile')
+    })
+})
+
+router.post('/ajout', checkUserConnected, (req, res) => {
   let { nbplaces, total, idvoyage, nbplacesv } = req.body
   let { id } = req.session.userInfo;
 
@@ -46,7 +60,7 @@ router.post('/ajout', checkUserConnected , (req, res) => {
 
   Promise.all([
     reservDao.addReservation(reserv),
-    voyageDao.updateNbPlaces(+(nbplacesv-nbplaces), idvoyage)
+    voyageDao.updateNbPlaces(+(nbplacesv - nbplaces), idvoyage)
   ])
     .then(result => {
       res.render('client/payments')
