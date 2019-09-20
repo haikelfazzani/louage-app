@@ -39,19 +39,18 @@ module.exports = VoyagesDao = {
   },
 
   updateVoyage (Voyage, idVoyage) {
-    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation } = Voyage;
+    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces } = Voyage;
 
     const rq = `update ${table.name} 
     set ${table.destination} = ? ,
         ${table.heureDepart} = ?,
         ${table.dateDepart} = ?,
         ${table.prixPlace} = ?,
-        ${table.nbPlaces} = ?,
-        ${table.idStation} = ?
+        ${table.nbPlaces} = ?
     where ${table.idVoyage} = ? `;
 
     const sql = SqlString.format(rq,
-      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, idVoyage]
+      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idVoyage]
     );
 
     return new Promise((resolve, reject) => {
