@@ -18,23 +18,23 @@ function checkValidParam (req, res, next) {
   }
 }
 
-router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
+router.get('/', [checkUserConnected], (req, res) => {
 
-  let { voyage } = req.query;
+  // let { voyage } = req.query;
 
-  voyage = JSON.parse(decodeURIComponent(voyage))
+  // voyage = JSON.parse(decodeURIComponent(voyage))
 
-  voyageDao.nbPlacesByDestination(voyage.destination)
-    .then(result => {
-      if(result[0].nb < 1) {
-        res.redirect('/')
-      }
-      res.render('client/reservations', { voyage, nbPlaces: result[0].nb })
-    })
-    .catch(error => {
-      res.render('client/reservations')
-    })
-
+  // voyageDao.nbPlacesByDestination(voyage.destination)
+  //   .then(result => {
+  //     if(result[0].nb < 1) {
+  //       res.redirect('/')
+  //     }
+  //     res.render('client/payments', { voyage, nbPlaces: result[0].nb })
+  //   })
+  //   .catch(error => {
+  //     res.render('client/payments')
+  //   })
+    res.render('client/payments')
 })
 
 router.post('/ajout', checkUserConnected , (req, res) => {
@@ -56,7 +56,7 @@ router.post('/ajout', checkUserConnected , (req, res) => {
 })
 
 
-router.get('/supprimer', checkUserConnected, function (req, res) {
+router.get('/annuler', checkUserConnected, function (req, res) {
   let { numserie } = req.query
 
   vehiculeDao.deletVehicule(numserie)

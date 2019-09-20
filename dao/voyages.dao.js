@@ -10,7 +10,7 @@ const table = {
   prixPlace: 'prix_place',
   nbPlaces: 'nb_places',
   idStation: 'id_station',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_voyage'
 }
 
 module.exports = VoyagesDao = {
@@ -114,14 +114,32 @@ module.exports = VoyagesDao = {
         else resolve(result)
       })
     })
-
   },
 
-  nbPlacesByDestination (destination) {
-    const rq = `SELECT sum(${table.nbPlaces}) as nb
-    FROM ${table.name} where ${table.destination} = ? GROUP BY ${table.nbPlaces}`;
+  nbPlacesByDestination (destination, station) {
+    const rq = `SELECT sum(v.nb_places) as nb
+    FROM ${table.name} v join stations s
+    on v.id_station = s.id_station
+    where v.destination = ? and s.nom_station = ? 
+    GROUP BY v.nb_places`;
 
-    const sql = SqlString.format(rq, destination);
+    const sql = SqlString.format(rq, [destination, station]);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  getVoyageByDateAndStation (date, station) {
+    const rq = `select * from ${table.name} v join stations u 
+    on v.id_station = u.id_station 
+    WHERE v.timestamp_voyage = ? and u.nom_station = ?
+    ORDER BY v.id_voyage DESC`;
+
+    const sql = SqlString.format(rq, [date, station]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

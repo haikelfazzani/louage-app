@@ -8,9 +8,9 @@ var EtatReser = require('../../model/EtatReservation.enum')
 
 function checkValidParam (req, res, next) {
   try {
-    let { voyage } = req.query;
-    voyage = JSON.parse(decodeURIComponent(voyage))
-    if (!voyage && Object.keys(voyage).length < 2) {
+    let { destination, station, date } = req.query;
+
+    if ((!destination && destination.length < 3) && !station && !date) {
       res.redirect('/404')
     }
     next()
@@ -21,21 +21,25 @@ function checkValidParam (req, res, next) {
 
 router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
 
-  let { voyage } = req.query;
+  let { destination, station, date } = req.query;
 
-  voyage = JSON.parse(decodeURIComponent(voyage))
+  Promise.all([
+    voyageDao.nbPlacesByDestination(destination, station),
+    voyageDao.getVoyageByDateAndStation(date, station)
+  ])
+    .then(values => {
 
-  voyageDao.nbPlacesByDestination(voyage.destination)
-    .then(result => {
-      if (result[0].nb < 1) {
+      let nbPlaces = values[0][0].nb
+
+      if (nbPlaces < 1) {
         res.redirect('/')
       }
-      res.render('client/reservations', { voyage, nbPlaces: result[0].nb })
-    })
-    .catch(error => {
-      res.render('client/reservations')
-    })
 
+      res.render('client/reservations', { voyage: values[1][0], nbPlaces })
+    })
+    .catch(errorV => {
+      res.redirect('/')
+    })
 })
 
 
@@ -56,17 +60,17 @@ router.post('/ajout', checkUserConnected, (req, res) => {
   let { nbplaces, total, idvoyage, nbplacesv } = req.body
   let { id } = req.session.userInfo;
 
-  let reserv = new Reservation(+nbplaces, total, EtatReser.enAttente, id, idvoyage)
+  let reserv = new Reservation(+nbplaces, total, EtatReser.enAttente, id, +idvoyage)
 
   Promise.all([
     reservDao.addReservation(reserv),
     voyageDao.updateNbPlaces(+(nbplacesv - nbplaces), idvoyage)
   ])
     .then(result => {
-      res.render('client/payments')
+      res.redirect('/payments')
     })
     .catch(error => {
-      res.render('client/payments')
+      res.redirect('/payments')
     })
 })
 

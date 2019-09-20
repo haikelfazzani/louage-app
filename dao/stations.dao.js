@@ -8,7 +8,7 @@ const table = {
   ville: 'ville',
   tel: 'tel',
   chefStation: 'chef_station',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_station'
 }
 
 module.exports = StationsDao = {
