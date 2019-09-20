@@ -9,20 +9,18 @@ module.exports = (function () {
       result.forEach(element => {
 
         let checkTime = Date.parse(new Date()) > (Date.parse(element.timestamp_reservation) + 600000)
-
-        console.log(Date.parse(new Date()) - (Date.parse(element.timestamp_reservation) + 600000));
-        console.log(checkTime);
         
-
-        if(checkTime && element.etat_reservation === EtatReservation.enAttente) {
-          // reservDao.deleteReservByEtat()
-          // .then(resultEtat => {
-          //   console.log(resultEtat)
-          // })
-          // .catch(error => {
-          //   console.log(errorEtat)
-          // })
-        }        
+        if (checkTime) {
+          if (element.etat_reservation === EtatReservation.enAttente) {
+            reservDao.deleteReservByEtat()
+              .then(resultEtat => {
+                console.log(resultEtat)
+              })
+              .catch(error => {
+                console.log(errorEtat)
+              })
+          }
+        }
       });
     })
     .then(error => {
