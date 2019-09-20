@@ -29,10 +29,10 @@ router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
       if(result[0].nb < 1) {
         res.redirect('/')
       }
-      res.render('reservations', { voyage, nbPlaces: result[0].nb })
+      res.render('client/reservations', { voyage, nbPlaces: result[0].nb })
     })
     .catch(error => {
-      res.render('reservations')
+      res.render('client/reservations')
     })
 
 })
@@ -48,10 +48,10 @@ router.post('/ajout', checkUserConnected , (req, res) => {
     voyageDao.updateNbPlaces(+(nbplacesv-nbplaces), idvoyage)
   ])
     .then(result => {
-      res.render('payments')
+      res.render('client/payments')
     })
     .catch(error => {
-      res.render('payments')
+      res.render('client/payments')
     })
 })
 
