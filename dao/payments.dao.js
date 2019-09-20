@@ -20,7 +20,7 @@ module.exports = PaymentsDao = {
     (${table.datePayment}, ${table.idReserv}, ${table.idClient}, ${table.timestamp}) 
     values(?, ? , ? , ?)`;
 
-    const sql = SqlString.format(rq, [datePayment, idReserv, idClient, new Date().toString()]);
+    const sql = SqlString.format(rq, [datePayment, idReserv, idClient, new Date().toISOString()]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

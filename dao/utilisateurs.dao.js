@@ -24,7 +24,7 @@ const UtilisateurDao = {
     (${table.email}, ${table.password}, ${table.role}, ${table.timestamp}) 
     values(?, ? , ?, ?)`;
 
-    const sql = SqlString.format(rq, [email, password, role, new Date().toString()]);
+    const sql = SqlString.format(rq, [email, password, role, new Date().toISOString()]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

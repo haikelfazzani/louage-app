@@ -4,6 +4,7 @@ var { checkUserConnected } = require('../../middleware/authorisation')
 var reservDao = require('../../dao/reservations.dao')
 var Reservation = require('../../model/Reservation')
 var voyageDao = require('../../dao/voyages.dao')
+var EtatReser = require('../../model/EtatReservation.enum')
 
 function checkValidParam (req, res, next) {
   try {
@@ -41,7 +42,7 @@ router.post('/ajout', checkUserConnected , (req, res) => {
   let { nbplaces, total, idvoyage, nbplacesv } = req.body
   let { id } = req.session.userInfo;
 
-  let reserv = new Reservation(+nbplaces, total, 'en attente', id, idvoyage)
+  let reserv = new Reservation(+nbplaces, total, EtatReser.enAttente, id, idvoyage)
 
   Promise.all([
     reservDao.addReservation(reserv),
@@ -56,7 +57,7 @@ router.post('/ajout', checkUserConnected , (req, res) => {
 })
 
 
-router.get('/supprimer', checkUserConnected, function (req, res) {
+router.get('/annuler', checkUserConnected, function (req, res) {
   let { numserie } = req.query
 
   vehiculeDao.deletVehicule(numserie)

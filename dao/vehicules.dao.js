@@ -24,7 +24,7 @@ module.exports = VehiculesDao = {
     values(?, ? , ? , ? , ?, ?)`;
 
     const sql = SqlString.format(rq,
-      [proprietaire, numSerie, nbPlaces, tel, idStation, new Date().toString()]
+      [proprietaire, numSerie, nbPlaces, tel, idStation, new Date().toISOString()]
     );
 
     return new Promise((resolve, reject) => {
