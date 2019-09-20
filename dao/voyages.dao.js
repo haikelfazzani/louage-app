@@ -27,7 +27,7 @@ module.exports = VoyagesDao = {
     values(?, ? , ? , ? , ?, ?, ?)`;
 
     const sql = SqlString.format(rq,
-      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, new Date().toString()]
+      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, new Date().toISOString()]
     );
 
     return new Promise((resolve, reject) => {
@@ -91,7 +91,8 @@ module.exports = VoyagesDao = {
 
   getVoyageByNomStation (nomStation) {
     const rq = `SELECT * FROM ${table.name} v JOIN stations s 
-    ON v.id_station = s.id_station WHERE s.nom_station = ? ORDER BY v.id_voyage DESC`;
+    ON v.id_station = s.id_station WHERE s.nom_station = ? 
+    ORDER BY v.id_voyage DESC`;
 
     const sql = SqlString.format(rq, nomStation);
 

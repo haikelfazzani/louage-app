@@ -44,6 +44,9 @@ app.get('/404', (req, res) => {
 // load env variables
 nodeFileEnv().load()
 
+// triggers and services
+require('./services/reservation')
+
 // routers
 app.use('/', require('./routes/index'));
 app.use('/login', require('./routes/login'));

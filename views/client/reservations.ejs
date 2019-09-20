@@ -1,12 +1,6 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
 
-<style>
-  #total {
-    background-color: #4CAF50;
-    color: #fff;
-  }
-</style>
 <% if(locals.voyage) { %>
 <div class="container py-5">
   <div class="row">
@@ -15,7 +9,7 @@
     <div class="col-md-6 mb-3">
       <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
-        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" readonly>
+        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
 
         <div class="form-group">
           <label>destination</label>
@@ -49,15 +43,17 @@
             placeholder="Enter nombre places" required>
         </div>
 
-        <div class="row mb-5">
+        <div class="row mb-4">
           <div class="col-md-6">
             <label>Prix place</label>
-            <button type="button" class="btn btn-danger btn-block"><%=  voyage.prix_place %> DNT</button>
+            <input type="text" class="form-control display-3" 
+            value="<%=  voyage.prix_place %> DNT" required readonly>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>total</label>
-              <input type="text" class="form-control" id="total" name="total" value="0 DNT" required readonly>
+              <input type="text" class="form-control display-3" 
+              id="total" name="total" value="0 DNT" required readonly>
             </div>
           </div>
         </div>
@@ -67,6 +63,12 @@
       </form>
     </div>
 
+    <div class="col-md-6">
+      <iframe id='mapcanvas'
+        src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+        frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+      </iframe>
+    </div>
   </div><!-- end row -->
 
 </div>
@@ -84,7 +86,6 @@
     let total = document.getElementById('total')
     total.value = (nbPlaces * prixPlace) + ' DNT'
   }
-//console.log(nbPlaces)
 </script>
 <% } %>
 <%- include('../partials/footer.ejs') -%>

@@ -24,8 +24,8 @@ module.exports = ReservationsDao = {
 
     const sql = SqlString.format(rq,
       [
-        nbPlaceReserv, totalPrixPlaces, etatReservation || 'en attente',
-        idUtilisateur, idVoyage, new Date().toString()
+        nbPlaceReserv, totalPrixPlaces, etatReservation,
+        idUtilisateur, idVoyage, new Date().toISOString()
       ]
     );
 
@@ -83,6 +83,18 @@ module.exports = ReservationsDao = {
   getReservations () {
     const sql = `select * from ${table.name} t join utilisateurs u
     on t.id_client = u.id ORDER BY t.id_reservation DESC`;
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+
+  },
+
+  getAllReservations () {
+    const sql = `select * from ${table.name}`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
