@@ -60,11 +60,13 @@ app.use('/payments', require('./routes/client/payments'));
 
 // admin routes
 app.use('/admin', require('./routes/admin/admin.route'))
-app.use('/admin/stations', require('./routes/admin/stations'));
 app.use('/admin/utilisateurs', require('./routes/admin/utilisateurs'));
+
+app.use('/admin/stations', require('./routes/admin/stations'));
 
 app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
 app.use('/admin/voyages', require('./routes/chefstation/voyages'));
+app.use('/admin/reservations', require('./routes/chefstation/reservations'));
 
 app.get('*', (req, res) => { res.redirect('/404') })
 

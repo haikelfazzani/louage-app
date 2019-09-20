@@ -103,6 +103,18 @@ module.exports = ReservationsDao = {
         else resolve(result)
       })
     })
+  },
+  getReservsVoyagesUsers () {
+    const sql = `select * from ${table.name} t 
+    join utilisateurs u on t.id_client = u.id 
+    join voyages v on t.id_voyage = v.id_voyage 
+    ORDER BY t.id_reservation DESC`;
 
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
   }
 }
