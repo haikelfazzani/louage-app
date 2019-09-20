@@ -1,5 +1,6 @@
 const db = require('../database/connection');
-var SqlString = require('sqlstring');
+var SqlString = require('sqlstring')
+var EtatReservation = require('../model/EtatReservation.enum')
 
 const table = {
   name: 'reservations',
@@ -52,10 +53,10 @@ module.exports = ReservationsDao = {
     })
   },
 
-  deleteReservation (idReserv) {
-    const rq = `delete from ${table.name} where ${table.idReserv} = ?`;
+  deleteReservByEtat () {
+    const rq = `delete from ${table.name} where ${table.etatReserv} = ?`;
 
-    const sql = SqlString.format(rq, idReserv);
+    const sql = SqlString.format(rq, EtatReservation.enAttente);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
