@@ -7,10 +7,27 @@
     <div class="col-md-6 mb-3">
       <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
+        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
+
         <div class="form-group">
-          <label for="destination">destination</label>
-          <input type="text" class="form-control" id="destination" name="destination" value="<%= voyage.destination %>"
-            required readonly>
+          <label>destination</label>
+          <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>heure de depart</label>
+              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" required disabled>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>date de depart</label>
+              <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -18,58 +35,43 @@
             nombre de places disponibles
             <span class="badge badge-pill badge-danger"><%= voyage.nb_places %></span>
           </label>
-
-          <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>" id="nbplaces" name="nbplaces"
-            placeholder="Enter nb places" required>
+          <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>" 
+          id="nbplaces" name="nbplaces"
+            placeholder="Enter nombre places" required>
         </div>
 
-        <div class="row">
+        <div class="row mb-5">
           <div class="col-md-6">
-            <div class="form-group">
-              <label for="heureDepart">heure Depart</label>
-              <input type="number" class="form-control" id="heureDepart" name="heureDepart"
-                placeholder="Enter heure depart" required>
-            </div>
+            <button type="button" class="btn btn-danger btn-block"><%=  voyage.prix_place %> DNT</button>
           </div>
           <div class="col-md-6">
-            <div class="form-group">
-              <label for="dateDepart">date Depart</label>
-              <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Enter date depart"
-                required>
-            </div>
+            <button type="button" class="btn btn-dark btn-block" id="total">0 DNT</button>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="prixPlace">prix place</label>
-              <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
-                required>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="nbPlaces">nb Places</label>
-              <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
-                required>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-dark">Ajout</button>
+        <button type="submit" class="btn btn-dark">reserver</button>
         <button type="reset" class="btn btn-danger">vider</button>
       </form>
     </div>
 
-
-
-    <div class="col-md-6 mb-3" style="display: flex">
-
-    </div>
-
-
   </div><!-- end row -->
 
 </div>
+
+<script>
+  let prixPlace = '<%=  voyage.prix_place %>'
+  document.getElementById('nbplaces').onkeyup = (e) => {
+    let nbPlaces = e.target.value;
+    let total = document.getElementById('total')
+    total.textContent = (nbPlaces * prixPlace) + ' DNT'
+  }
+
+  document.getElementById('nbplaces').onchange = (e) => {
+    let nbPlaces = e.target.value;
+    let total = document.getElementById('total')
+    total.textContent = (nbPlaces * prixPlace) + ' DNT'
+  }
+//console.log(nbPlaces)
+</script>
+
 <%- include('partials/footer.ejs') -%>
