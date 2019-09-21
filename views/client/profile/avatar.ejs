@@ -1,9 +1,7 @@
 <style>
   .img-hover-zoom {
     height: 300px;
-    /* Modify this according to your need */
     overflow: hidden;
-    /* Removing this will break the effects */
   }
 
   .img-hover-zoom--colorize img {
@@ -11,7 +9,6 @@
     filter: grayscale(100%);
   }
 
-  /* The Transformation */
   .img-hover-zoom--colorize:hover img {
     filter: grayscale(0);
     transform: scale(1.1);
@@ -19,7 +16,6 @@
 </style>
 
 <div class="col-md-3 mb-3">
-
   <form action="/utilisateur/profile/avatar" method="POST" enctype="multipart/form-data">
     <div class="input-group" style="justify-content: center">
 
@@ -29,13 +25,12 @@
         <% } else { %>
         <img src="/img/profile.png" alt="photo de profile" class="img-thumbnail img-profile fade-in mb-3">
         <% } %>
-
-        <input type="file" class="custom-file-input" id="inputImage" aria-describedby="inputGroupFileAddon04" name="avatar">
-        <label class="custom-file-label" for="inputImage" style="height: 255px; opacity: 0; cursor: pointer;">Choose file</label>
+        <input type="file" class="custom-file-input" id="inputImage" aria-describedby="inputGroupFileAddon04"
+          name="avatar">
+        <label class="custom-file-label" for="inputImage" style="height: 255px; opacity: 0; cursor: pointer;">Choose
+          file</label>
       </div>
-
     </div>
-
     <button class="btn btn-dark btn-block" type="submit" id="btn-update-avatar" disabled>mettre a jour</button>
   </form>
 </div>

@@ -3,9 +3,8 @@
 
 <style>
   .card {
-    font-family: Lato, sans-serif;
-    color: #ffffff;
-    background-color: #1f2532;
+    font-family: Arial, sans-serif;    
+    background-color: inherit;
     border: 4px solid #ffffff;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
@@ -50,11 +49,12 @@
             <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
           </p>
           <div style="display: flex; justify-content: space-between;">
-            <div class="btn btn-outline-light"><i
-                class="fas fa-coins"></i> <%= v.prix_place %> DNT</div style="    font-size: 20px !important;">
+            <div class="btn btn-outline-dark"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
             <a href="<%= url %>"
-              class="btn btn-danger">RESERVER <i class="fas fa-chevron-circle-right ml-2"></i></a>
+              class="btn btn-danger">RESERVER <i class="fas fa-chevron-circle-right ml-2"></i>
+            </a>            
           </div>
+
         </div>
       </div>
       <% }) %>

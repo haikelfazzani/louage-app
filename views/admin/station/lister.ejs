@@ -1,39 +1,39 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-
 <div class="container py-5">
-  <%- include('../navbar') -%>  
+  <%- include('../navbar') -%>
 
   <% if(locals.stations) {  %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>chef station</th>
-        <th>nom station</th>
-        <th>ville</th>
-        <th>tel</th>
-        <th>action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% stations.forEach((u, i) => {  %>
-      <tr>
-        <td><%= i %></td>
-        <td><%= u.nom + ' ' + u.prenom %></td>
-        <td><%= u.nom_station %></td>
-        <td><%= u.ville %></td>
-        <td><%= u.station_tel %></td>
-        <td>
-          <a href="/admin/stations/modifier?nom=<%= u.nom_station %>" class="btn btn-success">M</a>
-          <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete">S</a>
-        </td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>chef station</th>
+          <th>nom station</th>
+          <th>ville</th>
+          <th>tel</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% stations.forEach((u, i) => {  %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= u.nom + ' ' + u.prenom %></td>
+          <td><%= u.nom_station %></td>
+          <td><%= u.ville %></td>
+          <td><%= u.station_tel %></td>
+          <td>
+            <a href="/admin/stations/modifier?nom=<%= u.nom_station %>" class="btn btn-success">M</a>
+            <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete">S</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
   <% } %>
-
 
 </div>
 <%- include('../../partials/footer.ejs') -%>
