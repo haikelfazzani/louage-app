@@ -86,10 +86,14 @@ a {
   padding-bottom: 0;
 }
 
+.form-signin {
+  padding: 20px;
+}
+
+
 .form-general,
 .form-bg-gray,
-.form-gen,
-.form-signin {
+.form-gen {
   background-color: #ffffff !important;
   padding: 20px;
   border-radius: 7px;
