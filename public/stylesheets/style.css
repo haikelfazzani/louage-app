@@ -86,21 +86,18 @@ a {
   padding-bottom: 0;
 }
 
-
+.form-general,
+.form-bg-gray,
 .form-gen,
 .form-signin {
+  background-color: #ffffff !important;
   padding: 20px;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2)
 }
 
 #form-signin {
   display: none;
-}
-
-.form-bg-gray {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 7px;
-  box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2)
 }
 
 .img-profile {
