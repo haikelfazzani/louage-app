@@ -9,6 +9,14 @@ var reservDao = require('../../dao/reservations.dao')
 
 router.get('/', checkUserConnected, function (req, res) {
 
+    let {email}=req.session.userInfo
+
+    stationDao.getStationByChef(email)
+    .then(resStation => {
+        req.session.chefStationInfo = resStation[0]
+    })
+    .catch(error => error)
+
     const promises = [
         utilisateurDao.getUsers(),
         stationDao.getStations(),

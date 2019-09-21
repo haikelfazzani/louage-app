@@ -25,8 +25,11 @@ app.use(function (req, res, next) {
     res.locals.userInfo = req.session.userInfo
     res.locals.avatar = req.session.avatar
   }
+
+  res.locals.chefStationInfo = req.session.chefStationInfo
+
   res.locals.Role = Role
-  res.locals.request = req
+  //res.locals.request = req
   res.locals.chefStations = req.session.chefStations
   next()
 })

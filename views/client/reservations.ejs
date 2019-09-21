@@ -23,31 +23,43 @@
 
         <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
 
-        <div class="form-group">
-          <label>destination</label>
-          <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+        <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label>station</label>
+                  <input type="text" class="form-control" value="<%= station %>" required disabled>
+                </div>                  
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label>destination</label>
+                  <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+                </div>
+          </div>
         </div>
 
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>heure de depart</label>
-              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" required disabled>
+              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" 
+              required disabled>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label>date de depart</label>
-              <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
+              <input type="text" class="form-control" value="<%= voyage.date_depart %>" 
+              required disabled>
             </div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="nbplaces" class="d-flex justify-content-between">
-            nombre de places disponibles
-            <span class="badge badge-pill badge-danger"><%= nbPlaces %></span>
+            nombre de places
+            <span class="badge badge-pill badge-danger">disponibles <%= nbPlaces %></span>
           </label>
           <input type="number" name="nbplacesv" id="nbplacesv" value="<%= nbPlaces %>" hidden readonly>
           

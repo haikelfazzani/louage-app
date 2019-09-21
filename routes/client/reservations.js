@@ -13,16 +13,16 @@ function checkValidParam (req, res, next) {
   try {
     let { destination, station, date } = req.query
 
-    if (objContainsSQL({ destination, station, date })) {
+    if (destination && station && date) {
       res.redirect('/404')
     }
-    next()
+    else next()
   } catch (error) {
     res.redirect('/404')
   }
 }
 
-router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
+router.get('/', [checkUserConnected], (req, res) => {
 
   let { destination, station, date } = req.query;
 
@@ -31,16 +31,15 @@ router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
     voyageDao.getVoyageByDateAndStation(date, station)
   ])
     .then(values => {
-
+    
       let nbPlaces = values[0][0].nb
 
       if (nbPlaces < 1) {
         res.redirect('/')
       }
-
-      res.render('client/reservations', { voyage: values[1][0], nbPlaces })
+      res.render('client/reservations', { voyage: values[1][0], nbPlaces,station })
     })
-    .catch(errorV => {
+    .catch(errorV => {    
       res.redirect('/404')
     })
 })
