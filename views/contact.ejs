@@ -10,7 +10,7 @@
 </section>
 
 <div class="container py-5">
-  <% if(locals.userInfo) { %>
+
   <form action="/contact" method="POST" class="form-general form-p20 bg-light p-0 mb-3">
 
     <div class="row">
@@ -18,7 +18,8 @@
 
         <div class="form-group">
           <label for="nom">Nom complet</label>
-          <input type="text" class="form-control" id="nom" name="nom" placeholder="Entere votre nom complet" required>
+          <input type="text" class="form-control" id="nom" name="nom" 
+          placeholder="Entrer votre nom complet" required>
         </div>
 
         <div class="form-group">
@@ -28,7 +29,8 @@
 
         <div class="form-group">
           <label for="email">Adresse email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Entere votre email" required>
+          <input type="email" class="form-control" id="email" name="email" 
+          placeholder="Entrer votre email" required>
         </div>
       </div>
 
@@ -46,6 +48,5 @@
 
   <%- include('snackbar') -%>
 
-  <% } %>
 </div>
 <%- include('partials/footer.ejs') -%>

@@ -52,7 +52,7 @@ h2 {
 .nav-link {
   font-size: 14px !important;
   position: relative;
-  color: #707d8f !important;  
+  color: #707d8f !important;
   transition: background-color .4s ease, color .4s ease;
 }
 
@@ -86,22 +86,22 @@ a {
   padding-bottom: 0;
 }
 
-
-.form-gen , .form-signin {
+.form-general,
+.form-bg-gray,
+.form-gen,
+.form-signin {
+  background-color: #ffffff !important;
   padding: 20px;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2)
 }
 
 #form-signin {
   display: none;
 }
 
-.form-bg-gray {
-  background-color: #e4e6e7;
-  padding: 20px;
-}
-
 .img-profile {
-  max-width: 300px;  
+  max-width: 300px;
   box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
 }
 
@@ -168,11 +168,25 @@ th {
 }
 
 #mapcanvas {
+  background-color: #e9ecef;
+  padding: 7px;
   width: 100%;
-  height: 440px;
+  height: 470px;
+  border-radius: 7px;
   box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
 }
 
+textarea {
+  height: 209px !important;
+}
+
+.font-s18 {
+  font-size: 18px !important
+}
+
+.mt-10 {
+  margin-top: 150px !important;
+}
 
 @media screen and (max-width: 600px) {
   .navbar {

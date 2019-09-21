@@ -1,0 +1,15 @@
+var knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+  }
+})
+
+// knex.select('*').from('utilisateurs').then(rows => {
+//   console.log(rows)
+// })
+
+module.exports = knex
