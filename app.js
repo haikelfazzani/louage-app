@@ -5,11 +5,15 @@ var path = require('path');
 var nodeFileEnv = require('node-file-env');
 var session = require('express-session')
 var cookieParser = require('cookie-parser');
+const helmet = require('helmet')
 
 var app = express()
 // load env variables
 nodeFileEnv().load()
 require('./database/knex')
+
+app.disable("x-powered-by");
+app.use(helmet())
 
 app.use(session({
   secret: 'my-secret-code',
