@@ -19,7 +19,7 @@ app.use(session({
 }))
 
 var Role = require('./model/Role.enum')
-
+var format = require('./util/format')
 app.use(function (req, res, next) {
   if (req.session.userInfo) {
     res.locals.userInfo = req.session.userInfo
@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
   }
 
   res.locals.chefStationInfo = req.session.chefStationInfo
-
+  res.locals.formatDate = format
   res.locals.Role = Role
   //res.locals.request = req
   res.locals.chefStations = req.session.chefStations
