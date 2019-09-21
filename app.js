@@ -4,7 +4,7 @@ var path = require('path');
 //var logger = require('morgan');
 var nodeFileEnv = require('node-file-env');
 var session = require('express-session')
-
+var cookieParser = require('cookie-parser');
 var app = express()
 
 app.use(session({
@@ -14,12 +14,15 @@ app.use(session({
   cookie: { secure: false, maxAge: 3600000 }
 }))
 
+var Role = require('./model/Role.enum')
+
 app.use(function (req, res, next) {
   if (req.session.userInfo) {
     res.locals.userInfo = req.session.userInfo
     res.locals.avatar = req.session.avatar
   }
-
+  res.locals.Role = Role
+  res.locals.request = req
   res.locals.chefStations = req.session.chefStations
   next()
 })
@@ -32,6 +35,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 
 app.get('/test', (req, res) => {
   res.render('test')
@@ -67,6 +71,8 @@ app.use('/admin/stations', require('./routes/admin/stations'));
 app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
 app.use('/admin/voyages', require('./routes/chefstation/voyages'));
 app.use('/admin/reservations', require('./routes/chefstation/reservations'));
+
+app.use('/contact', require('./routes/contact'))
 
 app.get('*', (req, res) => { res.redirect('/404') })
 

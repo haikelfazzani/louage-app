@@ -17,15 +17,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">station</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">A PROPOS</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link mr-2" href="#">CONTACT</a>
+        <a class="nav-link mr-2" href="/contact">CONTACT</a>
       </li>
 
       <% if(!locals.userInfo) { %>
@@ -44,7 +36,10 @@
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/utilisateur/profile">Profile</a>
+
+          <% if(locals.Role && locals.userInfo.role !== locals.Role.client) { %>
           <a class="dropdown-item" href="/admin">administration</a>
+          <% } %>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/se-deconnecter">se deconnecter</a>
         </div>

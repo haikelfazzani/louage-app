@@ -1,73 +1,56 @@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">METTER UN JOUR VOYAGE</h5>
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+<div class="container py-5">
+  <%- include('../navbar') -%>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<form action="/admin/voyages/modifier" method="POST" class="form-general form-bg-gray mb-3">
 
+  <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
+
+  <div class="form-group">
+    <label for="station">station</label>
+    <input type="text" class="form-control" id="station" name="station" value="<%= voyage.nom_station %>" required readonly>
+  </div>
+
+  <div class="form-group">
+    <label for="destination">destination</label>
+    <input type="text" class="form-control" id="destination" name="destination" value="<%= voyage.destination %>" required>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="heureDepart">heure Depart</label>
+        <input type="number" class="form-control" id="heureDepart" name="heureDepart" value="<%= voyage.heure_depart %>"
+          required>
       </div>
-      <div class="modal-body">
-        <form action="/admin/voyages/modifier" method="POST" class="form-general p-0 mb-3">
-
-          <input type="text" name="idvoyage" id="idvoyage" value="<%= u.id_voyage %>" hidden readonly>
-
-          <div class="form-group">
-              <label for="station">station</label>
-              <input type="text" class="form-control" id="station" name="station" 
-              value="<%= u.nom_station %>"
-                required readonly>
-            </div>
-
-          <div class="form-group">
-            <label for="destination">destination</label>
-            <input type="text" class="form-control" id="destination" name="destination" value="<%= u.destination %>"
-              required>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="heureDepart">heure Depart</label>
-                <input type="number" class="form-control" id="heureDepart" name="heureDepart"
-                  value="<%= u.heure_depart %>" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="dateDepart">date Depart</label>
-                <input type="date" class="form-control" id="dateDepart" name="dateDepart" value="<%= u.date_depart %>"
-                  required>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="prixPlace">prix place</label>
-                <input type="text" class="form-control" id="prixPlace" name="prixPlace" value="<%= u.prix_place %>"
-                  required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="nbPlaces">nb Places</label>
-                <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" value="<%= u.nb_places %>"
-                  required>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-dark">mettre à jour</button>
-        </form>
-        </form>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="dateDepart">date Depart</label>
+        <input type="date" class="form-control" id="dateDepart" name="dateDepart" value="<%= voyage.date_depart %>" required>
       </div>
-
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="prixPlace">prix place</label>
+        <input type="text" class="form-control" id="prixPlace" name="prixPlace" value="<%= voyage.prix_place %>" required>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="nbPlaces">nb Places</label>
+        <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" value="<%= voyage.nb_places %>" required>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-dark">mettre à jour voyage</button>
+</form>
+
+
 </div>
+<%- include('../../partials/footer.ejs') -%>

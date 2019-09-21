@@ -6,11 +6,12 @@ var voyagesDao = require('../../dao/voyages.dao')
 var Voyage = require('../../model/Voyage.model')
 
 router.get('/', checkUserConnected, (req, res) => {
-  voyagesDao.getVoyages()
-  .then(function (voyages) {
 
-    res.render('admin/voyage/lister', { voyages });
-  })
+  voyagesDao.getVoyages()
+    .then(function (voyages) {
+      res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
+      res.render('admin/voyage/lister', { voyages });
+    })
     .catch(error => {
       res.render('admin/voyage/lister');
     });
@@ -56,6 +57,13 @@ router.get('/supprimer', checkUserConnected, function (req, res) {
 });
 
 
+router.get('/modifier', checkUserConnected, (req, res) => {
+
+  let { v } = req.query
+  let voyage = (JSON.parse(req.cookies.voyages)).find(vo => +vo.id_voyage === +v)
+  res.render('admin/voyage/modifier', { voyage })
+})
+
 router.post('/modifier', checkUserConnected, (req, res) => {
 
   let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
@@ -63,12 +71,12 @@ router.post('/modifier', checkUserConnected, (req, res) => {
   let newVoyage = new Voyage(destination, heureDepart, dateDepart, prixPlace, nbPlaces, '')
 
   voyagesDao.updateVoyage(newVoyage, idvoyage)
-  .then(result => {
-    res.redirect('/admin/voyages')
-  })
-  .catch(error => {
-    res.redirect('/admin/voyages')
-  })  
+    .then(result => {
+      res.redirect('/admin/voyages')
+    })
+    .catch(error => {
+      res.redirect('/admin/voyages')
+    })
 })
 
 module.exports = router
