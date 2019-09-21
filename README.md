@@ -6,23 +6,23 @@
 ## Gestion des stations (admin)
 - [x] Ajout station
 - [x] supprimer station
-- [ ] modifier station
+- [x] modifier station
 - [x] lister station
 
 ## Gestion des véhilcules (chef stations)
 - [x] Ajout véhilcule
-- [ ] supprimer véhilcule
+- [x] supprimer véhilcule
 - [x] modifier véhilcule
 - [x] lister véhilcule
 
 ## Gestion des voyages (chef station)
 - [x] plannification d'un voyage
 - [x] supprimer un voyage
-- [ ] modifier un voyage
+- [x] modifier un voyage
 - [x] consuler la liste des voyages (client + chef station)
 
 ## Gestion des reservations (client)
-- [ ] confirmer une reservation
+- [x] confirmer une reservation
 - [ ] annuler une reservation
 *reservation en etat d'attente sera anunler auto aprés 10min*
 
@@ -67,13 +67,14 @@
 - [x] XSS attack
 
 ## Additional
+- [x] resize image and minimize size (Sharp)
 - [ ] visitor reporting. (Charting)
 - [ ] Facebook login
 - [ ] Google login
-- [ ] Google maps station position
+- [x] Google maps station position
 
 ## Notes
-- supprimer tous les voyages si la date est expirée
+- [x] supprimer tous les voyages si la date est expirée
 
 ## Bugs
 - [x] Database Connection lost: The server closed the connection. (Fixed)
