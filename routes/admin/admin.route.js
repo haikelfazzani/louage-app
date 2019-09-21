@@ -9,13 +9,13 @@ var reservDao = require('../../dao/reservations.dao')
 
 router.get('/', checkUserConnected, function (req, res) {
 
-    let {email}=req.session.userInfo
+    let { email } = req.session.userInfo
 
     stationDao.getStationByChef(email)
-    .then(resStation => {
-        req.session.chefStationInfo = resStation[0]
-    })
-    .catch(error => error)
+        .then(resStation => {
+            req.session.chefStationInfo = resStation[0]
+        })
+        .catch(error => error)
 
     const promises = [
         utilisateurDao.getUsers(),
@@ -38,26 +38,27 @@ router.get('/', checkUserConnected, function (req, res) {
         });
 });
 
-router.get('/data.json', checkUserConnected, function (req, res) {
+router.get('/voyages.json', checkUserConnected, function (req, res) {
 
-    const promises = [
-        utilisateurDao.getUsers(),
-        stationDao.getStations(),
-        voyageDao.getVoyages(),
-        reservDao.getAllReservations()
-    ];
+    let { nom_station } = req.session.chefStationInfo
 
-    Promise.all(promises).then(function (values) {
-        let data = {
-            utilisateurs: values[0],
-            stations: values[1],
-            voyages: values[2],
-            reservations: values[3]
-        };
-        res.status(200).json( data );
-    })
+    voyageDao.getVoyageByNomStation(nom_station)
+        .then(function (voyages) {
+            res.status(200).json(voyages);
+        })
         .catch(error => {
-            res.status(404).json( data );
+            res.status(404).json(voyages);
+        });
+});
+
+router.get('/utilisateurs.json', checkUserConnected, function (req, res) {
+
+    utilisateurDao.getUsers()
+        .then(function (utilisateurs) {
+            res.status(200).json(utilisateurs);
+        })
+        .catch(error => {
+            res.status(404).json(utilisateurs);
         });
 });
 
