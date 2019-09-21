@@ -1,29 +1,33 @@
 const db = require('../database/connection');
-var SqlString = require('sqlstring');
+var SqlString = require('sqlstring')
+var EtatReservation = require('../model/EtatReservation.enum')
 
 const table = {
-  name: 'stations',
+  name: 'reservations',
   idReserv: 'id_reservation',
   nbPlaceReserv: 'nb_place_reserver',
   totalPrixPlaces: 'total_prix_places',
   etatReserv: 'etat_reservation',
-  idUtilisateur: 'id_utilisateur',
+  idClient: 'id_client',
   idVoyage: 'id_voyage',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_reservation'
 }
 
 module.exports = ReservationsDao = {
 
   addReservation (Reservation) {
 
-    let { nbPlaceReserv, totalPrixPlaces, etatReservation, idUtilisateur, idVoyage } = Reservation;
+    let { nbPlaceReserv, totalPrixPlaces, etatReservation, idClient, idVoyage } = Reservation;
 
     const rq = `INSERT INTO ${table.name} 
-    (${table.nbPlaceReserv}, ${table.totalPrixPlaces}, ${table.etatReservation}, 
-      ${table.idUtilisateur}, ${table.idUtilisateur}, ${table.idVoyage}) values(?, ? , ? , ?, ?, ?)`;
+    (${table.nbPlaceReserv}, ${table.totalPrixPlaces}, ${table.etatReserv}, 
+      ${table.idClient}, ${table.idVoyage}, ${table.timestamp}) values(?, ? , ? , ?, ?, ?)`;
 
     const sql = SqlString.format(rq,
-      [nbPlaceReserv, totalPrixPlaces, 'en attente', idUtilisateur, idVoyage, new Date().toString()]
+      [
+        nbPlaceReserv, totalPrixPlaces, etatReservation,
+        idClient, idVoyage, new Date().toISOString()
+      ]
     );
 
     return new Promise((resolve, reject) => {
@@ -49,23 +53,10 @@ module.exports = ReservationsDao = {
     })
   },
 
-  deleteReservation (idReserv) {
-    const rq = `delete from ${table.name} where ${table.idReserv} = ?`;
+  deleteReservByEtat () {
+    const rq = `delete from ${table.name} where ${table.etatReserv} = ?`;
 
-    const sql = SqlString.format(rq, idReserv);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
-  },
-
-  getReservation (idReserv) {
-    const rq = `select * from ${table.name} where ${table.idReserv} = ?`;
-
-    const sql = SqlString.format(rq, idReserv);
+    const sql = SqlString.format(rq, EtatReservation.enAttente);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -76,9 +67,10 @@ module.exports = ReservationsDao = {
   },
 
   getReservByUser (email) {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.id_utilisateur = u.id 
-    WHERE u.email = ? ORDER BY t.id_station DESC`;
+    const rq = `select * from ${table.name} t 
+    join utilisateurs u on t.id_client = u.id 
+    join voyages v on t.id_voyage = v.id_voyage
+    WHERE u.email = ? ORDER BY t.id_reservation DESC`;
 
     const sql = SqlString.format(rq, email);
 
@@ -92,7 +84,7 @@ module.exports = ReservationsDao = {
 
   getReservations () {
     const sql = `select * from ${table.name} t join utilisateurs u
-    on t.id_utilisateur = u.id ORDER BY t.id_station DESC`;
+    on t.id_client = u.id ORDER BY t.id_reservation DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -101,5 +93,29 @@ module.exports = ReservationsDao = {
       })
     })
 
+  },
+
+  getAllReservations () {
+    const sql = `select * from ${table.name}`;
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+  getReservsVoyagesUsers () {
+    const sql = `select * from ${table.name} t 
+    join utilisateurs u on t.id_client = u.id 
+    join voyages v on t.id_voyage = v.id_voyage 
+    ORDER BY t.id_reservation DESC`;
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
   }
 }

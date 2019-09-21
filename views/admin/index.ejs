@@ -7,9 +7,8 @@
     let myData = [
       { label : 'nombre des utilisateurs', l: data.utilisateurs.length , fa:'fas fa-user'},
       { label : 'nombre des stations' , l : data.stations.length , fa:'fab fa-hubspot'},
-      { label : 'nombre des chefs Station', l:data.chefStations.length , fa:'fas fa-users-cog'},
-      { label : 'nombre des vehicules' , l : data.vehicules.length , fa:'fas fa-car'},
-      { label : 'nombre des voyages' , l : data.voyages.length , fa:'fas fa-plane-departure'}
+      { label : 'nombre des voyages' , l : data.voyages.length , fa:'fas fa-plane-departure'},
+      { label : 'nombre des reservations' , l : data.reservations.length , fa:'fas fa-shopping-bag'}
     ]  
   %>
   <div class="row text-uppercase mb-5">
@@ -34,25 +33,62 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
   <script defer>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
-      // The type of chart we want to create
-      type: 'line',
 
-      // The data for our dataset
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-          label: 'My First dataset',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-      },
+    /*
+    etat_reservation: "annuler"
+id_client: 40
+id_reservation: 12
+id_voyage: 15
+nb_place_reserver: 3
+timestamp_reservation: "2019-09-20T21:51:34.850Z"
+total_prix_places: "45 DNT"
+    */
 
-      // Configuration options go here
-      options: {}
-    });
+    const months = [
+      "jan", "fév", "mars", "avril", "mai", "juin", "juil", "août", "sep", "oct", "nov", "déc"
+    ];
+
+    fetch('/admin/data.json')
+      .then(res => res.json())
+      .then(result => {
+
+        let voyageParMoi = result.voyages.reduce((a, c, i) =>
+          (v = months[new Date(c.date_depart).getMonth()],
+            a[v] ? a[v]++ : a[v] = 1, a), []);
+
+        let objReserv = [];
+
+        for (let i in voyageParMoi) {
+          objReserv.push({ n: voyageParMoi[i], m: i, indx: months.indexOf(i) })
+        }
+
+        objReserv = objReserv.sort((i, j) => i.indx - j.indx);
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: objReserv.map(v => v.m),
+            datasets: [{
+              label: 'nombre de voyages par moi',
+              data: objReserv.map(v => v.n),
+              backgroundColor: '#e91e63',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  callback: function (value) { if (value % 1 === 0) { return value; } }
+                }
+              }]
+            }
+          }
+        });
+      })
+      .catch(error => { })
   </script>
 </div>
 

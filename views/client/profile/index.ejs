@@ -1,5 +1,5 @@
-<%- include('../partials/head.ejs') -%>
-<%- include('../partials/navbar') -%>
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
 
 <section class="page-header">
   <div class="col-md-12">
@@ -44,7 +44,7 @@
               value="<%= userInfo.email  %>" required readonly>
           </div>
 
-          <div class="form-group mb-5">
+          <div class="form-group mb-4">
             <label for="tel">tel</label>
             <input type="text" class="form-control" id="tel" 
             name="tel" placeholder="Entrer numero telephone" 
@@ -52,14 +52,10 @@
             required>
           </div>
 
-          <button type="submit" class="btn btn-dark">mettre à jour</button>
+          <button type="submit" class="btn btn-dark">mettre à jour profile</button>
         </form>
 
-        <%- include('../snackbar') -%>
-
-        <% if(locals.msg) { %>
-        <div class="alert alert-dark" role="alert"><%= msg %></div>
-        <% } %>
+        <%- include('../../snackbar') -%>
 
 
       </div>
@@ -70,4 +66,4 @@
   </div>
 </div>
 
-<%- include('../partials/footer.ejs') -%>
+<%- include('../../partials/footer.ejs') -%>

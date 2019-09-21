@@ -1,0 +1,48 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+
+  <% if(locals.reservations) {  %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>destination</th>
+          <th>heure_depart</th>
+          <th>date_depart</th>
+          <th>nb_place_reserver</th>
+          <th>total_prix_places</th>
+          <th>etat_reservation</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reservations.forEach((u, i) => {  %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= u.destination %></td>
+          <td><%= u.heure_depart %> h</td>
+          <td><%= u.date_depart %></td>
+          <td><%= u.nb_place_reserver %></td>
+          <td><%= u.total_prix_places %></td>
+          <td>
+            <span class="badge badge-dark"><%= u.etat_reservation %></span>
+          </td>
+          <td>
+            <% if(u.etat_reservation === 'en attente') { %>
+            <a class="btn btn-danger btn-delete" href="#">A</a>
+            <% } %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+
+</div>
+<%- include('../../partials/footer.ejs') -%>

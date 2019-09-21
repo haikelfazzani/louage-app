@@ -1,0 +1,52 @@
+<%- include('partials/head.ejs') -%>
+<%- include('partials/navbar') -%>
+<section class="page-header">
+  <div class="col-md-12"><h3>Contact</h3></div>
+
+  <div class="bread">
+    <a href="/">home </a>
+    <a href="/contact" disabled> / Contact</a>
+  </div>
+</section>
+
+<div class="container py-5">
+
+  <form action="/contact" method="POST" class="form-general form-p20 bg-light p-0 mb-3">
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="form-group">
+          <label for="nom">Nom complet</label>
+          <input type="text" class="form-control" id="nom" name="nom" 
+          placeholder="Entrer votre nom complet" required>
+        </div>
+
+        <div class="form-group">
+          <label for="sujet">Sujet</label>
+          <input type="text" class="form-control" id="sujet" name="sujet" placeholder="Entrer sujet" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Adresse email</label>
+          <input type="email" class="form-control" id="email" name="email" 
+          placeholder="Entrer votre email" required>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea class="form-control" id="message" name="message" rows="7"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-dark">Envoyer</button>
+    <button type="reset" class="btn btn-danger">vider</button>
+  </form>
+
+  <%- include('snackbar') -%>
+
+</div>
+<%- include('partials/footer.ejs') -%>

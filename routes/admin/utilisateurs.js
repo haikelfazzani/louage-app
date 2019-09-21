@@ -33,12 +33,7 @@ router.post('/ajout', checkUserConnected, function (req, res) {
 
       utilisateurDao.addUser(utilisateur)
         .then(result => {
-          if (Object.keys(result) && result.affectedRows > 0) {
-            res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
-          }
-          else {
-            res.render('admin/utilisateur/ajout', { msg: 'utilisateur deja existe!' });
-          }
+          res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
         })
         .catch(error => {
           res.render('admin/utilisateur/ajout', { msg: 'erreur d\'ajout' });

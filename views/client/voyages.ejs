@@ -1,5 +1,5 @@
-<%- include('partials/head.ejs') -%>
-<%- include('partials/navbar') -%>
+<%- include('../partials/head.ejs') -%>
+<%- include('../partials/navbar') -%>
 
 <style>
   .card a {
@@ -26,14 +26,28 @@
   }
 </style>
 
+<section class="page-header">
+  <div class="col-md-12">
+    <h3>Voyages</h3>
+  </div>
+
+  <div class="bread">
+    <a href="/">home </a>
+    <a href="/voyages" disabled> / Voyages</a>
+  </div>
+</section>
+
+
 <div class="container py-5">
   <div class="row">
 
     <% if(locals.voyages && locals.voyages.length > 0) { %>
     <div class="col-md-6 mb-3">
 
-      <% voyages.forEach(v => { %>
-      <a href="/reservations?voyage=<%= encodeURIComponent(JSON.stringify(v)) %>">
+      <% voyages.forEach(v => { 
+        let url = `/reservations?destination=${v.destination}&station=${v.nom_station}&date=${v.timestamp_voyage}`  
+      %>
+      <a href="<%= url %>">
         <div class="card" style="box-shadow: 0 2px 5px 0 rgba(19,41,104,.2); background-color: #fff;">
           <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -95,4 +109,4 @@
   </div>
 
 </div>
-<%- include('partials/footer.ejs') -%>
+<%- include('../partials/footer.ejs') -%>

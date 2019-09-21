@@ -29,13 +29,9 @@
         <td><%= u.prix_place %> DNT</td>
         <td><%= u.nb_places %></td>
         <td>
-          <button type="button" class="btn btn-success btn-dismiss" data-toggle="modal" data-target="#exampleModal">
-            M
-          </button>
-          <a class="btn btn-danger btn-delete" href="/admin/voyages/supprimer?voyage=<%= u.id_voyage %>">S</a>
+          <a href="/admin/voyages/modifier?v=<%= u.id_voyage %>" class="btn btn-success btn-dismiss">M</a>
+          <a href="/admin/voyages/supprimer?voyage=<%= u.id_voyage %>" class="btn btn-danger btn-delete">S</a>
         </td>
-
-        <%- include('modifier', {u}) -%>
 
       </tr>
       <% }) %>
@@ -43,18 +39,6 @@
   </table>
   <% } %>
 
-  <script defer>
-    let btnDismiss = document.querySelector('.close');
-
-    btnDismiss.onclick = () => {
-      let m = document.querySelector('.modal-backdrop')
-      if (m) {
-        m.style.opacity = 0        
-        m.classList.remove("show")
-      }
-      document.getElementById('exampleModal').style.display = 'none'
-    }
-  </script>
 
 </div>
 <%- include('../../partials/footer.ejs') -%>

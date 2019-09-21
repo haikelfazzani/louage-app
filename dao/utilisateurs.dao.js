@@ -1,5 +1,6 @@
 const db = require('../database/connection');
 var SqlString = require('sqlstring');
+var knex = require('../database/knex')
 
 const table = {
   name: 'utilisateurs',
@@ -11,47 +12,40 @@ const table = {
   avatar: 'avatar',
   tel: 'tel',
   role: 'role',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp_utilisateur'
 }
 
 const UtilisateurDao = {
 
   addUser (User) {
-
     let { email, password, role } = User;
 
-    const rq = `INSERT INTO ${table.name} 
-    (${table.email}, ${table.password}, ${table.role}, ${table.timestamp}) 
-    values(?, ? , ?, ?)`;
-
-    const sql = SqlString.format(rq, [email, password, role, new Date().toString()]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).insert(
+      { email, password, role, timestamp_utilisateur: new Date().toISOString() }
+    )
   },
 
   updateUser (user) {
 
     let { nom, prenom, email, tel } = user;
 
-    const rq = `update ${table.name} 
-    set ${table.nom} = ? ,
-        ${table.prenom} = ? ,
-        ${table.tel} = ? 
-    where ${table.email} = ? `;
+    // const rq = `update ${table.name} 
+    // set ${table.nom} = ? ,
+    //     ${table.prenom} = ? ,
+    //     ${table.tel} = ? 
+    // where ${table.email} = ? `;
 
-    const sql = SqlString.format(rq, [nom, prenom, tel, email]);
+    // const sql = SqlString.format(rq, [nom, prenom, tel, email]);
 
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    // return new Promise((resolve, reject) => {
+    //   db.query(sql, (err, result) => {
+    //     if (err) reject(err)
+    //     else resolve(result)
+    //   })
+    // })
+
+    return knex(table.name).where({email})
+    .update({nom, prenom, email, tel})
   },
 
   updateUserPassword (email, password) {
@@ -130,7 +124,6 @@ const UtilisateurDao = {
         else resolve(result)
       })
     })
-
   },
 
   updateAvatar (avatar, email) {
