@@ -72,6 +72,8 @@ app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
 app.use('/admin/voyages', require('./routes/chefstation/voyages'));
 app.use('/admin/reservations', require('./routes/chefstation/reservations'));
 
+app.use('/contact', require('./routes/contact'))
+
 app.get('*', (req, res) => { res.redirect('/404') })
 
 // catch 404 and forward to error handler
