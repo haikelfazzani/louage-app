@@ -28,8 +28,11 @@ router.post('/', (req, res) => {
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-    console.log(info)
-    res.render('contact', { msg: "un email a été bien envoyé" });
+    res.render('contact', {
+      msg: errror
+        ? "Cette adresse mail n'est pas valide!"
+        : "un email a été bien envoyé"
+    });
   });
 })
 
