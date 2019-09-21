@@ -1,12 +1,9 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
-
-
 <section class="page-header">
   <div class="col-md-12">
     <h3>Reservation</h3>
   </div>
-
   <div class="bread">
     <a href="/">home </a>
     <a href="/reservations" disabled> / Reservation</a>
@@ -16,7 +13,6 @@
 <% if(locals.voyage) { %>
 <div class="container py-5">
   <div class="row">
-
 
     <div class="col-md-6 mb-3">
       <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">

@@ -36,7 +36,6 @@ if (generalForm) {
   }
 }
 
-
 /** form validation for forms contains email and password */
 if (formRegister) {
   formRegister.onsubmit = e => {

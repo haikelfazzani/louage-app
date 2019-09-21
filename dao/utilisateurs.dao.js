@@ -26,26 +26,8 @@ const UtilisateurDao = {
   },
 
   updateUser (user) {
-
     let { nom, prenom, email, tel } = user;
-
-    // const rq = `update ${table.name} 
-    // set ${table.nom} = ? ,
-    //     ${table.prenom} = ? ,
-    //     ${table.tel} = ? 
-    // where ${table.email} = ? `;
-
-    // const sql = SqlString.format(rq, [nom, prenom, tel, email]);
-
-    // return new Promise((resolve, reject) => {
-    //   db.query(sql, (err, result) => {
-    //     if (err) reject(err)
-    //     else resolve(result)
-    //   })
-    // })
-
-    return knex(table.name).where({email})
-    .update({nom, prenom, email, tel})
+    return knex(table.name).where({ email }).update({ nom, prenom, email, tel })
   },
 
   updateUserPassword (email, password) {

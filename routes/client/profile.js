@@ -7,20 +7,18 @@ var express = require('express'),
 
 var bcrypt = require('bcrypt'), saltRounds = 10;
 
-
 var multer = require('multer'), storage = multer.memoryStorage(), upload = multer({ storage: storage });
-const sharp = require('sharp');
+var sharp = require('sharp');
 
 //let IMG_BASE_URL='https://api.imgbb.com/1/upload?key=bd564129d4a8eccb275c4cc0c637cff3'
 
 router.get('/profile', checkUserConnected, function (req, res) {
   let { email } = req.session.userInfo
-  utilisateurDao.getAvatar(email)
-    .then(result => {
-
-      let encode = 'data:image/png;base64,' + result[0].avatar
+  utilisateurDao.getUser(email)
+    .then(users => {
+      let encode = 'data:image/png;base64,' + users[0].avatar
       req.session.avatar = encode
-      res.render('client/profile/index', { avatar: encode })
+      res.render('client/profile/index', { user: users[0], avatar: encode })
     })
     .catch(error => {
       res.render('client/profile/index')
@@ -28,14 +26,15 @@ router.get('/profile', checkUserConnected, function (req, res) {
 });
 
 router.post('/profile', checkUserConnected, function (req, res) {
-
   let { nom, prenom, email, password, tel } = req.body;
-
   let User = new UtilisateurModel(nom, prenom, email, password, tel)
 
   utilisateurDao.updateUser(objectTrim(User))
-    .then(result => {
-      res.render('client/profile/index', { msg: 'votre profile a été bien modifiée' });
+    .then(result => {    
+      res.render('client/profile/index', {
+        user: User,        
+        msg: 'votre profile a été bien modifiée'
+      });
     })
     .catch(error => {
       res.render('client/profile/index', { msg: 'erreur de modification!' });
@@ -82,10 +81,9 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
     .toBuffer()
     .then(function (data) {
 
-      let { email } = req.session.userInfo
       const encoded = data.toString("base64");
 
-      utilisateurDao.updateAvatar(encoded, email)
+      utilisateurDao.updateAvatar(encoded, req.session.userInfo.email)
         .then(result => {
           res.redirect('/utilisateur/profile')
         })

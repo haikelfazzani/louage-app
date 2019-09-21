@@ -4,38 +4,37 @@
   <%- include('../navbar') -%>
 
   <% if(locals.utilisateurs) {  %>
-  <div id="root"></div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>nom</th>
-        <th>prenom</th>
-        <th>email</th>
-        <th>tel</th>
-        <th>role</th>
-        <th>action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% utilisateurs.forEach((u, i) => {  %>
-      <tr>
-        <td><%= i %></td>
-        <td><%= u.nom %></td>
-        <td><%= u.prenom %></td>
-        <td><%= u.email %></td>
-        <td><%= u.tel %></td>
-        <td><%= u.role %></td>
-        <td>
-          <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=<%= u.email %>">S</a>
-        </td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>nom</th>
+          <th>prenom</th>
+          <th>email</th>
+          <th>tel</th>
+          <th>role</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% utilisateurs.forEach((u, i) => {  %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= u.nom %></td>
+          <td><%= u.prenom %></td>
+          <td><%= u.email %></td>
+          <td><%= u.tel %></td>
+          <td><%= u.role %></td>
+          <td>
+            <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=<%= u.email %>">S</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
   <% } %>
 
-
 </div>
-
 <%- include('../../partials/footer.ejs') -%>
