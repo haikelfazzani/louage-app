@@ -6,7 +6,8 @@ var stationDao = require('../../dao/stations.dao')
 var Vehicule = require('../../model/Vehicule.model')
 
 router.get('/', checkUserConnected, (req, res) => {
-  vehiculeDao.getVehicules()
+  let { id } = req.session.userInfo
+  vehiculeDao.getVehicules(id)
     .then(vehicules => {
       res.render('admin/vehicule/lister', { vehicules })
     })

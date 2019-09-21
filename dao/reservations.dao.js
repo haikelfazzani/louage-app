@@ -105,11 +105,14 @@ module.exports = ReservationsDao = {
       })
     })
   },
-  getReservsVoyagesUsers () {
-    const sql = `select * from ${table.name} t 
+  getReservsVoyagesUsers (idStation) {
+    const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage 
+    WHERE v.id_station = ?
     ORDER BY t.id_reservation DESC`;
+
+    const sql = SqlString.format(rq, idStation);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

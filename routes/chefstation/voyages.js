@@ -7,7 +7,9 @@ var Voyage = require('../../model/Voyage.model')
 
 router.get('/', checkUserConnected, (req, res) => {
 
-  voyagesDao.getVoyages()
+  let { chefStationInfo } = req.session
+
+  voyagesDao.getVoyageByNomStation(chefStationInfo.nom_station)
     .then(function (voyages) {
       res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
       res.render('admin/voyage/lister', { voyages });
@@ -19,9 +21,10 @@ router.get('/', checkUserConnected, (req, res) => {
 
 
 router.get('/ajout', checkUserConnected, (req, res) => {
-  stationDao.getStations()
-    .then(stations => {
-      res.render('admin/voyage/ajout', { stations })
+  let { email } = req.session.userInfo
+  stationDao.getStationByChef(email)
+    .then(station => {
+      res.render('admin/voyage/ajout', { station:station[0] })
     })
     .catch(error => {
       res.render('admin/voyage/ajout')
