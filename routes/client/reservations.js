@@ -6,11 +6,14 @@ var Reservation = require('../../model/Reservation')
 var voyageDao = require('../../dao/voyages.dao')
 var EtatReser = require('../../model/EtatReservation.enum')
 
-function checkValidParam (req, res, next) {
-  try {
-    let { destination, station, date } = req.query;
+var objContainsSQL = require('../../util/objContainsSQL')
 
-    if ((!destination && destination.length < 3) && !station && !date) {
+function checkValidParam (req, res, next) {
+
+  try {
+    let { destination, station, date } = req.query
+
+    if (objContainsSQL({ destination, station, date })) {
       res.redirect('/404')
     }
     next()
@@ -38,7 +41,7 @@ router.get('/', [checkUserConnected, checkValidParam], (req, res) => {
       res.render('client/reservations', { voyage: values[1][0], nbPlaces })
     })
     .catch(errorV => {
-      res.redirect('/')
+      res.redirect('/404')
     })
 })
 
@@ -67,8 +70,8 @@ router.post('/ajout', checkUserConnected, (req, res) => {
     voyageDao.updateNbPlaces(+(nbplacesv - nbplaces), idvoyage)
   ])
     .then(result => {
-      res.cookie('reservation', JSON.stringify({ nbplaces, total, idvoyage, nbplacesv }), 
-      {maxAge: 360000, httpOnly:true}
+      res.cookie('reservation', JSON.stringify({ nbplaces, total, idvoyage, nbplacesv }),
+        { maxAge: 360000, httpOnly: true }
       )
       res.redirect('/payments')
     })

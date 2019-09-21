@@ -5,7 +5,11 @@ var path = require('path');
 var nodeFileEnv = require('node-file-env');
 var session = require('express-session')
 var cookieParser = require('cookie-parser');
+
 var app = express()
+// load env variables
+nodeFileEnv().load()
+require('./database/knex')
 
 app.use(session({
   secret: 'my-secret-code',
@@ -45,8 +49,6 @@ app.get('/404', (req, res) => {
   res.render('404')
 })
 
-// load env variables
-nodeFileEnv().load()
 
 // triggers and services
 require('./services/reservation')
@@ -72,6 +74,7 @@ app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
 app.use('/admin/voyages', require('./routes/chefstation/voyages'));
 app.use('/admin/reservations', require('./routes/chefstation/reservations'));
 
+app.use('/a-propos', require('./routes/apropos'))
 app.use('/contact', require('./routes/contact'))
 
 app.get('*', (req, res) => { res.redirect('/404') })

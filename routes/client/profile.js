@@ -32,8 +32,7 @@ router.post('/profile', checkUserConnected, function (req, res) {
   let User = new UtilisateurModel(nom, prenom, email, password, tel)
 
   utilisateurDao.updateUser(objectTrim(User))
-    .then(result => {
-      if (Object.keys(result).length > 0 && result.affectedRows)
+    .then(result => {      
         res.render('client/profile/index', { msg: 'votre profile a été bien modifiée' });
     })
     .catch(error => {

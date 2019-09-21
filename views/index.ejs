@@ -8,9 +8,11 @@
 
         <h1 class="display-4 flipInX">BIENVENUE</h1>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          Louage partout, tout le temps
+          Parce que votre voyage ne s’arrête pas, nous sommes toujours là pour vous.
+          Notre service est simple et rapide.
+          Il est facile de trouver vos voyages. 
+          Aussi vous trouvez des Maps indéquantes.
         </p>
 
         <form action="/voyages" class="w-100 form-row" method="POST">
@@ -18,14 +20,14 @@
           <div class="col-md-8">
             <select class="form-control" id="nomstation" name="nomstation">
               <% stations.forEach(s => { %>
-              <option value="<%= s.nom_station %>" ><%= s.nom_station %></option>
+              <option value="<%= s.nom_station %>"><%= s.nom_station %></option>
               <% }) %>
             </select>
           </div>
           <% } %>
 
           <div class="col-md-4">
-            <button type="submit" class="btn btn-dark btn-block">chercher</button>
+            <button type="submit" class="btn btn-dark btn-block">rechercher</button>
           </div>
         </form>
 
