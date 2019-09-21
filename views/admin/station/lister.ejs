@@ -20,17 +20,13 @@
       <% stations.forEach((u, i) => {  %>
       <tr>
         <td><%= i %></td>
-        <% if(u.nom !== null) { %>
-        <td><%= (u.nom+' ' +u.prenom) %></td> <% } else { %>
-        <td><%= u.email %></td>
-        <% } %>
-
+        <td><%= u.nom + ' ' + u.prenom %></td>
         <td><%= u.nom_station %></td>
         <td><%= u.ville %></td>
-        <td><%= u.tel %></td>
+        <td><%= u.station_tel %></td>
         <td>
-          <a href="#" class="btn btn-success">M</a>
-          <a class="btn btn-danger btn-delete" href="/admin/stations/supprimer?nom=<%= u.nom_station %>">S</a>
+          <a href="/admin/stations/modifier?nom=<%= u.nom_station %>" class="btn btn-success">M</a>
+          <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete">S</a>
         </td>
       </tr>
       <% }) %>

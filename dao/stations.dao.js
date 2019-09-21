@@ -6,7 +6,7 @@ const table = {
   idStation: 'id_station',
   nomStation: 'nom_station',
   ville: 'ville',
-  tel: 'tel',
+  tel: 'station_tel',
   chefStation: 'chef_station',
   timestamp: 'timestamp_station'
 }
@@ -31,16 +31,14 @@ module.exports = StationsDao = {
     })
   },
 
-  updateStation (Station) {
-    let { nomStation, ville, tel, chefStation } = Station;
+  updateStation (Station, idStation) {
+    let { nomStation, ville, tel } = Station;
 
     const rq = `update ${table.name} 
-    set ${table.ville} = ? ,
-        ${table.tel} = ?,
-        ${table.chefStation} = ?
-    where ${table.nomStation} = ? `;
+    set ${table.nomStation} = ?, ${table.ville} = ? , ${table.tel} = ?
+    where ${table.idStation} = ? `;
 
-    const sql = SqlString.format(rq, [ville, tel, chefStation, nomStation]);
+    const sql = SqlString.format(rq, [nomStation, ville, tel, idStation]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -64,7 +62,8 @@ module.exports = StationsDao = {
   },
 
   getStation (nomStation) {
-    const rq = `select * from ${table.name} where ${table.nomStation} = ? limit 1`;
+    const rq = `select * from ${table.name} s join utilisateurs u
+    on s.chef_station = u.id where s.nom_station = ?`;
 
     const sql = SqlString.format(rq, nomStation);
 

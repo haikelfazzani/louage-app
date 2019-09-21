@@ -8,8 +8,8 @@ var utilisateurDao = require('../../dao/utilisateurs.dao');
 var { checkUserConnected } = require('../../middleware/authorisation')
 
 router.get('/', checkUserConnected, (req, res) => {
-  
-  stationDao.getStations().then(function (stations) {    
+
+  stationDao.getStations().then(function (stations) {
     res.render('admin/station/lister', { stations })
   })
     .catch(error => {
@@ -17,11 +17,10 @@ router.get('/', checkUserConnected, (req, res) => {
     })
 })
 
-
 router.get('/ajout', checkUserConnected, (req, res) => {
   utilisateurDao.getUserByRole('chef_station')
     .then(chefStations => {
-      req.session.chefStations = chefStations      
+      req.session.chefStations = chefStations
       res.render('admin/station/ajout', { chefStations })
     })
     .catch(error => {
@@ -31,7 +30,7 @@ router.get('/ajout', checkUserConnected, (req, res) => {
 
 router.post('/ajout', checkUserConnected, function (req, res) {
   let { chef, nom, ville, tel } = req.body;
-  
+
   let station = new Station(nom, ville, tel, chef)
 
   stationDao.addStation(station)
@@ -48,26 +47,47 @@ router.post('/ajout', checkUserConnected, function (req, res) {
     })
 });
 
-router.post('/modifier', checkUserConnected, function (req, res) {
-  res.render('admin/station/ajout');
-});
-
 
 router.get('/supprimer', checkUserConnected, function (req, res) {
   let nomStation = req.query.nom
 
   stationDao.deletStation(nomStation.trim())
-  .then(result => {
-    res.redirect('/admin/stations')
-  })
-  .catch(error => {
-    res.redirect('/admin/stations')
-  })  
+    .then(result => {
+      res.redirect('/admin/stations')
+    })
+    .catch(error => {
+      res.redirect('/admin/stations')
+    })
 });
 
 router.post('/supprimer', checkUserConnected, function (req, res) {
   res.render('admin/station/ajout');
 });
 
+router.get('/modifier', checkUserConnected, function (req, res) {
+  let { nom } = req.query
+  
+  stationDao.getStation(nom)
+    .then(station => {
+      res.render('admin/station/modifier', { station:station[0] })
+    })
+    .catch(error => {
+      res.redirect('/404')
+    })
+});
+
+router.post('/modifier', checkUserConnected, function (req, res) {
+  let { idstation, nom, ville, tel } = req.body
+
+  let newStation = new Station(nom, ville, tel, '')
+
+  stationDao.updateStation(newStation, idstation)
+  .then(result => {
+    res.redirect('/admin/stations')
+  })
+  .catch(error => {
+    res.redirect('/404')
+  })  
+});
 
 module.exports = router;

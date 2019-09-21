@@ -30,6 +30,7 @@
         <td><%= u.nom_station %></td>
         <td><%= u.ville %></td>
         <td>
+            <a href="/admin/vehicules/modifier?numserie=<%= u.num_serie %>" class="btn btn-success">S</a>
           <a href="/admin/vehicules/supprimer?numserie=<%= u.num_serie %>" class="btn btn-danger btn-delete">S</a>
         </td>
       </tr>
