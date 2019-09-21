@@ -25,16 +25,16 @@
 
         <div class="row">
           <div class="col-md-6">
-              <div class="form-group">
-                  <label>station</label>
-                  <input type="text" class="form-control" value="<%= station %>" required disabled>
-                </div>                  
+            <div class="form-group">
+              <label>station</label>
+              <input type="text" class="form-control" value="<%= station %>" required disabled>
+            </div>
           </div>
           <div class="col-md-6">
-              <div class="form-group">
-                  <label>destination</label>
-                  <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
-                </div>
+            <div class="form-group">
+              <label>destination</label>
+              <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+            </div>
           </div>
         </div>
 
@@ -42,16 +42,14 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>heure de depart</label>
-              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" 
-              required disabled>
+              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" required disabled>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label>date de depart</label>
-              <input type="text" class="form-control" value="<%= voyage.date_depart %>" 
-              required disabled>
+              <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
             </div>
           </div>
         </div>
@@ -62,23 +60,20 @@
             <span class="badge badge-pill badge-danger">disponibles <%= nbPlaces %></span>
           </label>
           <input type="number" name="nbplacesv" id="nbplacesv" value="<%= nbPlaces %>" hidden readonly>
-          
-          <input type="number" class="form-control" min="1" max="<%= nbPlaces %>" 
-          id="nbplaces" name="nbplaces"
+
+          <input type="number" class="form-control" min="1" max="<%= nbPlaces %>" id="nbplaces" name="nbplaces"
             placeholder="Enter nombre places" required>
         </div>
 
         <div class="row mb-4">
           <div class="col-md-6">
             <label>Prix place</label>
-            <input type="text" class="form-control display-3" 
-            value="<%=  voyage.prix_place %> DNT" required readonly>
+            <input type="text" class="form-control display-3" value="<%=  voyage.prix_place %> DNT" required readonly>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>total</label>
-              <input type="text" class="form-control display-3" 
-              id="total" name="total" value="0 DNT" required readonly>
+              <input type="text" class="form-control display-3" id="total" name="total" value="0 DNT" required readonly>
             </div>
           </div>
         </div>

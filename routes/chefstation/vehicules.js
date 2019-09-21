@@ -18,9 +18,10 @@ router.get('/', checkUserConnected, (req, res) => {
 
 
 router.get('/ajout', checkUserConnected, (req, res) => {
-  stationDao.getStations()
+  let { email } = req.session.userInfo
+  stationDao.getStationByChef(email)
     .then(stations => {
-      res.render('admin/vehicule/ajout', { stations })
+      res.render('admin/vehicule/ajout', { station:stations[0] })
     })
     .catch(error => {
       res.render('admin/vehicule/ajout')

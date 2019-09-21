@@ -1,0 +1,64 @@
+<% if(locals.Role && locals.userInfo.role === locals.Role.chefStation) { %>
+  <canvas id="myChart" style="max-height: 450px"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <script defer>
+
+    /*
+    etat_reservation: "annuler"
+id_client: 40
+id_reservation: 12
+id_voyage: 15
+nb_place_reserver: 3
+timestamp_reservation: "2019-09-20T21:51:34.850Z"
+total_prix_places: "45 DNT"
+    */
+
+    const months = [
+      "jan", "fév", "mars", "avril", "mai", "juin", "juil", "août", "sep", "oct", "nov", "déc"
+    ];
+
+    fetch('/admin/voyages.json')
+      .then(res => res.json())
+      .then(voyages => {
+
+        let voyageParMoi = voyages.reduce((a, c, i) =>
+          (v = months[new Date(c.date_depart).getMonth()],
+            a[v] ? a[v]++ : a[v] = 1, a), []);
+
+        let objReserv = [];
+
+        for (let i in voyageParMoi) {
+          objReserv.push({ n: voyageParMoi[i], m: i, indx: months.indexOf(i) })
+        }
+
+        objReserv = objReserv.sort((i, j) => i.indx - j.indx);
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: objReserv.map(v => v.m),
+            datasets: [{
+              label: 'nombre de voyages par moi',
+              data: objReserv.map(v => v.n),
+              backgroundColor: '#e91e63',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  callback: function (value) { if (value % 1 === 0) { return value; } }
+                }
+              }]
+            }
+          }
+        });
+      })
+      .catch(error => { })
+  </script>
+  <%} %>
