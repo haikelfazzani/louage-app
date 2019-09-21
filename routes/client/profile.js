@@ -7,7 +7,9 @@ var express = require('express'),
 
 var bcrypt = require('bcrypt'), saltRounds = 10;
 
+
 var multer = require('multer'), storage = multer.memoryStorage(), upload = multer({ storage: storage });
+const sharp = require('sharp');
 
 //let IMG_BASE_URL='https://api.imgbb.com/1/upload?key=bd564129d4a8eccb275c4cc0c637cff3'
 
@@ -32,8 +34,8 @@ router.post('/profile', checkUserConnected, function (req, res) {
   let User = new UtilisateurModel(nom, prenom, email, password, tel)
 
   utilisateurDao.updateUser(objectTrim(User))
-    .then(result => {      
-        res.render('client/profile/index', { msg: 'votre profile a été bien modifiée' });
+    .then(result => {
+      res.render('client/profile/index', { msg: 'votre profile a été bien modifiée' });
     })
     .catch(error => {
       res.render('client/profile/index', { msg: 'erreur de modification!' });
@@ -67,7 +69,6 @@ router.post('/profile/password', checkUserConnected, function (req, res) {
 
 /** user change avatar */
 router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (req, res) => {
-
   /*
   fieldname: 'avatar',
   originalname: 'classe.PNG',
@@ -75,17 +76,24 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
   mimetype: 'image/png',
   buffer:
   */
+  sharp(req.file.buffer)
+    .resize(300, 300)
+    .jpeg()
+    .toBuffer()
+    .then(function (data) {
 
-  let { email } = req.session.userInfo
-  const encoded = req.file.buffer.toString("base64");
+      let { email } = req.session.userInfo
+      const encoded = data.toString("base64");
 
-  utilisateurDao.updateAvatar(encoded, email)
-    .then(result => {
-      res.redirect('/utilisateur/profile')
+      utilisateurDao.updateAvatar(encoded, email)
+        .then(result => {
+          res.redirect('/utilisateur/profile')
+        })
+        .catch(error => {
+          res.render('client/profile/index', { msg: 'erreur de modification' })
+        })
     })
-    .catch(error => {
-      res.render('client/profile/index', { msg: 'erreur de modification' })
-    })
+    .catch(errd => { res.redirect('/404') })
 });
 
 /** Suppression compte (profile) */
