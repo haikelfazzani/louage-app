@@ -18,4 +18,24 @@
 
 ![uses cases Diagram System de gestion utilisateur](https://i.ibb.co/zRsY38P/gestion-des-utilisateur.jpg)
 
+***
+
+Sommaire d’identification :
+Titre : Système de gestion des utilisateurs
+Objectifs : Gérer les comptes des utilisateurs .
+
+Résumé : Cette fonctionnalité permet :
+1 - Aux administrateurs de gérer complètement les comptes des utilisateur.
+
+Acteurs : Administrateur.
+
+Description détaillée :
+Pré conditions : L'administrateur doit s’authentifier pour avoir accès aux fonctionnalités du système.
+Description du traitement nominal :
+L'administrateur peut :
+1. Gérer les comptes des utilisateurs.
+2. Gérer les profils des utilisateurs. 
+
+***
+
 
