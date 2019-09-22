@@ -20,7 +20,7 @@
         <div class="form-group">
           <label>numero carte</label>
           <input type="text" class="form-control" id="numcarte" 
-          name="numcarte" value="<%= paymentInfo[0].numCarte %>"
+          name="numcarte" value="<%= paymentInfo.numcarte %>"
             required readonly>
         </div>
 
@@ -34,26 +34,27 @@
         <div class="form-group">
           <label>station</label>
           <input type="text" class="form-control" id="station" name="station" 
-          value="<%= paymentInfo.nom_station %>"
+          value="<%= voyage.nom_station %>"
             required readonly>
         </div>
 
         <div class="form-group">
           <label>destination</label>
           <input type="text" class="form-control" id="destination" name="destination"
-            value="<%= paymentInfo.destination %>" required readonly>
+            value="<%= voyage.destination %>" required readonly>
         </div>
 
         <div class="form-group">
           <label>total</label>
-          <input type="text" class="form-control" id="total" name="total" value="<%= paymentInfo.total_prix_places %>"
+          <input type="text" class="form-control" id="total" name="total" 
+          value="<%= paymentInfo.newReserv.totalPrixPlaces %>"
             required readonly>
         </div>
 
         <div class="form-group">
           <label>nombre places reservées</label>
           <input type="text" class="form-control" id="nbplaces" name="nbplaces"
-            value="<%= paymentInfo.nb_place_reserver %>" required readonly>
+            value="<%= paymentInfo.newReserv.nbPlaceReserv %>" required readonly>
         </div>
 
         <button type="button" class="btn btn-dark" id="btn-export">exporter ticket</button>

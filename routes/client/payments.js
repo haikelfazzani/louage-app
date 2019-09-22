@@ -37,7 +37,7 @@ router.post('/confirmer', checkUserConnected, (req, res) => {
     paymentDao.addPayment(newPayment)
   ])
     .then(values => {
-      res.cookie('payment', JSON.stringify([newReserv,newPayment]),{maxAge:1000*60*30})
+      res.cookie('payment', JSON.stringify({ newReserv, numcarte, idvoyage }), { maxAge: 1000 * 60 * 30 })
       res.redirect('/ticket')
     })
     .catch(error => {
