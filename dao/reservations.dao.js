@@ -92,8 +92,11 @@ module.exports = ReservationsDao = {
 
   },
 
-  getAllReservations () {
-    const sql = `select * from ${table.name}`;
+  getAllReservationsByStation (idStation) {
+    const rq = `SELECT * from ${table.name} r join voyages v
+    ON r.id_voyage = v.id_voyage WHERE v.id_station = ? `;
+
+    const sql = SqlString.format(rq, idStation);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
