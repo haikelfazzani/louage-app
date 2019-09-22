@@ -1,45 +1,47 @@
 var router = require('express').Router()
 var { checkUserConnected } = require('../../middleware/authorisation')
+var uniqid = require('uniqid')
 
 var reservDao = require('../../dao/reservations.dao')
+var voyageDao = require('../../dao/voyages.dao')
 var paymentDao = require('../../dao/payments.dao')
 var Payment = require('../../model/Payment.model')
+var Reservation = require('../../model/Reservation')
 
 router.get('/', [checkUserConnected], (req, res) => {
 
-  let { id_reservation } = req.body
-  let { email } = req.session.userInfo
+  let reservInfo = JSON.parse(req.cookies.vosreservations)
+  let { nbplaces, total, idvoyage } = reservInfo
 
-  reservDao.getReservByUser(email)
-    .then(reservs => {
-      res.render('client/payments', { reservation: reservs[0] })
+  voyageDao.getVoyageById(idvoyage)
+    .then(voyages => {
+      res.render('client/payments', {
+        nbplacesreserv: nbplaces, total, voyage: voyages[0], uidreserv: uniqid()
+      })
     })
     .catch(error => {
-      res.render('client/payments', { reservation: id_reservation })
+      res.redirect('/404')
     })
 })
 
 router.post('/confirmer', checkUserConnected, (req, res) => {
-  let { idreservation, numcarte } = req.body
+  let { uidreserv, numcarte, nbplacesreserv, total, nb_places, idvoyage } = req.body
   let { id } = req.session.userInfo
 
-  let newPayment = new Payment(numcarte, idreservation, id)
+  let newReserv = new Reservation(uidreserv, nbplacesreserv, total, 'payer', id, idvoyage)
+  let newPayment = new Payment(uidreserv, numcarte, uidreserv, id)
 
-  paymentDao.addPayment(newPayment)
-    .then(result => {
-      if (Object.keys(result).length > 2 && result.affectedRows === 1) {
-        reservDao.updateEtatReserv('payer', idreservation)
-          .then(resEtat => {
-            res.redirect('/ticket')
-          })
-          .catch(errEtat => {            
-            res.redirect('/404')
-          })
-      }
-      else res.render('client/payments', { msg: 'erreur de paiment! ressayer plutard..' })
+  Promise.all([
+    voyageDao.updateNbPlaces(((+nb_places) - (+nbplacesreserv)), idvoyage),
+    reservDao.addReservation(newReserv),
+    paymentDao.addPayment(newPayment)
+  ])
+    .then(values => {
+      res.cookie('payment', JSON.stringify([newReserv,newPayment]),{maxAge:1000*60*30})
+      res.redirect('/ticket')
     })
     .catch(error => {
-      res.render('/404')
+      res.render('client/payments')
     })
 })
 
