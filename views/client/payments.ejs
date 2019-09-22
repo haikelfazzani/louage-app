@@ -1,65 +1,78 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
-<% if(locals.voyage) { %>
+<% if(locals.reservation) { %>
 <div class="container py-5">
   <div class="row">
 
     <div class="col-md-6 mb-3">
-      <form action="/payments/confimer" method="POST" class="form-general form-bg-gray mb-3">
-
-        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
+      <div class="form-general form-bg-gray">
 
         <div class="form-group">
           <label>destination</label>
-          <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+          <input type="text" class="form-control" value="<%= reservation.destination %>" required disabled>
         </div>
 
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>heure de depart</label>
-              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" required disabled>
+              <input type="number" class="form-control" value="<%= reservation.heure_depart %>" required disabled>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label>date de depart</label>
-              <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
+              <input type="text" class="form-control" value="<%= reservation.date_depart %>" required disabled>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="nbplaces" class="d-flex justify-content-between">
-            nombre de places disponibles
-            <span class="badge badge-pill badge-danger"><%= voyage.nb_places %></span>
-          </label>
-          <input type="number" name="nbplacesv" id="nbplacesv" value="<%= voyage.nb_places %>" hidden readonly>
-          <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>" id="nbplaces" name="nbplaces"
-            placeholder="Enter nombre places" required>
+          <label for="nbplaces">nombre de places reservées</label>
+          <input type="number" class="form-control" id="nbplaces" name="nbplaces"
+            value="<%= reservation.nb_place_reserver %>" required disabled>
         </div>
 
         <div class="row mb-4">
           <div class="col-md-6">
             <label>Prix place</label>
-            <input type="text" class="form-control display-3" value="<%=  voyage.prix_place %> DNT" required readonly>
+            <input type="text" class="form-control display-3" value="<%= reservation.prix_place %> DNT" required
+              disabled>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>total</label>
-              <input type="text" class="form-control display-3" id="total" name="total" value="0 DNT" required readonly>
+              <input type="text" class="form-control display-3" id="total" name="total"
+                value="<%= reservation.total_prix_places %>" required disabled>
             </div>
           </div>
         </div>
-
-        <button type="submit" class="btn btn-dark">reserver</button>
-        <button type="reset" class="btn btn-danger">vider</button>
-      </form>
+      </div>
     </div>
 
-    <div class="col-md-6">
 
+    <div class="col-md-6">
+      <form action="/payments/confimer" method="POST" class="form-general form-bg-gray mb-3">
+
+        <input type="text" name="idreservation" id="idreservation" value="<%= reservation.id_reservation %>" hidden
+          readonly>
+
+        <div class="form-group">
+          <label>numero carte</label>
+          <input type="text" class="form-control" id="numcarte" name="numcarte"
+            placeholder="Entrer votre numero de carte" required>
+        </div>
+
+        <div class="form-group">
+          <label>code secret</label>
+          <input type="text" class="form-control" id="codesecret" name="codesecret"
+            placeholder="Entrer code secret de la carte" required>
+        </div>
+
+        <button type="submit" class="btn btn-dark">payer</button>
+        <button type="reset" class="btn btn-danger">vider</button>
+      </form>
     </div>
   </div><!-- end row -->
 

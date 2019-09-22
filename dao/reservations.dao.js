@@ -70,6 +70,7 @@ module.exports = ReservationsDao = {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage
+    join stations s on s.id_station = v.id_station
     WHERE u.email = ? ORDER BY t.id_reservation DESC`;
 
     const sql = SqlString.format(rq, email);

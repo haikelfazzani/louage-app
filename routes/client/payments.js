@@ -20,10 +20,18 @@ function checkValidParam (req, res, next) {
 router.get('/', [checkUserConnected], (req, res) => {
 
   let { id_reservation } = req.body
-  //reservDao.g
-  console.log('Cookies: ', req.cookies);
+  let {email}=req.session.userInfo
 
-  res.render('client/payments', { reservation: id_reservation })
+  //console.log('Cookies: ', req.cookies);
+
+  reservDao.getReservByUser(email)
+  .then(reservs => {
+    console.log(reservs)
+    res.render('client/payments', { reservation: reservs[0] })
+  })
+  .catch(error => {
+    res.render('client/payments', { reservation: id_reservation })
+  })  
 })
 
 router.post('/ajout', checkUserConnected, (req, res) => {

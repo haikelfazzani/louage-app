@@ -75,6 +75,7 @@
 
 ## Notes
 - [x] supprimer tous les voyages si la date est expirée
+- [ ] nombre places voyage === 0 ; voyage sera supprimé auto
 
 ## Bugs
 - [x] Database Connection lost: The server closed the connection. (Fixed)

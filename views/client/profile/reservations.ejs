@@ -24,6 +24,7 @@
             <thead>
               <tr>
                 <th>#</th>
+                <th>station</th>
                 <th>destination</th>
                 <th>heure depart</th>
                 <th>date depart</th>
@@ -37,6 +38,7 @@
               <% reservations.forEach((u, i) => {  %>
               <tr>
                 <td><%= i %></td>
+                <td><%= u.nom_station %></td>
                 <td><%= u.destination %></td>
                 <td><%= u.heure_depart %> h</td>
                 <td><%= locals.formatDate(u.date_depart) %></td>
