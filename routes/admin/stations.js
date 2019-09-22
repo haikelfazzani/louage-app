@@ -66,10 +66,10 @@ router.post('/supprimer', checkUserConnected, function (req, res) {
 
 router.get('/modifier', checkUserConnected, function (req, res) {
   let { nom } = req.query
-  
+
   stationDao.getStation(nom)
     .then(station => {
-      res.render('admin/station/modifier', { station:station[0] })
+      res.render('admin/station/modifier', { station: station[0] })
     })
     .catch(error => {
       res.redirect('/404')
@@ -82,12 +82,12 @@ router.post('/modifier', checkUserConnected, function (req, res) {
   let newStation = new Station(nom, ville, tel, '')
 
   stationDao.updateStation(newStation, idstation)
-  .then(result => {
-    res.redirect('/admin/stations')
-  })
-  .catch(error => {
-    res.redirect('/404')
-  })  
+    .then(result => {
+      res.redirect('/admin/stations')
+    })
+    .catch(error => {
+      res.redirect('/404')
+    })
 });
 
 module.exports = router;

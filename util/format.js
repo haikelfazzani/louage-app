@@ -10,5 +10,6 @@ module.exports = (function (date) { // 2019-08-16
   let m = d.getMonth()
   let y = d.getFullYear()
   
-  return jours[j] + ', ' + (d.getDate() - 1) + ' ' + months[m] + ' ' + y
+  //return jours[j] + ', ' + (d.getDate() - 1) + ' ' + months[m] + ' ' + y
+  return date
 })
