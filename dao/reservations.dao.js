@@ -108,7 +108,7 @@ module.exports = ReservationsDao = {
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage 
     WHERE v.id_station = ?
-    ORDER BY t.id_reservation DESC`;
+    ORDER BY t.uid_reservation DESC`;
 
     const sql = SqlString.format(rq, idStation);
 
