@@ -5,6 +5,7 @@ var knex = require('../database/knex')
 const table = {
   name: 'payments',
   idPayment: 'id_payment',
+  numCarte: 'num_carte',
   idReserv: 'id_reservation',
   idClient: 'id_client',
   timestamp: 'timestamp_payment'
@@ -14,13 +15,13 @@ module.exports = PaymentsDao = {
 
   addPayment (Payment) {
 
-    let { idReserv, idClient } = Payment;
+    let { numCarte, idReservation, idClient } = Payment;
 
     const rq = `INSERT INTO ${table.name} 
-    (${table.idReserv}, ${table.idClient}, ${table.timestamp}) 
-    values(? , ? , ?)`;
+    (${table.numCarte}, ${table.idReserv}, ${table.idClient}, ${table.timestamp}) 
+    values(? , ? , ?, ?)`;
 
-    const sql = SqlString.format(rq, [ idReserv, idClient, new Date().toISOString()]);
+    const sql = SqlString.format(rq, [numCarte, idReservation, idClient, new Date().toISOString()]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -30,7 +31,7 @@ module.exports = PaymentsDao = {
     })
   },
 
-  cancelPayment() {
+  cancelPayment () {
 
   },
 
