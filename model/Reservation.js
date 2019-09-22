@@ -1,5 +1,6 @@
 module.exports = class ReservationModel {
-  constructor (nbPlaceReserv, totalPrixPlaces, etatReservation, idClient, idVoyage) {
+  constructor (uidReservation, nbPlaceReserv, totalPrixPlaces, etatReservation, idClient, idVoyage) {
+    this.uidReservation = uidReservation || 0;
     this.nbPlaceReserv = nbPlaceReserv || 0;
     this.totalPrixPlaces = totalPrixPlaces || '';
     this.etatReservation = etatReservation || '';

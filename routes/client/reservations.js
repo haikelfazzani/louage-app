@@ -22,24 +22,24 @@ function checkValidParam (req, res, next) {
   }
 }
 
-router.get('/', [checkUserConnected], (req, res) => {
-
-  let { destination, station, date } = req.query;
+router.get('/', (req, res) => {
+  
+  let allVoyages = JSON.parse(req.query.v)
+  let { destination, nom_station, timestamp_voyage } = allVoyages
 
   Promise.all([
-    voyageDao.nbPlacesByDestination(destination, station),
-    voyageDao.getVoyageByDateAndStation(date, station)
+    voyageDao.nbPlacesByDestination(destination, timestamp_voyage, nom_station),
+    voyageDao.getVoyageByDateAndStation(destination, timestamp_voyage, nom_station)
   ])
     .then(values => {
-    
-      let nbPlaces = values[0][0].nb
 
-      if (nbPlaces < 1) {
-        res.redirect('/')
-      }
-      res.render('client/reservations', { voyage: values[1][0], nbPlaces,station })
+      res.render('client/reservations', {
+        voyage: allVoyages,
+        nbPlaces: values[0][0].nb,
+        station: nom_station
+      })
     })
-    .catch(errorV => {    
+    .catch(errorV => {
       res.redirect('/404')
     })
 })
@@ -59,24 +59,11 @@ router.get('/all', checkUserConnected, (req, res) => {
 })
 
 router.post('/ajout', checkUserConnected, (req, res) => {
-  let { nbplaces, total, idvoyage, nbplacesv } = req.body
-  let { id } = req.session.userInfo;
+  let { nbplaces, total, idvoyage } = req.body
 
-  let reserv = new Reservation(+nbplaces, total, EtatReser.enAttente, id, +idvoyage)
-
-  Promise.all([
-    reservDao.addReservation(reserv),
-    voyageDao.updateNbPlaces(+(nbplacesv - nbplaces), idvoyage)
-  ])
-    .then(result => {
-      //res.cookie('reservation', JSON.stringify({ nbplaces, total, idvoyage, nbplacesv }),
-        //{ maxAge: 360000, httpOnly: true }
-      //)      
-      res.redirect('/payments')
-    })
-    .catch(error => {
-      res.redirect('/payments')
-    })
+  res.cookie('vosreservations',
+    JSON.stringify({ nbplaces, total, idvoyage }), { maxAge: 1000 * 60 * 10 })
+  res.redirect('/payments')
 })
 
 

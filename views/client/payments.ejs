@@ -1,60 +1,64 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
 <section class="page-header">
-    <div class="col-md-12">
-      <h3>Paiment</h3>
-    </div>
-    <div class="bread">
-      <a href="/">home </a>
-      <a href="#" disabled> / paiments</a>
-    </div>
-  </section>
+  <div class="col-md-12">
+    <h3>Paiment</h3>
+  </div>
+  <div class="bread">
+    <a href="/">home </a>
+    <a href="#" disabled> / paiments</a>
+  </div>
+</section>
 
-<% if(locals.reservation) { %>
+<% if(locals.voyage) { %>
 <div class="container py-5">
   <div class="row">
 
     <div class="col-md-6 mb-3">
-      <div class="form-general form-bg-gray">
+      <div class="form-general form-bg-gray">          
+
+        <div class="form-group">
+          <label>nom station</label>
+          <input type="text" class="form-control" value="<%= voyage.nom_station %>" disabled>
+        </div>
 
         <div class="form-group">
           <label>destination</label>
-          <input type="text" class="form-control" value="<%= reservation.destination %>" required disabled>
+          <input type="text" class="form-control" value="<%= voyage.destination %>" disabled>
         </div>
 
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>heure de depart</label>
-              <input type="number" class="form-control" value="<%= reservation.heure_depart %>" required disabled>
+              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" disabled>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label>date de depart</label>
-              <input type="text" class="form-control" value="<%= reservation.date_depart %>" required disabled>
+              <input type="text" class="form-control" value="<%= voyage.date_depart %>" disabled>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="nbplaces">nombre de places reservées</label>
-          <input type="number" class="form-control" id="nbplaces" name="nbplaces"
-            value="<%= reservation.nb_place_reserver %>" required disabled>
+          <label for="nbplacesreserv">nombre de places reservées</label>
+          <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv" 
+          value="<%= nbplacesreserv %>" disabled>
         </div>
 
         <div class="row mb-4">
           <div class="col-md-6">
             <label>Prix place</label>
-            <input type="text" class="form-control display-3" value="<%= reservation.prix_place %> DNT" required
-              disabled>
+            <input type="text" class="form-control display-3" value="<%= voyage.prix_place %> DNT" required disabled>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>total</label>
-              <input type="text" class="form-control display-3" id="total" name="total"
-                value="<%= reservation.total_prix_places %>" required disabled>
+              <input type="text" class="form-control display-3" value="<%= total %>" required
+                disabled>
             </div>
           </div>
         </div>
@@ -65,8 +69,20 @@
     <div class="col-md-6">
       <form action="/payments/confirmer" method="POST" class="form-general form-bg-gray mb-3">
 
-        <input type="text" name="idreservation" id="idreservation" value="<%= reservation.id_reservation %>" hidden
-          readonly>
+        <input type="text" name="uidreserv" id="uidreserv" value="<%= uidreserv %>" 
+        required hidden readonly>
+
+        <input type="text" class="form-control" id="idvoyage" name="idvoyage" 
+          value="<%= voyage.id_voyage %>" required hidden readonly>
+
+          <input type="text" class="form-control" id="nb_places" name="nb_places" 
+          value="<%= voyage.nb_places %>" required hidden readonly>
+
+          <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv" 
+          value="<%= nbplacesreserv %>" required hidden readonly>
+
+          <input type="text" class="form-control display-3" 
+          id="total" name="total" value="<%= total %>" required hidden readonly>
 
         <div class="form-group">
           <label>numero carte</label>

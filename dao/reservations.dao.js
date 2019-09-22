@@ -2,9 +2,11 @@ const db = require('../database/connection');
 var SqlString = require('sqlstring')
 var EtatReservation = require('../model/EtatReservation.enum')
 
+var knex = require('../database/knex')
+
 const table = {
   name: 'reservations',
-  idReserv: 'id_reservation',
+  uidReservation: 'uid_reservation',
   nbPlaceReserv: 'nb_place_reserver',
   totalPrixPlaces: 'total_prix_places',
   etatReserv: 'etat_reservation',
@@ -17,25 +19,18 @@ module.exports = ReservationsDao = {
 
   addReservation (Reservation) {
 
-    let { nbPlaceReserv, totalPrixPlaces, etatReservation, idClient, idVoyage } = Reservation;
+    let { uidReservation, nbPlaceReserv, totalPrixPlaces, idClient, idVoyage } = Reservation;
 
-    const rq = `INSERT INTO ${table.name} 
-    (${table.nbPlaceReserv}, ${table.totalPrixPlaces}, ${table.etatReserv}, 
-      ${table.idClient}, ${table.idVoyage}, ${table.timestamp}) values(?, ? , ? , ?, ?, ?)`;
-
-    const sql = SqlString.format(rq,
-      [
-        nbPlaceReserv, totalPrixPlaces, etatReservation,
-        idClient, idVoyage, new Date().toISOString()
-      ]
-    );
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
+    return knex(table.name)
+      .insert({
+        uid_reservation: uidReservation,
+        nb_place_reserver: nbPlaceReserv,
+        total_prix_places: totalPrixPlaces,
+        etat_reservation: EtatReservation.payer,
+        id_client: idClient,
+        id_voyage: idVoyage,
+        timestamp_reservation: new Date().toISOString()
       })
-    })
   },
 
   updateEtatReserv (etat, idReserv) {
@@ -106,7 +101,7 @@ module.exports = ReservationsDao = {
       })
     })
   },
-  
+
   getReservsVoyagesUsers (idStation) {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 

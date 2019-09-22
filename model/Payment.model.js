@@ -1,7 +1,8 @@
 module.exports = class ReservationModel {
-  constructor (numCarte, idReservation, idClient) {
+  constructor (uidPayment, numCarte, uidReservation, idClient) {
+    this.uidPayment = uidPayment || '';
     this.numCarte = numCarte || '';
-    this.idReservation = idReservation || '';
+    this.uidReservation = uidReservation || '';
     this.idClient = idClient || '';
   }
 }
