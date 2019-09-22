@@ -48,8 +48,8 @@
                   <span class="badge badge-dark"><%= u.etat_reservation %></span>
                 </td>
                 <td>
-                  <% if(u.etat_reservation === 'en attente') { %>
-                  <a class="btn btn-success" href="#">C</a>
+                  <% if(u.etat_reservation === 'payer' && Date.parse(u.date_depart) > Date.parse(new Date())) { %>
+                  <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-danger btn-cancel">A</a>
                   <% } %>
                 </td>
               </tr>

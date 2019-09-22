@@ -50,8 +50,9 @@
 
           <div style="display: flex; justify-content: space-between;">
             <div class="btn btn-outline-dark"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
+            
             <a class="btn btn-danger btn-get-voayge" 
-            href="/reservations?v=<%= JSON.stringify(v) %>">
+            href="/reservations?v=<%= Buffer.from(JSON.stringify(v)).toString('base64') %>">
               RESERVER <i class="fas fa-chevron-circle-right ml-2"></i>
             </a>
           </div>

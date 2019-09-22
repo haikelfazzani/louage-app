@@ -1,7 +1,3 @@
-var router = require('express').Router()
-
-router.get('/', (req, res) => {
+module.exports = require('express').Router().get('/', (req, res) => {
   res.render('apropos')
 })
-
-module.exports = router

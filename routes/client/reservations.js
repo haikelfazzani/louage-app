@@ -2,11 +2,8 @@ var router = require('express').Router()
 var { checkUserConnected } = require('../../middleware/authorisation')
 
 var reservDao = require('../../dao/reservations.dao')
-var Reservation = require('../../model/Reservation')
 var voyageDao = require('../../dao/voyages.dao')
-var EtatReser = require('../../model/EtatReservation.enum')
-
-var objContainsSQL = require('../../util/objContainsSQL')
+var paymentDao = require('../../dao/payments.dao')
 
 function checkValidParam (req, res, next) {
 
@@ -22,9 +19,9 @@ function checkValidParam (req, res, next) {
   }
 }
 
-router.get('/', (req, res) => {
-  
-  let allVoyages = JSON.parse(req.query.v)
+router.get('/', checkUserConnected, (req, res) => {
+
+  let allVoyages =JSON.parse(Buffer.from(req.query.v, 'base64').toString())
   let { destination, nom_station, timestamp_voyage } = allVoyages
 
   Promise.all([
@@ -68,15 +65,18 @@ router.post('/ajout', checkUserConnected, (req, res) => {
 
 
 router.get('/annuler', checkUserConnected, function (req, res) {
-  let { numserie } = req.query
+  let { r } = req.query
 
-  vehiculeDao.deletVehicule(numserie)
-    .then(result => {
-      res.redirect('/admin/vehicules')
-    })
-    .catch(error => {
-      res.redirect('/admin/vehicules')
-    })
+  Promise.all([
+    reservDao.updateEtatReserv('annuler', r),
+    paymentDao.cancelPayment(r)
+  ])
+  .then(values => {
+    res.redirect('/reservations/all')  
+  })
+  .catch(error => {
+    res.redirect('/404')  
+  })  
 });
 
 module.exports = router
