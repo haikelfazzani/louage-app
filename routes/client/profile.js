@@ -13,8 +13,8 @@ var sharp = require('sharp');
 //let IMG_BASE_URL='https://api.imgbb.com/1/upload?key=bd564129d4a8eccb275c4cc0c637cff3'
 
 router.get('/profile', checkUserConnected, function (req, res) {
-  let { email } = req.session.userInfo
-  utilisateurDao.getUser(email)
+  let { id } = req.session.userInfo
+  utilisateurDao.getUserById(id)
     .then(users => {
       let encode = 'data:image/png;base64,' + users[0].avatar
       req.session.avatar = encode
@@ -27,12 +27,14 @@ router.get('/profile', checkUserConnected, function (req, res) {
 
 router.post('/profile', checkUserConnected, function (req, res) {
   let { nom, prenom, email, password, tel } = req.body;
+  let { id } = req.session.userInfo
+
   let User = new UtilisateurModel(nom, prenom, email, password, tel)
 
-  utilisateurDao.updateUser(objectTrim(User))
-    .then(result => {    
+  utilisateurDao.updateUser(id, objectTrim(User))
+    .then(result => {
       res.render('client/profile/index', {
-        user: User,        
+        user: User,
         msg: 'votre profile a été bien modifiée'
       });
     })
