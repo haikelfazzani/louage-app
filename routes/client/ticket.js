@@ -7,14 +7,12 @@ router.get('/', (req, res) => {
 
   paymentDao.getPayments(id)
     .then(result => {
-      console.log(result)
       res.render('client/ticket', {
         msg: 'Merci, votre paiment a été bien effectuer', paymentInfo: result[0],
         email
       })
     })
     .catch(error => {
-      console.log(error)
       res.render('client/ticket', { msg: 'Merci, votre paiment a été bien effectuer' })
     })
 })
