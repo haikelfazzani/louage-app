@@ -70,6 +70,7 @@ app.use('/utilisateur', require('./routes/client/profile'));
 app.use('/voyages', require('./routes/client/voyages'));
 app.use('/reservations', require('./routes/client/reservations'));
 app.use('/payments', require('./routes/client/payments'));
+app.use('/ticket', require('./routes/client/ticket'));
 
 // admin routes
 app.use('/admin', require('./routes/admin/admin.route'))
