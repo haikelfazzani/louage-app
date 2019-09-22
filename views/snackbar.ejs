@@ -12,6 +12,12 @@
     z-index: 1;
     left: 50%;
     bottom: 30px;
+    cursor: pointer;
+    transition: background-color .4s ease;
+  }
+
+  #snackbar:hover {
+    background-color: #1f2532;
   }
 
   #snackbar.show {
@@ -69,6 +75,12 @@
   }
 </style>
 
-<div id="snackbar">Some text some message..</div>
-
-<% if(locals.msg) { %><div class="alert alert-primary" role="alert"><%= msg %></div><% } %>
+<% if(locals.msg) { %><div id="snackbar" class="show"><%= msg %></div><% } %>
+<script defer>
+  let snackBar = document.getElementById('snackbar')
+  if (snackBar) {
+    snackBar.onclick = () => {
+      snackBar.classList.remove('show')
+    }
+  }
+</script>
