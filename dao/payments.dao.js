@@ -50,8 +50,14 @@ module.exports = PaymentsDao = {
     })
   },
 
-  getPayments () {
-    const sql = `select * from ${table.name}`;
+  getPayments (idUser) {
+    const rq = `select * from ${table.name} p
+    join reservations r on p.id_reservation = r.id_reservation
+    join voyages v on r.id_voyage = v.id_voyage
+    join stations s on s.id_station = v.id_station
+    where p.id_client = ? ORDER BY p.id_payment`;
+
+    const sql = SqlString.format(rq, [idUser])
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
