@@ -30,7 +30,7 @@ router.post('/confirmer', checkUserConnected, (req, res) => {
       if (Object.keys(result).length > 2 && result.affectedRows === 1) {
         reservDao.updateEtatReserv('payer', idreservation)
           .then(resEtat => {
-            res.render('client/ticket', { msg: 'Merci, votre paiment a été bien effectuer' })
+            res.redirect('/ticket')
           })
           .catch(errEtat => {            
             res.redirect('/404')
