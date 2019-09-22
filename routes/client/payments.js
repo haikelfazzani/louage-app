@@ -12,6 +12,7 @@ router.get('/', [checkUserConnected], (req, res) => {
 
   reservDao.getReservByUser(email)
     .then(reservs => {
+      res.cookie('reservdpayment', JSON.stringify(reservs[0]))
       res.render('client/payments', { reservation: reservs[0] })
     })
     .catch(error => {
@@ -30,15 +31,17 @@ router.post('/confirmer', checkUserConnected, (req, res) => {
       if (Object.keys(result).length > 2 && result.affectedRows === 1) {
         reservDao.updateEtatReserv('payer', idreservation)
           .then(resEtat => {
-            res.render('client/payments', { msg: 'Merci, votre paiment a été bien effectuer' })
+            let reservation = JSON.parse(req.cookies('reservdpayment'))
+            res.render('client/payments', { msg: 'Merci, votre paiment a été bien effectuer' ,reservation})
           })
-          .catch(errEtat => {
+          .catch(errEtat => {            
             res.redirect('/404')
           })
       }
       else res.render('client/payments', { msg: 'erreur de paiment! ressayer plutard..' })
     })
     .catch(error => {
+      console.log(error)
       res.render('/404')
     })
 })
