@@ -1,5 +1,4 @@
 module.exports = class UtilisateurModel {
-
   constructor (nom, prenom, email, password, tel, avatar, role) {
     this.nom = nom || '';
     this.prenom = prenom || '';

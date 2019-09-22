@@ -3,11 +3,11 @@
 let formRegister = document.querySelector('.form-signin');
 //email ou mot de passe incorrect!
 function isPureStr (str) {
-  return (/^[a-z0-9@\.\-\_]*$/gi.test(str) && str.length > 5)
+  return (/^[a-z0-9\xBF-\xFF@\.\-\_]*$/gi.test(str) && str.length > 5)
 }
 
 function isValidInput (str) {
-  return (/^[a-z0-9\s+\@\.\-\_]*$/gi.test(str) && str.length > 0)
+  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_]*$/gi.test(str) && str.length > 0)
 }
 
 let generalForm = document.querySelector('.form-general')
@@ -35,7 +35,6 @@ if (generalForm) {
     return false
   }
 }
-
 
 /** form validation for forms contains email and password */
 if (formRegister) {
@@ -108,7 +107,7 @@ btnDelete.forEach(b => {
 let formPass = document.getElementById('form-pass')
 
 function isValidPass (str) {
-  return (/^[a-z0-9\s+\@\.\-\_]*$/gi.test(str) && str.length > 5)
+  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#]*$/gi.test(str) && str.length > 5)
 }
 
 if(formPass) {

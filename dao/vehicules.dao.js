@@ -35,17 +35,14 @@ module.exports = VehiculesDao = {
     })
   },
 
-  updateVehicule (numSerie) {
-    let { proprietaire, nbPlaces, tel, idStation } = Vehicule;
+  updateVehicule (Vehicule, idVehicule) {
+    let { proprietaire, numSerie, nbPlaces, tel } = Vehicule;
 
     const rq = `update ${table.name} 
-    set ${table.proprietaire} = ? ,
-        ${table.nbPlaces} = ?,
-        ${table.tel} = ?,
-        ${table.idStation} = ?
-    where ${table.numSerie} = ? `;
+    set  ${table.proprietaire} = ? , ${table.numSerie} = ?, ${table.nbPlaces} = ?, ${table.tel} = ?
+    where ${table.idVehicule} = ?`;
 
-    const sql = SqlString.format(rq, [proprietaire, nbPlaces, tel, idStation, numSerie]);
+    const sql = SqlString.format(rq, [proprietaire, numSerie, nbPlaces, tel, idVehicule]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -69,7 +66,9 @@ module.exports = VehiculesDao = {
   },
 
   getVehicule (numSerie) {
-    const rq = `select * from ${table.name} where ${table.numSerie} = ?`;
+    const rq = `select * from ${table.name} v
+    join stations s on v.id_station = s.id_station
+    where v.num_serie = ?`;
 
     const sql = SqlString.format(rq, numSerie);
 
@@ -81,9 +80,12 @@ module.exports = VehiculesDao = {
     })
   },
 
-  getVehicules () {
-    const sql = `select * from ${table.name} t join stations u 
-    on t.id_station = u.id_station ORDER BY t.id_station DESC`;
+  getVehicules (idUtilisateur) {
+    const rq = `select * from ${table.name} t join stations s 
+    on t.id_station = s.id_station WHERE s.chef_station = ?
+    ORDER BY t.id_station DESC`;
+
+    const sql = SqlString.format(rq, idUtilisateur);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

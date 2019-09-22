@@ -1,11 +1,9 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-
 <section class="page-header">
   <div class="col-md-12">
     <h3>Profile</h3>
   </div>
-
   <div class="bread">
     <a href="/">home </a>
     <a href="/utilisateur/profile/password" disabled> / mot de passe </a>
@@ -22,45 +20,44 @@
       <div class="col-md-9">
         <% if(locals.reservations) {  %>
         <div class="table-responsive">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>destination</th>
-                    <th>heure depart</th>
-                    <th>date depart</th>
-                    <th>nombre place</th>
-                    <th>total</th>
-                    <th>etat</th>
-                    <th>action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% reservations.forEach((u, i) => {  %>
-                  <tr>
-                    <td><%= i %></td>
-                    <td><%= u.destination %></td>
-                    <td><%= u.heure_depart %> h</td>
-                    <td><%= u.date_depart %></td>
-                    <td><%= u.nb_place_reserver %></td>
-                    <td><%= u.total_prix_places %></td>
-                    <td>                      
-                        <span class="badge badge-dark"><%= u.etat_reservation %></span>
-                    </td>
-                    <td>
-                        <% if(u.etat_reservation === 'en attente') { %>
-                      <a class="btn btn-success" href="#">C</a>
-                      <% } %>
-                    </td>
-                  </tr>
-                  <% }) %>
-                </tbody>
-              </table>
-        </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>destination</th>
+                <th>heure depart</th>
+                <th>date depart</th>
+                <th>nombre place</th>
+                <th>total</th>
+                <th>etat</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% reservations.forEach((u, i) => {  %>
+              <tr>
+                <td><%= i %></td>
+                <td><%= u.destination %></td>
+                <td><%= u.heure_depart %> h</td>
+                <td><%= locals.formatDate(u.date_depart) %></td>
+                <td><%= u.nb_place_reserver %></td>
+                <td><%= u.total_prix_places %></td>
+                <td>
+                  <span class="badge badge-dark"><%= u.etat_reservation %></span>
+                </td>
+                <td>
+                  <% if(u.etat_reservation === 'en attente') { %>
+                  <a class="btn btn-success" href="#">C</a>
+                  <% } %>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div><!--end table-->
         <% } %>
       </div>
-    </div>
-
+    </div><!-- end row-->
 
   </div>
 </div>

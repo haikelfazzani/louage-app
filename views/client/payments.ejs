@@ -1,10 +1,8 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
-
 <% if(locals.voyage) { %>
 <div class="container py-5">
   <div class="row">
-
 
     <div class="col-md-6 mb-3">
       <form action="/payments/confimer" method="POST" class="form-general form-bg-gray mb-3">
@@ -38,22 +36,19 @@
             <span class="badge badge-pill badge-danger"><%= voyage.nb_places %></span>
           </label>
           <input type="number" name="nbplacesv" id="nbplacesv" value="<%= voyage.nb_places %>" hidden readonly>
-          <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>" 
-          id="nbplaces" name="nbplaces"
+          <input type="number" class="form-control" min="1" max="<%= voyage.nb_places %>" id="nbplaces" name="nbplaces"
             placeholder="Enter nombre places" required>
         </div>
 
         <div class="row mb-4">
           <div class="col-md-6">
             <label>Prix place</label>
-            <input type="text" class="form-control display-3" 
-            value="<%=  voyage.prix_place %> DNT" required readonly>
+            <input type="text" class="form-control display-3" value="<%=  voyage.prix_place %> DNT" required readonly>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>total</label>
-              <input type="text" class="form-control display-3" 
-              id="total" name="total" value="0 DNT" required readonly>
+              <input type="text" class="form-control display-3" id="total" name="total" value="0 DNT" required readonly>
             </div>
           </div>
         </div>
@@ -69,6 +64,5 @@
   </div><!-- end row -->
 
 </div>
-
 <% } %>
 <%- include('../partials/footer.ejs') -%>

@@ -6,7 +6,8 @@ var stationDao = require('../../dao/stations.dao')
 var Vehicule = require('../../model/Vehicule.model')
 
 router.get('/', checkUserConnected, (req, res) => {
-  vehiculeDao.getVehicules()
+  let { id } = req.session.userInfo
+  vehiculeDao.getVehicules(id)
     .then(vehicules => {
       res.render('admin/vehicule/lister', { vehicules })
     })
@@ -17,9 +18,10 @@ router.get('/', checkUserConnected, (req, res) => {
 
 
 router.get('/ajout', checkUserConnected, (req, res) => {
-  stationDao.getStations()
+  let { email } = req.session.userInfo
+  stationDao.getStationByChef(email)
     .then(stations => {
-      res.render('admin/vehicule/ajout', { stations })
+      res.render('admin/vehicule/ajout', { station:stations[0] })
     })
     .catch(error => {
       res.render('admin/vehicule/ajout')
@@ -36,21 +38,45 @@ router.post('/ajout', checkUserConnected, (req, res) => {
       res.redirect('/admin/vehicules')
     })
     .catch(error => {
-      res.redirect('/admin/vehicules')
+      res.redirect('/404')
     })
 })
 
 
 router.get('/supprimer', checkUserConnected, function (req, res) {
-  let { numserie } = req.query
-
-  vehiculeDao.deletVehicule(numserie)
+  vehiculeDao.deletVehicule(req.query.numserie)
     .then(result => {
       res.redirect('/admin/vehicules')
     })
     .catch(error => {
-      res.redirect('/admin/vehicules')
+      res.redirect('/404')
     })
 });
+
+router.get('/modifier', checkUserConnected, function (req, res) {
+  vehiculeDao.getVehicule(req.query.numserie)
+    .then(vehicule => {
+      res.render('admin/vehicule/modifier', { vehicule: vehicule[0] })
+    })
+    .catch(error => {
+      res.redirect('/404')
+    })
+});
+
+
+router.post('/modifier', checkUserConnected, function (req, res) {
+
+  let { proprietaire, numserie, nbPlaces, tel, idvehicule } = req.body
+  let newVehicule = new Vehicule(proprietaire, numserie, nbPlaces, tel, '')
+
+  vehiculeDao.updateVehicule(newVehicule, idvehicule)
+    .then(result => {
+      res.redirect('/admin/vehicules')
+    })
+    .catch(error => {
+      res.redirect('/404')
+    })
+});
+
 
 module.exports = router

@@ -1,5 +1,4 @@
 module.exports = class VehiculeModel {
-
     constructor (proprietaire, numSerie, nbPlaces, tel, idStation) {
         this.proprietaire = proprietaire || '';
         this.numSerie = numSerie || '';

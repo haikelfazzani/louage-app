@@ -2,27 +2,17 @@
 <%- include('../partials/navbar') -%>
 
 <style>
-  .card a {
-    color: #000000 !important
+  .card {
+    font-family: Arial, sans-serif;    
+    background-color: inherit;
+    border: 4px solid #ffffff;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
   }
 
-  .card h5 {
-    font-size: 30px;
-    letter-spacing: 2px;
-  }
-
-  .card h5,
-  h6 {
+  .card h3 {
+    font-size: 1.2rem !important;
     font-weight: 600;
-  }
-
-  a {
-    cursor: pointer !important;
-    text-decoration: none !important;
-  }
-
-  .card p {
-    margin: 0 !important
   }
 </style>
 
@@ -47,41 +37,30 @@
       <% voyages.forEach(v => { 
         let url = `/reservations?destination=${v.destination}&station=${v.nom_station}&date=${v.timestamp_voyage}`  
       %>
-      <a href="<%= url %>">
-        <div class="card" style="box-shadow: 0 2px 5px 0 rgba(19,41,104,.2); background-color: #fff;">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="muted">De </span>
-                <h5 class="card-title"><%= v.nom_station  %></h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                  <p><i class="fas fa-road p-0 m-0"></i> <span class="muted">vers</span></p>
-                  <span style="color:#e91e63"><%= v.destination %></span>
-                </h6>
-              </div>
-              <div>
-                <span style="font-size: 45px; color: #007bff">
-                  <i class="fas fa-coins"></i> <%= v.prix_place %></span><span>DNT</span>
-
-                <div class="w-100 text-right muted">
-                  <a href="#" class="card-link" style="font-size: 18px !important">
-                    <i class="far fa-clock"></i> <%= v.heure_depart %>h
-                  </a>
-                  <a href="#" class="card-link" style="font-size: 18px !important">
-                    <i class="fas fa-calendar-week"></i> <%= v.date_depart %>
-                  </a>
-                </div>
-
-              </div>
-            </div>
-
+      <div class="card text-uppercase">
+        <div class="card-body">
+          <h3 class="card-title m-0">
+            <i class="fas fa-road"></i> <span>De <%= v.nom_station  %> <i class="fas fa-arrow-circle-right"
+                style="color:#dc3545"></i> </span>
+            <span> <%= v.destination %></span>
+          </h3>
+          <p class="muted font-s14 p-0" style="color:#8bc34a">
+            <span><i class="fas fa-calendar-week"></i> <%= locals.formatDate(v.date_depart) %> </span>
+            <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
+          </p>
+          <div style="display: flex; justify-content: space-between;">
+            <div class="btn btn-outline-dark"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
+            <a href="<%= url %>"
+              class="btn btn-danger">RESERVER <i class="fas fa-chevron-circle-right ml-2"></i>
+            </a>            
           </div>
+
         </div>
-      </a>
+      </div>
       <% }) %>
 
-    </div>  
-    
+      
+    </div>
 
 
     <div class="col-md-6 mb-3" style="display: flex;
@@ -92,19 +71,19 @@
         src='https://maps.google.com/maps?q=<%= encodeURIComponent(locals.voyages[0].nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
         frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
       </iframe>
-      
+
     </div>
 
     <% } else { %>
-      <div class="col-md-6">
-        <div class="alert" role="alert">
-          <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolé</h1>
-          <h4>Aucun voyage trouvé pour cette station, veuillez réessayer plus tard.</h4>
-          <hr>
-          <h3 class="mb-0">Merci et bonne voyage 😊.</h3>
-        </div>
+    <div class="col-md-6">
+      <div class="alert" role="alert">
+        <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolé</h1>
+        <h4>Aucun voyage trouvé pour cette station, veuillez réessayer plus tard.</h4>
+        <hr>
+        <h3 class="mb-0">Merci et bonne voyage 😊.</h3>
       </div>
-      <% } %>
+    </div>
+    <% } %>
 
   </div>
 

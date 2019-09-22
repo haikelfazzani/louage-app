@@ -5,11 +5,15 @@ var path = require('path');
 var nodeFileEnv = require('node-file-env');
 var session = require('express-session')
 var cookieParser = require('cookie-parser');
+const helmet = require('helmet')
 
 var app = express()
 // load env variables
 nodeFileEnv().load()
 require('./database/knex')
+
+app.disable("x-powered-by");
+app.use(helmet())
 
 app.use(session({
   secret: 'my-secret-code',
@@ -19,14 +23,17 @@ app.use(session({
 }))
 
 var Role = require('./model/Role.enum')
-
+var format = require('./util/format')
 app.use(function (req, res, next) {
   if (req.session.userInfo) {
     res.locals.userInfo = req.session.userInfo
     res.locals.avatar = req.session.avatar
   }
+
+  res.locals.chefStationInfo = req.session.chefStationInfo
+  res.locals.formatDate = format
   res.locals.Role = Role
-  res.locals.request = req
+  //res.locals.request = req
   res.locals.chefStations = req.session.chefStations
   next()
 })

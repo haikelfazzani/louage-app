@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
-  const propEmail = "haikel.fazzani@zoho.com";
-  const pass = "WxC 0702106";
+  const propEmail = process.env.EMAIL
+  const pass = process.env.PASS_EMAIL
 
   let { nom, sujet, email, message } = req.body
 

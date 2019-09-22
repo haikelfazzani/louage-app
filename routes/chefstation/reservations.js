@@ -5,13 +5,12 @@ var reservDao = require('../../dao/reservations.dao')
 var Reservation = require('../../model/Reservation')
 
 router.get('/', checkUserConnected, (req, res) => {
-  reservDao.getReservsVoyagesUsers()
+  let { id_station } = req.session.chefStationInfo
+  reservDao.getReservsVoyagesUsers(id_station)
     .then(reservations => {
-      console.log(reservations)
       res.render('admin/reservation/index', { reservations })
     })
     .catch(error => {
-      console.log(error)
       res.render('admin/reservation/index')
     })
 })

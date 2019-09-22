@@ -3,7 +3,7 @@
 <div class="container py-5">
   <%- include('../navbar') -%>
 
-  <% if(locals.stations && locals.stations.length > 0) { %>
+  <% if(locals.station) { %>
   <form action="/admin/vehicules/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
     <div class="form-group">
@@ -34,16 +34,12 @@
       </div>
     </div>
 
-
     <div class="form-group">
       <label for="station">station</label>
       <select class="form-control" id="station" name="station">
-        <% stations.forEach(s => { %>
-        <option value="<%= s.id_station %>"><%= s.nom_station %></option>
-        <% }) %>
+        <option value="<%= station.id_station %>"><%= station.nom_station %></option>
       </select>
     </div>
-
 
     <button type="submit" class="btn btn-dark">Ajouter vehicule</button>
     <button type="reset" class="btn btn-danger">vider</button>
@@ -51,6 +47,5 @@
   <% } %>
 
   <%- include('../../snackbar') -%>  
-
 </div>
 <%- include('../../partials/footer.ejs') -%>

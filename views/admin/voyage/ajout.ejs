@@ -4,15 +4,13 @@
   <%- include('../navbar') -%>
 
 
-  <% if(locals.stations && locals.stations.length > 0) { %>
+  <% if(locals.station) { %>
   <form action="/admin/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
     
     <div class="form-group">
-      <label for="exampleFormControlSelect1">nom station</label>
-      <select class="form-control" id="exampleFormControlSelect1" name="station">
-        <% stations.forEach(statn => { %>
-        <option value="<%= statn.id_station %>"><%= statn.nom_station %></option>
-        <% })%>
+      <label for="station">nom station</label>
+      <select class="form-control" id="station" name="station">
+        <option value="<%= station.id_station %>"><%= station.nom_station %></option>
       </select>
     </div>
 
