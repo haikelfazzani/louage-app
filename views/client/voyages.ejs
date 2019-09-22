@@ -2,11 +2,12 @@
 <%- include('../partials/navbar') -%>
 <style>
   .card {
+    color: #fff;
     font-family: Arial, sans-serif;
-    background-color: inherit;
-    border: 4px solid #ffffff;
+    border: 4px solid #f5f5f5;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
+    background-color: #1f2532;
   }
 
   .card h3 {
@@ -49,7 +50,7 @@
           </p>
 
           <div style="display: flex; justify-content: space-between;">
-            <div class="btn btn-outline-dark"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
+            <div class="btn btn-outline-light"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
             
             <a class="btn btn-danger btn-get-voayge" 
             href="/reservations?v=<%= Buffer.from(JSON.stringify(v)).toString('base64') %>">
