@@ -80,12 +80,11 @@ module.exports = VehiculesDao = {
     })
   },
 
-  getVehicules (idUtilisateur) {
+  getVehicules (chefStation) {
     const rq = `select * from ${table.name} t join stations s 
-    on t.id_station = s.id_station WHERE s.chef_station = ?
-    ORDER BY t.id_station DESC`;
+    on t.id_station = s.id_station WHERE s.chef_station = ?`;
 
-    const sql = SqlString.format(rq, idUtilisateur);
+    const sql = SqlString.format(rq, chefStation);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

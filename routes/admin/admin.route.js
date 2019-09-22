@@ -6,36 +6,38 @@ var utilisateurDao = require('../../dao/utilisateurs.dao');
 var stationDao = require('../../dao/stations.dao');
 var voyageDao = require('../../dao/voyages.dao')
 var reservDao = require('../../dao/reservations.dao')
+var vehiculeDao = require('../../dao/vehicules.dao')
 
 router.get('/', checkUserConnected, function (req, res) {
 
-    let { email } = req.session.userInfo
+    let { id, email } = req.session.userInfo
 
     stationDao.getStationByChef(email)
         .then(resStation => {
             req.session.chefStationInfo = resStation[0]
+            const promises = [
+                utilisateurDao.getUsers(),
+                stationDao.getStations(),
+                voyageDao.getVoyageByNomStation(resStation[0].nom_station),
+                reservDao.getAllReservationsByStation(resStation[0].id_station),
+                vehiculeDao.getVehicules(id)
+            ];
+
+            Promise.all(promises).then(function (values) {
+                let data = {
+                    utilisateurs: values[0],
+                    stations: values[1],
+                    voyages: values[2],
+                    reservations: values[3],
+                    vehicules: values[4]
+                }
+                res.render('admin/index', { data });
+            })
+                .catch(error => {
+                    res.render('admin/index');
+                });
         })
         .catch(error => error)
-
-    const promises = [
-        utilisateurDao.getUsers(),
-        stationDao.getStations(),
-        voyageDao.getVoyages(),
-        reservDao.getAllReservations()
-    ];
-
-    Promise.all(promises).then(function (values) {
-        let data = {
-            utilisateurs: values[0],
-            stations: values[1],
-            voyages: values[2],
-            reservations: values[3]
-        };
-        res.render('admin/index', { data });
-    })
-        .catch(error => {
-            res.render('admin/index');
-        });
 });
 
 router.get('/voyages.json', checkUserConnected, function (req, res) {

@@ -1,24 +1,17 @@
 var router = require('express').Router()
-
-var paymentDao = require('../../dao/payments.dao')
+var voyageDao = require('../../dao/voyages.dao')
 
 router.get('/', (req, res) => {
-  let { id, email } = req.session.userInfo
-
-  let paymentInfo = [...JSON.parse(req.cookies.payment)]
-  console.log(paymentInfo);
+  let { email } = req.session.userInfo
+  let paymentInfo = JSON.parse(req.cookies.payment)
   
-  // paymentDao.getPayments(id)
-  //   .then(result => {
-  //     res.render('client/ticket', {
-  //       msg: 'Merci, votre paiment a été bien effectuer', paymentInfo: result[0],
-  //       email
-  //     })
-  //   })
-  //   .catch(error => {
-  //     res.render('client/ticket', { msg: 'Merci, votre paiment a été bien effectuer' })
-  //   })
-  res.render('client/ticket')
+  voyageDao.getVoyageById(paymentInfo.idvoyage)
+    .then(voyages => {      
+      res.render('client/ticket', { paymentInfo, email,voyage:voyages[0] })
+    })
+    .catch(error => {
+      res.render('client/ticket', { paymentInfo, email })
+    })
 })
 
 module.exports = router

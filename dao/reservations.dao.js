@@ -33,12 +33,12 @@ module.exports = ReservationsDao = {
       })
   },
 
-  updateEtatReserv (etat, idReserv) {
+  updateEtatReserv (etat, uidReservation) {
 
     const rq = `update ${table.name} 
-    set ${table.etatReserv} = ? where ${table.idReserv} = ? `;
+    set ${table.etatReserv} = ? where ${table.uidReservation} = ? `;
 
-    const sql = SqlString.format(rq, [etat, idReserv]);
+    const sql = SqlString.format(rq, [etat, uidReservation]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -66,7 +66,8 @@ module.exports = ReservationsDao = {
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage
     join stations s on s.id_station = v.id_station
-    WHERE u.email = ? ORDER BY t.id_reservation DESC`;
+    WHERE u.email = ? 
+    ORDER BY t.uid_reservation DESC`;
 
     const sql = SqlString.format(rq, email);
 
@@ -91,8 +92,11 @@ module.exports = ReservationsDao = {
 
   },
 
-  getAllReservations () {
-    const sql = `select * from ${table.name}`;
+  getAllReservationsByStation (idStation) {
+    const rq = `SELECT * from ${table.name} r join voyages v
+    ON r.id_voyage = v.id_voyage WHERE v.id_station = ? `;
+
+    const sql = SqlString.format(rq, idStation);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -107,7 +111,7 @@ module.exports = ReservationsDao = {
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage 
     WHERE v.id_station = ?
-    ORDER BY t.id_reservation DESC`;
+    ORDER BY t.uid_reservation DESC`;
 
     const sql = SqlString.format(rq, idStation);
 

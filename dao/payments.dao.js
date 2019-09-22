@@ -27,8 +27,17 @@ module.exports = PaymentsDao = {
       })
   },
 
-  cancelPayment () {
+  cancelPayment (uidPayment) {
+    let rq = `DELETE FROM ${table.name} WHERE ${table.uidPayment} = ?`;
 
+    const sql = SqlString.format(rq, uidPayment);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
   },
 
   getPaymentsByUser (email) {
