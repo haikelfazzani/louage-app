@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var { checkUserConnected } = require('../../middleware/authorisation')
+var Role = require('../../model/Role.enum')
 
 var utilisateurDao = require('../../dao/utilisateurs.dao');
 var stationDao = require('../../dao/stations.dao');
@@ -10,27 +11,29 @@ var vehiculeDao = require('../../dao/vehicules.dao')
 
 router.get('/', checkUserConnected, function (req, res) {
 
-    let { id, email } = req.session.userInfo
+    let { id, email, role } = req.session.userInfo
 
     stationDao.getStationByChef(email)
         .then(resStation => {
             req.session.chefStationInfo = resStation[0]
-            const promises = [
+            const promises = (role && role === Role.admin) ? [
                 utilisateurDao.getUsers(),
-                stationDao.getStations(),
-                voyageDao.getVoyageByNomStation(resStation[0].nom_station),
-                reservDao.getAllReservationsByStation(resStation[0].id_station),
-                vehiculeDao.getVehicules(id)
-            ];
+                stationDao.getStations()
+            ] : [
+                    voyageDao.getVoyageByNomStation(resStation[0].nom_station),
+                    reservDao.getAllReservationsByStation(resStation[0].id_station),
+                    vehiculeDao.getVehicules(id)
+                ]
 
             Promise.all(promises).then(function (values) {
-                let data = {
+                let data = (role && role === Role.admin) ? {
                     utilisateurs: values[0],
-                    stations: values[1],
-                    voyages: values[2],
-                    reservations: values[3],
-                    vehicules: values[4]
-                }
+                    stations: values[1]
+                } : {
+                        voyages: values[0],
+                        reservations: values[1],
+                        vehicules: values[2]
+                    }
                 res.render('admin/index', { data });
             })
                 .catch(error => {
