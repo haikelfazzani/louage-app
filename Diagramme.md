@@ -11,3 +11,11 @@
 
 ![Class Diagram](https://i.ibb.co/PjfyHmq/classe.png)
 
+
+------------------------------------------------------------- 
+
+## Diagramme de cas d'utilisation Systeme Gestion des utilisateurs 
+
+![uses cases Diagram System de gestion utilisateur](https://i.ibb.co/zRsY38P/gestion-des-utilisateur.jpg)
+
+
