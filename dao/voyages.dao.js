@@ -1,5 +1,6 @@
 const db = require('../database/connection');
 var SqlString = require('sqlstring');
+var knex = require('../database/knex')
 
 const table = {
   name: 'voyages',
@@ -105,15 +106,9 @@ module.exports = VoyagesDao = {
   },
 
   getVoyages () {
-    const sql = `select * from ${table.name} v join stations u 
-    on v.id_station = u.id_station ORDER BY v.id_voyage DESC`;
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+     return knex('voyages')    
+    .join('stations', 'voyages.id_station', '=', 'stations.id_station')
+    .orderBy(' voyages.id_voyage', 'desc')    
   },
 
   nbPlacesByDestination (destination, station) {
@@ -140,6 +135,21 @@ module.exports = VoyagesDao = {
     ORDER BY v.id_voyage DESC`;
 
     const sql = SqlString.format(rq, [date, station]);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  voyagesByDestAndStationAndDate (station, destination, date) {
+    const rq = `SELECT * from ${table.name} v join stations s
+    on v.id_station = s.id_station
+    where s.nom_station = ? and v.destination = ? and v.date_depart = ? `;
+
+    const sql = SqlString.format(rq, [station, destination, date]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
