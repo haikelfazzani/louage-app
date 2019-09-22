@@ -105,6 +105,7 @@ module.exports = ReservationsDao = {
       })
     })
   },
+  
   getReservsVoyagesUsers (idStation) {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 

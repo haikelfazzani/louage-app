@@ -32,10 +32,7 @@ const UtilisateurDao = {
 
   updateUserPassword (email, password) {
 
-    const rq = `update ${table.name} 
-    set ${table.password} = ? 
-    where ${table.email} = ? `;
-
+    const rq = `update ${table.name} set ${table.password} = ? where ${table.email} = ? `;
     const sql = SqlString.format(rq, [password, email]);
 
     return new Promise((resolve, reject) => {
@@ -48,7 +45,6 @@ const UtilisateurDao = {
 
   deleteUser (password) {
     const rq = `delete from ${table.name} where ${table.password} = ?`;
-
     const sql = SqlString.format(rq, password);
 
     return new Promise((resolve, reject) => {
@@ -58,9 +54,9 @@ const UtilisateurDao = {
       })
     })
   },
+  
   deleteUserByEmail (email) {
     const rq = `delete from ${table.name} where ${table.email} = ?`;
-
     const sql = SqlString.format(rq, email);
 
     return new Promise((resolve, reject) => {
@@ -73,7 +69,6 @@ const UtilisateurDao = {
 
   getUserByRole (role) {
     const rq = `select * from ${table.name} where ${table.role} = ?`;
-
     const sql = SqlString.format(rq, role);
 
     return new Promise((resolve, reject) => {
@@ -86,7 +81,6 @@ const UtilisateurDao = {
 
   getUser (email) {
     const rq = `select * from ${table.name} where ${table.email} = ?`;
-
     const sql = SqlString.format(rq, email);
 
     return new Promise((resolve, reject) => {
@@ -110,10 +104,7 @@ const UtilisateurDao = {
 
   updateAvatar (avatar, email) {
 
-    const rq = `update ${table.name} 
-    set ${table.avatar} = ? 
-    where ${table.email} = ? `;
-
+    const rq = `update ${table.name} set ${table.avatar} = ? where ${table.email} = ? `;
     const sql = SqlString.format(rq, [avatar, email]);
 
     return new Promise((resolve, reject) => {

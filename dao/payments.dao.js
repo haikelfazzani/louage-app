@@ -1,10 +1,10 @@
 const db = require('../database/connection');
 var SqlString = require('sqlstring');
+var knex = require('../database/knex')
 
 const table = {
   name: 'payments',
   idPayment: 'id_payment',
-  datePayment: 'date_payment',
   idReserv: 'id_reservation',
   idClient: 'id_client',
   timestamp: 'timestamp_payment'
@@ -14,13 +14,13 @@ module.exports = PaymentsDao = {
 
   addPayment (Payment) {
 
-    let { datePayment, idReserv, idClient } = Payment;
+    let { idReserv, idClient } = Payment;
 
     const rq = `INSERT INTO ${table.name} 
-    (${table.datePayment}, ${table.idReserv}, ${table.idClient}, ${table.timestamp}) 
-    values(?, ? , ? , ?)`;
+    (${table.idReserv}, ${table.idClient}, ${table.timestamp}) 
+    values(? , ? , ?)`;
 
-    const sql = SqlString.format(rq, [datePayment, idReserv, idClient, new Date().toISOString()]);
+    const sql = SqlString.format(rq, [ idReserv, idClient, new Date().toISOString()]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -28,6 +28,10 @@ module.exports = PaymentsDao = {
         else resolve(result)
       })
     })
+  },
+
+  cancelPayment() {
+
   },
 
   getPaymentsByUser (email) {
@@ -46,8 +50,7 @@ module.exports = PaymentsDao = {
   },
 
   getPayments () {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.id_client = u.id ORDER BY t.id_reservation DESC`;
+    const sql = `select * from ${table.name}`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -55,6 +58,5 @@ module.exports = PaymentsDao = {
         else resolve(result)
       })
     })
-
   }
 }

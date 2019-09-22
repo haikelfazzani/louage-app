@@ -8,13 +8,15 @@
   <form action="/admin/stations/modifier" method="POST" class="form-general form-bg-gray mb-3">
 
     <div class="form-group">
-      <input type="text" class="form-control" id="idstation" name="idstation" value="<%= station.id_station %>" required
+      <input type="text" class="form-control" id="idstation" 
+      name="idstation" value="<%= station.id_station %>" required
         hidden readonly>
     </div>
 
     <div class="form-group">
       <label for="chef">chef station</label>
-      <input type="text" class="form-control" id="chef" name="chef" value="<%= station.nom %>" required readonly>
+      <input type="text" class="form-control" id="chef" name="chef" 
+      value="<%= station.email %>" required readonly>
     </div>
 
     <div class="form-group">
