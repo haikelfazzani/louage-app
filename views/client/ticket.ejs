@@ -27,7 +27,7 @@
         <div class="form-group">
             <label>adresse email</label>
             <input type="email" class="form-control" id="email" name="email" 
-            value="<%= paymentInfo.email %>"
+            value="<%= email %>"
               required readonly>
           </div>
 
@@ -65,5 +65,4 @@
 
 </div>
 <% } %>
-<% if(locals.msg) { %><div class="alert alert-primary" role="alert"><%= msg %></div><% } %>
 <%- include('../partials/footer.ejs') -%>
