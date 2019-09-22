@@ -69,9 +69,9 @@ router.post('/ajout', checkUserConnected, (req, res) => {
     voyageDao.updateNbPlaces(+(nbplacesv - nbplaces), idvoyage)
   ])
     .then(result => {
-      res.cookie('reservation', JSON.stringify({ nbplaces, total, idvoyage, nbplacesv }),
-        { maxAge: 360000, httpOnly: true }
-      )
+      //res.cookie('reservation', JSON.stringify({ nbplaces, total, idvoyage, nbplacesv }),
+        //{ maxAge: 360000, httpOnly: true }
+      //)      
       res.redirect('/payments')
     })
     .catch(error => {
