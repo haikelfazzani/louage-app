@@ -26,6 +26,8 @@
         <div class="form-group">
           <label for="password">Mot de passe</label>
           <input type="password" id="password" name="password" class="form-control"
+          pattern="[A-Za-z0-9 #-]{6}" 
+          title="Au minimul 6 letters : letters, nombres, charactere spéciaux : # _ -"
             placeholder="Entrer votre mot de passe" required>
         </div>
 
@@ -34,7 +36,7 @@
         <button class="btn btn-lg btn-primary btn-block mt-3 mb-3 font-s14" type="submit">cree un compte</button>
         <hr>
         <div>
-          <p class="m-0">Vous avez déjà un compte ? <a href="/login" class="btn btn-link font-s14"> se connecter</a></p>
+          <p class="m-0">Vous avez déjà un compte ? <a href="/login" class="btn btn-link font-s14 p-1"> se connecter</a></p>
           <div class="alert alert-dark mx-400" id="form-signin" role="alert">alter</div>
 
           <% if(locals.msg) { %>

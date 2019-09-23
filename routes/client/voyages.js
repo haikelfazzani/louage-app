@@ -36,7 +36,9 @@ router.post('/', (req, res) => {
 router.post('/result', (req, res) => {
 
   let { station, destination, date } = req.body
-  date = date.trim().length > 4 ? date : (new Date()).toISOString().slice(0, 10)
+  date = date.trim().length > 4 && Date.parse(date) >= Date.parse(new Date())
+    ? date
+    : (new Date()).toISOString().slice(0, 10);
 
   voyagesDao.voyagesByDestAndStationAndDate(station.trim(), destination.trim(), date)
     .then(voyages => {
@@ -45,7 +47,6 @@ router.post('/result', (req, res) => {
     .catch(error => {
       res.render('client/voyages')
     })
-
 })
 
 module.exports = router
