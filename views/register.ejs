@@ -29,16 +29,13 @@
             placeholder="Entrer votre mot de passe" required>
         </div>
 
-        <p>
-          En créant votre compte vous acceptez nos conditions d'utilisation et notre politique de confidentialité
-        </p>
+        <p>En créant votre compte vous acceptez nos conditions d'utilisation et notre politique de confidentialité</p>
 
         <button class="btn btn-lg btn-primary btn-block mt-3 mb-3 font-s14" type="submit">cree un compte</button>
-
+        <hr>
         <div>
-          Vous avez déjà un compte ?
-          <a href="/login" class="btn btn-link font-s14"> se connecter</a>
-          <div class="alert alert-danger mx-400" id="form-signin" role="alert">alter</div>
+          <p class="m-0">Vous avez déjà un compte ? <a href="/login" class="btn btn-link font-s14"> se connecter</a></p>
+          <div class="alert alert-dark mx-400" id="form-signin" role="alert">alter</div>
 
           <% if(locals.msg) { %>
           <div class="alert alert-dark mx-400" role="alert">
