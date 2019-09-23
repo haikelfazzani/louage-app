@@ -87,14 +87,7 @@ const UtilisateurDao = {
     return knex(table.name).where({ id })
   },
   getUsers () {
-    const sql = `select * from ${table.name} ORDER BY ${table.id} DESC`;
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).orderBy(table.id, 'DESC')
   },
 
   updateAvatar (avatar, email) {
