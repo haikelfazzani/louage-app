@@ -48,8 +48,8 @@
                   <span class="badge badge-dark"><%= u.etat_reservation %></span>
                 </td>
                 <td>
-                  <% if(u.etat_reservation === 'payer' && Date.parse(u.date_depart) > Date.parse(new Date())) { %>
-                  <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-danger btn-cancel">A</a>
+                  <% if(u.etat_reservation === 'payer' && (Date.parse(u.date_depart) + (1000 * 60 * 60 * +u.heure_depart) + (1000*60*10)) >= Date.parse(new Date())) { %>
+                  <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i class="fas fa-hand-paper"></i></a>
                   <% } %>
                 </td>
               </tr>

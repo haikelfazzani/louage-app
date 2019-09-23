@@ -26,7 +26,7 @@ router.get('/annuler', checkUserConnected, (req, res) => {
     reservDao.updateEtatReserv('annuler', r)
   ])
     .then(values => {
-      res.redirect('/reservations/all')
+      res.redirect('/admin/reservations')
     })
     .catch(error => {
       res.redirect('/404')

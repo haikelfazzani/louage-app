@@ -48,6 +48,7 @@ router.get('/all', checkUserConnected, (req, res) => {
 
   reservDao.getReservByUser(email)
     .then(reservations => {
+      reservations.sort((i,j) => i.heure_depart >= j.heure_depart && Date.parse(i.date_depart) >= Date.parse(j.date_depart))
       res.render('client/profile/reservations', { reservations })
     })
     .catch(error => {

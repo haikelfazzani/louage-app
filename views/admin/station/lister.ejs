@@ -26,7 +26,7 @@
           <td><%= u.station_tel %></td>
           <td>
             <a href="/admin/stations/modifier?nom=<%= u.nom_station %>" class="btn btn-success">M</a>
-            <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete">S</a>
+            <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
         <% }) %>
