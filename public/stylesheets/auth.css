@@ -1,0 +1,35 @@
+.auth .row {
+  min-height: 100vh;
+  align-items: center;
+}
+
+.auth .col-md-4,
+.auth .col-md-8 {
+  min-height: 100vh;
+  height: 100% !important;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.auth .col-md-4 {
+  color: #ffffff;
+  background-color: #343a40;
+}
+
+.auth .col-md-8 a,
+.auth .col-md-4 h1 {
+  color: #3b7ec5 !important
+}
+
+.auth .col-md-4 .display-3 {
+  font-size: 55px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .auth .col-md-4 {
+    display: none
+  }
+}

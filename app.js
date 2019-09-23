@@ -48,38 +48,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
-app.get('/test', (req, res) => {
-  res.render('test')
-})
-
-app.get('/404', (req, res) => {
-  res.render('404')
-})
+app.get('/404', (req, res) => { res.render('404') })
 
 // routers
-app.use('/', require('./routes/index'));
-app.use('/login', require('./routes/login'));
-app.use('/register', require('./routes/register'));
-app.use('/se-deconnecter', require('./routes/deconnecter'));
-
-app.use('/utilisateur', require('./routes/client/profile'));
-app.use('/voyages', require('./routes/client/voyages'));
-app.use('/reservations', require('./routes/client/reservations'));
-app.use('/payments', require('./routes/client/payments'));
-app.use('/ticket', require('./routes/client/ticket'));
-
-// admin routes
-app.use('/admin', require('./routes/admin/admin.route'))
-app.use('/admin/utilisateurs', require('./routes/admin/utilisateurs'));
-
-app.use('/admin/stations', require('./routes/admin/stations'));
-
-app.use('/admin/vehicules', require('./routes/chefstation/vehicules'));
-app.use('/admin/voyages', require('./routes/chefstation/voyages'));
-app.use('/admin/reservations', require('./routes/chefstation/reservations'));
-
-app.use('/a-propos', require('./routes/apropos'))
-app.use('/contact', require('./routes/contact'))
+require('./routes.config').forEach(r => {
+  app.use(r.path, require(r.source))
+})
 
 app.get('*', (req, res) => { res.redirect('/404') })
 
