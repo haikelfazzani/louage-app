@@ -23,7 +23,6 @@
           <table class="table">
             <thead>
               <tr>
-                <th>#</th>
                 <th>station</th>
                 <th>destination</th>
                 <th>heure depart</th>
@@ -37,7 +36,6 @@
             <tbody>
               <% reservations.forEach((u, i) => {  %>
               <tr>
-                <td><%= i %></td>
                 <td><%= u.nom_station %></td>
                 <td><%= u.destination %></td>
                 <td><%= u.heure_depart %> h</td>
@@ -49,14 +47,32 @@
                 </td>
                 <td>
                   <% if(u.etat_reservation === 'payer' && (Date.parse(u.date_depart) + (1000 * 60 * 60 * +u.heure_depart) + (1000*60*10)) >= Date.parse(new Date())) { %>
-                  <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i class="fas fa-hand-paper"></i></a>
+                  <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+                      class="fas fa-hand-paper"></i></a>
                   <% } %>
                 </td>
               </tr>
               <% }) %>
             </tbody>
           </table>
-        </div><!--end table-->
+        </div>
+        <!--end table-->
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <%           
+            let begin = -5, end = 0
+              for(let i = 0; i <= (reservations.length / 5); ) {
+                begin += 5
+                end += 5
+                i++
+              %>
+            <li class="page-item">
+              <a class="page-link" href="/reservations/all?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+            </li>
+            <% } %>
+          </ul>
+        </nav>
         <% } %>
       </div>
     </div><!-- end row-->
