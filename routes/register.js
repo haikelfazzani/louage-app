@@ -60,14 +60,16 @@ router.post('/email/validation', (req, res) => {
     if (!err) {
       knex('utilisateurs').where({ email: decoded.email }).update({ etat_email: 1 })
         .then(result => {
-          res.render('register-valider',{msg:'Votre email a été bien validée, vous pouvez se connecter maintenant', c:0})
+          res.render('register-valider', {
+            msg: 'Votre email a été bien validée, vous pouvez se connecter maintenant', c: 0
+          })
         })
         .catch(error => {
-          res.render('register-valider',{ msg: 'Erreur de validation clé secret' })
+          res.render('register-valider', { msg: 'Erreur de validation clé secret' })
         })
     }
     else {
-      res.render('register-valider', { msg: 'Clé n\'est pas valide!' })
+      res.render('register-valider', { msg: 'Clé n\'est pas valide! verifier votre boite email', c: 0 })
     }
   })
 })

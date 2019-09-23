@@ -15,19 +15,24 @@
     <div class="col-md-8">
       <form action="/register/email/validation" method="POST" class="mx-400 w-100">
 
-        <h1 class="text-left mb-3">Validation de votre email</h1>        
+        <h1 class="text-left mb-3">Validation d'email</h1>
         <hr>
         <div class="form-group">
           <label for="key">clé secret</label>
           <input type="text" id="key" name="key" class="form-control" placeholder="Entrer clé secret" required>
         </div>
         <button class="btn btn-lg btn-primary btn-block mt-3 mb-3 font-s14" type="submit">valider</button>
-        <div>          
-          <% if(locals.msg) { %>
-            <hr>
-          <div class="alert alert-dark mx-400" role="alert"> 
+        <div>
+          <% if(locals.msg && locals.c === undefined) { %>
+          <hr>
+          <div class="alert alert-dark mx-400" role="alert">
             <%= msg %> <a href="/login">se connecter</a>
           </div>
+          <% } %>
+
+          <% if(locals.msg && locals.c === 0) { %>
+          <hr>
+          <div class="alert alert-dark mx-400" role="alert"> <%= msg %></div>
           <% } %>
         </div>
       </form>
