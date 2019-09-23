@@ -1,0 +1,43 @@
+<%- include('partials/head.ejs') -%>
+<link rel="stylesheet" href="/stylesheets/auth.css">
+<div class="container-fluid p-0 m-0 auth">
+  <div class="row p-0 m-0">
+
+    <div class="col-md-4">
+      <h1 class="ml-3 mr-3 display-3 w-100">Bienvenue</h1>
+      <p class="ml-3 mr-3">
+        Avec Louage Partez vers plusieurs milliers de destinations et découvrez les villes et villages
+        de la Tunisie.
+      </p>
+      <p class="ml-3 mr-3">Vous n'avez que l'embarras du choix !</p>
+    </div>
+
+    <div class="col-md-8">
+      <form action="/register/email/validation" method="POST" class="mx-400 w-100">
+
+        <h1 class="text-left mb-3">Validation de votre email</h1>        
+        <hr>
+        <div class="form-group">
+          <label for="key">clé secret</label>
+          <input type="text" id="key" name="key" class="form-control" placeholder="Entrer clé secret" required>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block mt-3 mb-3 font-s14" type="submit">valider</button>
+        <div>          
+          <% if(locals.msg) { %>
+            <hr>
+          <div class="alert alert-dark mx-400" role="alert"> 
+            <%= msg %> <a href="/login">se connecter</a>
+          </div>
+          <% } %>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+<script src="javascripts/validation.js" defer></script>
+</body>
+
+</html>

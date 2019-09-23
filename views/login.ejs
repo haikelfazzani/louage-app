@@ -36,9 +36,16 @@
         <div>          
           <p class="m-0">Pas de compte?<a href="/register" class="btn btn-link font-s14 pl-1">S'inscrire maintenant</a></p>
           <div class="alert alert-dark mx-400" id="form-signin" role="alert">alter</div>
-          <% if(locals.msg) { %>
+          <% if(locals.msg && !locals.c) { %>
           <div class="alert alert-dark mt-0 mx-400" role="alert"><%= msg %></div>
           <% } %>
+
+          <% if(locals.msg && locals.c) { %>
+            <div class="alert alert-dark mt-0 mx-400" role="alert">
+              <%= msg %> <a href="/register/email/validation">lien de validation</a>
+            </div>
+            <% } %>
+
         </div>
       </form>
 

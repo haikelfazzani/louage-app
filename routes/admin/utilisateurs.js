@@ -33,7 +33,13 @@ router.post('/ajout', checkUserConnected, function (req, res) {
 
       utilisateurDao.addUser(utilisateur)
         .then(result => {
-          res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
+          utilisateurDao.updateEtat(email)
+          .then(resultEtat => {
+            res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
+          })          
+          .catch(errorUpdate => {
+            res.redirect('/404')
+          })
         })
         .catch(error => {
           res.render('admin/utilisateur/ajout', { msg: 'erreur d\'ajout' });
