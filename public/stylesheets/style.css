@@ -196,6 +196,10 @@ textarea {
     padding: 20px !important;
   }
 
+  .form-p20 {
+    padding: 10px !important;
+  }
+
   .front-img {
     display: none;
   }
@@ -208,5 +212,16 @@ textarea {
     width: 100%;
     height: auto;
     height: 300px;
+  }
+
+  .form-general,
+  .form-bg-gray,
+  .form-gen,.form-signin {
+    padding: 10px !important;
+  }
+
+  .img-profile {
+    width: 100% !important;
+    margin: auto;
   }
 }

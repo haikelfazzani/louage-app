@@ -26,12 +26,17 @@
           <div class="form-group">
             <label for="nom">Nom</label>
             <input type="text" class="form-control" name="nom" id="nom" placeholder="Entrer nom"
+            pattern="[A-Za-z ]{4}" 
+          title="Seulement des letters"
               value="<%= user.nom  %>" required>
           </div>
 
           <div class="form-group">
             <label for="prenom">prenom</label>
-            <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Entrer prenom"
+            <input type="text" class="form-control" name="prenom" id="prenom" 
+            pattern="[A-Za-z ]{4}" 
+          title="Seulement des letters"
+            placeholder="Entrer prenom"
               value="<%= user.prenom  %>" required>
           </div>
 
@@ -43,7 +48,7 @@
 
           <div class="form-group mb-4">
             <label for="tel">tel</label>
-            <input type="text" class="form-control" id="tel" 
+            <input type="number" class="form-control" id="tel" 
             name="tel" placeholder="Entrer numero telephone" 
             value="<%= user.tel  %>"
             required>
