@@ -11,6 +11,7 @@ const table = {
   password: 'password',
   avatar: 'avatar',
   tel: 'tel',
+  etatEmail: 'etat_email',
   role: 'role',
   timestamp: 'timestamp_utilisateur'
 }
@@ -23,6 +24,9 @@ const UtilisateurDao = {
     return knex(table.name).insert(
       { email, password, role, timestamp_utilisateur: new Date().toISOString() }
     )
+  },
+  updateEtat (email) {
+    return knex(table.name).where({ email }).update({ etat_email: 1 })
   },
 
   updateUser (id, user) {
