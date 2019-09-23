@@ -15,7 +15,6 @@
     <%- include('navtabs') -%>
 
     <div class="row">
-
       <%- include('avatar') -%>
 
       <% if(locals.userInfo) { %>
@@ -24,8 +23,7 @@
 
           <div class="form-group">
             <label for="password">Entrer votre mot passe</label>
-            <input type="password" class="form-control" name="password" 
-            id="password" placeholder="Entrer password"
+            <input type="password" class="form-control" name="password" id="password" placeholder="Entrer password"
               required>
               <p class="text-muted font-s14 p-0 m-0 mt-2">Si vous rencontrez des problèmes, veuillez contacter notre Service Client.</p>
               <p class="text-muted font-s14 p-0 m-0">Visitez notre page <a class="font-s14" href="/contact">Contact</a></p>
@@ -45,8 +43,7 @@
       </div>
       <% } %>
 
-    </div>
-
+    </div><!-- end row -->
   </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

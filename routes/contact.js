@@ -1,11 +1,12 @@
 const router = require('express').Router()
 const nodemailer = require('nodemailer')
+const validContactForm = require('../middleware/validContactForm')
 
 router.get('/', (req, res) => {
   res.render('contact')
 })
 
-router.post('/', (req, res) => {
+router.post('/', validContactForm, (req, res) => {
 
   const propEmail = process.env.EMAIL
   const pass = process.env.PASS_EMAIL
