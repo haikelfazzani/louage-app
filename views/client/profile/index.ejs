@@ -7,7 +7,7 @@
   </div>
 
   <div class="bread">
-    <a href="/">home </a>
+    <a href="/">accueil </a>
     <a href="/utilisateur/profile" disabled> / Profile</a>
   </div>
 </section>
@@ -38,7 +38,7 @@
           <div class="form-group">
             <label for="email">Email adresse</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="Entrer email"
-              value="<%= user.email  %>" required readonly>
+              value="<%= user.email  %>" required>
           </div>
 
           <div class="form-group mb-4">
@@ -53,7 +53,6 @@
         </form>
 
         <%- include('../../snackbar') -%>
-
       </div>
       <% } %>
 

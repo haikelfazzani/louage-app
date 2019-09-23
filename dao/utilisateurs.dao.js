@@ -25,9 +25,9 @@ const UtilisateurDao = {
     )
   },
 
-  updateUser (user) {
-    let { nom, prenom, email, tel } = user;
-    return knex(table.name).where({ email }).update({ nom, prenom, email, tel })
+  updateUser (id, user) {
+    let { nom, prenom, email, tel } = user
+    return knex(table.name).where({ id }).update({ nom, prenom, email, tel })
   },
 
   updateUserPassword (email, password) {
@@ -54,7 +54,7 @@ const UtilisateurDao = {
       })
     })
   },
-  
+
   deleteUserByEmail (email) {
     const rq = `delete from ${table.name} where ${table.email} = ?`;
     const sql = SqlString.format(rq, email);
@@ -80,17 +80,12 @@ const UtilisateurDao = {
   },
 
   getUser (email) {
-    const rq = `select * from ${table.name} where ${table.email} = ?`;
-    const sql = SqlString.format(rq, email);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).where({ email })
   },
 
+  getUserById (id) {
+    return knex(table.name).where({ id })
+  },
   getUsers () {
     const sql = `select * from ${table.name} ORDER BY ${table.id} DESC`;
 
@@ -126,7 +121,7 @@ const UtilisateurDao = {
         else resolve(result)
       })
     })
-  },
+  }
 }
 
 module.exports = UtilisateurDao;

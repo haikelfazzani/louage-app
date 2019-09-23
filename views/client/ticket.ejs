@@ -1,11 +1,57 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
+<style>
+  .card {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    border: 18px dotted #ffffff;
+    background-color: #007bff;
+    padding: 0px;
+    font-weight: 100;
+  }
+
+  .card div {
+    border-right: 2px dotted;
+    padding: 20px;
+    text-transform: capitalize;
+  }
+
+  .card div:first-child {
+    background-color: #CDDC39;
+  }
+
+  .card div:last-child {
+    border: none;
+  }
+
+  .card h5 {
+    font-size: 14px;
+    color: #000000 !important;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 100;
+  }
+
+  .card .btn {
+    font-size: 35px !important
+  }
+
+  .card p {
+    color: #525252;
+    margin: 0;
+    font-size: 14px;
+    font-family: monospace;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+</style>
+
 <section class="page-header">
   <div class="col-md-12">
     <h3>Ticket</h3>
   </div>
   <div class="bread">
-    <a href="/">home </a>
+    <a href="/">accueil </a>
     <a href="#" disabled> / ticket</a>
   </div>
 </section>
@@ -14,51 +60,40 @@
 <div class="container py-5">
   <div class="row">
 
-    <div class="col-md-6">
-      <div class="form-general form-bg-gray mb-3">
+    <div class="col-md-8">
 
-        <div class="form-group">
-          <label>numero carte</label>
-          <input type="text" class="form-control" id="numcarte" 
-          name="numcarte" value="<%= paymentInfo.numcarte %>"
-            required readonly>
-        </div>
+      <div class="card mb-3">
+        <p>wwww.Louage.com</p>
+        <div class="row">
+          <div class="col-md-5">
+            <h5>Code reservation</h5>
+            <h4 class="card-title mb-4">N°<%= paymentInfo.newReserv.uidReservation %></h4>
 
-        <div class="form-group">
-            <label>adresse email</label>
-            <input type="email" class="form-control" id="email" name="email" 
-            value="<%= email %>"
-              required readonly>
+            <h5>DE</h5>
+            <h4><%= voyage.nom_station %></h4>
+            <h5>vers</h5>
+            <h4><%= voyage.destination %></h4>
+
           </div>
-
-        <div class="form-group">
-          <label>station</label>
-          <input type="text" class="form-control" id="station" name="station" 
-          value="<%= voyage.nom_station %>"
-            required readonly>
+          <div class="col-md-4">
+            <h5>Nom</h5>
+            <h4 class="card-text"><%= nom %></h4>
+            <h5>Prenom</h5>
+            <h4 class="card-text"><%= prenom %></h4>
+            <h5>Email</h5>
+            <h4 class="card-text"><%= email %></h4>
+          </div>
+          <div class="col-md-3">
+            <h5>Nombre de place</h5>
+            <h4 class="mb-4"><%= paymentInfo.newReserv.nbPlaceReserv %> places</h4>
+            <h5>Total prix</h5>
+            <button class="btn btn-outline-light mt-3"><i class="fas fa-coins"></i>
+              <%= paymentInfo.newReserv.totalPrixPlaces %></button class="btn btn-danger">
+          </div>
         </div>
-
-        <div class="form-group">
-          <label>destination</label>
-          <input type="text" class="form-control" id="destination" name="destination"
-            value="<%= voyage.destination %>" required readonly>
-        </div>
-
-        <div class="form-group">
-          <label>total</label>
-          <input type="text" class="form-control" id="total" name="total" 
-          value="<%= paymentInfo.newReserv.totalPrixPlaces %>"
-            required readonly>
-        </div>
-
-        <div class="form-group">
-          <label>nombre places reservées</label>
-          <input type="text" class="form-control" id="nbplaces" name="nbplaces"
-            value="<%= paymentInfo.newReserv.nbPlaceReserv %>" required readonly>
-        </div>
-
-        <button type="button" class="btn btn-dark" id="btn-export">exporter ticket</button>
       </div>
+
+      <button type="button" class="btn btn-warning" id="btn-export">exporter ticket</button>
     </div>
 
     <% if(locals.msg) { %><div class="alert alert-primary" role="alert"><%= msg %></div><% } %>
@@ -68,8 +103,8 @@
 <% } %>
 
 <script>
-document.getElementById('btn-export').onclick = () => {
-  window.print()
-}
+  document.getElementById('btn-export').onclick = () => {
+    window.print()
+  }
 </script>
 <%- include('../partials/footer.ejs') -%>
