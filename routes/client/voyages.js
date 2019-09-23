@@ -20,9 +20,10 @@ router.post('/', (req, res) => {
         return unique
       }, [])
 
+      let compDate = (dp, h, d) => Date.parse(dp) + (1000 * 60 * 60 * +h) >= Date.parse(d)
       let voyages = values[1]
-        .filter(v => v.nb_places > 0 && Date.parse(v.date_depart) >= Date.parse(new Date().toJSON().slice(0, 10)))
-     
+        .filter(v => v.nb_places > 0 && compDate(v.date_depart, v.heure_depart, new Date()))
+
       res.cookie('allvoyages', JSON.stringify(allVoyages), { maxAge: 1000 * 60 * 30, httpOnly: true })
       res.render('client/voyages', { voyages, allVoyages })
     })
