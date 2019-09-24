@@ -35,15 +35,12 @@ router.post('/ajout', checkUserConnected, function (req, res) {
 
   stationDao.addStation(station)
     .then(result => {
-      if (Object.keys(result) && result.affectedRows > 0) {
-        res.render('admin/station/ajout', { msg: 'une station a été bien ajoutée' });
-      }
-      else {
-        res.render('admin/station/ajout', { msg: 'station deja existe!' });
-      }
+      res.render('admin/station/ajout', { msg: 'une station a été bien ajoutée' });
     })
     .catch(error => {
-      res.render('admin/station/ajout', { msg: 'erreur d\'ajout!' });
+      res.render('admin/station/ajout', {
+        msg: 'Erreur d\'ajout! chef station est deja affecté une station'
+      });
     })
 });
 

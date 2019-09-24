@@ -1,4 +1,5 @@
-const db = require('../database/connection');
+const db = require('../database/connection')
+var knex = require('../database/knex')
 var SqlString = require('sqlstring');
 
 const table = {
@@ -17,58 +18,29 @@ module.exports = VehiculesDao = {
   addVehicule (Vehicule) {
 
     let { proprietaire, numSerie, nbPlaces, tel, idStation } = Vehicule;
-
-    const rq = `INSERT INTO ${table.name} 
-    (${table.proprietaire}, ${table.numSerie}, 
-      ${table.nbPlaces}, ${table.tel}, ${table.idStation}, ${table.timestamp}) 
-    values(?, ? , ? , ? , ?, ?)`;
-
-    const sql = SqlString.format(rq,
-      [proprietaire, numSerie, nbPlaces, tel, idStation, new Date().toISOString()]
-    );
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
+    return knex(table.name).insert({
+      proprietaire,
+      num_serie: numSerie,
+      nb_places: nbPlaces,
+      tel,
+      id_station: idStation,
+      timestamp_vehicule: new Date().toISOString()
     })
   },
 
   updateVehicule (Vehicule, idVehicule) {
     let { proprietaire, numSerie, nbPlaces, tel } = Vehicule;
-
-    const rq = `update ${table.name} 
-    set  ${table.proprietaire} = ? , ${table.numSerie} = ?, ${table.nbPlaces} = ?, ${table.tel} = ?
-    where ${table.idVehicule} = ?`;
-
-    const sql = SqlString.format(rq, [proprietaire, numSerie, nbPlaces, tel, idVehicule]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).update({ proprietaire, num_serie: numSerie, nb_places: nbPlaces, tel })
+      .where(table.idVehicule, '=', idVehicule)
   },
 
   deletVehicule (numSerie) {
-    const rq = `delete from ${table.name} where ${table.numSerie} = ?`;
-
-    const sql = SqlString.format(rq, numSerie);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).where(table.numSerie, numSerie).del()
   },
 
   getVehicule (numSerie) {
     const rq = `select * from ${table.name} v
-    join stations s on v.id_station = s.id_station
-    where v.num_serie = ?`;
+    join stations s on v.id_station = s.id_station where v.num_serie = ?`;
 
     const sql = SqlString.format(rq, numSerie);
 
@@ -84,7 +56,7 @@ module.exports = VehiculesDao = {
     const rq = `select * from ${table.name} t join stations s 
     on t.id_station = s.id_station WHERE s.chef_station = ?`;
 
-    const sql = SqlString.format(rq, chefStation);
+    const sql = SqlString.format(rq, chefStation)
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

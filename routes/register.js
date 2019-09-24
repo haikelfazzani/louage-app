@@ -1,12 +1,12 @@
-var router = require('express').Router();
+var router = require('express').Router()
 var knex = require('../database/knex')
 
-const sgMail = require('@sendgrid/mail');
+const sgMail = require('@sendgrid/mail')
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 const saltRounds = 10;
 
-var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken')
 
 router.get('/', function (req, res) {
   res.render('register')
@@ -19,11 +19,13 @@ router.post('/', function (req, res) {
   bcrypt.hash(password, saltRounds)
     .then(function (hash) {
 
-      knex('utilisateurs').insert({ email, password: hash, role: 'client' })
+      knex('utilisateurs').insert({
+        email,
+        password: hash, role: 'client',
+        timestamp_utilisateur: new Date().toISOString()
+      })
         .then(result => {
-
           var token = jwt.sign({ email }, 'shhhhh')
-
           sgMail.setApiKey(process.env.SENDGRID_API_KEY);
           const msg = {
             to: email.trim(),
@@ -37,7 +39,6 @@ router.post('/', function (req, res) {
           }
 
           sgMail.send(msg)
-
           res.redirect('/register/email/validation')
         })
         .catch(error => {

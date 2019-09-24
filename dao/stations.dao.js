@@ -1,4 +1,5 @@
-const db = require('../database/connection');
+var db = require('../database/connection')
+var knex = require('../database/knex')
 var SqlString = require('sqlstring');
 
 const table = {
@@ -15,50 +16,26 @@ module.exports = StationsDao = {
 
   addStation (Station) {
 
-    let { nomStation, ville, tel, chefStation } = Station;
+    let { nomStation, ville, tel, chefStation } = Station
 
-    const rq = `INSERT INTO ${table.name} 
-    (${table.nomStation}, ${table.ville}, ${table.tel}, ${table.chefStation}, ${table.timestamp})
-    values(?, ? , ? , ?, ?)`;
-
-    const sql = SqlString.format(rq, [nomStation, ville, tel, chefStation, new Date().toISOString()]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
+    return knex(table.name).insert({
+      nom_station: nomStation,
+      ville,
+      station_tel: tel,
+      chef_station: chefStation,
+      timestamp_station: new Date().toISOString()
     })
   },
 
   updateStation (Station, idStation) {
-    let { nomStation, ville, tel } = Station;
+    let { nomStation, ville, tel } = Station
 
-    const rq = `update ${table.name} 
-    set ${table.nomStation} = ?, ${table.ville} = ? , ${table.tel} = ?
-    where ${table.idStation} = ? `;
-
-    const sql = SqlString.format(rq, [nomStation, ville, tel, idStation]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).update({ nom_station: nomStation, ville, station_tel: tel })
+      .where(table.idStation, '=', idStation)
   },
 
   deletStation (nomStation) {
-    const rq = `delete from ${table.name} where ${table.nomStation} = ?`;
-
-    const sql = SqlString.format(rq, nomStation);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).where(table.nomStation, '=', nomStation).del()
   },
 
   getStation (nomStation) {

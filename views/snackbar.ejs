@@ -1,8 +1,6 @@
 <style>
   #snackbar {
     visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
     background-color: #dc3545;
     color: #fff;
     text-align: center;
@@ -10,8 +8,9 @@
     padding: 16px;
     position: fixed;
     z-index: 1;
-    left: 50%;
-    bottom: 30px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
     cursor: pointer;
     transition: background-color .4s ease;
   }
@@ -28,48 +27,40 @@
 
   @-webkit-keyframes fadein {
     from {
-      bottom: 0;
       opacity: 0;
     }
 
     to {
-      bottom: 30px;
       opacity: 1;
     }
   }
 
   @keyframes fadein {
     from {
-      bottom: 0;
       opacity: 0;
     }
 
     to {
-      bottom: 30px;
       opacity: 1;
     }
   }
 
   @-webkit-keyframes fadeout {
     from {
-      bottom: 30px;
       opacity: 1;
     }
 
     to {
-      bottom: 0;
       opacity: 0;
     }
   }
 
   @keyframes fadeout {
     from {
-      bottom: 30px;
       opacity: 1;
     }
 
     to {
-      bottom: 0;
       opacity: 0;
     }
   }
@@ -79,8 +70,6 @@
 <script defer>
   let snackBar = document.getElementById('snackbar')
   if (snackBar) {
-    snackBar.onclick = () => {
-      snackBar.classList.remove('show')
-    }
+    snackBar.onclick = () => { snackBar.classList.remove('show') }
   }
 </script>
