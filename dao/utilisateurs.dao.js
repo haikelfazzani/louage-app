@@ -80,7 +80,7 @@ const UtilisateurDao = {
   },
 
   getUserByRole (role) {
-    const rq = `select * from ${table.name} where ${table.role} = ?`;
+    const rq = `select * from ${table.name} where ${table.role} = ? ORDER BY ${table.id} DESC`;
     const sql = SqlString.format(rq, role);
 
     return new Promise((resolve, reject) => {
