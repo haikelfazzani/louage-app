@@ -60,7 +60,6 @@ if (formRegister) {
   }
 }
 
-
 /** input image file validation */
 (function () {
   const inputAvatar = document.getElementById("inputImage");

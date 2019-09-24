@@ -21,9 +21,17 @@ const UtilisateurDao = {
   addUser (User) {
     let { email, password, role } = User;
 
-    return knex(table.name).insert(
-      { email, password, role, timestamp_utilisateur: new Date().toISOString() }
-    )
+    const rq = `INSERT INTO ${table.name} 
+    (${table.email}, ${table.password}, ${table.role}, ${table.timestamp}) values(?, ? , ?, ?)`;
+
+    const sql = SqlString.format(rq, [email, password, role, new Date().toISOString()]);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
   },
   updateEtat (email) {
     return knex(table.name).where({ email }).update({ etat_email: 1 })
@@ -120,5 +128,4 @@ const UtilisateurDao = {
     })
   }
 }
-
-module.exports = UtilisateurDao;
+module.exports = UtilisateurDao
