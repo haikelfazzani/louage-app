@@ -98,13 +98,9 @@
 
     <% if(locals.msg) { %><div class="alert alert-primary" role="alert"><%= msg %></div><% } %>
   </div><!-- end row -->
-
 </div>
 <% } %>
-
-<script>
-  document.getElementById('btn-export').onclick = () => {
-    window.print()
-  }
+<script async defer>
+document.getElementById('btn-export').onclick = () => { window.print() }
 </script>
 <%- include('../partials/footer.ejs') -%>

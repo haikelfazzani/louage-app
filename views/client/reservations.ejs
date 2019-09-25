@@ -89,8 +89,8 @@
   </div><!-- end row -->
 
 </div>
-
-<script>
+<% } %>
+<script async defer>
   let prixPlace = '<%=  voyage.prix_place %>'
   document.getElementById('nbplaces').onkeyup = (e) => {
     let nbPlaces = e.target.value;
@@ -104,5 +104,4 @@
     total.value = (nbPlaces * prixPlace) + ' DNT'
   }
 </script>
-<% } %>
 <%- include('../partials/footer.ejs') -%>
