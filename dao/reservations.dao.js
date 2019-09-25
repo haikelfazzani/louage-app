@@ -1,8 +1,7 @@
-const db = require('../database/connection');
+const db = require('../database/connection')
+var knex = require('../database/knex')
 var SqlString = require('sqlstring')
 var EtatReservation = require('../model/EtatReservation.enum')
-
-var knex = require('../database/knex')
 
 const table = {
   name: 'reservations',
@@ -18,7 +17,6 @@ const table = {
 module.exports = ReservationsDao = {
 
   addReservation (Reservation) {
-
     let { uidReservation, nbPlaceReserv, totalPrixPlaces, idClient, idVoyage } = Reservation;
 
     return knex(table.name)

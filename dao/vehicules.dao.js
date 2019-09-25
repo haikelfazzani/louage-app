@@ -16,7 +16,6 @@ const table = {
 module.exports = VehiculesDao = {
 
   addVehicule (Vehicule) {
-
     let { proprietaire, numSerie, nbPlaces, tel, idStation } = Vehicule;
     return knex(table.name).insert({
       proprietaire,

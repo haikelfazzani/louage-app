@@ -13,7 +13,6 @@ function checkUserRoleAdmin (role) {
   }
   else if (req.session.userInfo !== Role.admin) {
     res.redirect('/login')
-
   }
   next()
 }
@@ -24,7 +23,6 @@ function checkUserRoleChef (role) {
   }
   else if (req.session.userInfo !== Role.chefStation) {
     res.redirect('/login')
-
   }
   next()
 }
