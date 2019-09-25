@@ -9,7 +9,6 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>#</th>
           <th>station</th>
           <th>destination</th>
           <th>heure Depart</th>
@@ -22,7 +21,6 @@
       <tbody>
         <% voyages.forEach((u, i) => {  %>
         <tr>
-          <td><%= i %></td>
           <td><%= u.nom_station %></td>
           <td><%= u.destination %></td>
           <td><%= u.heure_depart %>h</td>

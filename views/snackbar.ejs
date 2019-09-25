@@ -66,7 +66,7 @@
   }
 </style>
 
-<% if(locals.msg) { %><div id="snackbar" class="show"><%= msg %></div><% } %>
+<% if(locals.msg) { %><div id="snackbar" class="show"><i class="fas fa-info-circle"></i> <%= msg %></div><% } %>
 <script defer>
   let snackBar = document.getElementById('snackbar')
   if (snackBar) {

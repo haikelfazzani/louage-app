@@ -21,8 +21,8 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="heureDepart">heure Depart</label>
-        <input type="number" class="form-control" id="heureDepart" name="heureDepart" value="<%= voyage.heure_depart %>"
-          required>
+        <input type="number" class="form-control" id="heureDepart" min="0" max="24" 
+        name="heureDepart" value="<%= voyage.heure_depart %>" required>
       </div>
     </div>
     <div class="col-md-6">
@@ -43,7 +43,9 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="nbPlaces">nb Places</label>
-        <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" value="<%= voyage.nb_places %>" required>
+        <input type="number" class="form-control" id="nbPlaces" 
+        min="0" max="9"
+        name="nbPlaces" value="<%= voyage.nb_places %>" required>
       </div>
     </div>
   </div>

@@ -3,14 +3,13 @@
 <div class="container py-5">
   <%- include('../navbar') -%>
 
-  <% if(locals.reservations && locals.reservations.length > 0) {  
+  <% if(locals.reservations) {  
     reservations.sort((i,j) => Date.parse(j.date_depart) - Date.parse(i.date_depart) )
     %>
   <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
-          <th>#</th>
           <th>station</th>
           <th>destination</th>
           <th>heure_depart</th>
@@ -24,7 +23,6 @@
       <tbody>
         <% reservations.forEach((u, i) => {  %>
         <tr>
-          <td><%= i %></td>
           <td><%= nom_station %></td>
           <td><%= u.destination %></td>
           <td><%= u.heure_depart %> h</td>
