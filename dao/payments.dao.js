@@ -1,4 +1,4 @@
-const db = require('../database/connection');
+var db = require('../database/connection');
 var SqlString = require('sqlstring');
 var knex = require('../database/knex')
 

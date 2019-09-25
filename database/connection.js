@@ -18,6 +18,5 @@ db.connect((err) => {
     }, 10000);
 
     console.log(err || 'connected')
-});
-
-module.exports = db;
+})
+module.exports = db

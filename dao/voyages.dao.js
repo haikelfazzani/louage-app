@@ -17,25 +17,16 @@ const table = {
 module.exports = VoyagesDao = {
 
   addVoyage (Voyage) {
+    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation } = Voyage
 
-    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation } = Voyage;
-
-    const rq = `INSERT INTO ${table.name} 
-    (${table.destination}, ${table.heureDepart}, 
-      ${table.dateDepart}, ${table.prixPlace}, 
-      ${table.nbPlaces}, ${table.idStation}, 
-      ${table.timestamp}) 
-    values(?, ? , ? , ? , ?, ?, ?)`;
-
-    const sql = SqlString.format(rq,
-      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, new Date().toISOString()]
-    );
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
+    return knex(table.name).insert({
+      destination,
+      heure_depart: heureDepart,
+      date_depart: dateDepart,
+      prix_place: prixPlace,
+      nb_places: nbPlaces,
+      id_station: idStation,
+      timestamp_voyage: new Date().toISOString()
     })
   },
 
@@ -78,16 +69,7 @@ module.exports = VoyagesDao = {
   },
 
   deletVoyage (idVoyage) {
-    const rq = `delete from ${table.name} where ${table.idVoyage} = ?`;
-
-    const sql = SqlString.format(rq, idVoyage);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).where(table.idVoyage, '=', idVoyage).del()
   },
 
   getVoyageByNomStation (nomStation) {
@@ -108,7 +90,7 @@ module.exports = VoyagesDao = {
   getVoyages () {
     return knex('voyages')
       .join('stations', 'voyages.id_station', '=', 'stations.id_station')
-      .orderBy(' voyages.id_voyage', 'desc')
+      .orderBy(table.idVoyage, 'desc')
   },
 
   getVoyageById (id_voyage) {

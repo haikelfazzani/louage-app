@@ -7,9 +7,4 @@ var knex = require('knex')({
     database: process.env.DB_NAME
   }
 })
-
-// knex.select('*').from('utilisateurs').then(rows => {
-//   console.log(rows)
-// })
-
 module.exports = knex
