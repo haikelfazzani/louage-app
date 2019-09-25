@@ -13,7 +13,6 @@
 <% if(locals.voyage) { %>
 <div class="container py-5">
   <div class="row">
-
     <div class="col-md-6 mb-3">
       <div class="form-general form-bg-gray">
 
@@ -79,43 +78,40 @@
         <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv"
           value="<%= nbplacesreserv %>" required hidden readonly>
 
-        <input type="text" class="form-control display-3" id="total" name="total"
-         value="<%= total %>" required hidden
+        <input type="text" class="form-control display-3" id="total" name="total" value="<%= total %>" required hidden
           readonly>
 
         <div class="form-group">
           <label>numero de carte</label>
-          <input type="tel" class="form-control" id="numcarte" name="numcarte"
-           minlength="16" maxlength="16"
-            placeholder="4242 4242 4242 4242" required>
+          <input type="tel" class="form-control" id="numcarte" pattern="[0-9]{16}" name="numcarte" minlength="16"
+            maxlength="16" placeholder="4242 4242 4242 4242" required>
         </div>
 
         <div class="form-group">
           <label>code secret</label>
           <input type="tel" minlength="8" maxlength="8" class="form-control" id="codesecret" name="codesecret"
-            placeholder="1234 45678" required>
+            pattern="[0-9]{8}" placeholder="1234 45678" required>
         </div>
 
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>date d'expiration</label>
-              <input type="text" class="form-control" id="datexp" 
-              pattern="[0-9]{2}/[0-9]{2}"
-              name="datexp" placeholder="MM/YY" required>
+              <input type="text" class="form-control" id="datexp" pattern="[0-9]{2}/[0-9]{2}" name="datexp"
+                placeholder="MM/YY" required>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label>CVC</label>
-              <input type="tel" minlength="3" maxlength="3" class="form-control" id="cvc" name="cvc" placeholder="747"
-                required>
+              <input type="tel" minlength="3" maxlength="3" pattern="[0-9]{3}" class="form-control" id="cvc" name="cvc"
+                placeholder="747" required>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-dark">payer</button>
+        <button type="submit" class="btn btn-dark" id="btn-payment">payer</button>
         <button type="reset" class="btn btn-danger">vider</button>
       </form>
     </div>
@@ -124,4 +120,20 @@
 </div>
 <% } %>
 
+<script async defer>
+  let btnPayment = document.getElementById('btn-payment')
+  let datexp = document.getElementById('datexp')
+  if (btnPayment && datexp) {
+    btnPayment.disabled = true
+    datexp.onkeyup = () => {
+      if (datexp.value.length === 5 && /\d{2}\/\d{2}/g.test(datexp.value)) {
+        let d = datexp.value.split('/')
+        btnPayment.disabled = +d[1] > 14 && +d[0] > 0 && +d[0] < 13 ? false : true
+      }
+      else {
+        btnPayment.disabled = true
+      }
+    }
+  }
+</script>
 <%- include('../partials/footer.ejs') -%>
