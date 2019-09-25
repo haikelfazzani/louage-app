@@ -34,31 +34,7 @@ module.exports = ReservationsDao = {
   },
 
   updateEtatReserv (etat, uidReservation) {
-
-    const rq = `update ${table.name} 
-    set ${table.etatReserv} = ? where ${table.uidReservation} = ? `;
-
-    const sql = SqlString.format(rq, [etat, uidReservation]);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
-  },
-
-  deleteReservByEtat () {
-    const rq = `delete from ${table.name} where ${table.etatReserv} = ?`;
-
-    const sql = SqlString.format(rq, EtatReservation.enAttente);
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
+    return knex(table.name).update({ etat_reservation: etat }).where(table.uidReservation, '=', uidReservation)
   },
 
   getReservByUser (email) {
@@ -66,8 +42,7 @@ module.exports = ReservationsDao = {
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage
     join stations s on s.id_station = v.id_station
-    WHERE u.email = ? 
-    ORDER BY t.uid_reservation DESC`;
+    WHERE u.email = ?`;
 
     const sql = SqlString.format(rq, email);
 
@@ -79,22 +54,8 @@ module.exports = ReservationsDao = {
     })
   },
 
-  getReservations () {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.id_client = u.id ORDER BY t.id_reservation DESC`;
-
-    return new Promise((resolve, reject) => {
-      db.query(sql, (err, result) => {
-        if (err) reject(err)
-        else resolve(result)
-      })
-    })
-
-  },
-
   getAllReservationsByStation (idStation) {
-    const rq = `SELECT * from ${table.name} r join voyages v
-    ON r.id_voyage = v.id_voyage WHERE v.id_station = ? `;
+    const rq = `SELECT * from ${table.name} r join voyages v ON r.id_voyage = v.id_voyage WHERE v.id_station = ? `;
 
     const sql = SqlString.format(rq, idStation);
 
@@ -110,8 +71,7 @@ module.exports = ReservationsDao = {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 
     join voyages v on t.id_voyage = v.id_voyage 
-    WHERE v.id_station = ?
-    ORDER BY t.uid_reservation DESC`;
+    WHERE v.id_station = ?`;
 
     const sql = SqlString.format(rq, idStation);
 

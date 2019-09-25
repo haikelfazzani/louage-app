@@ -8,10 +8,14 @@ var Voyage = require('../../model/Voyage.model')
 router.get('/', checkUserConnected, (req, res) => {
 
   let { chefStationInfo } = req.session
-
+  let { b, e } = req.query
+  
   voyagesDao.getVoyageByNomStation(chefStationInfo.nom_station)
     .then(function (voyages) {
       res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
+      voyages = isNaN(b) || isNaN(e)
+        ? voyages = voyages.slice(0, 5) : b < 0 && e < 5
+          ? voyages = voyages.slice(0, 5) : voyages.slice(b || 0, e || 5)
       res.render('admin/voyage/lister', { voyages });
     })
     .catch(error => {
