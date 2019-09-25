@@ -15,7 +15,7 @@
   <div class="row">
 
     <div class="col-md-6 mb-3">
-      <div class="form-general form-bg-gray">          
+      <div class="form-general form-bg-gray">
 
         <div class="form-group">
           <label>nom station</label>
@@ -45,11 +45,11 @@
 
         <div class="form-group">
           <label for="nbplacesreserv">nombre de places reservées</label>
-          <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv" 
-          value="<%= nbplacesreserv %>" disabled>
+          <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv"
+            value="<%= nbplacesreserv %>" disabled>
         </div>
 
-        <div class="row mb-4">
+        <div class="row">
           <div class="col-md-6">
             <label>Prix place</label>
             <input type="text" class="form-control display-3" value="<%= voyage.prix_place %> DNT" required disabled>
@@ -57,8 +57,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>total</label>
-              <input type="text" class="form-control display-3" value="<%= total %>" required
-                disabled>
+              <input type="text" class="form-control display-3" value="<%= total %>" required disabled>
             </div>
           </div>
         </div>
@@ -69,31 +68,51 @@
     <div class="col-md-6">
       <form action="/payments/confirmer" method="POST" class="form-general form-bg-gray mb-3">
 
-        <input type="text" name="uidreserv" id="uidreserv" value="<%= uidreserv %>" 
-        required hidden readonly>
+        <input type="text" name="uidreserv" id="uidreserv" value="<%= uidreserv %>" required hidden readonly>
 
-        <input type="text" class="form-control" id="idvoyage" name="idvoyage" 
-          value="<%= voyage.id_voyage %>" required hidden readonly>
+        <input type="text" class="form-control" id="idvoyage" name="idvoyage" value="<%= voyage.id_voyage %>" required
+          hidden readonly>
 
-          <input type="text" class="form-control" id="nb_places" name="nb_places" 
-          value="<%= voyage.nb_places %>" required hidden readonly>
+        <input type="text" class="form-control" id="nb_places" name="nb_places" value="<%= voyage.nb_places %>" required
+          hidden readonly>
 
-          <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv" 
+        <input type="number" class="form-control" id="nbplacesreserv" name="nbplacesreserv"
           value="<%= nbplacesreserv %>" required hidden readonly>
 
-          <input type="text" class="form-control display-3" 
-          id="total" name="total" value="<%= total %>" required hidden readonly>
+        <input type="text" class="form-control display-3" id="total" name="total"
+         value="<%= total %>" required hidden
+          readonly>
 
         <div class="form-group">
-          <label>numero carte</label>
-          <input type="text" class="form-control" id="numcarte" name="numcarte"
-            placeholder="Entrer votre numero de carte" required>
+          <label>numero de carte</label>
+          <input type="tel" class="form-control" id="numcarte" name="numcarte"
+           minlength="16" maxlength="16"
+            placeholder="4242 4242 4242 4242" required>
         </div>
 
         <div class="form-group">
           <label>code secret</label>
-          <input type="text" class="form-control" id="codesecret" name="codesecret"
-            placeholder="Entrer code secret de la carte" required>
+          <input type="tel" minlength="8" maxlength="8" class="form-control" id="codesecret" name="codesecret"
+            placeholder="1234 45678" required>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>date d'expiration</label>
+              <input type="text" class="form-control" id="datexp" 
+              pattern="[0-9]{2}/[0-9]{2}"
+              name="datexp" placeholder="MM/YY" required>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>CVC</label>
+              <input type="tel" minlength="3" maxlength="3" class="form-control" id="cvc" name="cvc" placeholder="747"
+                required>
+            </div>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-dark">payer</button>

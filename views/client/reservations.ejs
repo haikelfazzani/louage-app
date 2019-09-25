@@ -38,14 +38,15 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>heure de depart</label>
-              <input type="number" class="form-control" value="<%= voyage.heure_depart %>" required disabled>
+              <input type="number" class="form-control" 
+              value="<%= voyage.heure_depart %>" required disabled>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label>date de depart</label>
-              <input type="text" class="form-control" value="<%= locals.formatDate(voyage.date_depart) %>" required disabled>
+              <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
             </div>
           </div>
         </div>
@@ -61,7 +62,7 @@
             placeholder="Enter nombre places" required>
         </div>
 
-        <div class="row mb-4">
+        <div class="row">
           <div class="col-md-6">
             <label>Prix place</label>
             <input type="text" class="form-control display-3" value="<%=  voyage.prix_place %> DNT" required readonly>
