@@ -10,68 +10,66 @@
   </div>
 </section>
 
-<div class="jumbotron container-v50">
-  <div class="container py-5">
+<div class="container py-5">
 
-    <% if(locals.reservations) {  
+  <% if(locals.reservations) {  
           reservations.sort((i,j) => Date.parse(j.date_depart) - Date.parse(i.date_depart) )
     %>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>station</th>
-            <th>destination</th>
-            <th>heure depart</th>
-            <th>date depart</th>
-            <th>nombre place</th>
-            <th>total</th>
-            <th>etat</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% reservations.forEach((u, i) => {  %>
-          <tr>
-            <td><%= u.nom_station %></td>
-            <td><%= u.destination %></td>
-            <td><%= u.heure_depart %> h</td>
-            <td><%= u.date_depart %></td>
-            <td><%= u.nb_place_reserver %></td>
-            <td><%= u.total_prix_places %></td>
-            <td>
-              <span class="badge badge-dark"><%= u.etat_reservation %></span>
-            </td>
-            <td>
-              <% if(u.etat_reservation === 'payer') { 
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>station</th>
+          <th>destination</th>
+          <th>heure depart</th>
+          <th>date depart</th>
+          <th>nombre place</th>
+          <th>total</th>
+          <th>etat</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reservations.forEach((u, i) => {  %>
+        <tr>
+          <td><%= u.nom_station %></td>
+          <td><%= u.destination %></td>
+          <td><%= u.heure_depart %> h</td>
+          <td><%= u.date_depart %></td>
+          <td><%= u.nb_place_reserver %></td>
+          <td><%= u.total_prix_places %></td>
+          <td>
+            <span class="badge badge-dark"><%= u.etat_reservation %></span>
+          </td>
+          <td>
+            <% if(u.etat_reservation === 'payer') { 
                     if((Date.parse(u.date_depart) + (1000 * 60 * 60 * (+u.heure_depart-1)) + (1000*60*10)) >= Date.parse(new Date())) {  
                   %>
-              <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
-                  class="fas fa-hand-paper"></i></a>
-              <% } } %>
-            </td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    </div>    
+            <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+                class="fas fa-hand-paper"></i></a>
+            <% } } %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <%           
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <%           
             let begin = -5, end = 0
               for(let i = 0; i <= (reservations.length / 5); ) {
                 begin += 5
                 end += 5
                 i++
               %>
-        <li class="page-item">
-          <a class="page-link" href="/reservations/all?b=<%= begin %>&e=<%= end %>"><%= i %></a>
-        </li>
-        <% } %>
-      </ul>
-    </nav>
-    <% } %>
-  </div>
+      <li class="page-item">
+        <a class="page-link" href="/reservations/all?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+  <% } %>
 </div>
 <%- include('../../partials/footer.ejs') -%>

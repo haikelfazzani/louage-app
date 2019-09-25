@@ -10,40 +10,39 @@
   </div>
 </section>
 
-<div class="jumbotron container-v50">
-  <div class="container py-5">
-    <%- include('navtabs') -%>
+<div class="container py-5">
+  <%- include('navtabs') -%>
 
-    <div class="row">
-      <%- include('avatar') -%>
+  <div class="row">
+    <%- include('avatar') -%>
 
-      <% if(locals.userInfo) { %>
-      <div class="col-md-9">
-        <form action="/utilisateur/profile/supprimer" method="POST" class="form-signin form-p20 bg-light p-0 mb-3">
+    <% if(locals.userInfo) { %>
+    <div class="col-md-9">
+      <form action="/utilisateur/profile/supprimer" method="POST" class="form-signin form-p20 bg-light p-0 mb-3">
 
-          <div class="form-group">
-            <label for="password">Entrer votre mot passe</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Entrer password"
-              required>
-              <p class="text-muted font-s14 p-0 m-0 mt-2">Si vous rencontrez des problèmes, veuillez contacter notre Service Client.</p>
-              <p class="text-muted font-s14 p-0 m-0">Visitez notre page <a class="font-s14" href="/contact">Contact</a></p>
-          </div>                       
+        <div class="form-group">
+          <label for="password">Entrer votre mot passe</label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Entrer password"
+            required>
+          <p class="text-muted font-s14 p-0 m-0 mt-2">Si vous rencontrez des problèmes, veuillez contacter notre Service
+            Client.</p>
+          <p class="text-muted font-s14 p-0 m-0">Visitez notre page <a class="font-s14" href="/contact">Contact</a></p>
+        </div>
 
-          <button type="submit" class="btn btn-dark">supprimer</button>
-          <button type="reset" class="btn btn-danger">vider</button>
-        </form>
+        <button type="submit" class="btn btn-dark">supprimer</button>
+        <button type="reset" class="btn btn-danger">vider</button>
+      </form>
 
-        <div class="alert alert-danger" id="form-signin" role="alert">alter</div>
+      <div class="alert alert-danger" id="form-signin" role="alert">alter</div>
 
-        <% if(locals.msg) { %>
-        <div class="alert alert-primary" role="alert"><%= msg %></div>
-        <% } %>
-
-
-      </div>
+      <% if(locals.msg) { %>
+      <div class="alert alert-primary" role="alert"><%= msg %></div>
       <% } %>
 
-    </div><!-- end row -->
-  </div>
+
+    </div>
+    <% } %>
+
+  </div><!-- end row -->
 </div>
 <%- include('../../partials/footer.ejs') -%>

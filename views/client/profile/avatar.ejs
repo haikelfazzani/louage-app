@@ -17,7 +17,6 @@
 <div class="col-md-3 mb-3">
   <form action="/utilisateur/profile/avatar" method="POST" enctype="multipart/form-data">
     <div class="input-group" style="justify-content: center">
-
       <div class="img-hover-zoom img-hover-zoom--colorize">
         <% if(locals.avatar && locals.avatar.length > 45) { %>
         <img src="<%= locals.avatar %>" alt="photo de profile" class="img-thumbnail img-profile fade-in mb-3">
