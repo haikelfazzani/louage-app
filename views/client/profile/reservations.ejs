@@ -18,7 +18,9 @@
     <div class="row">
       <%- include('avatar') -%>
       <div class="col-md-9">
-        <% if(locals.reservations) {  %>
+        <% if(locals.reservations && locals.reservations.length > 0) {  
+          reservations.sort((i,j) => Date.parse(j.date_depart) - Date.parse(i.date_depart) )
+          %>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -46,10 +48,12 @@
                   <span class="badge badge-dark"><%= u.etat_reservation %></span>
                 </td>
                 <td>
-                  <% if(u.etat_reservation === 'payer' && (Date.parse(u.date_depart) + (1000 * 60 * 60 * +u.heure_depart) + (1000*60*10)) >= Date.parse(new Date())) { %>
+                  <% if(u.etat_reservation === 'payer') { 
+                    if((Date.parse(u.date_depart) + (1000 * 60 * 60 * +u.heure_depart) + (1000*60*10)) >= Date.parse(new Date())) {  
+                  %>
                   <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
                       class="fas fa-hand-paper"></i></a>
-                  <% } %>
+                  <% } } %>
                 </td>
               </tr>
               <% }) %>

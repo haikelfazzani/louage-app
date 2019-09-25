@@ -3,7 +3,9 @@
 <div class="container py-5">
   <%- include('../navbar') -%>
 
-  <% if(locals.reservations) {  %>
+  <% if(locals.reservations && locals.reservations.length > 0) {  
+    reservations.sort((i,j) => Date.parse(j.date_depart) - Date.parse(i.date_depart) )
+    %>
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -34,7 +36,8 @@
           </td>
           <td>
             <% if(u.etat_reservation === 'payer' && (Date.parse(u.date_depart) + (1000 * 60 * 60 * +u.heure_depart) + (1000*60*10)) >= Date.parse(new Date())) { %>
-            <a href="/admin/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i class="fas fa-hand-paper"></i></a>
+            <a href="/admin/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+                class="fas fa-hand-paper"></i></a>
             <% } %>
           </td>
         </tr>
@@ -42,6 +45,22 @@
       </tbody>
     </table>
   </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <%           
+        let begin = -5, end = 0
+          for(let i = 0; i <= (reservations.length / 5); ) {
+            begin += 5
+            end += 5
+            i++
+          %>
+      <li class="page-item">
+        <a class="page-link" href="/admin/reservations?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
   <% } %>
 
 </div>

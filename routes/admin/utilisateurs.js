@@ -9,8 +9,12 @@ var Utilisateur = require('../../model/Utilisateur.model');
 var utilisateurDao = require('../../dao/utilisateurs.dao');
 
 router.get('/', checkUserConnected, (req, res) => {
-  utilisateurDao.getUsers().then(function (values) {
-    res.render('admin/utilisateur/lister', { utilisateurs: values })
+  let { b, e } = req.query
+  utilisateurDao.getUsers().then(function (utilisateurs) {
+    utilisateurs = isNaN(b) || isNaN(e)
+      ? utilisateurs = utilisateurs.slice(0, 5) : b < 0 && e < 5
+        ? utilisateurs = utilisateurs.slice(0, 5) : utilisateurs.slice(b || 0, e || 5)
+    res.render('admin/utilisateur/lister', { utilisateurs })
   })
     .catch(error => {
       res.render('admin/utilisateur/lister')
@@ -34,12 +38,12 @@ router.post('/ajout', checkUserConnected, function (req, res) {
       utilisateurDao.addUser(utilisateur)
         .then(result => {
           utilisateurDao.updateEtat(email)
-          .then(resultEtat => {
-            res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
-          })          
-          .catch(errorUpdate => {
-            res.redirect('/404')
-          })
+            .then(resultEtat => {
+              res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
+            })
+            .catch(errorUpdate => {
+              res.redirect('/404')
+            })
         })
         .catch(error => {
           res.render('admin/utilisateur/ajout', { msg: 'erreur d\'ajout' });

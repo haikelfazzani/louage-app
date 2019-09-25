@@ -5,40 +5,58 @@
   <%- include('../navbar') -%>
 
   <% if(locals.voyages) {  %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>station</th>
-        <th>destination</th>
-        <th>heure Depart</th>
-        <th>date Depart</th>
-        <th>prix Place</th>
-        <th>nb Places</th>
-        <th>action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% voyages.forEach((u, i) => {  %>
-      <tr>
-        <td><%= i %></td>
-        <td><%= u.nom_station %></td>
-        <td><%= u.destination %></td>
-        <td><%= u.heure_depart %>h</td>
-        <td><%= u.date_depart %></td>
-        <td><%= u.prix_place %> DNT</td>
-        <td><%= u.nb_places %></td>
-        <td>
-          <a href="/admin/voyages/modifier?v=<%= u.id_voyage %>" class="btn btn-success btn-dismiss"><i class="fas fa-pen-square"></i></a>
-          <a href="/admin/voyages/supprimer?voyage=<%= u.id_voyage %>" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i></a>
-        </td>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>station</th>
+          <th>destination</th>
+          <th>heure Depart</th>
+          <th>date Depart</th>
+          <th>prix Place</th>
+          <th>nb Places</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% voyages.forEach((u, i) => {  %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= u.nom_station %></td>
+          <td><%= u.destination %></td>
+          <td><%= u.heure_depart %>h</td>
+          <td><%= u.date_depart %></td>
+          <td><%= u.prix_place %> DNT</td>
+          <td><%= u.nb_places %></td>
+          <td>
+            <a href="/admin/voyages/modifier?v=<%= u.id_voyage %>" class="btn btn-success btn-dismiss"><i
+                class="fas fa-pen-square"></i></a>
+            <a href="/admin/voyages/supprimer?voyage=<%= u.id_voyage %>" class="btn btn-danger btn-delete"><i
+                class="fas fa-trash-alt"></i></a>
+          </td>
 
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <%           
+          let begin = -5, end = 0
+            for(let i = 0; i <= (voyages.length / 5); ) {
+              begin += 5
+              end += 5
+              i++
+            %>
+      <li class="page-item">
+        <a class="page-link" href="/admin/voyages?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
   <% } %>
-
 
 </div>
 <%- include('../../partials/footer.ejs') -%>

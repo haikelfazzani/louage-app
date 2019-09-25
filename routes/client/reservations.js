@@ -21,8 +21,8 @@ function checkValidParam (req, res, next) {
 
 router.get('/', checkUserConnected, (req, res) => {
 
-  let allVoyages = JSON.parse(Buffer.from(req.query.v, 'base64').toString())
-  let { destination, nom_station, timestamp_voyage } = allVoyages
+  let selectedVoyage = JSON.parse(Buffer.from(req.query.v, 'base64').toString())
+  let { destination, nom_station, timestamp_voyage } = selectedVoyage
 
   Promise.all([
     voyageDao.nbPlacesByDestination(destination, timestamp_voyage, nom_station),
@@ -31,7 +31,7 @@ router.get('/', checkUserConnected, (req, res) => {
     .then(values => {
 
       res.render('client/reservations', {
-        voyage: allVoyages,
+        voyage: selectedVoyage,
         nbPlaces: values[0][0].nb,
         station: nom_station
       })
@@ -53,8 +53,7 @@ router.get('/all', checkUserConnected, (req, res) => {
       reservations = isNaN(b) || isNaN(e)
         ? reservations = reservations.slice(0, 5) : b < 0 && e < 5
         ? reservations = reservations.slice(0, 5) : reservations.slice(b || 0, e || 5)
-
-      reservations.sort((i, j) => i.heure_depart >= j.heure_depart && Date.parse(i.date_depart) >= Date.parse(j.date_depart))
+      
       res.render('client/profile/reservations', { reservations })
     })
     .catch(error => {
