@@ -61,7 +61,7 @@ module.exports = PaymentsDao = {
     join voyages v on r.id_voyage = v.id_voyage
     join stations s on s.id_station = v.id_station
     where p.id_client = ? 
-    ORDER BY p.id_payment DESC LIMIT 1`;
+    ORDER BY p.id_payment DESC`;
 
     const sql = SqlString.format(rq, [idUser])
 
