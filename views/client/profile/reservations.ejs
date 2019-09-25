@@ -18,7 +18,7 @@
     <div class="row">
       <%- include('avatar') -%>
       <div class="col-md-9">
-        <% if(locals.reservations && locals.reservations.length > 0) {  
+        <% if(locals.reservations) {  
           reservations.sort((i,j) => Date.parse(j.date_depart) - Date.parse(i.date_depart) )
           %>
         <div class="table-responsive">

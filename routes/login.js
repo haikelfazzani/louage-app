@@ -3,6 +3,8 @@ var UtilisateurDao = require('../dao/utilisateurs.dao');
 const bcrypt = require('bcrypt')
 const checkValidEmail = require('../middleware/checkValidEmail')
 
+var passport = require('passport')
+
 router.get('/', function (req, res) {
   res.render('login')
 });
@@ -30,4 +32,11 @@ router.post('/', checkValidEmail, function (req, res) {
       res.render('login', { msg: 'ce compte n\'existe pas!' })
     })
 })
+
+router.get('/facebook', passport.authenticate('facebook'))
+
+router.get('/facebook/cb',
+  passport.authenticate('facebook', 
+  { successRedirect: '/', failureRedirect: '/login',scope:['email','picture','birthday'] }));
+
 module.exports = router

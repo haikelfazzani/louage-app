@@ -15,6 +15,10 @@ require('./database/knex')
 app.disable("x-powered-by");
 app.use(helmet())
 
+var passport = require('passport')
+app.use(passport.initialize());
+require('./middleware/facebookAuth')(passport)
+
 app.use(session({
   secret: 'my-secret-code',
   resave: false,
