@@ -28,14 +28,15 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="nbPlaces">nbPlaces</label>
-          <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" value="<%= vehicule.nb_places %>"
-            required>
+          <input type="number" class="form-control" id="nbPlaces" min="0" max="9"
+          name="nbPlaces" value="<%= vehicule.nb_places %>" required>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="nbPlaces">tel</label>
-          <input type="number" class="form-control" id="tel" name="tel" value="<%= vehicule.tel %>" required>
+          <input type="tel" class="form-control" id="tel" name="tel" minlength="8" maxlength="8"
+          value="<%= vehicule.tel %>" required>
         </div>
       </div>
     </div>
