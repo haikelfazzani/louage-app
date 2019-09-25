@@ -11,6 +11,10 @@
 </section>
 
 <div class="container py-5">
+  <div class="text-center mx-auto mb-2" style="max-width: 700px">
+    <h3>Nous contacter</h3>
+    <p>Est-ce que quelque chose ne fonctionne pas ? n'hésitez pas à nous contacter.</p>
+  </div>
   <form action="/contact" method="POST" class="form-general form-p20 bg-light p-0 mb-3">
 
     <div class="row">
@@ -18,31 +22,27 @@
 
         <div class="form-group">
           <label for="nom">Nom complet</label>
-          <input type="text" class="form-control" id="nom" name="nom" 
-          pattern="[A-Za-z ]{6,}" 
-          title="Seulement des letters"
-          placeholder="Entrer votre nom complet" required>
+          <input type="text" class="form-control" id="nom" name="nom" pattern="[A-Za-z ]{6,}"
+            title="Seulement des letters" placeholder="Entrer votre nom complet" required>
         </div>
 
         <div class="form-group">
           <label for="sujet">Sujet</label>
-          <input type="text" class="form-control" id="sujet" name="sujet"
-          pattern="[A-Za-z ]{6,}" 
-          title="Seulement des letters" 
-          placeholder="Entrer sujet" required>
+          <input type="text" class="form-control" id="sujet" name="sujet" pattern="[A-Za-z ]{6,}"
+            title="Seulement des letters" placeholder="Entrer sujet" required>
         </div>
 
         <div class="form-group">
           <label for="email">Adresse email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Entrer votre email" required>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Entrer votre adresse email" required>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="message">Message</label>          
-          <textarea class="form-control" id="message" name="Entrer votre message" 
-          minlength="50" maxlength="250" rows="7" placeholder="message" required></textarea>
+          <label for="message">Message</label>
+          <textarea class="form-control" id="message" name="message" minlength="50" maxlength="250"
+            rows="7" placeholder="Entrer votre message" required></textarea>
         </div>
       </div>
     </div>
