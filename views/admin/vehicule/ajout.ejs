@@ -22,14 +22,19 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="nbPlaces">nbPlaces</label>
-          <input type="number" class="form-control" id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
+          <input type="number" class="form-control" 
+          min="1" max="9"
+          id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
             required>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="nbPlaces">tel</label>
-          <input type="number" class="form-control" id="tel" name="tel" placeholder="Enter tel" required>
+          <input type="tel" class="form-control" 
+          id="tel" name="tel" minlength="0" maxlength="8"
+          placeholder="Enter tel" 
+          required>
         </div>
       </div>
     </div>

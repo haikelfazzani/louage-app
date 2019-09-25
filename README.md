@@ -23,12 +23,12 @@
 
 ## Gestion des reservations (client)
 - [x] confirmer une reservation
-- [ ] annuler une reservation
+- [x] annuler une reservation
 *reservation en etat d'attente sera anunler auto aprés 10min*
 
 ## Gestion des payments (client)
-- [ ] effectuer un payment
-- [ ] annuler un payment
+- [x] effectuer un payment
+- [x] annuler un payment
 
 > *Export ticket into PDF* and *Notify user payment*.
 
@@ -60,7 +60,7 @@
 - [ ] JWT Auth
 - [ ] CORS
 - [x] Password attack (hashing)
-- [ ] ClickJacking attack
+- [x] ClickJacking attack
 - [ ] DDOS attack
 - [ ] DOS attack
 - [ ] CSRF attack

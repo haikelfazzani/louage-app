@@ -31,7 +31,9 @@
 
     <div class="form-group">
       <label for="tel">tel</label>
-      <input type="text" class="form-control" id="tel" name="tel" value="<%= station.station_tel %>" required>
+      <input type="number" class="form-control" 
+      id="tel" name="tel" minlength="8" maxlength="8"
+      value="<%= station.station_tel %>" required>
     </div>
 
     <button type="submit" class="btn btn-dark">modifier station</button>
