@@ -98,8 +98,10 @@ const UtilisateurDao = {
   getUserById (id) {
     return knex(table.name).where({ id })
   },
+
   getUsers () {
-    return knex(table.name).orderBy(table.id, 'DESC')
+    return knex(table.name).select('nom', 'prenom', 'email', 'tel', 'role')
+    .orderBy(table.id, 'DESC')
   },
 
   updateAvatar (avatar, email) {

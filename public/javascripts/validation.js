@@ -100,13 +100,11 @@ btnDelete.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment supprimer ?')
 })
 
-
 let btnCancel = document.querySelectorAll('.btn-cancel')
 
 btnCancel.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment annuler ?')
 })
-
 
 /** form validation : changer mot de passe */
 let formPass = document.getElementById('form-pass')
