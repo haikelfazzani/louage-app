@@ -16,19 +16,20 @@
   .toast h4 {
     font-size: 20px;
   }
+
+  .col-md-8 iframe {
+    max-height: 190px
+  }
 </style>
 
 <% if(locals.paymentInfo) { %>
 <div class="container py-5">
   <div class="row">
-    <div class="col-md-4">
-      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="col-md-4 mb-3" id="ticket">
+      <div class="toast show">
         <div class="toast-header">
           <strong class="mr-auto">N°: <%= paymentInfo.newReserv.uidReservation %></strong>
           <small><%= paymentInfo.newReserv.nbPlaceReserv %> places</small>
-          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="toast-body">
           <div>
@@ -37,10 +38,12 @@
             <small>vers</small>
             <h4><%= voyage.destination %></h4>
           </div>
+          <% if(nom && nom.length > 0) { %>
           <div>
             <small>Nom Complet</small>
             <h4><%= nom %> <%= prenom %></h4>
           </div>
+          <% } %>
           <div>
             <small>Email</small>
             <h4><%= email %></h4>
@@ -50,18 +53,56 @@
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-warning" id="btn-export">exporter ticket</button>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 mb-3">
+      <iframe id='mapcanvas' class="mb-3"
+        src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+        frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+      </iframe>
+
       <iframe id='mapcanvas'
         src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
         frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
       </iframe>
     </div>
+    <button type="button" class="btn btn-warning ml-3" id="btn-export">exporter ticket</button>
   </div>
+  <!--end row-->
 </div>
 <% } %>
 <script defer>
-  document.getElementById('btn-export').onclick = () => { window.print() }
+  document.getElementById('btn-export').onclick = () => {
+    var divToPrint = document.getElementById('ticket')
+    var newWin = window.open('', 'Print-Window')
+    newWin.document.open()
+
+    newWin.document.write(`
+    <html><body onload="window.print()">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" />
+    <style>
+      .toast {
+        padding: 20px;
+      }
+
+      .toast small {
+        text-transform: uppercase;
+        color: #afafaf !important;
+      }
+
+      .toast h4 {
+        font-size: 20px;
+      }
+
+      .col-md-8 iframe {
+        max-height: 190px
+      }
+    </style>
+    ${divToPrint.innerHTML}
+    </body></html>
+  `)
+
+    newWin.document.close();
+    setTimeout(function () { newWin.close(); }, 10)
+  }
 </script>
 <%- include('../partials/footer.ejs') -%>
