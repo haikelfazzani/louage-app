@@ -1,6 +1,6 @@
 var db = require('../database/connection')
 var knex = require('../database/knex')
-var SqlString = require('sqlstring');
+var SqlString = require('sqlstring')
 
 const table = {
   name: 'stations',
@@ -26,18 +26,15 @@ module.exports = StationsDao = {
       timestamp_station: new Date().toISOString()
     })
   },
-
   updateStation (Station, idStation) {
     let { nomStation, ville, tel } = Station
 
     return knex(table.name).update({ nom_station: nomStation, ville, station_tel: tel })
       .where(table.idStation, '=', idStation)
   },
-
   deletStation (nomStation) {
     return knex(table.name).where(table.nomStation, '=', nomStation).del()
   },
-
   getStation (nomStation) {
     const rq = `select * from ${table.name} s join utilisateurs u
     on s.chef_station = u.id where s.nom_station = ?`;
@@ -51,13 +48,11 @@ module.exports = StationsDao = {
       })
     })
   },
-
   getStationByChef (email) {
-    const rq = `select u.nom, u.prenom , s.nom_station, s.ville, s.station_tel 
-    from stations s join utilisateurs u
-    on s.chef_station = u.id where u.email = ?`;
+    const rq = `select u.nom, u.prenom , s.nom_station, s.ville, s.station_tel, s.id_station 
+    from stations s join utilisateurs u on s.chef_station = u.id where u.email = ?`;
 
-    const sql = SqlString.format(rq, email);
+    const sql = SqlString.format(rq, email)
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -78,7 +73,6 @@ module.exports = StationsDao = {
       })
     })
   },
-  
   getAllStations () {
     const sql = `select * from ${table.name} ORDER BY ${table.idStation} DESC`;
 

@@ -21,7 +21,7 @@ router.get('/ajout', checkUserConnected, (req, res) => {
   let { email } = req.session.userInfo
   stationDao.getStationByChef(email)
     .then(stations => {
-      res.render('admin/vehicule/ajout', { station:stations[0] })
+      res.render('admin/vehicule/ajout', { station: stations[0] })
     })
     .catch(error => {
       res.render('admin/vehicule/ajout')
@@ -30,8 +30,9 @@ router.get('/ajout', checkUserConnected, (req, res) => {
 
 router.post('/ajout', checkUserConnected, (req, res) => {
 
-  let { proprietaire, numSerie, nbPlaces, tel, station } = req.body
-  let newVehicule = new Vehicule(proprietaire, numSerie, nbPlaces, tel, station)
+  let { id_station } = req.session.chefStationInfo
+  let { proprietaire, numSerie, nbPlaces, tel } = req.body
+  let newVehicule = new Vehicule(proprietaire, numSerie, nbPlaces, tel, id_station)
 
   vehiculeDao.addVehicule(newVehicule)
     .then(result => {
@@ -77,6 +78,5 @@ router.post('/modifier', checkUserConnected, function (req, res) {
       res.redirect('/404')
     })
 });
-
 
 module.exports = router

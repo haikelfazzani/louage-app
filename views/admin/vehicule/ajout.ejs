@@ -7,6 +7,11 @@
   <form action="/admin/vehicules/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
     <div class="form-group">
+      <label>Nom Station</label>
+      <input type="text" class="form-control" value="<%= station.nom_station %>" disabled>
+    </div>
+
+    <div class="form-group">
       <label for="proprietaire">proprietaire</label>
       <input type="text" class="form-control" id="proprietaire" name="proprietaire" placeholder="Enter proprietaire"
         required>
@@ -35,18 +40,9 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="station">station</label>
-      <select class="form-control" id="station" name="station">
-        <option value="<%= station.id_station %>"><%= station.nom_station %></option>
-      </select>
-    </div>
-
     <button type="submit" class="btn btn-dark">Ajouter vehicule</button>
     <button type="reset" class="btn btn-danger">vider</button>
   </form>
   <% } %>
-
-  <%- include('../../snackbar') -%>
 </div>
 <%- include('../../partials/footer.ejs') -%>

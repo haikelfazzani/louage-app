@@ -37,12 +37,12 @@ router.get('/ajout', checkUserConnected, (req, res) => {
 
 router.post('/ajout', checkUserConnected, (req, res) => {
 
-  let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, station } = req.body
-  let newVoyage = new Voyage(destination, heureDepart, dateDepart, prixPlace, nbPlaces, station)
+  let { id_station } = req.session.chefStationInfo
+  let { destination, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
+  let newVoyage = new Voyage(destination, heureDepart, dateDepart, prixPlace, nbPlaces, id_station)
 
   voyagesDao.addVoyage(newVoyage)
     .then(result => {
-      //res.render('admin/voyage/ajout', { msg: 'un nouveaux voyage a été bien ajouté' })
       res.redirect('/admin/voyages')
     })
     .catch(error => {
