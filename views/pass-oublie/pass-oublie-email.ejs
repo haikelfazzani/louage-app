@@ -1,0 +1,41 @@
+<%- include('../partials/head.ejs') -%>
+<link rel="stylesheet" href="/stylesheets/auth.css">
+
+<div class="container-fluid p-0 m-0 auth">
+  <div class="row p-0 m-0">
+    <div class="col-md-4">
+      <h1 class="ml-3 mr-3 display-3 w-100">Bienvenue</h1>
+      <p class="ml-3 mr-3">
+        Avec Louage Partez vers plusieurs milliers de destinations et découvrez les villes et villages
+        de la Tunisie.
+      </p>
+      <p class="ml-3 mr-3">Vous n'avez que l'embarras du choix !</p>
+    </div>
+    <div class="col-md-8">
+
+      <form action="/pass-oublie" method="POST" class="form-signin mx-400 w-100">
+        <h1 class="text-left font-bold mb-3">Mot de passe oublié</h1>
+        <hr>
+        <div class="form-group">
+          <label for="email">Adresse email</label>
+          <input type="text" id="email" name="email" class="form-control mb-3" placeholder="Entrer votre adresse email"
+            required autofocus>
+        </div>
+
+        <button class="btn-submit btn btn-lg btn-primary btn-block mt-3 mb-3 font-s14" type="submit">Envoyer</button>
+        <hr>
+        <div>          
+          </p>
+          <div class="alert alert-dark mx-400" id="form-signin" role="alert">alter</div>
+          <% if(locals.msg) { %>
+          <div class="alert alert-dark mt-0 mx-400" role="alert"><%= msg %></div>
+          <% } %>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<script src="javascripts/validation.js" defer></script>
+</body>
+</html>

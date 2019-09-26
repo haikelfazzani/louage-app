@@ -2,11 +2,9 @@ var router = require('express').Router()
 var knex = require('../database/knex')
 
 const sgMail = require('@sendgrid/mail')
-
+var jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
-
-var jwt = require('jsonwebtoken')
 
 router.get('/', function (req, res) {
   res.render('register')

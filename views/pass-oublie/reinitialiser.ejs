@@ -1,0 +1,70 @@
+<%- include('../partials/head.ejs') -%>
+<link rel="stylesheet" href="/stylesheets/auth.css">
+
+<div class="container-fluid p-0 m-0 auth">
+  <div class="row p-0 m-0">
+    <div class="col-md-4">
+      <h1 class="ml-3 mr-3 display-3 w-100">Bienvenue</h1>
+      <p class="ml-3 mr-3">
+        Avec Louage Partez vers plusieurs milliers de destinations et découvrez les villes et villages
+        de la Tunisie.
+      </p>
+      <p class="ml-3 mr-3">Vous n'avez que l'embarras du choix !</p>
+    </div>
+    <div class="col-md-8">
+
+      <form action="/pass-oublie/reinitialiser" method="POST" class="form-signin mx-400 w-100">
+        <h1 class="text-left font-bold mb-3">Reinitialiser mot de passe</h1>
+        <hr>
+
+        <div class="form-group">
+          <label for="key">CLé</label>
+          <input type="text" id="key" name="key" class="form-control" placeholder="Entrer votre clé réinitialisation"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" class="form-control" pattern="[A-Za-z0-9 #-]{6,}"
+            title="Au minimul 6 letters : letters, nombres, charactere spéciaux : # _ -"
+            placeholder="Entrer votre mot de passe" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confpassword">Confirmer Mot de passe</label>
+          <input type="password" id="confpassword" name="confpassword" class="form-control" pattern="[A-Za-z0-9 #-]{6,}"
+            title="Au minimul 6 letters : letters, nombres, charactere spéciaux : # _ -"
+            placeholder="Confirmer votre mot de passe" required>
+        </div>
+
+        <button class="btn-submit btn-lg btn-primary btn-block mt-3 mb-3 font-s14"
+          type="submit" id="btn-rein">reinitialiser</button>
+        <hr>
+        <div>
+
+          <% if(locals.msg) { %>
+          <div class="alert alert-dark mt-0 mx-400" role="alert">
+            <%= msg %> <a href="/login">se connecter</a>
+          </div>
+          <% } %>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script src="javascripts/validation.js" defer></script>
+<script defer>
+let btnRein = document.getElementById('btn-rein')
+  btnRein.disabled = true
+
+  let confPass = document.getElementById('confpassword')
+  confPass.onblur = () => {
+    btnRein.disabled = confPass.value !== document.getElementById('password').value
+  }
+</script>
+</body>
+
+</html>

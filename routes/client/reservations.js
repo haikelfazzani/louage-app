@@ -50,10 +50,10 @@ router.get('/all', checkUserConnected, (req, res) => {
   reservDao.getReservByUser(email)
     .then(reservations => {
 
-      reservations = isNaN(b) || isNaN(e)
-        ? reservations = reservations.slice(0, 5) : b < 0 && e < 5
-        ? reservations = reservations.slice(0, 5) : reservations.slice(b || 0, e || 5)
-      
+      reservations = isNaN(+b) || isNaN(+e)
+        ? reservations = reservations.slice(0, 10) : b < 0 && e < 10
+          ? reservations = reservations.slice(0, 10) : reservations.slice(b || 0, e || 10)
+
       res.render('client/profile/reservations', { reservations })
     })
     .catch(error => {

@@ -15,5 +15,6 @@ module.exports = routes = [
   { path: '/admin/voyages', source: './routes/chefstation/voyages' },
   { path: '/admin/reservations', source: './routes/chefstation/reservations' },
   { path: '/a-propos', source: './routes/apropos' },
-  { path: '/contact', source: './routes/contact' }
+  { path: '/contact', source: './routes/contact' },
+  { path: '/pass-oublie', source: './routes/pass-oublie' }
 ]
