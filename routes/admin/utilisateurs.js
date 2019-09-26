@@ -9,12 +9,17 @@ var Utilisateur = require('../../model/Utilisateur.model');
 var utilisateurDao = require('../../dao/utilisateurs.dao');
 
 router.get('/', checkUserConnected, (req, res) => {
-  let { b, e } = req.query
+  let { role } = req.query
   utilisateurDao.getUsers().then(function (utilisateurs) {
-    utilisateurs = isNaN(b) || isNaN(e)
-      ? utilisateurs = utilisateurs.slice(0, 5) : b < 0 && e < 5
-        ? utilisateurs = utilisateurs.slice(0, 5) : utilisateurs.slice(b || 0, e || 5)
-    res.render('admin/utilisateur/lister', { utilisateurs })
+
+    let utilisateursByRole = role && role !== 'tous'
+      ? utilisateurs.filter(v => v.role === role)
+      : utilisateurs
+
+    res.render('admin/utilisateur/lister', {
+      utilisateurs: utilisateursByRole,
+      roles: [...new Set(utilisateurs.map(u => u.role))]
+    })
   })
     .catch(error => {
       res.render('admin/utilisateur/lister')

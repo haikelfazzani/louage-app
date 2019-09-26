@@ -4,6 +4,18 @@
   <%- include('../navbar') -%>
 
   <% if(locals.utilisateurs) {  %>
+  <div class="dropdown d-flex justify-content-end mb-3">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="roles" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">roles</button>
+    <div class="dropdown-menu" aria-labelledby="roles">      
+      <% roles.forEach(role => {  %>
+      <a href="/admin/utilisateurs?role=<%= role %>" class="dropdown-item"><%= role %></a>
+      <% }) %>
+      <div class="dropdown-divider"></div>
+      <a href="/admin/utilisateurs?role=<%= 'tous' %>" class="dropdown-item"><%= 'tous' %></a>
+    </div>
+  </div>
+
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -17,37 +29,22 @@
         </tr>
       </thead>
       <tbody>
-        <% utilisateurs.forEach((u, i) => {  %>
+        <% utilisateurs.forEach(u => {  %>
         <tr>
-          <td><%= u.nom %></td>
-          <td><%= u.prenom %></td>
+          <td><%= u.nom ? u.nom : '-' %></td>
+          <td><%= u.prenom ? u.prenom : '-' %></td>
           <td><%= u.email %></td>
-          <td><%= u.tel %></td>
+          <td><%= u.tel ? u.tel : '-' %></td>
           <td><%= u.role %></td>
           <td>
-            <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=<%= u.email %>"><i class="fas fa-trash-alt"></i></a>
+            <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=<%= u.email %>"><i
+                class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
         <% }) %>
       </tbody>
     </table>
   </div>
-
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <%           
-            let begin = -5, end = 0
-              for(let i = 0; i <= (utilisateurs.length / 5); ) {
-                begin += 5
-                end += 5
-                i++
-              %>
-      <li class="page-item">
-        <a class="page-link" href="/admin/utilisateurs?b=<%= begin %>&e=<%= end %>"><%= i %></a>
-      </li>
-      <% } %>
-    </ul>
-  </nav>
   <% } %>
 
 </div>

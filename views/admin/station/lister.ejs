@@ -4,6 +4,18 @@
   <%- include('../navbar') -%>
 
   <% if(locals.stations) {  %>
+  <div class="dropdown d-flex justify-content-end mb-3">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="nomStations" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">Stations</button>
+    <div class="dropdown-menu" aria-labelledby="nomStations">      
+      <% nomStations.forEach(nom => {  %>
+      <a href="/admin/stations?nom=<%= nom %>" class="dropdown-item"><%= nom %></a>
+      <% }) %>
+      <div class="dropdown-divider"></div>
+      <a href="/admin/stations?nom=<%= 'tous' %>" class="dropdown-item"><%= 'tous' %></a>
+    </div>
+  </div>
+
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -15,8 +27,8 @@
           <th>action</th>
         </tr>
       </thead>
-      <tbody>
-        <% stations.forEach((u, i) => {  %>
+      <tbody id="all-stations">
+        <% stations.forEach(u => {  %>
         <tr>
           <td><%= u.nom + ' ' + u.prenom %></td>
           <td><%= u.nom_station %></td>
@@ -24,7 +36,8 @@
           <td><%= u.station_tel %></td>
           <td>
             <a href="/admin/stations/modifier?nom=<%= u.nom_station %>" class="btn btn-success">M</a>
-            <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i></a>
+            <a href="/admin/stations/supprimer?nom=<%= u.nom_station %>" class="btn btn-danger btn-delete"><i
+                class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
         <% }) %>
@@ -32,6 +45,5 @@
     </table>
   </div>
   <% } %>
-
 </div>
 <%- include('../../partials/footer.ejs') -%>

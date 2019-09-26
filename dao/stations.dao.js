@@ -53,7 +53,8 @@ module.exports = StationsDao = {
   },
 
   getStationByChef (email) {
-    const rq = `select * from stations s join utilisateurs u
+    const rq = `select u.nom, u.prenom , s.nom_station, s.ville, s.station_tel 
+    from stations s join utilisateurs u
     on s.chef_station = u.id where u.email = ?`;
 
     const sql = SqlString.format(rq, email);
@@ -66,8 +67,9 @@ module.exports = StationsDao = {
     })
   },
   getStations () {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.chef_station = u.id ORDER BY t.id_station DESC`;
+    const sql = `select u.nom, u.prenom , s.nom_station, s.ville, s.station_tel
+    from ${table.name} s join utilisateurs u
+    on s.chef_station = u.id ORDER BY s.id_station DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -76,6 +78,7 @@ module.exports = StationsDao = {
       })
     })
   },
+  
   getAllStations () {
     const sql = `select * from ${table.name} ORDER BY ${table.idStation} DESC`;
 
