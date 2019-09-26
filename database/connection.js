@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql')
 
 var remoteDB = {
     host: process.env.DB_HOST,
@@ -10,13 +10,7 @@ var remoteDB = {
 var db = mysql.createConnection(remoteDB);
 
 db.connect((err) => {
-
-    setInterval(() => {
-        db.query('SELECT 1', (err, rows) => {
-            if (err) throw err;
-        });
-    }, 10000);
-
+    setInterval(() => { db.query('SELECT 1') }, 1000 * 60 * 5)
     console.log(err || 'connected')
 })
 module.exports = db

@@ -1,106 +1,67 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
+
+<%- include('../partials/section',{ title:'Ticket', sub:'Ticket' }) -%>
+
 <style>
-  .card {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #ffffff;
-    border: 18px dotted #ffffff;
-    background-color: #007bff;
-    padding: 0px;
-    font-weight: 100;
-  }
-
-  .card div {
-    border-right: 2px dotted;
+  .toast {
     padding: 20px;
-    text-transform: capitalize;
   }
 
-  .card div:first-child {
-    background-color: #CDDC39;
-  }
-
-  .card div:last-child {
-    border: none;
-  }
-
-  .card h5 {
-    font-size: 14px;
-    color: #000000 !important;
-    margin: 0;
+  .toast small {
     text-transform: uppercase;
-    font-weight: 100;
+    color: #afafaf !important;
   }
 
-  .card .btn {
-    font-size: 35px !important
-  }
-
-  .card p {
-    color: #525252;
-    margin: 0;
-    font-size: 14px;
-    font-family: monospace;
-    margin-left: 20px;
-    margin-top: 10px;
+  .toast h4 {
+    font-size: 20px;
   }
 </style>
-
-<section class="page-header">
-  <div class="col-md-12">
-    <h3>Ticket</h3>
-  </div>
-  <div class="bread">
-    <a href="/">accueil </a>
-    <a href="#" disabled> / ticket</a>
-  </div>
-</section>
 
 <% if(locals.paymentInfo) { %>
 <div class="container py-5">
   <div class="row">
-
-    <div class="col-md-8">
-
-      <div class="card mb-3">
-        <p>wwww.Louage.com</p>
-        <div class="row">
-          <div class="col-md-5">
-            <h5>Code reservation</h5>
-            <h4 class="card-title mb-4">N°<%= paymentInfo.newReserv.uidReservation %></h4>
-
-            <h5>DE</h5>
+    <div class="col-md-4">
+      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="mr-auto">N°: <%= paymentInfo.newReserv.uidReservation %></strong>
+          <small><%= paymentInfo.newReserv.nbPlaceReserv %> places</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          <div>
+            <small>DE</small>
             <h4><%= voyage.nom_station %></h4>
-            <h5>vers</h5>
+            <small>vers</small>
             <h4><%= voyage.destination %></h4>
-
           </div>
-          <div class="col-md-4">
-            <h5>Nom</h5>
-            <h4 class="card-text"><%= nom %></h4>
-            <h5>Prenom</h5>
-            <h4 class="card-text"><%= prenom %></h4>
-            <h5>Email</h5>
-            <h4 class="card-text"><%= email %></h4>
+          <div>
+            <small>Nom Complet</small>
+            <h4><%= nom %> <%= prenom %></h4>
           </div>
-          <div class="col-md-3">
-            <h5>Nombre de place</h5>
-            <h4 class="mb-4"><%= paymentInfo.newReserv.nbPlaceReserv %> places</h4>
-            <h5>Total prix</h5>
-            <button class="btn btn-outline-light mt-3"><i class="fas fa-coins"></i>
-              <%= paymentInfo.newReserv.totalPrixPlaces %></button class="btn btn-danger">
+          <div>
+            <small>Email</small>
+            <h4><%= email %></h4>
+          </div>
+          <div><small>TOTAL</small>
+            <h4><%= paymentInfo.newReserv.totalPrixPlaces %></h4>
           </div>
         </div>
       </div>
-
       <button type="button" class="btn btn-warning" id="btn-export">exporter ticket</button>
     </div>
-
-    <% if(locals.msg) { %><div class="alert alert-primary" role="alert"><%= msg %></div><% } %>
-  </div><!-- end row -->
+    <div class="col-md-8">
+      <iframe id='mapcanvas'
+        src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+        frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+      </iframe>
+    </div>
+  </div>
 </div>
 <% } %>
-<script async defer>
-document.getElementById('btn-export').onclick = () => { window.print() }
+<script defer>
+  document.getElementById('btn-export').onclick = () => { window.print() }
 </script>
 <%- include('../partials/footer.ejs') -%>

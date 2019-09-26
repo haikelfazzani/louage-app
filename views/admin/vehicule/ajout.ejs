@@ -22,19 +22,15 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="nbPlaces">nbPlaces</label>
-          <input type="number" class="form-control" 
-          min="1" max="9"
-          id="nbPlaces" name="nbPlaces" placeholder="Enter nombre places"
-            required>
+          <input type="number" class="form-control" min="1" max="9" id="nbPlaces" name="nbPlaces"
+            placeholder="Enter nombre places" required>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="nbPlaces">tel</label>
-          <input type="tel" class="form-control" 
-          id="tel" name="tel" minlength="0" maxlength="8"
-          placeholder="Enter tel" 
-          required>
+          <input type="tel" class="form-control" id="tel" name="tel" minlength="0" maxlength="8" placeholder="Enter tel"
+            required>
         </div>
       </div>
     </div>
@@ -51,6 +47,6 @@
   </form>
   <% } %>
 
-  <%- include('../../snackbar') -%>  
+  <%- include('../../snackbar') -%>
 </div>
 <%- include('../../partials/footer.ejs') -%>
