@@ -30,7 +30,7 @@
       <tbody id="all-stations">
         <% stations.forEach(u => {  %>
         <tr>
-          <td><%= u.nom + ' ' + u.prenom %></td>
+          <td><%= u.nom ? u.nom : '-' %> <%= u.prenom ? u.prenom : '-' %></td>
           <td><%= u.nom_station %></td>
           <td><%= u.ville %></td>
           <td><%= u.station_tel %></td>

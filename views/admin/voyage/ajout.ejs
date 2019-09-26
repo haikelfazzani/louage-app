@@ -8,10 +8,8 @@
   <form action="/admin/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
     
     <div class="form-group">
-      <label for="station">nom station</label>
-      <select class="form-control" id="station" name="station">
-        <option value="<%= station.id_station %>"><%= station.nom_station %></option>
-      </select>
+      <label>Nom Station</label>
+      <input type="text" class="form-control" value="<%= station.nom_station %>" disabled>
     </div>
 
     <div class="form-group">
