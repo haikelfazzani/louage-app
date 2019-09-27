@@ -19,7 +19,7 @@ const table = {
 const UtilisateurDao = {
 
   addUser (User) {
-    let { email, password, role } = User;
+    let { email, password, role } = User
 
     const rq = `INSERT INTO ${table.name} 
     (${table.email}, ${table.password}, ${table.role}, ${table.timestamp}) values(?, ? , ?, ?)`;
@@ -43,7 +43,6 @@ const UtilisateurDao = {
   },
 
   updateUserPassword (email, password) {
-
     const rq = `update ${table.name} set ${table.password} = ? where ${table.email} = ? `;
     const sql = SqlString.format(rq, [password, email]);
 
@@ -57,7 +56,7 @@ const UtilisateurDao = {
 
   deleteUser (password) {
     const rq = `delete from ${table.name} where ${table.password} = ?`;
-    const sql = SqlString.format(rq, password);
+    const sql = SqlString.format(rq, password)
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -69,7 +68,7 @@ const UtilisateurDao = {
 
   deleteUserByEmail (email) {
     const rq = `delete from ${table.name} where ${table.email} = ?`;
-    const sql = SqlString.format(rq, email);
+    const sql = SqlString.format(rq, email)
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -81,7 +80,7 @@ const UtilisateurDao = {
 
   getUserByRole (role) {
     const rq = `select * from ${table.name} where ${table.role} = ? ORDER BY ${table.id} DESC`;
-    const sql = SqlString.format(rq, role);
+    const sql = SqlString.format(rq, role)
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -100,8 +99,7 @@ const UtilisateurDao = {
   },
 
   getUsers () {
-    return knex(table.name).select('nom', 'prenom', 'email', 'tel', 'role')
-    .orderBy(table.id, 'DESC')
+    return knex(table.name).select('nom', 'prenom', 'email', 'tel', 'role', 'timestamp_utilisateur').orderBy(table.id, 'DESC')
   },
 
   updateAvatar (avatar, email) {

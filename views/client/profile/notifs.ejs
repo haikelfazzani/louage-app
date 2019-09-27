@@ -1,6 +1,5 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-
 <%- include('../../partials/section',{ title:'Mes Notifications' , sub:'Mes Notifications'}) -%>
 
 <div class="container py-5">
@@ -33,20 +32,5 @@
   </div>
 
 </div>
-<script defer>
-  let btnNotif = document.querySelectorAll('.list-group-item')
-  btnNotif.forEach(b => {
-    b.onclick = () => {
-      let data = JSON.parse(b.getAttribute('data-notif'));
-
-      document.querySelector('.modal-body').innerHTML = `
-      <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1" id="sujet">${data.sujet}</h5>
-          <small>${data.timestamp_notification}</small>
-        </div>
-        <p class="text-break mb-1">${data.message}</p>
-        <small><i class="fas fa-map-marker-alt"></i> ${data.nom_station}</small>`
-    }
-  })
-</script>
+<script src="/javascripts/notifs.js" defer></script>
 <%- include('../../partials/footer.ejs') -%>
