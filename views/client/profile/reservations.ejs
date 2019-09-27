@@ -5,9 +5,7 @@
 
 <div class="container py-5">
 
-  <% if(locals.reservations) {  
-          reservations.sort((i,j) => Date.parse(j.date_depart) - Date.parse(i.date_depart) )
-    %>
+  <% if(locals.reservations && locals.reservations.length > 0) { %>
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -35,12 +33,10 @@
             <span class="badge badge-dark"><%= u.etat_reservation %></span>
           </td>
           <td>
-            <% if(u.etat_reservation === 'payer') { 
-                    if((Date.parse(u.date_depart) + (1000 * 60 * 60 * (+u.heure_depart-1)) + (1000*60*10)) >= Date.parse(new Date())) {  
-                  %>
+            <% if(u.etat_reservation === 'payer' && u.out === false) { %>
             <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
                 class="fas fa-hand-paper"></i></a>
-            <% } } %>
+            <% } %>
           </td>
         </tr>
         <% }) %>
@@ -63,6 +59,8 @@
       <% } %>
     </ul>
   </nav>
+  <% } else { %>
+  <div class="alert alert-danger" role="alert">Aucune reservation trouvée pour le moment, réessayez plus tard!</div>
   <% } %>
 </div>
 <%- include('../../partials/footer.ejs') -%>

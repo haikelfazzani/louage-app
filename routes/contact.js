@@ -2,14 +2,11 @@ const router = require('express').Router()
 const nodemailer = require('nodemailer')
 const validContactForm = require('../middleware/validContactForm')
 
-router.get('/', (req, res) => {
-  res.render('contact')
+router.get('/', async (req, res) => {
+  await res.render('contact')
 })
 
 router.post('/', validContactForm, (req, res) => {
-
-  const propEmail = process.env.EMAIL
-  const pass = process.env.PASS_EMAIL
 
   let { nom, sujet, email, message } = req.body
 
@@ -18,15 +15,15 @@ router.post('/', validContactForm, (req, res) => {
     host: 'smtp.zoho.com',
     port: 465,
     secure: false,
-    auth: { user: propEmail.trim(), pass }
-  });
+    auth: { user: propEmail.trim(), pass:process.env.PASS_EMAIL }
+  })
 
   let mailOptions = {
     from: `"${nom} 👻" <${email}>`,
-    to: propEmail.trim(),
+    to: process.env.EMAIL.trim(),
     subject: sujet.trim(),
     text: message.trim()
-  };
+  }
 
   transporter.sendMail(mailOptions, function (error, info) {
     let errorMail = error
@@ -34,8 +31,8 @@ router.post('/', validContactForm, (req, res) => {
       msg: errorMail
         ? "Cette adresse mail n'est pas valide!"
         : "un email a été bien envoyé"
-    });
-  });
+    })
+  })
 })
 
 module.exports = router

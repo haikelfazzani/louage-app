@@ -1,3 +1,5 @@
-module.exports = require('express').Router().get('/', (req, res) => {
-  res.render('apropos')
+router = require('express').Router()
+
+module.exports = router.get('/', async (req, res) => {
+  await res.render('apropos')
 })

@@ -1,11 +1,9 @@
 <%- include('partials/head.ejs') -%>
 <%- include('partials/navbar') -%>
-
 <%- include('partials/section',{ title:'Contact', sub:'Contact' }) -%>
 
 <div class="container py-5">
-  <div class="text-center mx-auto mb-2" style="max-width: 700px">
-    <h3>Nous contacter</h3>
+  <div class="text-center font-s18 mx-auto mb-2" style="max-width:500px">
     <p>Est-ce que quelque chose ne fonctionne pas ? n'hésitez pas à nous contacter.</p>
   </div>
   <form action="/contact" method="POST" class="form-general bg-light p-0 mb-3">
@@ -34,8 +32,8 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea class="form-control" id="message" name="message" minlength="50" maxlength="250"
-            rows="7" placeholder="mon message ici.." required></textarea>
+          <textarea class="form-control" id="message" name="message" minlength="50" maxlength="250" rows="7"
+            placeholder="mon message ici.." required></textarea>
         </div>
       </div>
     </div>
