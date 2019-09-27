@@ -1,9 +1,9 @@
 var router = require('express').Router()
 var notifsDao = require('../../dao/notifications.dao')
 var Notification = require('../../model/Notification')
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkUserRoleChef } = require('../../middleware/authorisation')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { id } = req.session.userInfo
   notifsDao.getNotifisByChefStation(id)
     .then(notifications => {
@@ -14,11 +14,11 @@ router.get('/', checkUserConnected, (req, res) => {
     })
 })
 
-router.get('/envoyer', checkUserConnected, (req, res) => {
+router.get('/envoyer', [checkUserConnected, checkUserRoleChef], (req, res) => {
   res.render('admin/notifs/ajout')
 })
 
-router.post('/envoyer', checkUserConnected, (req, res) => {
+router.post('/envoyer', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { id } = req.session.userInfo
   let { nom_station } = req.session.chefStationInfo
   let { sujet, msg } = req.body
@@ -32,7 +32,7 @@ router.post('/envoyer', checkUserConnected, (req, res) => {
     })
 })
 
-router.get('/modifier', checkUserConnected, (req, res) => {
+router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { notif } = req.query
   notifsDao.getNotifisById(notif)
     .then(result => {
@@ -43,7 +43,7 @@ router.get('/modifier', checkUserConnected, (req, res) => {
     })
 })
 
-router.post('/modifier', checkUserConnected, (req, res) => {
+router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { sujet, message, idnotif } = req.body
   let notif = new Notification(sujet, message, '', '')
 
@@ -56,7 +56,7 @@ router.post('/modifier', checkUserConnected, (req, res) => {
     })
 })
 
-router.get('/supprimer', checkUserConnected, (req, res) => {
+router.get('/supprimer', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { notif } = req.query
   notifsDao.deletNotification(notif)
     .then(result => {

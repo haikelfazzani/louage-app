@@ -1,41 +1,33 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<%- include('../../partials/section',{ title:'Mon Compte' , sub:'Notifications'}) -%>
+
+<%- include('../../partials/section',{ title:'Mes Notifications' , sub:'Mes Notifications'}) -%>
 
 <div class="container py-5">
-  <%- include('navtabs') -%>
-
-  <div class="row">
-    <%- include('avatar') -%>
-
-    <div class="col-md-9">
-      <% if(locals.notifications) { 
+  <% if(locals.notifications) { 
         notifications.forEach(n => {        
       %>
-      <a href="#" data-notif="<%= JSON.stringify(n) %>" class="list-group-item list-group-item-action" data-toggle="modal"
-       data-target="#exampleModal">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1" style="    color: #007bff; font-weight: 600;"><%= n.sujet %></h5>
-          <small>3 days ago</small>
-        </div>
-        <p class="overflow-hidden mb-1"><%= n.message %></p>
-        <small><%= n.nom_station %></small>
-      </a>      
-      <% }) } %>
+  <a href="#" data-notif="<%= JSON.stringify(n) %>" class="list-group-item list-group-item-action" data-toggle="modal"
+    data-target="#exampleModal">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1" style="    color: #007bff; font-weight: 600;"><%= n.sujet %></h5>
+      <small>3 days ago</small>
     </div>
+    <p class="overflow-hidden mb-1"><%= n.message %></p>
+    <small><%= n.nom_station %></small>
+  </a>
+  <% }) } %>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body"></div>
-          </div>
-        </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body"></div>
       </div>
+    </div>
+  </div>
 
-  </div><!-- end row -->
 </div>
-
 <script defer>
   let btnNotif = document.querySelectorAll('.list-group-item')
   btnNotif.forEach(b => {

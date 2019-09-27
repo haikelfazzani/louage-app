@@ -1,11 +1,11 @@
 var router = require('express').Router()
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkUserRoleChef } = require('../../middleware/authorisation')
 
 var vehiculeDao = require('../../dao/vehicules.dao')
 var stationDao = require('../../dao/stations.dao')
 var Vehicule = require('../../model/Vehicule.model')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { id } = req.session.userInfo
   vehiculeDao.getVehicules(id)
     .then(vehicules => {
@@ -17,7 +17,7 @@ router.get('/', checkUserConnected, (req, res) => {
 })
 
 
-router.get('/ajout', checkUserConnected, (req, res) => {
+router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { email } = req.session.userInfo
   stationDao.getStationByChef(email)
     .then(stations => {
@@ -28,7 +28,7 @@ router.get('/ajout', checkUserConnected, (req, res) => {
     })
 })
 
-router.post('/ajout', checkUserConnected, (req, res) => {
+router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { id_station } = req.session.chefStationInfo
   let { proprietaire, numSerie, nbPlaces, tel } = req.body
@@ -44,7 +44,7 @@ router.post('/ajout', checkUserConnected, (req, res) => {
 })
 
 
-router.get('/supprimer', checkUserConnected, function (req, res) {
+router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req, res) {
   vehiculeDao.deletVehicule(req.query.numserie)
     .then(result => {
       res.redirect('/admin/vehicules')
@@ -54,7 +54,7 @@ router.get('/supprimer', checkUserConnected, function (req, res) {
     })
 });
 
-router.get('/modifier', checkUserConnected, function (req, res) {
+router.get('/modifier', [checkUserConnected, checkUserRoleChef], function (req, res) {
   vehiculeDao.getVehicule(req.query.numserie)
     .then(vehicule => {
       res.render('admin/vehicule/modifier', { vehicule: vehicule[0] })
@@ -65,7 +65,7 @@ router.get('/modifier', checkUserConnected, function (req, res) {
 });
 
 
-router.post('/modifier', checkUserConnected, function (req, res) {
+router.post('/modifier', [checkUserConnected, checkUserRoleChef], function (req, res) {
 
   let { proprietaire, numserie, nbPlaces, tel, idvehicule } = req.body
   let newVehicule = new Vehicule(proprietaire, numserie, nbPlaces, tel, '')

@@ -1,10 +1,10 @@
 var router = require('express').Router()
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkUserRoleChef } = require('../../middleware/authorisation')
 
 var reservDao = require('../../dao/reservations.dao')
 var paymentDao = require('../../dao/payments.dao')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { id_station, nom_station } = req.session.chefStationInfo
   let { b, e } = req.query
@@ -21,7 +21,7 @@ router.get('/', checkUserConnected, (req, res) => {
     })
 })
 
-router.get('/annuler', checkUserConnected, (req, res) => {
+router.get('/annuler', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { r } = req.query
 

@@ -1,14 +1,15 @@
 var router = require('express').Router()
 var utilisateurDao = require('../dao/utilisateurs.dao')
+var { isConnected } = require('../middleware/authorisation')
 
 const sgMail = require('@sendgrid/mail')
 var jwt = require('jsonwebtoken')
 
-router.get('/', (req, res) => {
+router.get('/', isConnected, (req, res) => {
   res.render('pass-oublie/pass-oublie-email')
 })
 
-router.post('/', (req, res) => {
+router.post('/', isConnected, (req, res) => {
   let { email } = req.body
   utilisateurDao.getUser(email)
     .then(result => {
@@ -37,13 +38,13 @@ router.post('/', (req, res) => {
     })
 })
 
-router.get('/reinitialiser', (req, res) => {
+router.get('/reinitialiser', isConnected, (req, res) => {
   let email = req.cookies.passoublieemail;
   res.cookie('passoublieemail', email, { maxAge: 1000 * 60 * 5, httpOnly: true })
   res.render('pass-oublie/reinitialiser')
 })
 
-router.post('/reinitialiser', (req, res) => {
+router.post('/reinitialiser', isConnected, (req, res) => {
   let { key, password } = req.body
   let email = req.cookies.passoublieemail
 

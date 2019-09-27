@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkAdminOrChef } = require('../../middleware/authorisation')
 var Role = require('../../model/Role.enum')
 
 var utilisateurDao = require('../../dao/utilisateurs.dao');
@@ -9,7 +9,7 @@ var voyageDao = require('../../dao/voyages.dao')
 var reservDao = require('../../dao/reservations.dao')
 var vehiculeDao = require('../../dao/vehicules.dao')
 
-router.get('/', checkUserConnected, function (req, res) {
+router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
     let { id, email, role } = req.session.userInfo
 
@@ -47,7 +47,7 @@ router.get('/', checkUserConnected, function (req, res) {
         .catch(error => error)
 });
 
-router.get('/voyages.json', checkUserConnected, function (req, res) {
+router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
     let { nom_station } = req.session.chefStationInfo
 
@@ -60,7 +60,7 @@ router.get('/voyages.json', checkUserConnected, function (req, res) {
         });
 });
 
-router.get('/utilisateurs.json', checkUserConnected, function (req, res) {
+router.get('/utilisateurs.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
     utilisateurDao.getUsers()
         .then(function (utilisateurs) {

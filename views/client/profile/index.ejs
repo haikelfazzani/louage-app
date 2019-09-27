@@ -15,26 +15,25 @@
 
         <div class="form-group">
           <label for="nom">Nom</label>
-          <input type="text" class="form-control" name="nom" id="nom" placeholder="Entrer nom" pattern="[A-Za-z ]{4,}"
+          <input type="text" class="form-control" name="nom" id="nom" placeholder="joe" pattern="[A-Za-z]{4,}"
             title="Seulement des letters" value="<%= user.nom  %>" required>
         </div>
 
         <div class="form-group">
           <label for="prenom">prenom</label>
-          <input type="text" class="form-control" name="prenom" id="prenom" pattern="[A-Za-z ]{4,}"
-            title="Seulement des letters" placeholder="Entrer prenom" value="<%= user.prenom  %>" required>
+          <input type="text" class="form-control" name="prenom" id="prenom" pattern="[A-Za-z]{4,}"
+            title="Seulement des letters" placeholder="doe" value="<%= user.prenom  %>" required>
         </div>
 
         <div class="form-group">
           <label for="email">Email adresse</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Entrer email"
-            value="<%= user.email  %>" required>
+          <input type="email" class="form-control" name="email" id="email" value="<%= user.email  %>" required>
         </div>
 
         <div class="form-group mb-4">
           <label for="tel">tel</label>
-          <input type="number" class="form-control" id="tel" name="tel" placeholder="Entrer numero telephone"
-            value="<%= user.tel  %>" required>
+          <input type="tel" class="form-control" id="tel" name="tel" 
+          minlength="8" maxlength="8" placeholder="71 455 988" value="<%= user.tel  %>" required>
         </div>
 
         <button type="submit" class="btn btn-dark">mettre à jour profile</button>

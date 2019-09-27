@@ -5,9 +5,9 @@ var Station = require('../../model/Station.model');
 var stationDao = require('../../dao/stations.dao');
 var utilisateurDao = require('../../dao/utilisateurs.dao');
 
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkUserRoleAdmin } = require('../../middleware/authorisation')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
 
   let { nom } = req.query
 
@@ -26,7 +26,7 @@ router.get('/', checkUserConnected, (req, res) => {
     })
 })
 
-router.get('/ajout', checkUserConnected, (req, res) => {
+router.get('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
   utilisateurDao.getUserByRole('chef_station')
     .then(chefStations => {
       req.session.chefStations = chefStations
@@ -37,7 +37,7 @@ router.get('/ajout', checkUserConnected, (req, res) => {
     })
 })
 
-router.post('/ajout', checkUserConnected, function (req, res) {
+router.post('/ajout', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   let { chef, nom, ville, tel } = req.body;
 
   let station = new Station(nom, ville, tel, chef)
@@ -54,7 +54,7 @@ router.post('/ajout', checkUserConnected, function (req, res) {
 });
 
 
-router.get('/supprimer', checkUserConnected, function (req, res) {
+router.get('/supprimer', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   let nomStation = req.query.nom
 
   stationDao.deletStation(nomStation.trim())
@@ -66,11 +66,11 @@ router.get('/supprimer', checkUserConnected, function (req, res) {
     })
 });
 
-router.post('/supprimer', checkUserConnected, function (req, res) {
+router.post('/supprimer', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   res.render('admin/station/ajout');
 });
 
-router.get('/modifier', checkUserConnected, function (req, res) {
+router.get('/modifier', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   let { nom } = req.query
 
   stationDao.getStation(nom)
@@ -82,7 +82,7 @@ router.get('/modifier', checkUserConnected, function (req, res) {
     })
 });
 
-router.post('/modifier', checkUserConnected, function (req, res) {
+router.post('/modifier', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   let { idstation, nom, ville, tel } = req.body
 
   let newStation = new Station(nom, ville, tel, '')
@@ -96,4 +96,4 @@ router.post('/modifier', checkUserConnected, function (req, res) {
     })
 });
 
-module.exports = router;
+module.exports = router

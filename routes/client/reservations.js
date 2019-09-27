@@ -1,25 +1,11 @@
 var router = require('express').Router()
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected,checkIsClient } = require('../../middleware/authorisation')
 
 var reservDao = require('../../dao/reservations.dao')
 var voyageDao = require('../../dao/voyages.dao')
 var paymentDao = require('../../dao/payments.dao')
 
-function checkValidParam (req, res, next) {
-
-  try {
-    let { destination, station, date } = req.query
-
-    if (destination && station && date) {
-      res.redirect('/404')
-    }
-    else next()
-  } catch (error) {
-    res.redirect('/404')
-  }
-}
-
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected,checkIsClient], (req, res) => {
 
   let selectedVoyage = JSON.parse(Buffer.from(req.query.v, 'base64').toString())
   let { destination, nom_station, timestamp_voyage } = selectedVoyage
@@ -42,7 +28,7 @@ router.get('/', checkUserConnected, (req, res) => {
 })
 
 
-router.get('/all', checkUserConnected, (req, res) => {
+router.get('/all', [checkUserConnected,checkIsClient], (req, res) => {
 
   let { email } = req.session.userInfo
   let { b, e } = req.query
@@ -69,8 +55,7 @@ router.post('/ajout', checkUserConnected, (req, res) => {
   res.redirect('/payments')
 })
 
-
-router.get('/annuler', checkUserConnected, function (req, res) {
+router.get('/annuler', [checkUserConnected,checkIsClient], function (req, res) {
   let { r } = req.query
 
   Promise.all([

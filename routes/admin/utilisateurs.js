@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkUserRoleAdmin } = require('../../middleware/authorisation')
 
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+var bcrypt = require('bcrypt')
+var saltRounds = 10;
 
 var Utilisateur = require('../../model/Utilisateur.model');
 var utilisateurDao = require('../../dao/utilisateurs.dao');
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
   let { role } = req.query
   utilisateurDao.getUsers().then(function (utilisateurs) {
 
@@ -27,12 +27,12 @@ router.get('/', checkUserConnected, (req, res) => {
 })
 
 
-router.get('/ajout', checkUserConnected, (req, res) => {
+router.get('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
   res.render('admin/utilisateur/ajout')
 })
 
 
-router.post('/ajout', checkUserConnected, function (req, res) {
+router.post('/ajout', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   let { email, password, role } = req.body;
 
   bcrypt.hash(password, saltRounds)
@@ -55,14 +55,14 @@ router.post('/ajout', checkUserConnected, function (req, res) {
         })
     })
     .catch(errHash => { res.render('error', { appErrors: errHash }) });
-});
+})
 
-router.post('/modifier', checkUserConnected, function (req, res) {
+router.post('/modifier', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   res.render('admin/utilisateur');
-});
+})
 
 
-router.get('/supprimer', checkUserConnected, function (req, res) {
+router.get('/supprimer', [checkUserConnected, checkUserRoleAdmin], function (req, res) {
   let { email } = req.query
 
   utilisateurDao.deleteUserByEmail(email)
@@ -72,7 +72,6 @@ router.get('/supprimer', checkUserConnected, function (req, res) {
     .catch(error => {
       res.redirect('/admin/utilisateurs')
     })
-});
+})
 
-
-module.exports = router;
+module.exports = router
