@@ -11,9 +11,20 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   reservDao.getReservsVoyagesUsers(id_station)
     .then(reservations => {
+
+      let current = Date.parse(new Date());
+      reservations = reservations.map(v => {
+        let hToMilli = (1000 * 60 * 60 * (parseInt(v.heure_depart, 10) - 1))
+        let d = Date.parse(v.date_depart) + hToMilli - (1000 * 60 * 15)
+        v.out = current > d
+        return v
+      })
+
       reservations = isNaN(b) || isNaN(e)
-        ? reservations = reservations.slice(0, 5) : b < 0 && e < 5
-          ? reservations = reservations.slice(0, 5) : reservations.slice(b || 0, e || 5)
+        ? reservations.slice(0, 10) : b < 0 && e < 10
+          ? reservations.slice(0, 10) : reservations.slice(b || 0, e || 10);
+
+      reservations.sort((i, j) => Date.parse(j.date_depart) - Date.parse(i.date_depart))
       res.render('admin/reservation/index', { reservations, nom_station })
     })
     .catch(error => {

@@ -113,18 +113,35 @@ function isValidPass (str) {
   return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#]*$/gi.test(str) && str.length > 5)
 }
 
-if(formPass) {
+if (formPass) {
   formPass.onsubmit = (e) => {
 
     let pass = e.target.password.value
     if (isValidPass(pass) && e.target.confpassword.value === pass) {
       return true
     }
-  
+
     let alert = document.getElementById('alert-pass')
     alert.textContent = 'mot de passe incorrect ou contient des charactére n\'ont valide';
     alert.style.display = 'block';
     setTimeout(() => { alert.style.display = 'none' }, 5000)
     return false
+  }
+}
+
+
+/** Contact Page Form */
+let btnSend = document.getElementById('btn-send-mail'), r = '';
+btnSend.disabled = true
+let check = (s) => /^[a-z0-9\;\.\,\+\-\s+ ]+$/gmi.test(s);
+
+document.getElementById('message').onkeyup = (e) => {
+  r = e.target.value
+  if (check(r.replace(/\r|\n/g, ''))) {
+    if (r.length > 50) btnSend.disabled = false
+    else btnSend.disabled = true
+  }
+  else {
+    btnSend.disabled = true
   }
 }
