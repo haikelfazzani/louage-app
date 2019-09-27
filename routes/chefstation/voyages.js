@@ -1,15 +1,15 @@
 var router = require('express').Router()
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkUserRoleChef } = require('../../middleware/authorisation')
 
 var stationDao = require('../../dao/stations.dao')
 var voyagesDao = require('../../dao/voyages.dao')
 var Voyage = require('../../model/Voyage.model')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { chefStationInfo } = req.session
   let { b, e } = req.query
-  
+
   voyagesDao.getVoyageByNomStation(chefStationInfo.nom_station)
     .then(function (voyages) {
       res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
@@ -24,18 +24,18 @@ router.get('/', checkUserConnected, (req, res) => {
 })
 
 
-router.get('/ajout', checkUserConnected, (req, res) => {
+router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { email } = req.session.userInfo
   stationDao.getStationByChef(email)
     .then(station => {
-      res.render('admin/voyage/ajout', { station:station[0] })
+      res.render('admin/voyage/ajout', { station: station[0] })
     })
     .catch(error => {
       res.render('admin/voyage/ajout')
     })
 })
 
-router.post('/ajout', checkUserConnected, (req, res) => {
+router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { id_station } = req.session.chefStationInfo
   let { destination, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
@@ -51,7 +51,7 @@ router.post('/ajout', checkUserConnected, (req, res) => {
 })
 
 
-router.get('/supprimer', checkUserConnected, function (req, res) {
+router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req, res) {
   let { voyage } = req.query
 
   voyagesDao.deletVoyage(voyage)
@@ -64,14 +64,14 @@ router.get('/supprimer', checkUserConnected, function (req, res) {
 });
 
 
-router.get('/modifier', checkUserConnected, (req, res) => {
+router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { v } = req.query
   let voyage = (JSON.parse(req.cookies.voyages)).find(vo => +vo.id_voyage === +v)
   res.render('admin/voyage/modifier', { voyage })
 })
 
-router.post('/modifier', checkUserConnected, (req, res) => {
+router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
 
@@ -85,5 +85,4 @@ router.post('/modifier', checkUserConnected, (req, res) => {
       res.redirect('/admin/voyages')
     })
 })
-
 module.exports = router

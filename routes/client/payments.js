@@ -1,5 +1,5 @@
 var router = require('express').Router()
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkIsClient } = require('../../middleware/authorisation')
 var uniqid = require('uniqid')
 
 var reservDao = require('../../dao/reservations.dao')
@@ -8,7 +8,7 @@ var paymentDao = require('../../dao/payments.dao')
 var Payment = require('../../model/Payment.model')
 var Reservation = require('../../model/Reservation')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
 
   let reservInfo = JSON.parse(req.cookies.vosreservations)
   let { nbplaces, total, idvoyage } = reservInfo
@@ -24,7 +24,7 @@ router.get('/', checkUserConnected, (req, res) => {
     })
 })
 
-router.post('/confirmer', checkUserConnected, (req, res) => {
+router.post('/confirmer', [checkUserConnected, checkIsClient], (req, res) => {
   let { uidreserv, numcarte, nbplacesreserv, total, nb_places, idvoyage } = req.body
   let { id } = req.session.userInfo
 
@@ -45,7 +45,7 @@ router.post('/confirmer', checkUserConnected, (req, res) => {
     })
 })
 
-router.get('/annuler', checkUserConnected, function (req, res) {
+router.get('/annuler', [checkUserConnected, checkIsClient], function (req, res) {
   let { numserie } = req.query
 
   vehiculeDao.deletVehicule(numserie)

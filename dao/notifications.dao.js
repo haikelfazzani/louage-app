@@ -31,7 +31,7 @@ module.exports = NotificationsDao = {
     return knex(table.name).where(table.id, '=', idNotif).del()
   },
   getNotifisById (id) {
-    const rq = `SELECT * from ${table.name} WHERE ${table.id} = ${id}`;
+    const rq = `SELECT * from ${table.name} WHERE ${table.id} = ${id} ORDER BY ${table.id} DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(rq, (err, result) => {
@@ -41,7 +41,7 @@ module.exports = NotificationsDao = {
     })
   },
   getNotifisByChefStation (idUtilisateur) {
-    const rq = `SELECT * from ${table.name} t WHERE t.id_utilisateur = ${idUtilisateur}`;
+    const rq = `SELECT * from ${table.name} t WHERE t.id_utilisateur = ${idUtilisateur} ORDER BY t.id DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(rq, (err, result) => {
@@ -51,7 +51,8 @@ module.exports = NotificationsDao = {
     })
   },
   getNotifications () {
-    const rq = `select * from ${table.name} t join utilisateurs u on t.id_utilisateur = u.id`;
+    const rq = `SELECT * from ${table.name} t 
+    JOIN utilisateurs u ON t.id_utilisateur = u.id ORDER BY t.id DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(rq, (err, result) => {

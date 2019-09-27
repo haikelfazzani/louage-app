@@ -1,8 +1,8 @@
 var router = require('express').Router()
 var notifDao = require('../../dao/notifications.dao')
-var { checkUserConnected } = require('../../middleware/authorisation')
+var { checkUserConnected, checkIsClient } = require('../../middleware/authorisation')
 
-router.get('/', checkUserConnected, (req, res) => {
+router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
   notifDao.getNotifications()
     .then(notifications => {
       res.render('client/profile/notifs', { notifications })

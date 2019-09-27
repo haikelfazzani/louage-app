@@ -1,13 +1,14 @@
-var router = require('express').Router();
+var router = require('express').Router()
+var { isConnected } = require('../middleware/authorisation')
 var UtilisateurDao = require('../dao/utilisateurs.dao');
 const bcrypt = require('bcrypt')
 const checkValidEmail = require('../middleware/checkValidEmail')
 
-router.get('/', function (req, res) {
+router.get('/', isConnected, function (req, res) {
   res.render('login')
 });
 
-router.post('/', checkValidEmail, function (req, res) {
+router.post('/', [isConnected, checkValidEmail], function (req, res) {
   let { email, password } = req.body
 
   UtilisateurDao.getUser(email)

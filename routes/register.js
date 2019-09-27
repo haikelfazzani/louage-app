@@ -1,16 +1,17 @@
 var router = require('express').Router()
 var knex = require('../database/knex')
+var { isConnected } = require('../middleware/authorisation')
 
 const sgMail = require('@sendgrid/mail')
 var jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
 
-router.get('/', function (req, res) {
+router.get('/', isConnected, function (req, res) {
   res.render('register')
 });
 
-router.post('/', function (req, res) {
+router.post('/', isConnected, function (req, res) {
 
   let { email, password } = req.body;
 
@@ -46,11 +47,11 @@ router.post('/', function (req, res) {
     .catch(errHash => { res.render('error', { appErrors: errHash }) });
 });
 
-router.get('/email/validation', (req, res) => {
+router.get('/email/validation', isConnected, (req, res) => {
   res.render('register-valider')
 })
 
-router.post('/email/validation', (req, res) => {
+router.post('/email/validation', isConnected, (req, res) => {
 
   let { key } = req.body
 
