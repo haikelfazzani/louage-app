@@ -83,6 +83,5 @@ router.get('/annuler', checkUserConnected, function (req, res) {
     .catch(error => {
       res.redirect('/404')
     })
-});
-
+})
 module.exports = router

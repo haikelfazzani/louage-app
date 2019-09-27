@@ -16,5 +16,7 @@ module.exports = routes = [
   { path: '/admin/reservations', source: './routes/chefstation/reservations' },
   { path: '/a-propos', source: './routes/apropos' },
   { path: '/contact', source: './routes/contact' },
-  { path: '/pass-oublie', source: './routes/pass-oublie' }
+  { path: '/pass-oublie', source: './routes/pass-oublie' },
+  { path: '/utilisateur/notifications', source: './routes/client/notifs' },
+  { path: '/admin/notifications', source: './routes/chefstation/notifs' }
 ]

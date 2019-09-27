@@ -8,7 +8,7 @@ var paymentDao = require('../../dao/payments.dao')
 var Payment = require('../../model/Payment.model')
 var Reservation = require('../../model/Reservation')
 
-router.get('/', [checkUserConnected], (req, res) => {
+router.get('/', checkUserConnected, (req, res) => {
 
   let reservInfo = JSON.parse(req.cookies.vosreservations)
   let { nbplaces, total, idvoyage } = reservInfo
@@ -45,7 +45,6 @@ router.post('/confirmer', checkUserConnected, (req, res) => {
     })
 })
 
-
 router.get('/annuler', checkUserConnected, function (req, res) {
   let { numserie } = req.query
 
@@ -56,6 +55,5 @@ router.get('/annuler', checkUserConnected, function (req, res) {
     .catch(error => {
       res.redirect('/admin/vehicules')
     })
-});
-
+})
 module.exports = router
