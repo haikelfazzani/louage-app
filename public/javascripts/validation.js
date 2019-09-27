@@ -11,7 +11,6 @@ function isValidInput (str) {
 }
 
 let generalForm = document.querySelector('.form-general')
-
 if (generalForm) {
   generalForm.onsubmit = (e) => {
 
@@ -95,20 +94,17 @@ function previewImage (event) {
 
 /** alert confirm before delete */
 let btnDelete = document.querySelectorAll('.btn-delete')
-
 btnDelete.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment supprimer ?')
 })
 
 let btnCancel = document.querySelectorAll('.btn-cancel')
-
 btnCancel.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment annuler ?')
 })
 
 /** form validation : changer mot de passe */
 let formPass = document.getElementById('form-pass')
-
 function isValidPass (str) {
   return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#]*$/gi.test(str) && str.length > 5)
 }
@@ -132,16 +128,18 @@ if (formPass) {
 
 /** Contact Page Form */
 let btnSend = document.getElementById('btn-send-mail'), r = '';
-btnSend.disabled = true
-let check = (s) => /^[a-z0-9\;\.\,\+\-\s+ ]+$/gmi.test(s);
+if (btnSend) {
+  btnSend.disabled = true
+  let check = (s) => /^[a-z0-9\;\.\,\+\-\s+ ]+$/gmi.test(s)
 
-document.getElementById('message').onkeyup = (e) => {
-  r = e.target.value
-  if (check(r.replace(/\r|\n/g, ''))) {
-    if (r.length > 50) btnSend.disabled = false
-    else btnSend.disabled = true
-  }
-  else {
-    btnSend.disabled = true
+  document.getElementById('message').onkeyup = (e) => {
+    r = e.target.value
+    if (check(r.replace(/\r|\n/g, ''))) {
+      if (r.length > 50) btnSend.disabled = false
+      else btnSend.disabled = true
+    }
+    else {
+      btnSend.disabled = true
+    }
   }
 }

@@ -54,10 +54,7 @@ module.exports = VoyagesDao = {
   },
 
   updateNbPlaces (nbPlaces, idVoyage) {
-
-    const rq = `update ${table.name} 
-    set ${table.nbPlaces} = ? where ${table.idVoyage} = ? `;
-
+    const rq = `update ${table.name} set ${table.nbPlaces} = ? where ${table.idVoyage} = ? `;
     const sql = SqlString.format(rq, [nbPlaces, idVoyage]);
 
     return new Promise((resolve, reject) => {
@@ -74,8 +71,7 @@ module.exports = VoyagesDao = {
 
   getVoyageByNomStation (nomStation) {
     const rq = `SELECT * FROM ${table.name} v JOIN stations s 
-    ON v.id_station = s.id_station WHERE s.nom_station = ? 
-    ORDER BY v.id_voyage DESC`;
+    ON v.id_station = s.id_station WHERE s.nom_station = ?  ORDER BY v.id_voyage DESC`;
 
     const sql = SqlString.format(rq, nomStation);
 

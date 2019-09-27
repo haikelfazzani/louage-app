@@ -50,7 +50,7 @@ module.exports = VehiculesDao = {
   getVehicules (chefStation) {
     const rq = `select * from ${table.name} t 
     join stations s on t.id_station = s.id_station 
-    WHERE s.chef_station = ?`;
+    WHERE s.chef_station = ? ORDER BY t.id_vehicule DESC`;
 
     const sql = SqlString.format(rq, chefStation)
 
