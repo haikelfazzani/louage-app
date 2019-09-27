@@ -2,14 +2,14 @@ var router = require('express').Router()
 var knex = require('../database/knex')
 var { isConnected } = require('../middleware/authorisation')
 
-const sgMail = require('@sendgrid/mail')
+const nodemailer = require('nodemailer')
 var jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
 
 router.get('/', isConnected, function (req, res) {
   res.render('register')
-});
+})
 
 router.post('/', isConnected, function (req, res) {
 
@@ -24,28 +24,38 @@ router.post('/', isConnected, function (req, res) {
         timestamp_utilisateur: new Date().toISOString()
       })
         .then(result => {
-          var token = jwt.sign({ email }, 'shhhhh')
-          sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-          const msg = {
+          let token = jwt.sign({ email }, 'shhhhh')
+
+          let transporter = nodemailer.createTransport({
+            service: 'zoho',
+            host: 'smtp',
+            port: 465,
+            secure: true,
+            auth: { user: process.env.EMAIL, pass: process.env.PASS_EMAIL }
+          })
+
+          let mailOptions = {
+            from: `"Louage 👻" <${process.env.EMAIL}>`,
             to: email.trim(),
-            from: process.env.GMAIL_EMAIL,
             subject: 'Clé de validation, envoyé par Louage.com',
             text: 'Merci de valider votre email',
             html: `
-            <div><img src="/img/logo.png" alt="logo" ></div>
-            <h2>Votre clé secret : </h2><h3> ${token}</h3>
-            <div><small>louage.com</small></div>`,
+            <div><img src="https://i.ibb.co/K7KK032/logo.png" alt="logo" ></div>
+            <h4>Votre clé secret : </h4>
+            <h3> ${token}</h3>
+            <div><small>https://louage.herokuapp.com</small></div>`
           }
 
-          sgMail.send(msg)
-          res.redirect('/register/email/validation')
+          transporter.sendMail(mailOptions, function (errMail, info) {
+            res.redirect('/register/email/validation')
+          })
         })
         .catch(error => {
           res.render('register', { msg: 'Vous êtes deja inscrit!' })
         })
     })
-    .catch(errHash => { res.render('error', { appErrors: errHash }) });
-});
+    .catch(errHash => { res.redirect('/404') });
+})
 
 router.get('/email/validation', isConnected, (req, res) => {
   res.render('register-valider')
@@ -74,4 +84,4 @@ router.post('/email/validation', isConnected, (req, res) => {
   })
 })
 
-module.exports = router;
+module.exports = router

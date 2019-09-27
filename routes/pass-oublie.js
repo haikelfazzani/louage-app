@@ -2,7 +2,6 @@ var router = require('express').Router()
 var utilisateurDao = require('../dao/utilisateurs.dao')
 var { isConnected } = require('../middleware/authorisation')
 
-const sgMail = require('@sendgrid/mail')
 var jwt = require('jsonwebtoken')
 
 router.get('/', isConnected, (req, res) => {
@@ -15,23 +14,32 @@ router.post('/', isConnected, (req, res) => {
     .then(result => {
       if (result.length < 1) throw 404;
 
-      var token = jwt.sign({ email }, 'shhhhh')
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      const msg = {
+      let token = jwt.sign({ email }, 'shhhhh')
+
+      let transporter = nodemailer.createTransport({
+        service: 'zoho',
+        host: 'smtp.zoho.com',
+        port: 465,
+        secure: false,
+        auth: { user: process.env.EMAIL, pass: process.env.PASS_EMAIL }
+      })
+
+      let mailOptions = {
+        from: `"Louage 👻" <${process.env.EMAIL}>`,
         to: email.trim(),
-        from: 'haykelfezzani@gmail.com',
-        subject: 'réinitialiser le mot de passe, envoyé par Louage.com',
+        subject: 'Réinitialiser le mot de passe, envoyé par Louage.com',
         text: 'Merci de valider votre email',
         html: `
-            <div><img src="https://i.ibb.co/K7KK032/logo.png" alt="logo" ></div>
-            <h2>Votre clé de réinitialiser : </h2>
-            <h3>${token}</h3>
-            <div><small>louage.com</small></div>`,
+        <div><img src="https://i.ibb.co/K7KK032/logo.png" alt="logo" ></div>
+        <h2>Votre clé secret : </h2>
+        <h3> ${token}</h3>
+        <div><small>louage.com</small></div>`
       }
-      sgMail.send(msg)
 
-      res.cookie('passoublieemail', email, { maxAge: 1000 * 60 * 5, httpOnly: true })
-      res.redirect('/pass-oublie/reinitialiser')
+      transporter.sendMail(mailOptions, function (errMail, info) {
+        res.cookie('passoublieemail', email, { maxAge: 1000 * 60 * 5, httpOnly: true })
+        res.redirect('/pass-oublie/reinitialiser')
+      })
     })
     .catch(error => {
       res.render('pass-oublie/pass-oublie-email', { msg: 'Ce compte n\'existe pas' })
