@@ -19,7 +19,7 @@
       <small><%= n.timestamp_notification %></small>
     </div>
     <p class="overflow-hidden mb-1"><%= n.message %></p>
-    <small><%= n.nom_station %></small>
+    <small><i class="fas fa-map-marker-alt"></i> <%= n.nom_station %></small>
   </a>
   <% }) } %>
 
@@ -42,11 +42,10 @@
       document.querySelector('.modal-body').innerHTML = `
       <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1" id="sujet">${data.sujet}</h5>
-          <small>3 days ago</small>
+          <small>${data.timestamp_notification}</small>
         </div>
         <p class="text-break mb-1">${data.message}</p>
-        <small>${data.nom_station}</small>
-      `
+        <small><i class="fas fa-map-marker-alt"></i> ${data.nom_station}</small>`
     }
   })
 </script>

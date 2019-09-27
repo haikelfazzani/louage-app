@@ -183,6 +183,21 @@ textarea {
   margin-top: 150px !important;
 }
 
+.img-hover-zoom {
+  height: 300px;
+  overflow: hidden;
+}
+
+.img-hover-zoom--colorize img {
+  transition: transform .5s, filter 1.5s ease-in-out;
+  filter: grayscale(100%);
+}
+
+.img-hover-zoom--colorize:hover img {
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
+
 @media screen and (max-width: 600px) {
   .navbar {
     padding: 20px !important;
