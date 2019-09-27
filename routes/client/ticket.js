@@ -13,5 +13,4 @@ router.get('/', (req, res) => {
       res.render('client/ticket', { paymentInfo, email })
     })
 })
-
 module.exports = router

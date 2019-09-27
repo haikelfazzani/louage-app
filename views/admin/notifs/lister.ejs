@@ -1,0 +1,37 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+
+<div class="container py-5">
+  <%- include('../navbar') -%>
+
+  <% if(locals.notifications) {  %>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>station</th>
+          <th>sujet</th>
+          <th>message</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% notifications.forEach(u => {  %>
+        <tr>
+          <td><%= u.nom_station %></td>
+          <td><%= u.sujet %></td>
+          <td><p class="text-break"><%= u.message %></p></td>
+          <td>
+            <a href="/admin/notifications/modifier?notif=<%= u.id %>" class="btn btn-success btn-dismiss"><i
+                class="fas fa-pen-square"></i></a>
+            <a href="/admin/notifications/supprimer?notif=<%= u.id %>" class="btn btn-danger btn-delete"><i
+                class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</div>
+<%- include('../../partials/footer.ejs') -%>
