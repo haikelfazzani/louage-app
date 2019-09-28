@@ -2,12 +2,10 @@
 <%- include('../partials/navbar') -%>
 <style>
   .card {
-    color: #fff;
     font-family: Arial, sans-serif;
     border: 4px solid #f5f5f5;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
-    background-color: #1f2532;
   }
 
   .card h3 {
@@ -43,13 +41,13 @@
               <span> <%= v.destination %></span>
             </h3>
   
-            <p class="muted font-s14 p-0" style="color:#8bc34a">
+            <p class="muted font-s14 p-0">
               <span><i class="fas fa-calendar-week"></i> <%= v.date_depart %> </span>
               <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
             </p>
   
             <div style="display: flex; justify-content: space-between;">
-              <div class="btn btn-outline-light"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
+              <div class="btn btn-light"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
   
               <a class="btn btn-danger btn-get-voayge"
                 href="/reservations?v=<%= Buffer.from(JSON.stringify(v)).toString('base64') %>">
