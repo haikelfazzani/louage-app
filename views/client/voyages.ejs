@@ -26,64 +26,66 @@
   </div>
 </section>
 
-<div class="container py-5">
-  <%- include('chercher-voyage') -%>
-  <div class="row">
-    <% if(locals.voyages && locals.voyages.length > 0) { %>
-    <div class="col-md-6 mb-3">
-
-      <% voyages.forEach(v => { %>
-      <div class="card text-uppercase">
-        <div class="card-body">
-
-          <h3 class="card-title m-0">
-            <i class="fas fa-road"></i> De <span> <%= v.nom_station  %> <i class="fas fa-arrow-circle-right"
-                style="color:#dc3545"></i> </span>
-            <span> <%= v.destination %></span>
-          </h3>
-
-          <p class="muted font-s14 p-0" style="color:#8bc34a">
-            <span><i class="fas fa-calendar-week"></i> <%= v.date_depart %> </span>
-            <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
-          </p>
-
-          <div style="display: flex; justify-content: space-between;">
-            <div class="btn btn-outline-light"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
-
-            <a class="btn btn-danger btn-get-voayge"
-              href="/reservations?v=<%= Buffer.from(JSON.stringify(v)).toString('base64') %>">
-              <i class="fas fa-chevron-circle-right ml-2"></i>
-            </a>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('chercher-voyage') -%>
+    <div class="row">
+      <% if(locals.voyages && locals.voyages.length > 0) { %>
+      <div class="col-md-6 mb-3">
+  
+        <% voyages.forEach(v => { %>
+        <div class="card text-uppercase">
+          <div class="card-body">
+  
+            <h3 class="card-title m-0">
+              <i class="fas fa-road"></i> De <span> <%= v.nom_station  %> <i class="fas fa-arrow-circle-right"
+                  style="color:#dc3545"></i> </span>
+              <span> <%= v.destination %></span>
+            </h3>
+  
+            <p class="muted font-s14 p-0" style="color:#8bc34a">
+              <span><i class="fas fa-calendar-week"></i> <%= v.date_depart %> </span>
+              <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
+            </p>
+  
+            <div style="display: flex; justify-content: space-between;">
+              <div class="btn btn-outline-light"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
+  
+              <a class="btn btn-danger btn-get-voayge"
+                href="/reservations?v=<%= Buffer.from(JSON.stringify(v)).toString('base64') %>">
+                <i class="fas fa-chevron-circle-right ml-2"></i>
+              </a>
+            </div>
+  
           </div>
-
+        </div>
+        <% }) %>
+  
+      </div>
+  
+  
+      <div class="col-md-6 mb-3" style="display: flex;
+      justify-content: center;
+      align-items: center;">
+  
+        <iframe id='mapcanvas'
+          src='https://maps.google.com/maps?q=<%= encodeURIComponent(locals.voyages[0].nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+          frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+        </iframe>
+  
+      </div>
+  
+      <% } else { %>
+      <div class="col-md-6">
+        <div class="alert" role="alert">
+          <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolés</h1>
+          <h4>Pour le moment, il n'existe aucun voyage pour cette station.</h4>
+          <hr>
+          <h3 class="mb-0">Veuillez réessayer plus tard, Merci 😊.</h3>
         </div>
       </div>
-      <% }) %>
-
+      <% } %>
     </div>
-
-
-    <div class="col-md-6 mb-3" style="display: flex;
-    justify-content: center;
-    align-items: center;">
-
-      <iframe id='mapcanvas'
-        src='https://maps.google.com/maps?q=<%= encodeURIComponent(locals.voyages[0].nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
-        frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
-      </iframe>
-
-    </div>
-
-    <% } else { %>
-    <div class="col-md-6">
-      <div class="alert" role="alert">
-        <h1 class="alert-heading"><i class="fas fa-info-circle"></i> Nous somme désolés</h1>
-        <h4>Pour le moment, il n'existe aucun voyage pour cette station.</h4>
-        <hr>
-        <h3 class="mb-0">Veuillez réessayer plus tard, Merci 😊.</h3>
-      </div>
-    </div>
-    <% } %>
   </div>
 </div>
 <%- include('../partials/footer.ejs') -%>

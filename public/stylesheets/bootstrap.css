@@ -421,7 +421,7 @@ h6,
 
 .display-4 {
   font-size: 70px !important;
-  color: #007bff !important;
+  color: #ffffff !important;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -4287,7 +4287,7 @@ input[type="button"].btn-block {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #ffffff;
 }
 
 .nav-tabs .nav-item {

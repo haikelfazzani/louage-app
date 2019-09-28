@@ -2,45 +2,47 @@
 <%- include('partials/navbar') -%>
 <%- include('partials/section',{ title:'Contact', sub:'Contact' }) -%>
 
-<div class="container py-5">
-  <div class="text-center font-s18 mx-auto mb-2" style="max-width:500px">
-    <p>Est-ce que quelque chose ne fonctionne pas ? n'hésitez pas à nous contacter.</p>
-  </div>
-  <form action="/contact" method="POST" class="form-general bg-light p-0 mb-3">
-
-    <div class="row">
-      <div class="col-md-6">
-
-        <div class="form-group">
-          <label for="nom">Nom complet</label>
-          <input type="text" class="form-control" id="nom" name="nom" pattern="[A-Za-z ]{6,}"
-            title="Seulement des letters" placeholder="joe doe" required>
-        </div>
-
-        <div class="form-group">
-          <label for="sujet">Sujet</label>
-          <input type="text" class="form-control" id="sujet" name="sujet" pattern="[A-Za-z ]{6,}"
-            title="Seulement des letters" placeholder="technique" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Adresse email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="joe.doe@gmail.com" required>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea class="form-control" id="message" name="message" minlength="50" maxlength="250" rows="7"
-            placeholder="mon message ici.." required></textarea>
-        </div>
-      </div>
+<div class="container-fluid py-6">
+  <div class="container">
+    <div class="text-center font-s18 mx-auto mb-2" style="max-width:500px">
+      <p>Est-ce que quelque chose ne fonctionne pas ? n'hésitez pas à nous contacter.</p>
     </div>
-
-    <button type="submit" class="btn btn-dark" id="btn-send-mail">Envoyer</button>
-    <button type="reset" class="btn btn-danger">vider</button>
-  </form>
-  <%- include('snackbar') -%>
+    <form action="/contact" method="POST" class="form-general bg-light p-0 mb-3">
+  
+      <div class="row">
+        <div class="col-md-6">
+  
+          <div class="form-group">
+            <label for="nom">Nom complet</label>
+            <input type="text" class="form-control" id="nom" name="nom" pattern="[A-Za-z ]{6,}"
+              title="Seulement des letters" placeholder="joe doe" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="sujet">Sujet</label>
+            <input type="text" class="form-control" id="sujet" name="sujet" pattern="[A-Za-z ]{6,}"
+              title="Seulement des letters" placeholder="technique" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="joe.doe@gmail.com" required>
+          </div>
+        </div>
+  
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" minlength="50" maxlength="250" rows="7"
+              placeholder="mon message ici.." required></textarea>
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-dark" id="btn-send-mail">Envoyer</button>
+      <button type="reset" class="btn btn-danger">vider</button>
+    </form>
+    <%- include('snackbar') -%>
+  </div>
 </div>
 <%- include('partials/footer.ejs') -%>

@@ -1,40 +1,41 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
-  <% if(locals.notification) { %>
-  <form action="/admin/notifications/modifier" method="POST" class="form-general bg-light p-0 mb-3">
+    <% if(locals.notification) { %>
+    <form action="/admin/notifications/modifier" method="POST" class="form-general bg-light p-0 mb-3">
 
-    <div class="row">
-      <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
 
-        <div class="form-group">
-          <input type="text" class="form-control" id="idnotif" name="idnotif" 
-          value="<%= notification.id %>" required hidden
-            readonly>
+          <div class="form-group">
+            <input type="text" class="form-control" id="idnotif" name="idnotif" value="<%= notification.id %>" required
+              hidden readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="sujet">Sujet</label>
+            <input type="text" class="form-control" id="sujet" name="sujet" value="<%= notification.sujet %>" required>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="sujet">Sujet</label>
-          <input type="text" class="form-control" id="sujet" name="sujet" value="<%= notification.sujet %>" required>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="7"
+              required><%= notification.message %></textarea>
+          </div>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea class="form-control" id="message" name="message" rows="7"
-            required><%= notification.message %></textarea>
-        </div>
-      </div>
-    </div>
+      <button type="submit" class="btn btn-dark" id="btn-send-mail">modifier</button>
+      <button type="reset" class="btn btn-danger">vider</button>
+    </form>
+    <% } %>
 
-    <button type="submit" class="btn btn-dark" id="btn-send-mail">modifier</button>
-    <button type="reset" class="btn btn-danger">vider</button>
-  </form>
-  <% } %>
-
-  <%- include('../../snackbar') -%>
+    <%- include('../../snackbar') -%>
+  </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

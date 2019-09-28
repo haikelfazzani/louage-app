@@ -1,57 +1,62 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
-<form action="/admin/voyages/modifier" method="POST" class="form-general form-bg-gray mb-3">
+    <form action="/admin/voyages/modifier" method="POST" class="form-general form-bg-gray mb-3">
 
-  <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
+      <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
 
-  <div class="form-group">
-    <label for="station">station</label>
-    <input type="text" class="form-control" id="station" name="station" value="<%= voyage.nom_station %>" required readonly>
-  </div>
-
-  <div class="form-group">
-    <label for="destination">destination</label>
-    <input type="text" class="form-control" id="destination" name="destination" value="<%= voyage.destination %>" required>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
       <div class="form-group">
-        <label for="heureDepart">heure Depart</label>
-        <input type="number" class="form-control" id="heureDepart" min="0" max="24" 
-        name="heureDepart" value="<%= voyage.heure_depart %>" required>
+        <label for="station">station</label>
+        <input type="text" class="form-control" id="station" name="station" value="<%= voyage.nom_station %>" required
+          readonly>
       </div>
-    </div>
-    <div class="col-md-6">
+
       <div class="form-group">
-        <label for="dateDepart">date Depart</label>
-        <input type="date" class="form-control" id="dateDepart" name="dateDepart" value="<%= voyage.date_depart %>" required>
+        <label for="destination">destination</label>
+        <input type="text" class="form-control" id="destination" name="destination" value="<%= voyage.destination %>"
+          required>
       </div>
-    </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="heureDepart">heure Depart</label>
+            <input type="number" class="form-control" id="heureDepart" min="0" max="24" name="heureDepart"
+              value="<%= voyage.heure_depart %>" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dateDepart">date Depart</label>
+            <input type="date" class="form-control" id="dateDepart" name="dateDepart" value="<%= voyage.date_depart %>"
+              required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="prixPlace">prix place</label>
+            <input type="text" class="form-control" id="prixPlace" name="prixPlace" value="<%= voyage.prix_place %>"
+              required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nbPlaces">nb Places</label>
+            <input type="number" class="form-control" id="nbPlaces" min="0" max="9" name="nbPlaces"
+              value="<%= voyage.nb_places %>" required>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-dark">mettre à jour voyage</button>
+    </form>
+
   </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="prixPlace">prix place</label>
-        <input type="text" class="form-control" id="prixPlace" name="prixPlace" value="<%= voyage.prix_place %>" required>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="nbPlaces">nb Places</label>
-        <input type="number" class="form-control" id="nbPlaces" 
-        min="0" max="9"
-        name="nbPlaces" value="<%= voyage.nb_places %>" required>
-      </div>
-    </div>
-  </div>
-
-  <button type="submit" class="btn btn-dark">mettre à jour voyage</button>
-</form>
-
 </div>
 <%- include('../../partials/footer.ejs') -%>

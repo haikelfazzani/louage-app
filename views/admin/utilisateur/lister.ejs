@@ -1,51 +1,53 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
-  <% if(locals.utilisateurs) {  %>
-  <div class="dropdown d-flex justify-content-end mb-3">
-    <button class="btn btn-dark dropdown-toggle" type="button" id="roles" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">roles</button>
-    <div class="dropdown-menu" aria-labelledby="roles">      
-      <% roles.forEach(role => {  %>
-      <a href="/admin/utilisateurs?role=<%= role %>" class="dropdown-item"><%= role %></a>
-      <% }) %>
-      <div class="dropdown-divider"></div>
-      <a href="/admin/utilisateurs?role=<%= 'tous' %>" class="dropdown-item"><%= 'tous' %></a>
-    </div>
-  </div>
-
-  <div class="table-responsive">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>nom</th>
-          <th>prenom</th>
-          <th>email</th>
-          <th>tel</th>
-          <th>role</th>
-          <th>action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% utilisateurs.forEach(u => {  %>
-        <tr>
-          <td><%= u.nom ? u.nom : '-' %></td>
-          <td><%= u.prenom ? u.prenom : '-' %></td>
-          <td><%= u.email %></td>
-          <td><%= u.tel ? u.tel : '-' %></td>
-          <td><%= u.role %></td>
-          <td>
-            <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=<%= u.email %>"><i
-                class="fas fa-trash-alt"></i></a>
-          </td>
-        </tr>
+    <% if(locals.utilisateurs) {  %>
+    <div class="dropdown d-flex justify-content-end mb-3">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="roles" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">roles</button>
+      <div class="dropdown-menu" aria-labelledby="roles">
+        <% roles.forEach(role => {  %>
+        <a href="/admin/utilisateurs?role=<%= role %>" class="dropdown-item"><%= role %></a>
         <% }) %>
-      </tbody>
-    </table>
-  </div>
-  <% } %>
+        <div class="dropdown-divider"></div>
+        <a href="/admin/utilisateurs?role=<%= 'tous' %>" class="dropdown-item"><%= 'tous' %></a>
+      </div>
+    </div>
 
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>nom</th>
+            <th>prenom</th>
+            <th>email</th>
+            <th>tel</th>
+            <th>role</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% utilisateurs.forEach(u => {  %>
+          <tr>
+            <td><%= u.nom ? u.nom : '-' %></td>
+            <td><%= u.prenom ? u.prenom : '-' %></td>
+            <td><%= u.email %></td>
+            <td><%= u.tel ? u.tel : '-' %></td>
+            <td><%= u.role %></td>
+            <td>
+              <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=<%= u.email %>"><i
+                  class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <% } %>
+
+  </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

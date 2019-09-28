@@ -1,63 +1,65 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
-  <% if(locals.reservations) { %>
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>station</th>
-          <th>destination</th>
-          <th>heure_depart</th>
-          <th>date_depart</th>
-          <th>nb_place_reserver</th>
-          <th>total</th>
-          <th>etat</th>
-          <th>action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% reservations.forEach((u, i) => {  %>
-        <tr>
-          <td><%= nom_station %></td>
-          <td><%= u.destination %></td>
-          <td><%= u.heure_depart %> h</td>
-          <td><%= u.date_depart %></td>
-          <td><%= u.nb_place_reserver %></td>
-          <td><%= u.total_prix_places %></td>
-          <td>
-            <span class="badge badge-dark"><%= u.etat_reservation %></span>
-          </td>
-          <td>
-            <% if(u.etat_reservation === 'payer' && u.out === false) { %>
-            <a href="/admin/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
-                class="fas fa-hand-paper"></i></a>
-            <% } %>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
+    <% if(locals.reservations) { %>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>station</th>
+            <th>destination</th>
+            <th>heure_depart</th>
+            <th>date_depart</th>
+            <th>nb_place_reserver</th>
+            <th>total</th>
+            <th>etat</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservations.forEach((u, i) => {  %>
+          <tr>
+            <td><%= nom_station %></td>
+            <td><%= u.destination %></td>
+            <td><%= u.heure_depart %> h</td>
+            <td><%= u.date_depart %></td>
+            <td><%= u.nb_place_reserver %></td>
+            <td><%= u.total_prix_places %></td>
+            <td>
+              <span class="badge badge-dark"><%= u.etat_reservation %></span>
+            </td>
+            <td>
+              <% if(u.etat_reservation === 'payer' && u.out === false) { %>
+              <a href="/admin/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+                  class="fas fa-hand-paper"></i></a>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <%           
+          let begin = -10, end = 0
+            for(let i = 0; i <= (reservations.length / 10); ) {
+              begin += 10
+              end += 10
+              i++
+            %>
+        <li class="page-item">
+          <a class="page-link" href="/admin/reservations?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+    <% } %>
+
   </div>
-
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <%           
-        let begin = -10, end = 0
-          for(let i = 0; i <= (reservations.length / 10); ) {
-            begin += 10
-            end += 10
-            i++
-          %>
-      <li class="page-item">
-        <a class="page-link" href="/admin/reservations?b=<%= begin %>&e=<%= end %>"><%= i %></a>
-      </li>
-      <% } %>
-    </ul>
-  </nav>
-  <% } %>
-
 </div>
 <%- include('../../partials/footer.ejs') -%>

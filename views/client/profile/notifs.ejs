@@ -2,35 +2,37 @@
 <%- include('../../partials/navbar') -%>
 <%- include('../../partials/section',{ title:'Mes Notifications' , sub:'Mes Notifications'}) -%>
 
-<div class="container py-5">
-  <div class="text-center font-s18 mx-auto mb-2" style="max-width: 500px">
-    <p>Recevez des promotions, questionnaires, informations, 
-      nouveautés et idées de voyage de Louage..</p>
-  </div>
-
-  <% if(locals.notifications) { 
-        notifications.forEach(n => {        
-      %>
-  <a href="#" data-notif="<%= JSON.stringify(n) %>" class="list-group-item list-group-item-action" data-toggle="modal"
-    data-target="#exampleModal">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1" style="    color: #007bff; font-weight: 600;"><%= n.sujet %></h5>
-      <small><%= n.timestamp_notification %></small>
+<div class="container-fluid py-6">
+  <div class="container">
+    <div class="text-center font-s18 mx-auto mb-2" style="max-width: 500px">
+      <p>Recevez des promotions, questionnaires, informations, 
+        nouveautés et idées de voyage de Louage..</p>
     </div>
-    <p class="overflow-hidden mb-1"><%= n.message %></p>
-    <small><i class="fas fa-map-marker-alt"></i> <%= n.nom_station %></small>
-  </a>
-  <% }) } %>
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body"></div>
+  
+    <% if(locals.notifications) { 
+          notifications.forEach(n => {        
+        %>
+    <a href="#" data-notif="<%= JSON.stringify(n) %>" class="list-group-item list-group-item-action" data-toggle="modal"
+      data-target="#exampleModal">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1" style="    color: #007bff; font-weight: 600;"><%= n.sujet %></h5>
+        <small><%= n.timestamp_notification %></small>
+      </div>
+      <p class="overflow-hidden mb-1"><%= n.message %></p>
+      <small><i class="fas fa-map-marker-alt"></i> <%= n.nom_station %></small>
+    </a>
+    <% }) } %>
+  
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body"></div>
+        </div>
       </div>
     </div>
+  
   </div>
-
 </div>
 <script src="/javascripts/notifs.js" defer></script>
 <%- include('../../partials/footer.ejs') -%>

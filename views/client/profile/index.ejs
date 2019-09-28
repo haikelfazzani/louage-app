@@ -2,44 +2,46 @@
 <%- include('../../partials/navbar') -%>
 <%- include('../../partials/section',{ title:'Mon Compte', sub:'Mon compte' }) -%>
 
-<div class="container py-5">
-  <%- include('navtabs') -%>
-  <div class="row">
-    <%- include('avatar') -%>
-
-    <% if(locals.user) { %>
-    <div class="col-md-9">
-      <form action="/utilisateur/profile" method="POST" class="form-general bg-light p-0 mb-3">
-
-        <div class="form-group">
-          <label for="nom">Nom</label>
-          <input type="text" class="form-control" name="nom" id="nom" placeholder="joe" pattern="[A-Za-z]{4,}"
-            title="Seulement des letters" value="<%= user.nom  %>" required>
-        </div>
-
-        <div class="form-group">
-          <label for="prenom">prenom</label>
-          <input type="text" class="form-control" name="prenom" id="prenom" pattern="[A-Za-z]{4,}"
-            title="Seulement des letters" placeholder="doe" value="<%= user.prenom  %>" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email adresse</label>
-          <input type="email" class="form-control" name="email" id="email" value="<%= user.email  %>" required>
-        </div>
-
-        <div class="form-group mb-4">
-          <label for="tel">tel</label>
-          <input type="tel" class="form-control" id="tel" name="tel" 
-          minlength="8" maxlength="8" placeholder="71 455 988" value="<%= user.tel  %>" required>
-        </div>
-
-        <button type="submit" class="btn btn-dark">mettre à jour profile</button>
-      </form>
-
-      <%- include('../../snackbar') -%>
-    </div>
-    <% } %>
-  </div><!-- En row -->
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('navtabs') -%>
+    <div class="row">
+      <%- include('avatar') -%>
+  
+      <% if(locals.user) { %>
+      <div class="col-md-9">
+        <form action="/utilisateur/profile" method="POST" class="form-general bg-light p-0 mb-3">
+  
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="nom" placeholder="joe" pattern="[A-Za-z]{4,}"
+              title="Seulement des letters" value="<%= user.nom  %>" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="prenom">prenom</label>
+            <input type="text" class="form-control" name="prenom" id="prenom" pattern="[A-Za-z]{4,}"
+              title="Seulement des letters" placeholder="doe" value="<%= user.prenom  %>" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Email adresse</label>
+            <input type="email" class="form-control" name="email" id="email" value="<%= user.email  %>" required>
+          </div>
+  
+          <div class="form-group mb-4">
+            <label for="tel">tel</label>
+            <input type="tel" class="form-control" id="tel" name="tel" 
+            minlength="8" maxlength="8" placeholder="71 455 988" value="<%= user.tel  %>" required>
+          </div>
+  
+          <button type="submit" class="btn btn-dark">mettre à jour profile</button>
+        </form>
+  
+        <%- include('../../snackbar') -%>
+      </div>
+      <% } %>
+    </div><!-- En row -->
+  </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

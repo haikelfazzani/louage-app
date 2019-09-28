@@ -11,83 +11,85 @@
 </section>
 
 <% if(locals.voyage) { %>
-<div class="container py-5">
-  <div class="row">
-
-    <div class="col-md-6 mb-3">
-      <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">
-
-        <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>station</label>
-              <input type="text" class="form-control" value="<%= station %>" required disabled>
+<div class="container-fluid py-6">
+  <div class="container">
+    <div class="row">
+  
+      <div class="col-md-6 mb-3">
+        <form action="/reservations/ajout" method="POST" class="form-general form-bg-gray mb-3">
+  
+          <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
+  
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>station</label>
+                <input type="text" class="form-control" value="<%= station %>" required disabled>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>destination</label>
+                <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>destination</label>
-              <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+  
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>heure de depart</label>
+                <input type="number" class="form-control" 
+                value="<%= voyage.heure_depart %>" required disabled>
+              </div>
+            </div>
+  
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>date de depart</label>
+                <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>heure de depart</label>
-              <input type="number" class="form-control" 
-              value="<%= voyage.heure_depart %>" required disabled>
+  
+          <div class="form-group">
+            <label for="nbplaces" class="d-flex justify-content-between">
+              nombre de places
+              <span class="badge badge-pill badge-danger">disponibles <%= nbPlaces %></span>
+            </label>
+            <input type="number" name="nbplacesv" id="nbplacesv" value="<%= nbPlaces %>" hidden readonly>
+  
+            <input type="number" class="form-control" min="1" max="<%= nbPlaces %>" id="nbplaces" name="nbplaces"
+              placeholder="Enter nombre places" required>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6">
+              <label>Prix place</label>
+              <input type="text" class="form-control display-3" value="<%=  voyage.prix_place %> DNT" required readonly>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>total</label>
+                <input type="text" class="form-control display-3" id="total" name="total" value="0 DNT" required readonly>
+              </div>
             </div>
           </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>date de depart</label>
-              <input type="text" class="form-control" value="<%= voyage.date_depart %>" required disabled>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="nbplaces" class="d-flex justify-content-between">
-            nombre de places
-            <span class="badge badge-pill badge-danger">disponibles <%= nbPlaces %></span>
-          </label>
-          <input type="number" name="nbplacesv" id="nbplacesv" value="<%= nbPlaces %>" hidden readonly>
-
-          <input type="number" class="form-control" min="1" max="<%= nbPlaces %>" id="nbplaces" name="nbplaces"
-            placeholder="Enter nombre places" required>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <label>Prix place</label>
-            <input type="text" class="form-control display-3" value="<%=  voyage.prix_place %> DNT" required readonly>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>total</label>
-              <input type="text" class="form-control display-3" id="total" name="total" value="0 DNT" required readonly>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-dark">reserver</button>
-        <button type="reset" class="btn btn-danger">vider</button>
-      </form>
-    </div>
-
-    <div class="col-md-6">
-      <iframe id='mapcanvas'
-        src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
-        frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
-      </iframe>
-    </div>
-  </div><!-- end row -->
-
+  
+          <button type="submit" class="btn btn-dark">reserver</button>
+          <button type="reset" class="btn btn-danger">vider</button>
+        </form>
+      </div>
+  
+      <div class="col-md-6">
+        <iframe id='mapcanvas'
+          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+          frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+        </iframe>
+      </div>
+    </div><!-- end row -->
+  
+  </div>
 </div>
 <% } %>
 <script defer>
