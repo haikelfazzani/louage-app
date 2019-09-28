@@ -1,41 +1,43 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
-  <% if(locals.station && Object.keys(locals.station).length > 0) { %>
+    <% if(locals.station && Object.keys(locals.station).length > 0) { %>
 
-  <form action="/admin/stations/modifier" method="POST" class="form-general form-bg-gray mb-3">
+    <form action="/admin/stations/modifier" method="POST" class="form-general form-bg-gray mb-3">
 
-    <div class="form-group">
-      <input type="text" class="form-control" id="idstation" 
-      name="idstation" value="<%= station.id_station %>" required hidden readonly>
-    </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="idstation" name="idstation" value="<%= station.id_station %>"
+          required hidden readonly>
+      </div>
 
-    <div class="form-group">
-      <label for="chef">chef station</label>
-      <input type="text" class="form-control" id="chef" name="chef" value="<%= station.email %>" required readonly>
-    </div>
+      <div class="form-group">
+        <label for="chef">chef station</label>
+        <input type="text" class="form-control" id="chef" name="chef" value="<%= station.email %>" required readonly>
+      </div>
 
-    <div class="form-group">
-      <label for="nom">nom station</label>
-      <input type="text" class="form-control" id="nom" name="nom" value="<%= station.nom_station %>" required>
-    </div>
+      <div class="form-group">
+        <label for="nom">nom station</label>
+        <input type="text" class="form-control" id="nom" name="nom" value="<%= station.nom_station %>" required>
+      </div>
 
-    <div class="form-group">
-      <label for="ville">ville</label>
-      <input type="text" class="form-control" id="ville" name="ville" value="<%= station.ville %>" required>
-    </div>
+      <div class="form-group">
+        <label for="ville">ville</label>
+        <input type="text" class="form-control" id="ville" name="ville" value="<%= station.ville %>" required>
+      </div>
 
-    <div class="form-group">
-      <label for="tel">tel</label>
-      <input type="tel" class="form-control" id="tel" name="tel" minlength="8" maxlength="8"
-      value="<%= station.station_tel %>" required>
-    </div>
+      <div class="form-group">
+        <label for="tel">tel</label>
+        <input type="tel" class="form-control" id="tel" name="tel" minlength="8" maxlength="8"
+          value="<%= station.station_tel %>" required>
+      </div>
 
-    <button type="submit" class="btn btn-dark">modifier station</button>
-  </form>
+      <button type="submit" class="btn btn-dark">modifier station</button>
+    </form>
 
-  <% } %>
+    <% } %>
+  </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

@@ -1,67 +1,67 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
+    <% if(locals.station) { %>
+    <form action="/admin/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
 
-  <% if(locals.station) { %>
-  <form action="/admin/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
-    
-    <div class="form-group">
-      <label>Nom Station</label>
-      <input type="text" class="form-control" value="<%= station.nom_station %>" disabled>
-    </div>
+      <div class="form-group">
+        <label>Nom Station</label>
+        <input type="text" class="form-control" value="<%= station.nom_station %>" disabled>
+      </div>
 
-    <div class="form-group">
-      <label for="destination">destination</label>
-      <input type="text" class="form-control" id="destination" name="destination" placeholder="Enter destination"
-        required>
-    </div>
+      <div class="form-group">
+        <label for="destination">destination</label>
+        <input type="text" class="form-control" id="destination" name="destination" placeholder="Enter destination"
+          required>
+      </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="heureDepart">heure Depart</label>
-          <input type="number" class="form-control" min="0" max="24"
-          id="heureDepart" name="heureDepart" placeholder="Enter heure depart"
-            required>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="heureDepart">heure Depart</label>
+            <input type="number" class="form-control" min="0" max="24" id="heureDepart" name="heureDepart"
+              placeholder="Enter heure depart" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="dateDepart">date Depart</label>
+            <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Enter date depart"
+              required>
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="dateDepart">date Depart</label>
-          <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Enter date depart"
-            required>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="prixPlace">prix place</label>
+            <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
+              required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nbPlaces">nb Places</label>
+            <input type="number" class="form-control" id="nbPlaces" min="1" max="9" name="nbPlaces"
+              placeholder="Enter nombre places" required>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="prixPlace">prix place</label>
-          <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
-            required>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="nbPlaces">nb Places</label>
-          <input type="number" class="form-control" id="nbPlaces" min="1" max="9"
-          name="nbPlaces" placeholder="Enter nombre places" required>
-        </div>
-      </div>
-    </div>
+      <button type="submit" class="btn btn-dark">Ajouter voyage</button>
+      <button type="reset" class="btn btn-danger">vider</button>
+    </form>
+    <% } %>
 
-    <button type="submit" class="btn btn-dark">Ajouter voyage</button>
-    <button type="reset" class="btn btn-danger">vider</button>
-  </form>
-  <% } %>
+    <%- include('../../snackbar') -%>
 
-  <%- include('../../snackbar') -%>
-
-  <% if(locals.msg) { %>
-  <div class="alert alert-primary" role="alert"><%= msg %></div>
-  <% } %>
+    <% if(locals.msg) { %>
+    <div class="alert alert-primary" role="alert"><%= msg %></div>
+    <% } %>
+  </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

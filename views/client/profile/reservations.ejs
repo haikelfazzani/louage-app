@@ -3,62 +3,63 @@
 
 <%- include('../../partials/section',{ title:'Mes Reservations' , sub:'Mes Reservations'}) -%>
 
-<div class="container py-5">
+<div class="container-fluid py-6">
+  <div class="container">
+    <% if(locals.reservations) { %>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>station</th>
+            <th>destination</th>
+            <th>heure depart</th>
+            <th>date depart</th>
+            <th>nombre place</th>
+            <th>total</th>
+            <th>etat</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservations.forEach((u, i) => {  %>
+          <tr>
+            <td><%= u.nom_station %></td>
+            <td><%= u.destination %></td>
+            <td><%= u.heure_depart %> h</td>
+            <td><%= u.date_depart %></td>
+            <td><%= u.nb_place_reserver %></td>
+            <td><%= u.total_prix_places %></td>
+            <td>
+              <span class="badge badge-dark"><%= u.etat_reservation %></span>
+            </td>
+            <td>
+              <% if(u.etat_reservation === 'payer' && u.out === false) { %>
+              <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+                  class="fas fa-hand-paper"></i></a>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
 
-  <% if(locals.reservations) { %>
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>station</th>
-          <th>destination</th>
-          <th>heure depart</th>
-          <th>date depart</th>
-          <th>nombre place</th>
-          <th>total</th>
-          <th>etat</th>
-          <th>action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% reservations.forEach((u, i) => {  %>
-        <tr>
-          <td><%= u.nom_station %></td>
-          <td><%= u.destination %></td>
-          <td><%= u.heure_depart %> h</td>
-          <td><%= u.date_depart %></td>
-          <td><%= u.nb_place_reserver %></td>
-          <td><%= u.total_prix_places %></td>
-          <td>
-            <span class="badge badge-dark"><%= u.etat_reservation %></span>
-          </td>
-          <td>
-            <% if(u.etat_reservation === 'payer' && u.out === false) { %>
-            <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
-                class="fas fa-hand-paper"></i></a>
-            <% } %>
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <%           
+          let begin = -10, end = 0
+          for(let i = 0; i <= (reservations.length / 10); ) {
+            begin += 10
+            end += 10
+            i++
+          %>
+        <li class="page-item">
+          <a class="page-link" href="/reservations/all?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+    <% } %>
   </div>
-
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <%           
-        let begin = -10, end = 0
-        for(let i = 0; i <= (reservations.length / 10); ) {
-          begin += 10
-          end += 10
-          i++
-        %>
-      <li class="page-item">
-        <a class="page-link" href="/reservations/all?b=<%= begin %>&e=<%= end %>"><%= i %></a>
-      </li>
-      <% } %>
-    </ul>
-  </nav>
-  <% } %>
 </div>
 <%- include('../../partials/footer.ejs') -%>
