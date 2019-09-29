@@ -79,7 +79,8 @@ const UtilisateurDao = {
   },
 
   getUserByRole (role) {
-    const rq = `select * from ${table.name} where ${table.role} = ? ORDER BY ${table.id} DESC`;
+    const rq = `SELECT * from ${table.name} u LEFT JOIN stations s on u.id = s.chef_station
+    where u.role = ? and s.chef_station IS NULL ORDER BY u.id DESC`;
     const sql = SqlString.format(rq, role)
 
     return new Promise((resolve, reject) => {
