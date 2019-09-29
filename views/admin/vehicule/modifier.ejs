@@ -1,54 +1,56 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-<div class="container py-5">
-  <%- include('../navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
 
-  <% if(locals.vehicule) { %>
-  <form action="/admin/vehicules/modifier" method="POST" class="form-general form-bg-gray mb-3">
+    <% if(locals.vehicule) { %>
+    <form action="/admin/vehicules/modifier" method="POST" class="form-general form-bg-gray mb-3">
 
-    <div class="form-group">
-      <input type="text" class="form-control" id="idvehicule" name="idvehicule" value="<%= vehicule.id_vehicule %>"
-        required hidden readonly>
-    </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="idvehicule" name="idvehicule" value="<%= vehicule.id_vehicule %>"
+          required hidden readonly>
+      </div>
 
-    <div class="form-group">
-      <label for="proprietaire">proprietaire</label>
-      <input type="text" class="form-control" id="proprietaire" name="proprietaire" value="<%= vehicule.proprietaire %>"
-        required>
-    </div>
+      <div class="form-group">
+        <label for="proprietaire">proprietaire</label>
+        <input type="text" class="form-control" id="proprietaire" name="proprietaire"
+          value="<%= vehicule.proprietaire %>" required>
+      </div>
 
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="numserie">num Serie</label>
-          <input type="text" class="form-control" id="numserie" name="numserie" value="<%= vehicule.num_serie %>"
-            required>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="numserie">num Serie</label>
+            <input type="text" class="form-control" id="numserie" name="numserie" value="<%= vehicule.num_serie %>"
+              required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="nbPlaces">nbPlaces</label>
+            <input type="number" class="form-control" id="nbPlaces" min="0" max="9" name="nbPlaces"
+              value="<%= vehicule.nb_places %>" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="nbPlaces">tel</label>
+            <input type="tel" class="form-control" id="tel" name="tel" minlength="8" maxlength="8"
+              value="<%= vehicule.tel %>" required>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="nbPlaces">nbPlaces</label>
-          <input type="number" class="form-control" id="nbPlaces" min="0" max="9"
-          name="nbPlaces" value="<%= vehicule.nb_places %>" required>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="nbPlaces">tel</label>
-          <input type="tel" class="form-control" id="tel" name="tel" minlength="8" maxlength="8"
-          value="<%= vehicule.tel %>" required>
-        </div>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <label for="nbPlaces">nom station</label>
-      <input type="text" class="form-control" id="nomstation" name="nomstation" value="<%= vehicule.nom_station %>"
-        required readonly>
-    </div>
+      <div class="form-group">
+        <label for="nbPlaces">nom station</label>
+        <input type="text" class="form-control" id="nomstation" name="nomstation" value="<%= vehicule.nom_station %>"
+          required readonly>
+      </div>
 
-    <button type="submit" class="btn btn-dark">modifier vehicule</button>
-  </form>
-  <% } %>
+      <button type="submit" class="btn btn-dark">modifier vehicule</button>
+    </form>
+    <% } %>
+  </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

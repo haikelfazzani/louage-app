@@ -4,7 +4,7 @@
 }
 
 .bcgb {
-  background: url(/img/bg_shadow-light_community.png), url(/img/bg_pattern.png), linear-gradient(315deg, #0575f6 0, #007bff 100%);
+  background: url(/img/bg_shadow-light_community.png), url(/img/bg_pattern.png), linear-gradient(315deg, #2a8dff 0, #3c9aff 100%);
 }
 
 .bcgv {
@@ -115,9 +115,8 @@ a {
   padding: 20px;
 }
 
-.table-responsive {
+.table {
   box-shadow: 0 0px 10px 2px #00000052;
-  ;
 }
 
 #form-pass,
