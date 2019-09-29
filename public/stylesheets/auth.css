@@ -16,12 +16,13 @@
 
 .auth .col-md-4 {
   color: #ffffff;
-  background-color: #343a40;
+  background-color: #007bff;
 }
 
-.auth .col-md-8 a,
-.auth .col-md-4 h1 {
-  color: #3b7ec5 !important
+
+.auth .col-md-8 .btn-link {
+  color: #007bff !important;
+  box-shadow: none !important;
 }
 
 .auth .col-md-4 .display-3 {

@@ -4,8 +4,7 @@
 }
 
 .bcgb {
-  background: url(/img/bg_shadow-light_community.png), url(/img/bg_pattern.png),
-    linear-gradient(315deg, #3c41bc 0, #4154b8 100%);
+  background: url(/img/bg_shadow-light_community.png), url(/img/bg_pattern.png), linear-gradient(315deg, #0575f6 0, #007bff 100%);
 }
 
 .bcgv {
@@ -151,7 +150,7 @@ th {
 
 .img-front {
   border-radius: 7px;
-  box-shadow: 0 0px 9px 4px #00000052;
+  box-shadow: 0 0px 9px 4px #00000024;
 }
 
 .img-nav {
