@@ -102,8 +102,7 @@ module.exports = VoyagesDao = {
   },
 
   getVoyages () {
-    return knex(table.name).select()
-      .join('stations', 'voyages.id_station', '=', 'stations.id_station')
+    return knex(table.name).join('stations', 'voyages.id_station', '=', 'stations.id_station')
   },
 
   getVoyageById (uidVoyage) {
