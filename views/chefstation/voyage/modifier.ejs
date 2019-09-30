@@ -48,16 +48,16 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-dark">mettre à jour voyage</button>
+      <button type="submit" class="btn btn-dark" id="btn-ajout">mettre à jour voyage</button>
     </form>
   </div>
 </div>
 
 <script>
-  let btnAjout = document.getElementById('btn-ajout')
-  btnAjout.disabled = true
-  document.getElementById('prixPlace').onkeyup = (e) => {
-    btnAjout.disabled = +(e.target.value) > 0 ? false : true
-  }
-</script>
+    let btnAjout = document.getElementById('btn-ajout')
+    btnAjout.disabled = true
+    document.getElementById('prixPlace').onkeyup = (e) => {
+      btnAjout.disabled = +(e.target.value) > 0 ? false : true
+    }
+  </script>
 <%- include('../../partials/footer.ejs') -%>

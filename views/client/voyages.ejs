@@ -46,12 +46,9 @@
               <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
             </p>
 
-            <p class="muted font-s14 p-0">
-              <span><i class="fas fa-calendar-week"></i> <%= v.num_serie %> </span>
-            </p>
-
             <div style="display: flex; justify-content: space-between;">
-              <div class="btn btn-light"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
+                <div class="btn btn-light"><i class="fas fa-car"></i> <%= v.num_serie %></div>
+              <div class="btn btn-success"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
 
               <a class="btn btn-danger btn-get-voayge" href="/reservations?v=<%= v.uid_voyage %>">
                 <i class="fas fa-chevron-circle-right ml-2"></i>
