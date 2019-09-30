@@ -1,9 +1,7 @@
 module.exports = class VehiculeModel {
-    constructor (proprietaire, numSerie, nbPlaces, tel, idStation) {
-        this.proprietaire = proprietaire || '';
+    constructor (numSerie, proprietaire, nbPlaces) {
         this.numSerie = numSerie || '';
+        this.proprietaire = proprietaire || '';
         this.nbPlaces = nbPlaces || '';
-        this.tel = tel || '';
-        this.idStation = idStation || '';
     }
 }

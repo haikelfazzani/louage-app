@@ -107,6 +107,9 @@ router.post('/profile/supprimer', checkUserConnected, function (req, res) {
       if (hashRes) {
         utilisateurDao.deleteUser(userPassword)
           .then(result => {
+            req.session.destroy()
+            req.session = null
+            res.locals = null
             res.redirect('/register')
           })
           .catch(error => {

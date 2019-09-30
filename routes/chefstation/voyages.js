@@ -16,10 +16,10 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
       voyages = isNaN(b) || isNaN(e)
         ? voyages = voyages.slice(0, 5) : b < 0 && e < 5
           ? voyages = voyages.slice(0, 5) : voyages.slice(b || 0, e || 5)
-      res.render('admin/voyage/lister', { voyages });
+      res.render('chefstation/voyage/lister', { voyages });
     })
     .catch(error => {
-      res.render('admin/voyage/lister');
+      res.render('chefstation/voyage/lister');
     });
 })
 
@@ -28,10 +28,10 @@ router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { email } = req.session.userInfo
   stationDao.getStationByChef(email)
     .then(station => {
-      res.render('admin/voyage/ajout', { station: station[0] })
+      res.render('chefstation/voyage/ajout', { station: station[0] })
     })
     .catch(error => {
-      res.render('admin/voyage/ajout')
+      res.render('chefstation/voyage/ajout')
     })
 })
 
@@ -43,10 +43,10 @@ router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   voyagesDao.addVoyage(newVoyage)
     .then(result => {
-      res.redirect('/admin/voyages')
+      res.redirect('/chefstation/voyages')
     })
     .catch(error => {
-      res.render('admin/voyage/ajout', { msg: 'erreur d\'ajout' })
+      res.render('chefstation/voyage/ajout', { msg: 'erreur d\'ajout' })
     })
 })
 
@@ -56,10 +56,10 @@ router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req,
 
   voyagesDao.deletVoyage(voyage)
     .then(result => {
-      res.redirect('/admin/voyages')
+      res.redirect('/chefstation/voyages')
     })
     .catch(error => {
-      res.redirect('/admin/voyages')
+      res.redirect('/chefstation/voyages')
     })
 });
 
@@ -68,7 +68,7 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { v } = req.query
   let voyage = (JSON.parse(req.cookies.voyages)).find(vo => +vo.id_voyage === +v)
-  res.render('admin/voyage/modifier', { voyage })
+  res.render('chefstation/voyage/modifier', { voyage })
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
@@ -79,10 +79,10 @@ router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => 
 
   voyagesDao.updateVoyage(newVoyage, idvoyage)
     .then(result => {
-      res.redirect('/admin/voyages')
+      res.redirect('/chefstation/voyages')
     })
     .catch(error => {
-      res.redirect('/admin/voyages')
+      res.redirect('/chefstation/voyages')
     })
 })
 module.exports = router

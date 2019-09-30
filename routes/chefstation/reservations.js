@@ -25,10 +25,10 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
           ? reservations.slice(0, 10) : reservations.slice(b || 0, e || 10);
 
       reservations.sort((i, j) => Date.parse(j.date_depart) - Date.parse(i.date_depart))
-      res.render('admin/reservation/index', { reservations, nom_station })
+      res.render('chefstation/reservation/index', { reservations, nom_station })
     })
     .catch(error => {
-      res.render('admin/reservation/index')
+      res.render('chefstation/reservation/index')
     })
 })
 
@@ -41,7 +41,7 @@ router.get('/annuler', [checkUserConnected, checkUserRoleChef], (req, res) => {
     reservDao.updateEtatReserv('annuler', r)
   ])
     .then(values => {
-      res.redirect('/admin/reservations')
+      res.redirect('/chefstation/reservations')
     })
     .catch(error => {
       res.redirect('/404')

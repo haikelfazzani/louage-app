@@ -4,34 +4,37 @@ var knex = require('../database/knex')
 
 const table = {
   name: 'voyages',
-  idVoyage: 'id_voyage',
+  uidVoyage: 'uid_voyage',
   destination: 'destination',
   heureDepart: 'heure_depart',
   dateDepart: 'date_depart',
   prixPlace: 'prix_place',
   nbPlaces: 'nb_places',
   idStation: 'id_station',
+  numSerieVehicule: 'num_serie_vehicule',
   timestamp: 'timestamp_voyage'
 }
 
 module.exports = VoyagesDao = {
 
   addVoyage (Voyage) {
-    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation } = Voyage
+    let { uidVoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, numSerieVehicule } = Voyage
 
     return knex(table.name).insert({
+      uid_voyage: uidVoyage,
       destination,
       heure_depart: heureDepart,
       date_depart: dateDepart,
       prix_place: prixPlace,
       nb_places: nbPlaces,
       id_station: idStation,
+      num_serie_vehicule: numSerieVehicule,
       timestamp_voyage: new Date().toISOString()
     })
   },
 
-  updateVoyage (Voyage, idVoyage) {
-    let { destination, heureDepart, dateDepart, prixPlace, nbPlaces } = Voyage;
+  updateVoyage (Voyage) {
+    let { uidVoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces } = Voyage
 
     const rq = `update ${table.name} 
     set ${table.destination} = ? ,
@@ -39,10 +42,10 @@ module.exports = VoyagesDao = {
         ${table.dateDepart} = ?,
         ${table.prixPlace} = ?,
         ${table.nbPlaces} = ?
-    where ${table.idVoyage} = ? `;
+    where ${table.uidVoyage} = ? `;
 
     const sql = SqlString.format(rq,
-      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, idVoyage]
+      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, uidVoyage]
     );
 
     return new Promise((resolve, reject) => {
@@ -53,9 +56,9 @@ module.exports = VoyagesDao = {
     })
   },
 
-  updateNbPlaces (nbPlaces, idVoyage) {
-    const rq = `update ${table.name} set ${table.nbPlaces} = ? where ${table.idVoyage} = ? `;
-    const sql = SqlString.format(rq, [nbPlaces, idVoyage]);
+  updateNbPlaces (nbPlaces, uidVoyage) {
+    const rq = `update ${table.name} set ${table.nbPlaces} = ? where ${table.uidVoyage} = ? `;
+    const sql = SqlString.format(rq, [nbPlaces, uidVoyage]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -65,8 +68,8 @@ module.exports = VoyagesDao = {
     })
   },
 
-  deletVoyage (idVoyage) {
-    return knex(table.name).where(table.idVoyage, '=', idVoyage).del()
+  deletVoyage (uidVoyage) {
+    return knex(table.name).where(table.uidVoyage, '=', uidVoyage).del()
   },
 
   getVoyageByNomStation (nomStation) {
@@ -86,7 +89,7 @@ module.exports = VoyagesDao = {
   getVoyages () {
     return knex('voyages')
       .join('stations', 'voyages.id_station', '=', 'stations.id_station')
-      .orderBy(table.idVoyage, 'desc')
+      .orderBy(table.uidVoyage, 'desc')
   },
 
   getVoyageById (id_voyage) {

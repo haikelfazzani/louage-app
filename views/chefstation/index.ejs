@@ -3,31 +3,7 @@
 <div class="container-fluid py-5">
 
   <div class="container">
-    <%- include('navbar') -%>
-  
-    <% if(locals.data && locals.userInfo.role === locals.Role.admin) { 
-      let myData = [
-        { label : 'nombre des utilisateurs', l: data.utilisateurs.length , fa:'fas fa-user'},
-        { label : 'nombre des stations' , l : data.stations.length , fa:'fab fa-hubspot'}
-      ]  
-    %>
-    <div class="row text-uppercase mb-5">
-  
-      <% myData.forEach(v => { %>
-      <div class="col-md-6 text-center mb-3">
-        <div class="card box-light">
-          <div class="card-body">
-            <h1><i class="<%= v.fa %>"></i></h1>
-            <h5 class="card-title"><%= v.label  %></h5>
-            <h2><%= v.l %></h2>
-          </div>
-        </div>
-      </div>
-      <% }) %>
-  
-    </div><!-- end row-->
-    <% } %>
-  
+    <%- include('navbar') -%> 
   
     <% if(locals.data && locals.userInfo.role !== locals.Role.admin) { 
       let myData = [
@@ -53,7 +29,7 @@
     </div><!-- end row-->
     <% } %>
     
-    <%- include('./stat/utilisateurs') -%>
+    <%- include('./stat/voyages') -%>
   </div>
 </div>
 <%- include('../partials/footer.ejs') -%>

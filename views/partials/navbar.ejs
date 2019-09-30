@@ -30,16 +30,21 @@
         <% } %>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/utilisateur/profile">Mon compte</a>          
-          
+          <a class="dropdown-item" href="/utilisateur/profile">Mon compte</a>
+
           <% if(locals.Role.client === locals.userInfo.role) { %>
-            <a class="dropdown-item" href="/reservations/all">mes reservations</a>
-            <a class="dropdown-item" href="/utilisateur/notifications">mes notifications</a>
+          <a class="dropdown-item" href="/reservations/all">mes reservations</a>
+          <a class="dropdown-item" href="/utilisateur/notifications">mes notifications</a>
           <% } %>
 
-          <% if(locals.Role && locals.userInfo.role !== locals.Role.client) { %>
+          <% if(locals.Role && locals.userInfo.role === locals.Role.admin) { %>
           <a class="dropdown-item" href="/admin">administration</a>
           <% } %>
+
+          <% if(locals.Role && locals.userInfo.role === locals.Role.chefStation) { %>
+          <a class="dropdown-item" href="/chefstation">administration</a>
+          <% } %>
+
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="/se-deconnecter">se deconnecter</a>
         </div>

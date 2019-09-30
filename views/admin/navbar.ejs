@@ -26,44 +26,4 @@
     </div>
   </li>
   <% } %>
-
-  <% if(locals.Role && locals.userInfo.role === locals.Role.chefStation) { %>
-  <li class="nav-item dropdown">
-    <button class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-      aria-expanded="false">notifications
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="/admin/notifications">liste des notifications</a>
-      <a class="dropdown-item" href="/admin/notifications/envoyer">ajout notification</a>
-    </div>
-  </li>
-  <li class="nav-item dropdown">
-    <button class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-      aria-expanded="false">vehicules
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="/admin/vehicules">liste des vehicules</a>
-      <a class="dropdown-item" href="/admin/vehicules/ajout">ajout vehicule</a>
-    </div>
-  </li>
-
-  <li class="nav-item dropdown">
-    <button class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-      aria-expanded="false">voyages
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="/admin/voyages">liste des voyages</a>
-      <a class="dropdown-item" href="/admin/voyages/ajout">ajout voyage</a>
-    </div>
-  </li>
-
-  <li class="nav-item dropdown">
-    <button class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-      aria-expanded="false">reservations
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="/admin/reservations">liste des reservations</a>
-    </div>
-  </li>
-  <% } %>
 </ul>

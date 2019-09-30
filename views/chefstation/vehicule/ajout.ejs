@@ -1,0 +1,33 @@
+<%- include('../../partials/head.ejs') -%>
+<%- include('../../partials/navbar') -%>
+<div class="container-fluid py-6">
+  <div class="container">
+    <%- include('../navbar') -%>
+
+    <form action="/admin/vehicules/ajout" method="POST" class="form-general form-bg-gray mb-3">
+
+      <div class="form-group">
+        <label for="numSerie">num Serie</label>
+        <input type="text" class="form-control" id="numSerie" pattern="[a-z0-9 -]+"
+        name="numSerie" placeholder="Enter numSerie" required>
+      </div>
+
+      <div class="form-group">
+        <label for="proprietaire">proprietaire</label>
+        <input type="text" class="form-control" id="proprietaire" pattern="[a-zA-Z ]+" name="proprietaire"
+          placeholder="Enter proprietaire" required>
+      </div>
+
+      <div class="form-group">
+        <label for="nbPlaces">nbPlaces</label>
+        <input type="number" class="form-control" min="1" max="32" id="nbPlaces" name="nbPlaces"
+          placeholder="Enter nombre places" required>
+      </div>
+
+      <button type="submit" class="btn btn-dark">Ajouter vehicule</button>
+      <button type="reset" class="btn btn-danger">vider</button>
+    </form>
+
+  </div>
+</div>
+<%- include('../../partials/footer.ejs') -%>

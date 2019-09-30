@@ -22,7 +22,7 @@ fetch('/admin/utilisateurs.json')
       data: {
         labels: objReserv.map(v => v.m),
         datasets: [{
-          label: 'nombre de utilisateurs par moi',
+          label: 'nombre des utilisateurs par mois',
           data: objReserv.map(v => v.n),
           backgroundColor: '#e91e63',
           borderWidth: 1
@@ -38,6 +38,6 @@ fetch('/admin/utilisateurs.json')
           }]
         }
       }
-    });
+    })
   })
   .catch(error => { })

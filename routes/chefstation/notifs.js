@@ -7,15 +7,15 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { id } = req.session.userInfo
   notifsDao.getNotifisByChefStation(id)
     .then(notifications => {
-      res.render('admin/notifs/lister', { notifications })
+      res.render('chefstation/notifs/lister', { notifications })
     })
     .catch(error => {
-      res.render('admin/notifs/lister')
+      res.render('chefstation/notifs/lister')
     })
 })
 
 router.get('/envoyer', [checkUserConnected, checkUserRoleChef], (req, res) => {
-  res.render('admin/notifs/ajout')
+  res.render('chefstation/notifs/ajout')
 })
 
 router.post('/envoyer', [checkUserConnected, checkUserRoleChef], (req, res) => {
@@ -25,10 +25,10 @@ router.post('/envoyer', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   notifsDao.addNotification(new Notification(sujet, msg, nom_station, id))
     .then(result => {
-      res.render('admin/notifs/ajout', { msg: 'votre message a été bien enovyé' })
+      res.render('chefstation/notifs/ajout', { msg: 'votre message a été bien enovyé' })
     })
     .catch(error => {
-      res.render('admin/notifs/ajout', { msg: 'Erreur d\'envoie, réessayez plus tard' })
+      res.render('chefstation/notifs/ajout', { msg: 'Erreur d\'envoie, réessayez plus tard' })
     })
 })
 
@@ -36,10 +36,10 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { notif } = req.query
   notifsDao.getNotifisById(notif)
     .then(result => {
-      res.render('admin/notifs/modifier', { notification: result[0] })
+      res.render('chefstation/notifs/modifier', { notification: result[0] })
     })
     .catch(error => {
-      res.render('admin/notifs')
+      res.render('chefstation/notifs')
     })
 })
 
@@ -49,10 +49,10 @@ router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => 
 
   notifsDao.updateNotification(notif, idnotif)
     .then(result => {
-      res.redirect('/admin/notifications')
+      res.redirect('/chefstation/notifications')
     })
     .catch(error => {
-      res.redirect('/admin/notifications')
+      res.redirect('/chefstation/notifications')
     })
 })
 
@@ -60,10 +60,10 @@ router.get('/supprimer', [checkUserConnected, checkUserRoleChef], (req, res) => 
   let { notif } = req.query
   notifsDao.deletNotification(notif)
     .then(result => {
-      res.redirect('/admin/notifications')
+      res.redirect('/chefstation/notifications')
     })
     .catch(error => {
-      res.render('admin/notifications')
+      res.render('chefstation/notifications')
     })
 })
 
