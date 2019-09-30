@@ -144,8 +144,8 @@ module.exports = VoyagesDao = {
   },
 
   getVoyageByDateAndStation (destination, timestampVoyage, station) {
-    const rq = `select * from ${table.name} v join stations u 
-    on v.id_station = u.id_station 
+    const rq = `select * from ${table.name} v 
+    join stations u on v.id_station = u.id_station 
     WHERE v.destination = ? and v.timestamp_voyage = ? and u.nom_station = ?`;
 
     const sql = SqlString.format(rq, [destination, timestampVoyage, station]);

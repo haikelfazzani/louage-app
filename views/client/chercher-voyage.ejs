@@ -7,7 +7,7 @@
   }
 </style>
 
-<% if(locals.allVoyages) { %>
+<% if(locals.destinations) { %>
 <form action="/voyages/result" method="POST" class="form-general chercher-form mb-5">
   <div class="form-row">
 
@@ -15,7 +15,7 @@
       <div class="form-group">
         <label for="station">station</label>
         <select class="form-control" id="station" name="station">
-          <% allVoyages.forEach(v => { %>
+          <% stations.forEach(v => { %>
           <option><%= v.nom_station %></option>
           <% }) %>
         </select>
@@ -26,7 +26,7 @@
       <div class="form-group">
         <label for="destination">destination</label>
         <select class="form-control" id="destination" name="destination">
-          <% allVoyages.forEach(v => { %>
+          <% destinations.forEach(v => { %>
           <option><%= v.destination %></option>
           <% }) %>
         </select>

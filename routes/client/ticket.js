@@ -7,11 +7,11 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
   let paymentInfo = JSON.parse(req.cookies.payment)
 
   voyageDao.geFulltVoyageById(paymentInfo.uidvoyage)
-    .then(voyages => {          
+    .then(voyages => {
       res.render('client/ticket', { paymentInfo, email, voyage: voyages[0], nom, prenom })
     })
     .catch(e => {
-      res.render('client/ticket')
+      res.redirect('/404')
     })
 })
 module.exports = router
