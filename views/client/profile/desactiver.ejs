@@ -1,7 +1,7 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
 
-<%- include('../../partials/section',{ title:'Mon Compte' , sub:'supprimer compte'}) -%>
+<%- include('../../partials/section',{ title:'Mon Compte' , sub:'desactiver compte'}) -%>
 
 <div class="container-fluid py-6">
   <div class="container">
@@ -11,7 +11,7 @@
 
       <% if(locals.userInfo) { %>
       <div class="col-md-9">
-        <form action="/utilisateur/profile/supprimer" method="POST" class="form-general bg-light p-0 mb-3">
+        <form action="/utilisateur/profile/desactiver" method="POST" class="form-general bg-light p-0 mb-3">
 
           <div class="form-group">
             <label for="password">Entrer votre mot passe</label>
@@ -24,7 +24,7 @@
             </p>
           </div>
 
-          <button type="submit" class="btn btn-dark" id="btn-delete">supprimer</button>
+          <button type="submit" class="btn btn-dark" id="btn-delete">désactiver</button>
           <button type="reset" class="btn btn-danger">vider</button>
         </form>
 

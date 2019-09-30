@@ -10,7 +10,7 @@
         <thead>
           <tr>
             <th>proprietaire</th>
-            <th>nb_places</th>
+            <th>nombre de places</th>
             <th>num_serie</th>
             <th>action</th>
           </tr>
@@ -19,7 +19,7 @@
           <% vehicules.forEach(u => {  %>
           <tr>
             <td><%= u.proprietaire %></td>
-            <td><%= u.nb_places %></td>
+            <td><%= u.nb_places_v %></td>
             <td><%= u.num_serie %></td>
             <td>
               <a href="/chefstation/vehicules/modifier?numserie=<%= u.num_serie %>" class="btn btn-success"><i

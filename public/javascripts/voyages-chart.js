@@ -17,7 +17,7 @@ fetch('/chefstation/voyages.json')
 
     var ctx = document.getElementById('voyages-chart').getContext('2d');
     var myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: objReserv.map(v => v.m),
         datasets: [{

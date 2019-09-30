@@ -28,13 +28,13 @@ router.post('/profile', checkUserConnected, function (req, res) {
   let User = new UtilisateurModel(nom, prenom, email, password, tel)
 
   utilisateurDao.updateUser(id, objectTrim(User))
-    .then(result => {
+    .then(r => {
       res.render('client/profile/index', {
         user: User,
         msg: 'votre profile a été bien modifiée'
       });
     })
-    .catch(error => {
+    .catch(e => {
       res.render('client/profile/index', { msg: 'erreur de modification!' });
     })
 });
@@ -53,26 +53,18 @@ router.post('/profile/password', checkUserConnected, function (req, res) {
     .then(function (hash) {
 
       utilisateurDao.updateUserPassword(email, hash)
-        .then(result => {
+        .then(r => {
           res.render('client/profile/password', { msg: 'votre mot de passe a été bien modifiée' })
         })
-        .catch(error => {
+        .catch(e => {
           res.render('client/profile/password', { msg: 'erreur de modification!' })
         })
     })
-    .catch(errHash => { res.render('error', { appErrors: errHash }) });
-
-});
+    .catch(errHash => { res.redirect('/404') });
+})
 
 /** user change avatar */
 router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (req, res) => {
-  /*
-  fieldname: 'avatar',
-  originalname: 'classe.PNG',
-  encoding: '7bit',
-  mimetype: 'image/png',
-  buffer:
-  */
   sharp(req.file.buffer)
     .resize(300, 300)
     .jpeg()
@@ -93,11 +85,11 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
 });
 
 /** Suppression compte (profile) */
-router.get('/profile/supprimer', checkUserConnected, function (req, res) {
-  res.render('client/profile/supprimer')
+router.get('/profile/desactiver', checkUserConnected, function (req, res) {
+  res.render('client/profile/desactiver')
 });
 
-router.post('/profile/supprimer', checkUserConnected, function (req, res) {
+router.post('/profile/desactiver', checkUserConnected, function (req, res) {
   let { password } = req.body
   let userPassword = req.session.userInfo.password
 
@@ -106,22 +98,23 @@ router.post('/profile/supprimer', checkUserConnected, function (req, res) {
 
       if (hashRes) {
         utilisateurDao.deleteUser(userPassword)
-          .then(result => {
+          .then(r => {
             req.session.destroy()
             req.session = null
             res.locals = null
             res.redirect('/register')
           })
           .catch(error => {
-            res.render('client/profile/supprimer', { msg: 'erreur de suppression!' })
+            res.render('client/profile/desactiver', { msg: 'erreur de suppression!' })
           })
       }
       else {
-        res.render('login', { msg: 'mot de passe incorrect' })
+        res.render('client/profile/desactiver', { msg: 'mot de passe incorrect' })
       }
     })
-    .catch(errHash => {
-      res.render('client/profile/supprimer', { msg: 'erreur de suppression!' })
+    .catch(e => {
+      res.render('client/profile/desactiver', 
+      { msg: 'Pour désactiver votre compte, vous devez contacter le service client.' })
     });
 })
 
