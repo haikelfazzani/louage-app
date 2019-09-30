@@ -6,8 +6,7 @@ const table = {
   name: 'payments',
   uidPayment: 'uid_payment',
   numCarte: 'num_carte',
-  uidReserv: 'uid_reservation',
-  idClient: 'id_client',
+  uidReservation: 'uid_reservation',
   timestamp: 'timestamp_payment'
 }
 
@@ -15,14 +14,13 @@ module.exports = PaymentsDao = {
 
   addPayment (Payment) {
 
-    let { uidPayment, numCarte, uidReservation, idClient } = Payment;
+    let { uidPayment, numCarte, uidReservation } = Payment
 
     return knex(table.name)
       .insert({
         uid_payment: uidPayment,
         num_carte: numCarte,
         uid_reservation: uidReservation,
-        id_client: idClient,
         timestamp_payment: new Date().toISOString()
       })
   },
@@ -41,9 +39,9 @@ module.exports = PaymentsDao = {
   },
 
   getPaymentsByUser (email) {
-    const sql = `select * from ${table.name} t join utilisateurs u
-    on t.id_client = u.id 
-    WHERE u.email = ? ORDER BY t.id_reservation DESC`;
+    const sql = `select * from ${table.name} t 
+    JOIN reservation r ON t.uid_reservation = r.uid_reservation
+    join utilisateurs u on r.id_client = u.id WHERE u.email = ?`;
 
     const sql = SqlString.format(rq, email);
 
@@ -60,8 +58,7 @@ module.exports = PaymentsDao = {
     join reservations r on p.uid_reservation = r.uid_reservation
     join voyages v on r.id_voyage = v.id_voyage
     join stations s on s.id_station = v.id_station
-    where p.id_client = ? 
-    ORDER BY p.id_payment DESC`;
+    where p.id_client = ?`;
 
     const sql = SqlString.format(rq, [idUser])
 

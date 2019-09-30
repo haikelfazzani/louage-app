@@ -68,10 +68,7 @@
       <div class="col-md-6">
         <form action="/payments/confirmer" method="POST" class="form-general form-bg-gray mb-3">
 
-          <input type="text" name="uidreserv" id="uidreserv" value="<%= uidreserv %>" required hidden readonly>
-
-          <input type="text" class="form-control" id="idvoyage" name="idvoyage" value="<%= voyage.id_voyage %>" required
-            hidden readonly>
+          <input type="text" name="uidvoyage" id="uidvoyage" value="<%= uidvoyage %>" required hidden readonly>
 
           <input type="text" class="form-control" id="nb_places" name="nb_places" value="<%= voyage.nb_places %>"
             required hidden readonly>

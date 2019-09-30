@@ -4,20 +4,14 @@
   <div class="container">
     <%- include('../navbar') -%>
 
-    <form action="/admin/voyages/modifier" method="POST" class="form-general form-bg-gray mb-3">
+    <form action="/chefstation/voyages/modifier" method="POST" class="form-general form-bg-gray mb-3">
 
-      <input type="text" name="idvoyage" id="idvoyage" value="<%= voyage.id_voyage %>" hidden readonly>
-
-      <div class="form-group">
-        <label for="station">station</label>
-        <input type="text" class="form-control" id="station" name="station" value="<%= voyage.nom_station %>" required
-          readonly>
-      </div>
+      <input type="text" name="uidvoyage" id="uidvoyage" value="<%= voyage.uid_voyage %>" hidden readonly>
 
       <div class="form-group">
         <label for="destination">destination</label>
-        <input type="text" class="form-control" id="destination" name="destination" value="<%= voyage.destination %>"
-          required>
+        <input type="text" class="form-control" id="destination" pattern="[a-zA-Z ]+" name="destination"
+          value="<%= voyage.destination %>" required>
       </div>
 
       <div class="row">
@@ -56,7 +50,14 @@
 
       <button type="submit" class="btn btn-dark">mettre à jour voyage</button>
     </form>
-
   </div>
 </div>
+
+<script>
+  let btnAjout = document.getElementById('btn-ajout')
+  btnAjout.disabled = true
+  document.getElementById('prixPlace').onkeyup = (e) => {
+    btnAjout.disabled = +(e.target.value) > 0 ? false : true
+  }
+</script>
 <%- include('../../partials/footer.ejs') -%>

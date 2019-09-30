@@ -11,33 +11,35 @@ var Reservation = require('../../model/Reservation')
 router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
 
   let reservInfo = JSON.parse(req.cookies.vosreservations)
-  let { nbplaces, total, idvoyage } = reservInfo
+  let { nbplaces, total, uidvoyage } = reservInfo
 
-  voyageDao.getVoyageById(idvoyage)
+  voyageDao.getVoyageById(uidvoyage)
     .then(voyages => {
       res.render('client/payments', {
-        nbplacesreserv: nbplaces, total, voyage: voyages[0], uidreserv: uniqid()
+        nbplacesreserv: nbplaces, total, voyage: voyages[0], uidvoyage
       })
     })
-    .catch(error => {
+    .catch(e => {
       res.redirect('/404')
     })
 })
 
 router.post('/confirmer', [checkUserConnected, checkIsClient], (req, res) => {
-  let { uidreserv, numcarte, nbplacesreserv, total, nb_places, idvoyage } = req.body
+  let { numcarte, nbplacesreserv, total, nb_places, uidvoyage } = req.body
   let { id } = req.session.userInfo
 
-  let newReserv = new Reservation(uidreserv, nbplacesreserv, total, 'payer', id, idvoyage)
-  let newPayment = new Payment(uidreserv, numcarte, uidreserv, id)
+  let newReserv = new Reservation(uniqid(), nbplacesreserv, total, 'payer', id, uidvoyage)
+  let newPayment = new Payment(uniqid(), numcarte, uidvoyage)
 
   Promise.all([
-    voyageDao.updateNbPlaces(((+nb_places) - (+nbplacesreserv)), idvoyage),
+    voyageDao.updateNbPlaces(((+nb_places) - (+nbplacesreserv)), uidvoyage),
     reservDao.addReservation(newReserv),
     paymentDao.addPayment(newPayment)
   ])
     .then(values => {
-      res.cookie('payment', JSON.stringify({ newReserv, numcarte, idvoyage }), { maxAge: 1000 * 60 * 30 })
+      res.cookie('payment', JSON.stringify({
+        newReserv, numcarte, uidvoyage
+      }), { maxAge: 1000 * 60 * 30 })
       res.redirect('/ticket')
     })
     .catch(error => {
@@ -45,15 +47,4 @@ router.post('/confirmer', [checkUserConnected, checkIsClient], (req, res) => {
     })
 })
 
-router.get('/annuler', [checkUserConnected, checkIsClient], function (req, res) {
-  let { numserie } = req.query
-
-  vehiculeDao.deletVehicule(numserie)
-    .then(result => {
-      res.redirect('/admin/vehicules')
-    })
-    .catch(error => {
-      res.redirect('/admin/vehicules')
-    })
-})
 module.exports = router

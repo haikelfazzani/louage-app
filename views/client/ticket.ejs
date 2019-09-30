@@ -24,53 +24,59 @@
 
 <div class="container-fluid py-6">
   <% if(locals.paymentInfo) { %>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-3" id="ticket">
-          <div class="toast show">
-            <div class="toast-header">
-              <strong class="mr-auto">N°: <%= paymentInfo.newReserv.uidReservation %></strong>
-              <small><%= paymentInfo.newReserv.nbPlaceReserv %> places</small>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3" id="ticket">
+        <div class="toast show">
+          <div class="toast-header">
+            <strong class="mr-auto">N°: <%= paymentInfo.newReserv.uidReservation %></strong>
+            <small><%= paymentInfo.newReserv.nbPlaceReserv %> places</small>
+          </div>
+          <div class="toast-body">
+            <div>
+              <small>DE</small>
+              <h4><%= voyage.nom_station %></h4>
+              <small>vers</small>
+              <h4><%= voyage.destination %></h4>
             </div>
-            <div class="toast-body">
-              <div>
-                <small>DE</small>
-                <h4><%= voyage.nom_station %></h4>
-                <small>vers</small>
-                <h4><%= voyage.destination %></h4>
-              </div>
-              <% if(nom && nom.length > 0) { %>
-              <div>
-                <small>Nom Complet</small>
-                <h4><%= nom %> <%= prenom %></h4>
-              </div>
-              <% } %>
-              <div>
-                <small>Email</small>
-                <h4><%= email %></h4>
-              </div>
-              <div><small>TOTAL</small>
-                <h4><%= paymentInfo.newReserv.totalPrixPlaces %></h4>
-              </div>
+            <% if(nom && nom.length > 0) { %>
+            <div>
+              <small>Nom Complet</small>
+              <h4><%= nom %> <%= prenom %></h4>
+            </div>
+            <% } else { %>
+            <div>
+              <small>Email</small>
+              <h4><%= email %></h4>
+            </div>
+            <% } %>
+
+            <div>
+              <small>Vehicule</small>
+              <h4><%= voyage.num_serie_vehicule %></h4>
+            </div>
+            <div><small>TOTAL</small>
+              <h4><%= paymentInfo.newReserv.totalPrixPlaces %></h4>
             </div>
           </div>
         </div>
-        <div class="col-md-8 mb-3">
-          <iframe id='mapcanvas' class="mb-3"
-            src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
-            frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
-          </iframe>
-    
-          <iframe id='mapcanvas'
-            src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
-            frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
-          </iframe>
-        </div>
-        <button type="button" class="btn btn-warning ml-3" id="btn-export">exporter ticket</button>
       </div>
-      <!--end row-->
+      <div class="col-md-8 mb-3">
+        <iframe id='mapcanvas' class="mb-3"
+          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.nom_station) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+          frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+        </iframe>
+
+        <iframe id='mapcanvas'
+          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+          frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
+        </iframe>
+      </div>
+      <button type="button" class="btn btn-warning ml-3" id="btn-export">exporter ticket</button>
     </div>
-    <% } %>
+    <!--end row-->
+  </div>
+  <% } %>
 </div>
 <script src="/javascripts/ticket.js" defer></script>
 <%- include('../partials/footer.ejs') -%>

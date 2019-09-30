@@ -2,7 +2,7 @@ const months = [
   "jan", "fév", "mars", "avril", "mai", "juin", "juil", "août", "sep", "oct", "nov", "déc"
 ];
 
-fetch('/admin/voyages.json')
+fetch('/chefstation/voyages.json')
   .then(res => res.json())
   .then(voyages => {
     let voyageParMoi = voyages.reduce((a, c) =>
@@ -15,13 +15,13 @@ fetch('/admin/voyages.json')
     }
     objReserv.sort((i, j) => i.indx - j.indx).unshift({ n: 0, m: "-", indx: 0 });
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('voyages-chart').getContext('2d');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: objReserv.map(v => v.m),
         datasets: [{
-          label: 'nombre de voyages par moi',
+          label: 'nombre des voyages par mois',
           data: objReserv.map(v => v.n),
           backgroundColor: '#e91e63',
           borderWidth: 1
@@ -37,6 +37,6 @@ fetch('/admin/voyages.json')
           }]
         }
       }
-    });
+    })
   })
   .catch(error => { })

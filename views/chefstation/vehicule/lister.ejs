@@ -12,9 +12,6 @@
             <th>proprietaire</th>
             <th>nb_places</th>
             <th>num_serie</th>
-            <th>tel</th>
-            <th>nom_station</th>
-            <th>ville</th>
             <th>action</th>
           </tr>
         </thead>
@@ -24,13 +21,10 @@
             <td><%= u.proprietaire %></td>
             <td><%= u.nb_places %></td>
             <td><%= u.num_serie %></td>
-            <td><%= u.tel %></td>
-            <td><%= u.nom_station %></td>
-            <td><%= u.ville %></td>
             <td>
-              <a href="/admin/vehicules/modifier?numserie=<%= u.num_serie %>" class="btn btn-success"><i
+              <a href="/chefstation/vehicules/modifier?numserie=<%= u.num_serie %>" class="btn btn-success"><i
                   class="fas fa-pen-square"></i></a>
-              <a href="/admin/vehicules/supprimer?numserie=<%= u.num_serie %>" class="btn btn-danger btn-delete"><i
+              <a href="/chefstation/vehicules/supprimer?numserie=<%= u.num_serie %>" class="btn btn-danger btn-delete"><i
                   class="fas fa-trash-alt"></i></a>
             </td>
           </tr>

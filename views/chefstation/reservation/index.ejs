@@ -33,7 +33,7 @@
             </td>
             <td>
               <% if(u.etat_reservation === 'payer' && u.out === false) { %>
-              <a href="/admin/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+              <a href="/chefstation/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
                   class="fas fa-hand-paper"></i></a>
               <% } %>
             </td>
@@ -53,7 +53,7 @@
               i++
             %>
         <li class="page-item">
-          <a class="page-link" href="/admin/reservations?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+          <a class="page-link" href="/chefstation/reservations?b=<%= begin %>&e=<%= end %>"><%= i %></a>
         </li>
         <% } %>
       </ul>

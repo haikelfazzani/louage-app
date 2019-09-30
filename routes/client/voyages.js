@@ -10,19 +10,12 @@ router.post('/', (req, res) => {
     voyagesDao.getVoyageByNomStation(nomstation)
   ])
     .then(values => {
-
-      let allVoyages = values[0].reduce((unique, o) => {
-        if (!unique.some(obj => obj.nom_station === o.nom_station)) {
-          if (!unique.some(obj => obj.destination === o.destination)) {
-            unique.push(o)
-          }
-        }
-        return unique
-      }, [])
-
-      let compDate = (dp, h, d) => (Date.parse(dp) + (1000 * 60 * 60 * (parseInt(h,10)-1))) >= Date.parse(d)
+      
+      let compDate = (dp, h, d) => (Date.parse(dp) + (1000 * 60 * 60 * (parseInt(h, 10) - 1))) >= Date.parse(d)
       let voyages = values[1]
         .filter(v => v.nb_places > 0 && compDate(v.date_depart, v.heure_depart, new Date()))
+
+      let allVoyages = values[0]
 
       res.cookie('allvoyages', JSON.stringify(allVoyages), { maxAge: 1000 * 60 * 30, httpOnly: true })
       res.render('client/voyages', { voyages, allVoyages })
