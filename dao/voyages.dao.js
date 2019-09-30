@@ -85,11 +85,29 @@ module.exports = VoyagesDao = {
       })
     })
   },
+  getVoyageByNomStation (nomStation) {
+    const rq = `SELECT * FROM ${table.name} v JOIN stations s ON v.id_station = s.id_station    
+    WHERE s.nom_station = ? `;
 
-  getVoyageById (uid_voyage) {
+    const sql = SqlString.format(rq, nomStation);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
+
+  getVoyages () {
+    return knex(table.name).select()
+      .join('stations', 'voyages.id_station', '=', 'stations.id_station')
+  },
+
+  getVoyageById (uidVoyage) {
     return knex(table.name)
-      .join('stations', { 'voyages.id_station': 'stations.id_station' })
-      .where({ uid_voyage })
+      .join('stations', 'voyages.id_station', '=', 'stations.id_station')
+      .where({ uid_voyage: uidVoyage })
   },
 
   nbPlacesByDestination (destination, timestampVoyage, station) {
@@ -112,8 +130,7 @@ module.exports = VoyagesDao = {
   getVoyageByDateAndStation (destination, timestampVoyage, station) {
     const rq = `select * from ${table.name} v join stations u 
     on v.id_station = u.id_station 
-    WHERE v.destination = ? and v.timestamp_voyage = ? and u.nom_station = ?
-    ORDER BY v.id_voyage DESC`;
+    WHERE v.destination = ? and v.timestamp_voyage = ? and u.nom_station = ?`;
 
     const sql = SqlString.format(rq, [destination, timestampVoyage, station]);
 

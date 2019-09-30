@@ -6,28 +6,17 @@ var voyageDao = require('../../dao/voyages.dao')
 var paymentDao = require('../../dao/payments.dao')
 
 router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
-
-  let selectedVoyage = JSON.parse(Buffer.from(req.query.v, 'base64').toString())
-  let { destination, nom_station, timestamp_voyage } = selectedVoyage
-
-  Promise.all([
-    voyageDao.nbPlacesByDestination(destination, timestamp_voyage, nom_station),
-    voyageDao.getVoyageByDateAndStation(destination, timestamp_voyage, nom_station)
-  ])
-    .then(values => {
-
-      res.render('client/reservations', {
-        voyage: selectedVoyage,
-        nbPlaces: values[0][0].nb,
-        station: nom_station
-      })
+ 
+  voyageDao.getVoyageById(req.query.v)
+    .then(r => {
+      res.render('client/reservations', { voyage:r[0] })
     })
-    .catch(errorV => {
+    .catch(e => {
       res.redirect('/404')
     })
 })
 
-router.get('/all', (req, res) => {
+router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
 
   let { email } = req.session.userInfo
   let { b, e } = req.query
@@ -56,20 +45,17 @@ router.get('/all', (req, res) => {
     })
 })
 
-router.post('/ajout', checkUserConnected, (req, res) => {
-  let { nbplaces, total, idvoyage } = req.body
-
+router.post('/ajout', [checkUserConnected, checkIsClient], (req, res) => {
   res.cookie('vosreservations',
-    JSON.stringify({ nbplaces, total, idvoyage }), { maxAge: 1000 * 60 * 10 })
+    JSON.stringify(req.body), { maxAge: 1000 * 60 * 10 }
+  )
   res.redirect('/payments')
 })
 
 router.get('/annuler', [checkUserConnected, checkIsClient], function (req, res) {
-  let { r } = req.query
-
   Promise.all([
-    reservDao.updateEtatReserv('annuler', r),
-    paymentDao.cancelPayment(r)
+    reservDao.updateEtatReserv('annuler', req.query.r),
+    paymentDao.cancelPayment(req.query.r)
   ])
     .then(values => {
       res.redirect('/reservations/all')

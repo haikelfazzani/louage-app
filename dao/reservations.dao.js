@@ -8,31 +8,32 @@ const table = {
   uidReservation: 'uid_reservation',
   nbPlaceReserv: 'nb_place_reserver',
   totalPrixPlaces: 'total_prix_places',
-  etatReserv: 'etat_reservation',
+  etatReservation: 'etat_reservation',
   idClient: 'id_client',
-  idVoyage: 'id_voyage',
+  uidVoyage: 'uid_voyage',
   timestamp: 'timestamp_reservation'
 }
 
 module.exports = ReservationsDao = {
 
   addReservation (Reservation) {
-    let { uidReservation, nbPlaceReserv, totalPrixPlaces, idClient, idVoyage } = Reservation;
+    let { uidReservation, nbPlaceReserv, totalPrixPlaces, etatReservation, idClient, uidVoyage } = Reservation;
 
     return knex(table.name)
       .insert({
         uid_reservation: uidReservation,
         nb_place_reserver: nbPlaceReserv,
         total_prix_places: totalPrixPlaces,
-        etat_reservation: EtatReservation.payer,
+        etat_reservation: etatReservation,
         id_client: idClient,
-        id_voyage: idVoyage,
+        uid_voyage: uidVoyage,
         timestamp_reservation: new Date().toISOString()
       })
   },
 
   updateEtatReserv (etat, uidReservation) {
-    return knex(table.name).update({ etat_reservation: etat }).where(table.uidReservation, '=', uidReservation)
+    return knex(table.name).update({ etat_reservation: etat })
+      .where(table.uidReservation, '=', uidReservation)
   },
 
   getReservByUser (email) {
