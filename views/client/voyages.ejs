@@ -35,19 +35,15 @@
         <div class="card text-uppercase">
           <div class="card-body">
 
-            <h3 class="card-title m-0">
+            <h3 class="card-title">
               <i class="fas fa-road"></i> De <span> <%= v.nom_station  %> <i class="fas fa-arrow-circle-right"
                   style="color:#dc3545"></i> </span>
               <span> <%= v.destination %></span>
             </h3>
 
-            <p class="muted font-s14 p-0">
-              <span><i class="fas fa-calendar-week"></i> <%= v.date_depart %> </span>
-              <span><i class="far fa-clock"></i> <%= v.heure_depart %>h</span>
-            </p>
-
             <div style="display: flex; justify-content: space-between;">
-                <div class="btn btn-light"><i class="fas fa-car"></i> <%= v.num_serie %></div>
+                <div class="btn btn-light"><i class="fas fa-calendar-week"></i> <%= v.date_depart %></div>
+                <div class="btn btn-light"><i class="fas fa-clock"></i> <%= v.heure_depart %>h</div>
               <div class="btn btn-success"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
 
               <a class="btn btn-danger btn-get-voayge" href="/reservations?v=<%= v.uid_voyage %>">
