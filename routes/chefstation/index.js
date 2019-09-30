@@ -15,21 +15,23 @@ router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
             let { id_station, nom_station } = r[0]
 
             const promises = [
-                //voyageDao.getVoyageByNomStation(nom_station),
-                //reservDao.getAllReservationsByStation(id_station),
-                vehiculeDao.getVehicules()
+                vehiculeDao.getVehicules(),
+                voyageDao.getVoyageByNomStation(nom_station),
+                reservDao.getAllReservationsByStation(id_station),
             ]
 
             Promise.all(promises)
                 .then((values) => {
                     let data = {
-                        vehicules: values[0]
-                    }                
+                        vehicules: values[0],
+                        voyages: values[1],
+                        reservations: values[2]
+                    }
                     res.render('chefstation/index', { data })
                 })
                 .catch(error => {
                     console.log(error);
-                    
+
                     res.render('chefstation/index')
                 })
         })
@@ -43,7 +45,7 @@ router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (re
     voyageDao.getVoyageByNomStation(nom_station)
         .then(function (voyages) {
             console.log(voyages);
-            
+
             res.status(200).json(voyages)
         })
         .catch(error => {

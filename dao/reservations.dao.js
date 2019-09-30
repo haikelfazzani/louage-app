@@ -39,7 +39,7 @@ module.exports = ReservationsDao = {
   getReservByUser (email) {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 
-    join voyages v on t.id_voyage = v.id_voyage
+    join voyages v on t.uid_voyage = v.uid_voyage
     join stations s on s.id_station = v.id_station
     WHERE u.email = ?`;
 
@@ -54,7 +54,8 @@ module.exports = ReservationsDao = {
   },
 
   getAllReservationsByStation (idStation) {
-    const rq = `SELECT * from ${table.name} r join voyages v ON r.id_voyage = v.id_voyage WHERE v.id_station = ? `;
+    const rq = `SELECT * from ${table.name} r join voyages v ON r.uid_voyage = v.uid_voyage 
+    WHERE v.id_station = ? `;
 
     const sql = SqlString.format(rq, idStation);
 
@@ -69,7 +70,7 @@ module.exports = ReservationsDao = {
   getReservsVoyagesUsers (idStation) {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 
-    join voyages v on t.id_voyage = v.id_voyage 
+    join voyages v on t.uid_voyage = v.uid_voyage 
     WHERE v.id_station = ?`;
 
     const sql = SqlString.format(rq, idStation);
