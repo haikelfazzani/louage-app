@@ -86,7 +86,9 @@ module.exports = VoyagesDao = {
     })
   },
   getVoyageByNomStation (nomStation) {
-    const rq = `SELECT * FROM ${table.name} v JOIN stations s ON v.id_station = s.id_station    
+    const rq = `SELECT * FROM ${table.name} v 
+    JOIN vehicules ON vehicules.num_serie = v.num_serie_vehicule
+    JOIN stations s ON v.id_station = s.id_station    
     WHERE s.nom_station = ? `;
 
     const sql = SqlString.format(rq, nomStation);
@@ -110,6 +112,21 @@ module.exports = VoyagesDao = {
       .where({ uid_voyage: uidVoyage })
   },
 
+  geFulltVoyageById (uidVoyage) {
+    const rq = `SELECT * FROM ${table.name} v 
+    JOIN vehicules ON vehicules.num_serie = v.num_serie_vehicule
+    JOIN stations s ON v.id_station = s.id_station    
+    WHERE v.uid_voyage = ? `;
+
+    const sql = SqlString.format(rq, uidVoyage);
+
+    return new Promise((resolve, reject) => {
+      db.query(sql, (err, result) => {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  },
   nbPlacesByDestination (destination, timestampVoyage, station) {
     const rq = `SELECT sum(v.nb_places) as nb
     FROM ${table.name} v join stations s

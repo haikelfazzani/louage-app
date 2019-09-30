@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
     voyagesDao.getVoyageByNomStation(nomstation)
   ])
     .then(values => {
-
+      
       let compDate = (dp, h, d) => (Date.parse(dp) + (1000 * 60 * 60 * (parseInt(h, 10) - 1))) >= Date.parse(d)
       let voyages = values[1]
         .filter(v => v.nb_places > 0 && compDate(v.date_depart, v.heure_depart, new Date()))
