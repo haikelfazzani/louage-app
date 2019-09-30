@@ -30,8 +30,6 @@ router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
                     res.render('chefstation/index', { data })
                 })
                 .catch(error => {
-                    console.log(error);
-
                     res.render('chefstation/index')
                 })
         })
@@ -40,12 +38,8 @@ router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
 router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
-    let { nom_station } = req.session.chefStationInfo
-
-    voyageDao.getVoyageByNomStation(nom_station)
+    voyageDao.getVoyageByNomStation(req.session.chefStationInfo.nom_station)
         .then(function (voyages) {
-            console.log(voyages);
-
             res.status(200).json(voyages)
         })
         .catch(error => {

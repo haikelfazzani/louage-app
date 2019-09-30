@@ -9,7 +9,7 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
     .then(notifications => {
       res.render('chefstation/notifs/lister', { notifications })
     })
-    .catch(error => {
+    .catch(e => {
       res.render('chefstation/notifs/lister')
     })
 })
@@ -27,7 +27,7 @@ router.post('/envoyer', [checkUserConnected, checkUserRoleChef], (req, res) => {
     .then(result => {
       res.render('chefstation/notifs/ajout', { msg: 'votre message a été bien enovyé' })
     })
-    .catch(error => {
+    .catch(e => {
       res.render('chefstation/notifs/ajout', { msg: 'Erreur d\'envoie, réessayez plus tard' })
     })
 })
@@ -38,7 +38,7 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
     .then(result => {
       res.render('chefstation/notifs/modifier', { notification: result[0] })
     })
-    .catch(error => {
+    .catch(e => {
       res.render('chefstation/notifs')
     })
 })
@@ -51,7 +51,7 @@ router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => 
     .then(result => {
       res.redirect('/chefstation/notifications')
     })
-    .catch(error => {
+    .catch(e => {
       res.redirect('/chefstation/notifications')
     })
 })
@@ -62,7 +62,7 @@ router.get('/supprimer', [checkUserConnected, checkUserRoleChef], (req, res) => 
     .then(result => {
       res.redirect('/chefstation/notifications')
     })
-    .catch(error => {
+    .catch(e => {
       res.render('chefstation/notifications')
     })
 })
