@@ -13,12 +13,12 @@ router.post('/', [isConnected, checkValidEmail], function (req, res) {
 
   UtilisateurDao.getUser(email)
     .then(result => {
+      let connectedUser = result[0]
+      bcrypt.compare(password, connectedUser.password)
+        .then(async (hashRes) => {
 
-      bcrypt.compare(password, result[0].password)
-        .then(function (hashRes) {
-
-          if (hashRes && email === result[0].email) {
-            req.session.userInfo = result[0];
+          if (hashRes && email === connectedUser.email) {
+            req.session.userInfo = connectedUser
             res.redirect('/')
           }
           else {

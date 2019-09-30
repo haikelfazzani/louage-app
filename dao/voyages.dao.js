@@ -72,11 +72,11 @@ module.exports = VoyagesDao = {
     return knex(table.name).where(table.uidVoyage, '=', uidVoyage).del()
   },
 
-  getVoyageByNomStation (nomStation) {
-    const rq = `SELECT * FROM ${table.name} v JOIN stations s 
-    ON v.id_station = s.id_station WHERE s.nom_station = ?  ORDER BY v.id_voyage DESC`;
+  getVoyageByStation (idStation) {
+    const rq = `SELECT * FROM ${table.name} v JOIN vehicules s 
+    ON v.num_serie_vehicule = s.num_serie WHERE v.id_station = ?`;
 
-    const sql = SqlString.format(rq, nomStation);
+    const sql = SqlString.format(rq, idStation)
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -86,16 +86,10 @@ module.exports = VoyagesDao = {
     })
   },
 
-  getVoyages () {
-    return knex('voyages')
-      .join('stations', 'voyages.id_station', '=', 'stations.id_station')
-      .orderBy(table.uidVoyage, 'desc')
-  },
-
-  getVoyageById (id_voyage) {
+  getVoyageById (uid_voyage) {
     return knex(table.name)
       .join('stations', { 'voyages.id_station': 'stations.id_station' })
-      .where({ id_voyage })
+      .where({ uid_voyage })
   },
 
   nbPlacesByDestination (destination, timestampVoyage, station) {

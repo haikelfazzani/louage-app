@@ -1,22 +1,23 @@
 var router = require('express').Router()
 var { checkUserConnected, checkUserRoleChef } = require('../../middleware/authorisation')
 
-var stationDao = require('../../dao/stations.dao')
+var vehiculeDao = require('../../dao/vehicules.dao')
 var voyagesDao = require('../../dao/voyages.dao')
 var Voyage = require('../../model/Voyage.model')
+var uniqid = require('uniqid')
 
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
-  let { chefStationInfo } = req.session
+  let { id_station, nom_station } = req.session.chefStationInfo
   let { b, e } = req.query
 
-  voyagesDao.getVoyageByNomStation(chefStationInfo.nom_station)
+  voyagesDao.getVoyageByStation(id_station)
     .then(function (voyages) {
       res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
       voyages = isNaN(b) || isNaN(e)
         ? voyages = voyages.slice(0, 5) : b < 0 && e < 5
           ? voyages = voyages.slice(0, 5) : voyages.slice(b || 0, e || 5)
-      res.render('chefstation/voyage/lister', { voyages });
+      res.render('chefstation/voyage/lister', { voyages, nom_station })
     })
     .catch(error => {
       res.render('chefstation/voyage/lister');
@@ -25,21 +26,21 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
 
 router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
-  let { email } = req.session.userInfo
-  stationDao.getStationByChef(email)
-    .then(station => {
-      res.render('chefstation/voyage/ajout', { station: station[0] })
+  let { id_station, nom_station } = req.session.chefStationInfo
+
+  vehiculeDao.getVehicules()
+    .then(result => {
+      res.render('chefstation/voyage/ajout', { vehicules: result, id_station, nom_station })
     })
-    .catch(error => {
-      res.render('chefstation/voyage/ajout')
+    .catch(v => {
+      res.redirect('/404')
     })
 })
 
 router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
-  let { id_station } = req.session.chefStationInfo
-  let { destination, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
-  let newVoyage = new Voyage(destination, heureDepart, dateDepart, prixPlace, nbPlaces, id_station)
+  let { id_station, vehicule, destination, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
+  let newVoyage = new Voyage(uniqid(), destination, heureDepart, dateDepart, prixPlace, nbPlaces, id_station, vehicule)
 
   voyagesDao.addVoyage(newVoyage)
     .then(result => {
@@ -67,17 +68,17 @@ router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req,
 router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { v } = req.query
-  let voyage = (JSON.parse(req.cookies.voyages)).find(vo => +vo.id_voyage === +v)
+  let voyage = (JSON.parse(req.cookies.voyages)).find(vo => vo.uid_voyage === v)
   res.render('chefstation/voyage/modifier', { voyage })
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
-  let { destination, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
+  let { uidvoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
 
-  let newVoyage = new Voyage(destination, heureDepart, dateDepart, prixPlace, nbPlaces, '')
+  let newVoyage = new Voyage(uidvoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, '', '')
 
-  voyagesDao.updateVoyage(newVoyage, idvoyage)
+  voyagesDao.updateVoyage(newVoyage)
     .then(result => {
       res.redirect('/chefstation/voyages')
     })

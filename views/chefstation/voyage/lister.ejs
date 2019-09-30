@@ -15,25 +15,26 @@
             <th>date Depart</th>
             <th>prix Place</th>
             <th>nb Places</th>
+            <th>num serie</th>
             <th>action</th>
           </tr>
         </thead>
         <tbody>
-          <% voyages.forEach((u, i) => {  %>
+          <% voyages.forEach(u => {  %>
           <tr>
-            <td><%= u.nom_station %></td>
+            <td><%= nom_station %></td>
             <td><%= u.destination %></td>
             <td><%= u.heure_depart %>h</td>
             <td><%= u.date_depart %></td>
             <td><%= u.prix_place %> DNT</td>
             <td><%= u.nb_places %></td>
+            <td><%= u.num_serie %></td>
             <td>
-              <a href="/admin/voyages/modifier?v=<%= u.id_voyage %>" class="btn btn-success btn-dismiss"><i
+              <a href="/chefstation/voyages/modifier?v=<%= u.uid_voyage %>" class="btn btn-success btn-dismiss"><i
                   class="fas fa-pen-square"></i></a>
-              <a href="/admin/voyages/supprimer?voyage=<%= u.id_voyage %>" class="btn btn-danger btn-delete"><i
+              <a href="/chefstation/voyages/supprimer?voyage=<%= u.uid_voyage %>" class="btn btn-danger btn-delete"><i
                   class="fas fa-trash-alt"></i></a>
             </td>
-
           </tr>
           <% }) %>
         </tbody>
@@ -42,14 +43,14 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <%           
-            let begin = -5, end = 0
-              for(let i = 0; i <= (voyages.length / 5); ) {
-                begin += 5
-                end += 5
-                i++
-              %>
+        let begin = -5, end = 0
+          for(let i = 0; i <= (voyages.length / 5); ) {
+            begin += 5
+            end += 5
+            i++
+          %>
         <li class="page-item">
-          <a class="page-link" href="/admin/voyages?b=<%= begin %>&e=<%= end %>"><%= i %></a>
+          <a class="page-link" href="/chefstation/voyages?b=<%= begin %>&e=<%= end %>"><%= i %></a>
         </li>
         <% } %>
       </ul>

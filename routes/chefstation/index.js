@@ -5,25 +5,35 @@ var { checkUserConnected, checkAdminOrChef } = require('../../middleware/authori
 var voyageDao = require('../../dao/voyages.dao')
 var reservDao = require('../../dao/reservations.dao')
 var vehiculeDao = require('../../dao/vehicules.dao')
+var stationDao = require('../../dao/stations.dao')
 
 router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
-    const promises = [
-        voyageDao.getVoyageByNomStation(resStation[0].nom_station),
-        reservDao.getAllReservationsByStation(resStation[0].id_station),
-        vehiculeDao.getVehicules()
-    ]
+    stationDao.getStationByChef(req.session.userInfo.email)
+        .then(r => {
+            req.session.chefStationInfo = r[0]
+            let { id_station, nom_station } = r[0]
 
-    Promise.all(promises)
-        .then((values) => {
-            let data = {
-                voyages: values[0], reservations: values[1], vehicules: values[2]
-            }
-            res.render('chefstation/index', { data })
+            const promises = [
+                //voyageDao.getVoyageByNomStation(nom_station),
+                //reservDao.getAllReservationsByStation(id_station),
+                vehiculeDao.getVehicules()
+            ]
+
+            Promise.all(promises)
+                .then((values) => {
+                    let data = {
+                        vehicules: values[0]
+                    }                
+                    res.render('chefstation/index', { data })
+                })
+                .catch(error => {
+                    console.log(error);
+                    
+                    res.render('chefstation/index')
+                })
         })
-        .catch(error => {
-            res.render('chefstation/index')
-        })
+        .catch(e => { res.redirect('/404') })
 })
 
 router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
@@ -32,21 +42,12 @@ router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (re
 
     voyageDao.getVoyageByNomStation(nom_station)
         .then(function (voyages) {
-            res.status(200).json(voyages);
+            console.log(voyages);
+            
+            res.status(200).json(voyages)
         })
         .catch(error => {
-            res.status(404).json(voyages);
-        })
-})
-
-router.get('/utilisateurs.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
-
-    utilisateurDao.getUsers()
-        .then(function (utilisateurs) {
-            res.status(200).json(utilisateurs);
-        })
-        .catch(error => {
-            res.status(404).json(utilisateurs);
+            res.status(404).json(voyages)
         })
 })
 

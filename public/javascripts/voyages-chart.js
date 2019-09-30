@@ -15,7 +15,7 @@ fetch('/chefstation/voyages.json')
     }
     objReserv.sort((i, j) => i.indx - j.indx).unshift({ n: 0, m: "-", indx: 0 });
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('voyages-chart').getContext('2d');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {

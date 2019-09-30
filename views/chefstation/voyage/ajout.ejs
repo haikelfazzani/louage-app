@@ -4,17 +4,31 @@
   <div class="container">
     <%- include('../navbar') -%>
 
-    <% if(locals.station) { %>
-    <form action="/admin/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
+    <% if(locals.vehicules) { %>
+    <form action="/chefstation/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
+
+      <input type="text" class="form-control" name="id_station" value="<%= id_station %>" hidden readonly>
 
       <div class="form-group">
         <label>Nom Station</label>
-        <input type="text" class="form-control" value="<%= station.nom_station %>" disabled>
+        <input type="text" class="form-control" value="<%= nom_station %>" disabled>
+      </div>
+
+      <div class="form-group">
+        <label>Vehicules</label>
+        <input type="text" class="form-control" id="vehicule" name="vehicule" list="vehicules" 
+        placeholder="Entrer vehicule" required>
+        <datalist id="vehicules">
+          <% locals.vehicules.forEach(v => { %>
+          <option value="<%= v.num_serie %>">
+            <% }) %>
+        </datalist>
       </div>
 
       <div class="form-group">
         <label for="destination">destination</label>
-        <input type="text" class="form-control" id="destination" name="destination" placeholder="Enter destination"
+        <input type="text" class="form-control" id="destination" name="destination"  pattern="[a-zA-Z ]+"
+        placeholder="Entrer destination"
           required>
       </div>
 
@@ -23,14 +37,14 @@
           <div class="form-group">
             <label for="heureDepart">heure Depart</label>
             <input type="number" class="form-control" min="0" max="24" id="heureDepart" name="heureDepart"
-              placeholder="Enter heure depart" required>
+              placeholder="Entrer l'heure de depart" required>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="dateDepart">date Depart</label>
-            <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Enter date depart"
-              required>
+            <input type="date" class="form-control" id="dateDepart" name="dateDepart" 
+            placeholder="Entrer date depart" required>
           </div>
         </div>
       </div>
@@ -39,7 +53,8 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="prixPlace">prix place</label>
-            <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
+            <input type="text" class="form-control" id="prixPlace" 
+            name="prixPlace" placeholder="Enter prix place"
               required>
           </div>
         </div>
@@ -47,12 +62,12 @@
           <div class="form-group">
             <label for="nbPlaces">nb Places</label>
             <input type="number" class="form-control" id="nbPlaces" min="1" max="9" name="nbPlaces"
-              placeholder="Enter nombre places" required>
+              placeholder="Enter nombre de places" required>
           </div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-dark">Ajouter voyage</button>
+      <button type="submit" class="btn btn-dark" id="btn-ajout">Ajouter voyage</button>
       <button type="reset" class="btn btn-danger">vider</button>
     </form>
     <% } %>
@@ -64,4 +79,12 @@
     <% } %>
   </div>
 </div>
+
+<script>
+  let btnAjout = document.getElementById('btn-ajout')
+  btnAjout.disabled = true
+  document.getElementById('prixPlace').onkeyup = (e) => {
+    btnAjout.disabled = +(e.target.value) > 0 ? false : true
+  }
+</script>
 <%- include('../../partials/footer.ejs') -%>

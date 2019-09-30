@@ -1,5 +1,14 @@
 module.exports = class Voayge {
-  constructor (uidVoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, numSerieVehicule) {
+  constructor (
+    uidVoyage, 
+    destination,
+    heureDepart, 
+    dateDepart, 
+    prixPlace,
+    nbPlaces, 
+    idStation, 
+    numSerieVehicule
+  ) {
     this.uidVoyage = uidVoyage || ''
     this.destination = destination || ''
     this.heureDepart = heureDepart || ''

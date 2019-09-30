@@ -26,19 +26,6 @@ router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
         .catch(error => error)
 });
 
-router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
-
-    let { nom_station } = req.session.chefStationInfo
-
-    voyageDao.getVoyageByNomStation(nom_station)
-        .then(function (voyages) {
-            res.status(200).json(voyages);
-        })
-        .catch(error => {
-            res.status(404).json(voyages);
-        })
-})
-
 router.get('/utilisateurs.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
 
     utilisateurDao.getUsers()
