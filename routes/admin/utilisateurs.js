@@ -21,7 +21,7 @@ router.get('/', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
       roles: [...new Set(utilisateurs.map(u => u.role))]
     })
   })
-    .catch(error => {
+    .catch(e => {
       res.render('admin/utilisateur/lister')
     });
 })
@@ -69,7 +69,7 @@ router.get('/supprimer', [checkUserConnected, checkUserRoleAdmin], function (req
     .then(result => {
       res.redirect('/admin/utilisateurs')
     })
-    .catch(error => {
+    .catch(e => {
       res.redirect('/admin/utilisateurs')
     })
 })

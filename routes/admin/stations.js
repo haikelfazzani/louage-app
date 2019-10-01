@@ -32,7 +32,7 @@ router.get('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
       req.session.chefStations = chefStations
       res.render('admin/station/ajout', { chefStations })
     })
-    .catch(error => {
+    .catch(e => {
       res.redirect('/admin')
     })
 })

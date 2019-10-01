@@ -7,7 +7,7 @@ var Vehicule = require('../../model/Vehicule.model')
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   vehiculeDao.getVehicules()
-    .then(vehicules => {
+    .then(vehicules => {      
       res.render('chefstation/vehicule/lister', { vehicules })
     })
     .catch(error => {

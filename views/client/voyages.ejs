@@ -42,13 +42,15 @@
             </h3>
 
             <div style="display: flex; justify-content: space-between;">
-                <div class="btn btn-light"><i class="fas fa-calendar-week"></i> <%= v.date_depart %></div>
-                <div class="btn btn-light"><i class="fas fa-clock"></i> <%= v.heure_depart %>h</div>
+              <div class="btn btn-light"><i class="fas fa-calendar-week"></i> <%= v.date_depart %></div>
+              <div class="btn btn-light"><i class="fas fa-clock"></i> <%= v.heure_depart %>h</div>
               <div class="btn btn-success"><i class="fas fa-coins"></i> <%= v.prix_place %> DNT</div>
 
+              <% if(parseInt(v.nb_places) > 0) { %>
               <a class="btn btn-danger btn-get-voayge" href="/reservations?v=<%= v.uid_voyage %>">
                 <i class="fas fa-chevron-circle-right ml-2"></i>
               </a>
+              <% } %>
             </div>
 
           </div>

@@ -6,7 +6,7 @@ const table = {
   name: 'vehicules',
   numSerie: 'num_serie',
   proprietaire: 'proprietaire',
-  nbPlaces: 'nb_places',
+  nbPlaces: 'nb_places_v',
   timestamp: 'timestamp_vehicule',
 }
 
@@ -17,13 +17,13 @@ module.exports = VehiculesDao = {
     return knex(table.name).insert({
       num_serie: numSerie,
       proprietaire,
-      nb_places: nbPlaces,
+      nb_places_v: nbPlaces,
       timestamp_vehicule: new Date().toISOString()
     })
   },
   updateVehicule (Vehicule) {
     let { numSerie, proprietaire, nbPlaces } = Vehicule;
-    return knex(table.name).update({ proprietaire, nb_places: nbPlaces })
+    return knex(table.name).update({ proprietaire, nb_places_v: nbPlaces })
       .where(table.numSerie, '=', numSerie)
   },
   deletVehicule (numSerie) {
