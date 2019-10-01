@@ -9,18 +9,10 @@ var { checkUserConnected, checkUserRoleAdmin } = require('../../middleware/autho
 
 router.get('/', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
 
-  let { nom } = req.query
-
-  stationDao.getStations().then(function (stations) {
-    let stationsByNom = nom && nom !== 'tous'
-      ? stations.filter(v => v.nom_station === nom)
-      : stations
-
-    res.render('admin/station/lister', {
-      stations: stationsByNom,
-      nomStations: [...new Set(stations.map(u => u.nom_station))]
+  stationDao.getStations()
+    .then(function (stations) {
+      res.render('admin/station/lister', { stations })
     })
-  })
     .catch(error => {
       res.render('admin/station/lister')
     })

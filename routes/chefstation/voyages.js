@@ -9,19 +9,15 @@ var uniqid = require('uniqid')
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { id_station, nom_station } = req.session.chefStationInfo
-  let { b, e } = req.query
 
   voyagesDao.getVoyageByStation(id_station)
     .then(function (voyages) {
       res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
-      voyages = isNaN(b) || isNaN(e)
-        ? voyages = voyages.slice(0, 5) : b < 0 && e < 5
-          ? voyages = voyages.slice(0, 5) : voyages.slice(b || 0, e || 5)
 
       voyages.sort((i, j) => Date.parse(j.timestamp_voyage) - Date.parse(i.timestamp_voyage))
       res.render('chefstation/voyage/lister', { voyages, nom_station })
     })
-    .catch(error => {
+    .catch(e => {
       res.render('chefstation/voyage/lister');
     });
 })

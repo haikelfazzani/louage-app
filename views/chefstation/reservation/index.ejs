@@ -6,7 +6,7 @@
 
     <% if(locals.reservations) { %>
     <div class="table-responsive">
-      <table class="table">
+      <table class="table" id="myTable">
         <thead>
           <tr>
             <th>nom station</th>
@@ -43,23 +43,7 @@
       </table>
     </div>
 
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <%           
-          let begin = -10, end = 0
-            for(let i = 0; i <= (reservations.length / 10); ) {
-              begin += 10
-              end += 10
-              i++
-            %>
-        <li class="page-item">
-          <a class="page-link" href="/chefstation/reservations?b=<%= begin %>&e=<%= end %>"><%= i %></a>
-        </li>
-        <% } %>
-      </ul>
-    </nav>
     <% } %>
-
   </div>
 </div>
 <%- include('../../partials/footer.ejs') -%>

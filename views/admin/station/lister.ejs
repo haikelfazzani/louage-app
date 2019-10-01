@@ -5,20 +5,8 @@
     <%- include('../navbar') -%>
 
     <% if(locals.stations) {  %>
-    <div class="dropdown d-flex justify-content-end mb-3">
-      <button class="btn btn-dark dropdown-toggle" type="button" id="nomStations" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">Stations</button>
-      <div class="dropdown-menu" aria-labelledby="nomStations">
-        <% nomStations.forEach(nom => {  %>
-        <a href="/admin/stations?nom=<%= nom %>" class="dropdown-item"><%= nom %></a>
-        <% }) %>
-        <div class="dropdown-divider"></div>
-        <a href="/admin/stations?nom=<%= 'tous' %>" class="dropdown-item"><%= 'tous' %></a>
-      </div>
-    </div>
-
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover" id="myTable">
         <thead>
           <tr>
             <th>chef station</th>

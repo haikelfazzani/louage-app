@@ -19,7 +19,6 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
 router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
 
   let { email } = req.session.userInfo
-  let { b, e } = req.query
 
   reservDao.getReservByUser(email)
     .then(reservations => {
@@ -32,12 +31,7 @@ router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
         return v
       })
 
-      reservations = isNaN(+b) || isNaN(+e)
-        ? reservations.slice(0, 10) : b < 0 && e < 10
-          ? reservations.slice(0, 10) : reservations.slice(b || 0, e || 10);
-
       reservations.sort((i, j) => Date.parse(j.timestamp_reservation) - Date.parse(i.timestamp_reservation))
-
       res.render('client/profile/reservations', { reservations })
     })
     .catch(error => {
