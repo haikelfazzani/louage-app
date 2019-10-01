@@ -100,7 +100,7 @@ const UtilisateurDao = {
   },
 
   getUsers () {
-    return knex(table.name).select('nom', 'prenom', 'email', 'tel', 'role', 'timestamp_utilisateur').orderBy(table.id, 'DESC')
+    return knex(table.name).select('nom', 'prenom', 'email', 'tel','etat_email', 'role', 'timestamp_utilisateur').orderBy(table.id, 'DESC')
   },
 
   updateAvatar (avatar, email) {
