@@ -26,8 +26,10 @@
           <td>${u.nom ? u.nom : '-'}</td>
           <td>${u.prenom ? u.prenom : '-'}</td>
           <td>${u.email}</td>
+          <td>${u.etat_email === 1 ? 'activer' : 'non activer'}</td>
           <td>${u.tel ? u.tel : '-'}</td>
           <td>${u.role}</td>
+          <td>${new Date(u.timestamp_utilisateur).toString().slice(0,24)}</td>
           <td>
             <a class="btn btn-danger btn-delete" href="/admin/utilisateurs/supprimer?email=${u.email}"><i
                 class="fas fa-trash-alt"></i></a>
