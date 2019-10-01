@@ -7,7 +7,6 @@ var paymentDao = require('../../dao/payments.dao')
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 
   let { id_station, nom_station } = req.session.chefStationInfo
-  let { b, e } = req.query
 
   reservDao.getReservsVoyagesUsers(id_station)
     .then(reservations => {
@@ -19,10 +18,6 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
         v.out = current > d
         return v
       })
-
-      reservations = isNaN(b) || isNaN(e)
-        ? reservations.slice(0, 10) : b < 0 && e < 10
-          ? reservations.slice(0, 10) : reservations.slice(b || 0, e || 10);
 
       reservations.sort((i, j) => Date.parse(j.timestamp_reservation) - Date.parse(i.timestamp_reservation))
       res.render('chefstation/reservation/index', { reservations, nom_station })

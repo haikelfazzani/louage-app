@@ -148,6 +148,7 @@ th {
 }
 
 .img-front {
+  border: 2px solid #fff;
   border-radius: 7px;
   box-shadow: 0 0px 9px 4px #00000024;
 }
