@@ -6,6 +6,9 @@
 
     <% if(locals.utilisateurs) {  %>
     <div class="dropdown d-flex justify-content-end mb-3">
+
+      <input type="text" class="form-control mr-3 w-25" id="input-search" placeholder="chercher par email, role..">
+
       <button class="btn btn-dark dropdown-toggle" type="button" id="roles" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">roles</button>
       <div class="dropdown-menu" aria-labelledby="roles">
@@ -29,7 +32,7 @@
             <th>action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody-users">
           <% utilisateurs.forEach(u => {  %>
           <tr>
             <td><%= u.nom ? u.nom : '-' %></td>
@@ -47,7 +50,8 @@
       </table>
     </div>
     <% } %>
-
   </div>
 </div>
+
+<script src="/javascripts/search/users.js" defer></script>
 <%- include('../../partials/footer.ejs') -%>

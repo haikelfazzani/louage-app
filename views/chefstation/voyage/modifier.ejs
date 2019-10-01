@@ -54,10 +54,9 @@
 </div>
 
 <script>
-    let btnAjout = document.getElementById('btn-ajout')
-    btnAjout.disabled = true
-    document.getElementById('prixPlace').onkeyup = (e) => {
-      btnAjout.disabled = +(e.target.value) > 0 ? false : true
-    }
-  </script>
+  let btnAjout = document.getElementById('btn-ajout')
+  document.getElementById('prixPlace').onkeyup = (e) => {
+    btnAjout.disabled = +(e.target.value) > 0 ? false : true
+  }
+</script>
 <%- include('../../partials/footer.ejs') -%>
