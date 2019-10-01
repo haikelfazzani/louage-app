@@ -1,8 +1,6 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
-
 <%- include('../partials/section',{ title:'Ticket', sub:'Ticket' }) -%>
-
 <style>
   .toast {
     padding: 20px;
@@ -18,7 +16,7 @@
   }
 
   .col-md-8 iframe {
-    max-height: 190px
+    max-height: 220px
   }
 </style>
 
@@ -50,6 +48,16 @@
               <h4><%= email %></h4>
             </div>
             <% } %>
+
+            <div>
+              <small>date de depart</small>
+              <h4><%= voyage.date_depart %></h4>
+            </div>
+
+            <div>
+              <small>Heure de depart</small>
+              <h4><%= voyage.heure_depart %></h4>
+            </div>
 
             <div>
               <small>Vehicule</small>

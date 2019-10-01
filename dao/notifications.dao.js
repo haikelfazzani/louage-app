@@ -41,7 +41,7 @@ module.exports = NotificationsDao = {
     })
   },
   getNotifisByChefStation (idUtilisateur) {
-    const rq = `SELECT * from ${table.name} t WHERE t.id_utilisateur = ${idUtilisateur} ORDER BY t.id DESC`;
+    const rq = `SELECT * from ${table.name} WHERE id_utilisateur = ${idUtilisateur} ORDER BY id DESC`;
 
     return new Promise((resolve, reject) => {
       db.query(rq, (err, result) => {
