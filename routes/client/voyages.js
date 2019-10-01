@@ -3,11 +3,21 @@ var voyagesDao = require('../../dao/voyages.dao')
 
 router.post('/', (req, res) => {
 
+  let { nomstation, destination, date } = req.body
+
   Promise.all([
     voyagesDao.getVoyages(),
-    voyagesDao.getVoyageByNomStation(req.body.nomstation)
+    voyagesDao.getVoyageByNomStation(nomstation)
   ])
     .then(values => {
+
+      date = date && date.trim().length > 4 && Date.parse(date) >= Date.parse(new Date())
+        ? date
+        : (new Date()).toISOString().slice(0, 10);
+
+      if (destination && destination.length > 3) {
+        values[1] = values[1].filter(v => v.destination === destination && v.date_depart === date)
+      }
 
       let compDate = (dp, h, d) => (Date.parse(dp) + (1000 * 60 * 60 * (parseInt(h, 10) - 1))) >= Date.parse(d)
       let voyages = values[1]
@@ -21,29 +31,7 @@ router.post('/', (req, res) => {
         i === self.findIndex((t) => (t.destination === v.destination))
       )
 
-      res.cookie('allvoyages', JSON.stringify({
-        allVoyages: values[0], stations, destinations
-      }), { maxAge: 1000 * 60 * 30, httpOnly: true })
       res.render('client/voyages', { voyages, stations, destinations })
-    })
-    .catch(error => {
-      res.render('client/voyages')
-    })
-})
-
-
-router.post('/result', (req, res) => {
-
-  let { station, destination, date } = req.body
-  date = date.trim().length > 4 && Date.parse(date) >= Date.parse(new Date())
-    ? date
-    : (new Date()).toISOString().slice(0, 10);
-
-  let { allVoyages, stations, destinations } = JSON.parse(req.cookies.allvoyages);
-
-  voyagesDao.voyagesByDestAndStationAndDate(station.trim(), destination.trim(), date)
-    .then(voyages => {
-      res.render('client/voyages', { voyages, allVoyages, stations, destinations })
     })
     .catch(error => {
       res.render('client/voyages')
