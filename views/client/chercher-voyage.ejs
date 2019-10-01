@@ -8,13 +8,13 @@
 </style>
 
 <% if(locals.destinations) { %>
-<form action="/voyages/result" method="POST" class="form-general chercher-form mb-5">
+<form action="/voyages" method="POST" class="form-general chercher-form mb-5">
   <div class="form-row">
 
     <div class="col-md-3">
       <div class="form-group">
-        <label for="station">station</label>
-        <select class="form-control" id="station" name="station">
+        <label for="nomstation">station</label>
+        <select class="form-control" id="nomstation" name="nomstation">
           <% stations.forEach(v => { %>
           <option><%= v.nom_station %></option>
           <% }) %>

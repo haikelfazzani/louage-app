@@ -24,7 +24,7 @@ fetch('/admin/utilisateurs.json')
         datasets: [{
           label: 'nombre des utilisateurs par mois',
           data: objReserv.map(v => v.n),
-          backgroundColor: '#e91e63',
+          backgroundColor: '#8bc34a',
           borderWidth: 1
         }]
       },
