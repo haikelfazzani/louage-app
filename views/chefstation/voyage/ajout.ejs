@@ -16,35 +16,32 @@
 
       <div class="form-group">
         <label>Vehicules</label>
-        <input type="text" class="form-control" id="vehicule" name="vehicule" list="vehicules" 
-        placeholder="Entrer vehicule" required>
+        <input type="text" class="form-control" id="vehicule" name="vehicule" list="vehicules"
+          placeholder="Entrer vehicule" required>
         <datalist id="vehicules">
-          <% locals.vehicules.forEach(v => { %>
-          <option value="<%= v.num_serie %>">
-            <% }) %>
+          <% locals.vehicules.forEach(v => { %><option value="<%= v.num_serie %>"><% }) %>
         </datalist>
       </div>
 
       <div class="form-group">
         <label for="destination">destination</label>
-        <input type="text" class="form-control" id="destination" name="destination"  pattern="[a-zA-Z ]+"
-        placeholder="Entrer destination"
-          required>
+        <input type="text" class="form-control" id="destination" name="destination" pattern="[a-zA-Z ]+"
+          placeholder="Entrer destination" required>
       </div>
 
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
             <label for="heureDepart">heure Depart</label>
-            <input type="time" class="form-control" id="heureDepart" name="heureDepart"
+            <input type="number" class="form-control" id="heureDepart" name="heureDepart" min="1" max="24"
               placeholder="Entrer l'heure de depart" required>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="dateDepart">date Depart</label>
-            <input type="date" class="form-control" id="dateDepart" name="dateDepart" 
-            placeholder="Entrer date depart" required>
+            <input type="date" class="form-control" id="dateDepart" name="dateDepart" placeholder="Entrer date depart"
+              required>
           </div>
         </div>
       </div>
@@ -53,8 +50,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="prixPlace">prix place</label>
-            <input type="text" class="form-control" id="prixPlace" 
-            name="prixPlace" placeholder="Enter prix place"
+            <input type="text" class="form-control" id="prixPlace" name="prixPlace" placeholder="Enter prix place"
               required>
           </div>
         </div>

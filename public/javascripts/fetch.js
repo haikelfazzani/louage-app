@@ -14,7 +14,7 @@ if (weather && weather.length > 15) {
         localStorage.setItem('weather', JSON.stringify({ d: nextDay, data: res.data[0] }))
         setWeather(res.data[0])
       })
-      .catch(error => { })
+      .catch(e => { })
   }
 }
 else {
@@ -25,7 +25,7 @@ else {
       localStorage.setItem('weather', JSON.stringify({ d: nextDay, data: res.data[0] }))
       setWeather(res.data[0])
     })
-    .catch(error => { })
+    .catch(e => { })
 }
 
 function setWeather (data) {
