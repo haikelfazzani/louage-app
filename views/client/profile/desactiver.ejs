@@ -1,8 +1,6 @@
 <%- include('../../partials/head.ejs') -%>
 <%- include('../../partials/navbar') -%>
-
 <%- include('../../partials/section',{ title:'Mon Compte' , sub:'desactiver compte'}) -%>
-
 <div class="container-fluid py-6">
   <div class="container">
     <%- include('navtabs') -%>
@@ -15,11 +13,9 @@
 
           <div class="form-group">
             <label for="password">Entrer votre mot passe</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Entrer password"
-              required>
-            <p class="text-muted font-s14 p-0 m-0 mt-2">Si vous rencontrez des problèmes, veuillez contacter notre
-              Service
-              Client.</p>
+            <input type="password" class="form-control" name="password" id="password"
+              placeholder="Saisissez votre mot de passe" required>
+            <p class="text-muted font-s14 p-0 m-0 mt-2">Si vous rencontrez des problèmes, veuillez contacter notre Service Client.</p>
             <p class="text-muted font-s14 p-0 m-0">Visitez notre page <a class="font-s14" href="/contact">Contact</a>
             </p>
           </div>
@@ -27,13 +23,10 @@
           <button type="submit" class="btn btn-dark" id="btn-delete">désactiver</button>
           <button type="reset" class="btn btn-danger">vider</button>
         </form>
-
         <div class="alert alert-danger" id="form-signin" role="alert">alter</div>
-
         <% if(locals.msg) { %>
         <div class="alert alert-primary" role="alert"><%= msg %></div>
         <% } %>
-
       </div>
       <% } %>
     </div><!-- end row -->

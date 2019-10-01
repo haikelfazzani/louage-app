@@ -1,32 +1,4 @@
-$(document).ready(function () {
-  $('#myTable').DataTable({
-    language: {
-      processing: "Traitement en cours...",
-      search: "Rechercher&nbsp;:",
-      lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
-      info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-      infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-      infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-      infoPostFix: "",
-      loadingRecords: "Chargement en cours...",
-      zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
-      emptyTable: "Aucune donnée disponible dans le tableau",
-      paginate: {
-        first: "Premier",
-        previous: "Pr&eacute;c&eacute;dent",
-        next: "Suivant",
-        last: "Dernier"
-      },
-      aria: {
-        sortAscending: ": activer pour trier la colonne par ordre croissant",
-        sortDescending: ": activer pour trier la colonne par ordre décroissant"
-      }
-    }
-  });
-});
-
 // validation pour les formulaire : login et register
-
 let formRegister = document.querySelector('.form-signin');
 //email ou mot de passe incorrect!
 function isPureStr (str) {
@@ -34,7 +6,7 @@ function isPureStr (str) {
 }
 
 function isValidInput (str) {
-  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_]*$/gi.test(str) && str.length > 0)
+  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#]*$/gi.test(str) && str.length > 0)
 }
 
 let generalForm = document.querySelector('.form-general')
@@ -47,17 +19,16 @@ if (generalForm) {
     }
 
     inputValues = inputValues.filter(vi => vi !== undefined && vi.length > 0)
-
     if (!inputValues.some(v => !isValidInput(v))) {
       return true
     }
 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
+    e.preventDefault()
+    var x = document.querySelector(".error-snack")
+    x.classList.add("showsnack")
     x.textContent = 'Entrée de données ne sont pas valide!'
 
-    setTimeout(function () { x.className = x.className.replace("show", "") }, 5000);
-
+    setTimeout(function () { x.className = x.className.replace("showsnack", "") }, 5000);
     return false
   }
 }
@@ -66,22 +37,20 @@ if (generalForm) {
 if (formRegister) {
   formRegister.onsubmit = e => {
 
-    let email = e.target.email.value;
-    let pass = e.target.password.value;
+    let email = e.target.email.value
+    let pass = e.target.password.value
 
     if (isPureStr(email) && isPureStr(pass)) {
       return true
     }
     else {
-      let msgForm = document.querySelector('#form-signin');
+      e.preventDefault()
+      let msgForm = document.querySelector('#form-signin')
       msgForm.style.display = 'block';
       msgForm.textContent = 'Email ou mot de passe invalide!';
 
-      setTimeout(() => {
-        msgForm.style.display = 'none';
-      }, 3000);
-
-      return false;
+      setTimeout(() => { msgForm.style.display = 'none' }, 3000)
+      return false
     }
   }
 }
@@ -105,7 +74,7 @@ if (formRegister) {
       isValid ? previewImage(event) : "";
     }
   }
-}());
+}())
 
 function previewImage (event) {
   const imgField = document.querySelector(".img-thumbnail");
@@ -130,29 +99,6 @@ btnCancel.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment annuler ?')
 })
 
-/** form validation : changer mot de passe */
-let formPass = document.getElementById('form-pass')
-function isValidPass (str) {
-  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#]*$/gi.test(str) && str.length > 5)
-}
-
-if (formPass) {
-  formPass.onsubmit = (e) => {
-
-    let pass = e.target.password.value
-    if (isValidPass(pass) && e.target.confpassword.value === pass) {
-      return true
-    }
-
-    let alert = document.getElementById('alert-pass')
-    alert.textContent = 'mot de passe incorrect ou contient des charactére n\'ont valide';
-    alert.style.display = 'block';
-    setTimeout(() => { alert.style.display = 'none' }, 5000)
-    return false
-  }
-}
-
-
 /** Contact Page Form */
 let btnSend = document.getElementById('btn-send-mail'), r = '';
 if (btnSend) {
@@ -170,3 +116,30 @@ if (btnSend) {
     }
   }
 }
+
+$(document).ready(function () {
+  $('#myTable').DataTable({
+    language: {
+      processing: "Traitement en cours...",
+      search: "Rechercher&nbsp;:",
+      lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+      info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+      infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+      infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+      infoPostFix: "",
+      loadingRecords: "Chargement en cours...",
+      zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+      emptyTable: "Aucune donnée disponible dans le tableau",
+      paginate: {
+        first: "Premier",
+        previous: "Pr&eacute;c&eacute;dent",
+        next: "Suivant",
+        last: "Dernier"
+      },
+      aria: {
+        sortAscending: ": activer pour trier la colonne par ordre croissant",
+        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+      }
+    }
+  })
+})

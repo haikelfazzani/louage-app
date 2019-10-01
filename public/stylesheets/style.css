@@ -228,6 +228,83 @@ textarea {
   transform: scale(1.1);
 }
 
+.error-snack,
+#snackbar {
+  visibility: hidden;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  cursor: pointer;
+  transition: background-color .3s ease;
+}
+
+.error-snack {
+  background-color: #dc3545 !important
+}
+
+.error-snack, #snackbar:hover {
+  background-color: #1f2532;
+}
+
+.showsnack {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .navbar {
     padding: 20px !important;

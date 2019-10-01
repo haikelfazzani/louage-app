@@ -8,9 +8,7 @@ var express = require('express'),
 var bcrypt = require('bcrypt'), saltRounds = 10;
 
 var multer = require('multer'), storage = multer.memoryStorage(), upload = multer({ storage: storage });
-var sharp = require('sharp');
-
-//let IMG_BASE_URL='https://api.imgbb.com/1/upload?key=bd564129d4a8eccb275c4cc0c637cff3'
+var sharp = require('sharp')
 
 router.get('/profile', checkUserConnected, async (req, res) => {
   let { id } = req.session.userInfo
@@ -19,9 +17,9 @@ router.get('/profile', checkUserConnected, async (req, res) => {
   let encode = 'data:image/png;base64,' + users[0].avatar
   req.session.avatar = encode
   res.render('client/profile/index', { user: users[0], avatar: encode })
-});
+})
 
-router.post('/profile', checkUserConnected, function (req, res) {
+router.post('/profile', checkUserConnected, (req, res) => {
   let { nom, prenom, email, password, tel } = req.body;
   let { id } = req.session.userInfo
 
@@ -37,30 +35,34 @@ router.post('/profile', checkUserConnected, function (req, res) {
     .catch(e => {
       res.render('client/profile/index', { msg: 'erreur de modification!' });
     })
-});
+})
 
 /** user change password */
-router.get('/profile/password', checkUserConnected, function (req, res) {
+router.get('/profile/password', checkUserConnected, (req, res) => {
   res.render('client/profile/password')
-});
+})
 
 
-router.post('/profile/password', checkUserConnected, function (req, res) {
-  let { password } = req.body
-  let { email } = req.session.userInfo
+router.post('/profile/password', checkUserConnected, (req, res) => {
+  let { npassword, ancien } = req.body
+  let { email, password } = req.session.userInfo
 
-  bcrypt.hash(password, saltRounds)
-    .then(function (hash) {
-
-      utilisateurDao.updateUserPassword(email, hash)
-        .then(r => {
-          res.render('client/profile/password', { msg: 'votre mot de passe a été bien modifiée' })
+  bcrypt.compare(ancien, password, function (err, cmpRes) {
+    if (cmpRes) {
+      bcrypt.hash(npassword, saltRounds)
+        .then(function (hash) {
+          utilisateurDao.updateUserPassword(email, hash)
+            .then(r => {
+              res.render('client/profile/password', { msg: 'votre mot de passe a été bien modifiée' })
+            })
+            .catch(e => {
+              res.redirect('/404')
+            })
         })
-        .catch(e => {
-          res.render('client/profile/password', { msg: 'erreur de modification!' })
-        })
-    })
-    .catch(errHash => { res.redirect('/404') });
+        .catch(e => { res.redirect('/404') })
+    }
+    else res.render('client/profile/password', { msg: 'Mot de passe incorrect ' })
+  })
 })
 
 /** user change avatar */
@@ -82,14 +84,14 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
         })
     })
     .catch(errd => { res.redirect('/404') })
-});
+})
 
 /** Suppression compte (profile) */
-router.get('/profile/desactiver', checkUserConnected, function (req, res) {
+router.get('/profile/desactiver', checkUserConnected, (req, res) => {
   res.render('client/profile/desactiver')
-});
+})
 
-router.post('/profile/desactiver', checkUserConnected, function (req, res) {
+router.post('/profile/desactiver', checkUserConnected, (req, res) => {
   let { password } = req.body
   let userPassword = req.session.userInfo.password
 
@@ -113,8 +115,8 @@ router.post('/profile/desactiver', checkUserConnected, function (req, res) {
       }
     })
     .catch(e => {
-      res.render('client/profile/desactiver', 
-      { msg: 'Pour désactiver votre compte, vous devez contacter le service client.' })
+      res.render('client/profile/desactiver',
+        { msg: 'Pour désactiver votre compte, vous devez contacter le service client.' })
     });
 })
 
