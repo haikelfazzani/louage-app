@@ -21,18 +21,16 @@
           <label for="key">clé secret</label>
           <input type="text" id="key" name="key" class="form-control" placeholder="clé secret" required>
         </div>
-        <button class="btn btn-lg btn-primary btn-block mt-3 mb-3 font-s14" type="submit">valider</button>
+        <button class="btn btn-lg btn-success btn-block mt-3 mb-3 font-s14" type="submit">valider</button>
         <div>
           <% if(locals.msg && locals.c === undefined) { %>
           <hr>
-          <div class="alert alert-dark mx-400" role="alert">
-            <%= msg %> <a href="/login">se connecter</a>
-          </div>
+          <div class="alert alert-dark mx-400" role="alert"><%= msg %></div>
           <% } %>
 
           <% if(locals.msg && locals.c === 0) { %>
           <hr>
-          <div class="alert alert-dark mx-400" role="alert"> <%= msg %></div>
+          <div class="alert alert-dark mx-400" role="alert"> <%= msg %> <a href="/login">se connecter</a></div>
           <% } %>
         </div>
       </form>

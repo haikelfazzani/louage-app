@@ -249,7 +249,8 @@ textarea {
   background-color: #dc3545 !important
 }
 
-.error-snack, #snackbar:hover {
+.error-snack,
+#snackbar:hover {
   background-color: #1f2532;
 }
 
@@ -335,5 +336,9 @@ textarea {
   .img-profile {
     width: 100% !important;
     margin: auto;
+  }
+
+  #back-to-top {
+    display: none
   }
 }

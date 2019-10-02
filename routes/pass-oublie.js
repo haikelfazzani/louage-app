@@ -1,8 +1,10 @@
 var router = require('express').Router()
 var utilisateurDao = require('../dao/utilisateurs.dao')
 var { isConnected } = require('../middleware/authorisation')
+var nodemailer = require('nodemailer')
 
 var jwt = require('jsonwebtoken')
+var bcrypt = require('bcrypt'), saltRounds = 10;
 
 router.get('/', isConnected, (req, res) => {
   res.render('pass-oublie/pass-oublie-email')
@@ -58,10 +60,13 @@ router.post('/reinitialiser', isConnected, (req, res) => {
 
   jwt.verify(key, 'shhhhh', function (errJwt, decoded) {
     if (errJwt) {
-      res.render('pass-oublie/reinitialiser', { msg: 'Erreur de verification' })
+      res.render('pass-oublie/reinitialiser', { msg: 'Votre clé n\'est pas valide' })
       return
     }
-    utilisateurDao.updateUserPassword(email, password)
+
+    bcrypt.hash(password, saltRounds)
+    .then(hash => {
+      utilisateurDao.updateUserPassword(email, hash)
       .then(result => {
         if (Object.keys(result).length < 1 && result.affectedRows !== 1) throw 404
         res.render('pass-oublie/reinitialiser', { msg: 'Maintenant vous pouvez ' })
@@ -69,6 +74,10 @@ router.post('/reinitialiser', isConnected, (req, res) => {
       .catch(error => {
         res.render('pass-oublie/reinitialiser', { msg: 'Erreur de verification' })
       })
+    })
+    .catch(e => {
+      res.render('pass-oublie/reinitialiser', { msg: 'Erreur de verification' })
+    })
   })
 })
 module.exports = router
