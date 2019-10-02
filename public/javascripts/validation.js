@@ -26,9 +26,8 @@ if (generalForm) {
     e.preventDefault()
     var x = document.querySelector(".error-snack")
     x.classList.add("showsnack")
-    x.textContent = 'Entrée de données ne sont pas valide!'
-
-    setTimeout(function () { x.className = x.className.replace("showsnack", "") }, 5000);
+    x.textContent = 'Les données entrées ne sont pas valides!'
+    setTimeout(function () { x.className = x.className.replace("showsnack", "") }, 5000)
     return false
   }
 }
