@@ -6,7 +6,7 @@ function isPureStr (str) {
 }
 
 function isValidInput (str) {
-  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#]*$/gi.test(str) && str.length > 0)
+  return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#\%]*$/gi.test(str) && str.length > 0)
 }
 
 let generalForm = document.querySelector('.form-general')

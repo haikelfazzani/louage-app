@@ -30,11 +30,10 @@ router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
         v.out = current > d
         return v
       })
-
-      reservations.sort((i, j) => Date.parse(j.timestamp_reservation) - Date.parse(i.timestamp_reservation))
+      
       res.render('client/profile/reservations', { reservations })
     })
-    .catch(error => {
+    .catch(e => {
       res.redirect('/utilisateur/profile')
     })
 })
