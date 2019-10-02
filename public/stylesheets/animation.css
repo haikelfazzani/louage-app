@@ -18,3 +18,21 @@
   70% { transform: perspective(400px) rotateX(10deg); }
   100% { transform: perspective(400px) rotateX(0deg); opacity: 1; }
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b3e895; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4caf50; 
+}
