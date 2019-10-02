@@ -19,9 +19,7 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
         nbplacesreserv: nbplaces, total, voyage: voyages[0], uidvoyage
       })
     })
-    .catch(e => {
-      res.redirect('/404')
-    })
+    .catch(e => { res.redirect('/404') })
 })
 
 router.post('/confirmer', [checkUserConnected, checkIsClient], (req, res) => {
@@ -39,10 +37,10 @@ router.post('/confirmer', [checkUserConnected, checkIsClient], (req, res) => {
   ])
     .then(values => {
       res.cookie('payment',
-        JSON.stringify({ newReserv, numcarte, uidvoyage }), { maxAge: 1000 * 60 * 30, httpOnly:true })        
+        JSON.stringify({ newReserv, numcarte, uidvoyage }), { maxAge: 1000 * 60 * 30, httpOnly: true })
       res.redirect('/ticket')
     })
-    .catch(error => {      
+    .catch(error => {
       res.redirect('/404')
     })
 })
