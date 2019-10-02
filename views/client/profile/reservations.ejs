@@ -34,7 +34,8 @@
             </td>
             <td>
               <% if(u.etat_reservation === 'payer' && u.out === false) { %>
-              <a href="/reservations/annuler?r=<%= u.uid_reservation %>" class="btn btn-warning btn-cancel"><i
+              <a href="/reservations/annuler?r=<%= u.uid_reservation %>&v=<%= u.uid_voyage %>&nb=<%= u.nb_place_reserver %>" 
+                class="btn btn-warning btn-cancel"><i
                   class="fas fa-hand-paper"></i></a>
               <% } %>
             </td>

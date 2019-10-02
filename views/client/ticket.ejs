@@ -57,7 +57,7 @@
             </div>
             <div>
               <small>Vehicule</small>
-              <h4><%= voyage.num_serie_vehicule %></h4>
+              <h4><%= (voyage.num_serie_vehicule).replace(/[-]+/g,' ') %></h4>
             </div>
             <div><small>TOTAL</small>
               <h4><%= paymentInfo.newReserv.totalPrixPlaces %></h4>

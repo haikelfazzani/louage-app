@@ -6,10 +6,10 @@ var voyageDao = require('../../dao/voyages.dao')
 var paymentDao = require('../../dao/payments.dao')
 
 router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
- 
+
   voyageDao.getVoyageById(req.query.v)
     .then(r => {
-      res.render('client/reservations', { voyage:r[0] })
+      res.render('client/reservations', { voyage: r[0] })
     })
     .catch(e => {
       res.redirect('/404')
@@ -40,21 +40,21 @@ router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
 })
 
 router.post('/ajout', [checkUserConnected, checkIsClient], (req, res) => {
-  res.cookie('vosreservations',
-    JSON.stringify(req.body), { maxAge: 1000 * 60 * 10 }
-  )
+  res.cookie('vosreservations', JSON.stringify(req.body), { maxAge: 1000 * 60 * 10 })
   res.redirect('/payments')
 })
 
 router.get('/annuler', [checkUserConnected, checkIsClient], function (req, res) {
+  let { r, v, nb } = req.query
   Promise.all([
-    reservDao.updateEtatReserv('annuler', req.query.r),
-    paymentDao.cancelPayment(req.query.r)
+    voyageDao.updateNbPlaces(nb, v, 'inc'),
+    reservDao.updateEtatReserv('annuler', r),
+    paymentDao.cancelPayment(r)
   ])
     .then(values => {
       res.redirect('/reservations/all')
     })
-    .catch(error => {
+    .catch(e => {
       res.redirect('/404')
     })
 })
