@@ -13,7 +13,7 @@ router.get('/', isConnected, function (req, res) {
 
 router.post('/', isConnected, function (req, res) {
 
-  let { email, password } = req.body;
+  let { email, password } = req.body
 
   bcrypt.hash(password, saltRounds)
     .then(function (hash) {
