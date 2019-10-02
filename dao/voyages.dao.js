@@ -56,9 +56,16 @@ module.exports = VoyagesDao = {
     })
   },
 
-  updateNbPlaces (nbPlaces, uidVoyage) {
-    const rq = `update ${table.name} set ${table.nbPlaces} = ? where ${table.uidVoyage} = ? `;
-    const sql = SqlString.format(rq, [nbPlaces, uidVoyage]);
+  updateNbPlaces (nbPlaces, uidVoyage, flag = 'dec') {
+    let sql = '';
+    if (flag === 'inc') {
+      sql = `update ${table.name} set ${table.nbPlaces} = ${table.nbPlaces} + ${nbPlaces} 
+      where ${table.uidVoyage} = '${uidVoyage}' `;
+    }
+    else {
+      const rq = `update ${table.name} set ${table.nbPlaces} = ? where ${table.uidVoyage} = ? `;
+      sql = SqlString.format(rq, [nbPlaces, uidVoyage]);
+    }
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

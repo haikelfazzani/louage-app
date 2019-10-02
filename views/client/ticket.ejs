@@ -19,7 +19,6 @@
     max-height: 220px
   }
 </style>
-
 <div class="container-fluid py-6">
   <% if(locals.paymentInfo) { %>
   <div class="container">
@@ -48,20 +47,17 @@
               <h4><%= email %></h4>
             </div>
             <% } %>
-
             <div>
               <small>date de depart</small>
-              <h4><%= voyage.date_depart %></h4>
+              <h4><%= locals.formatDate(voyage.date_depart) %></h4>
             </div>
-
             <div>
               <small>Heure de depart</small>
-              <h4><%= voyage.heure_depart %></h4>
+              <h4><%= voyage.heure_depart %>h</h4>
             </div>
-
             <div>
               <small>Vehicule</small>
-              <h4><%= voyage.num_serie_vehicule %></h4>
+              <h4><%= (voyage.num_serie_vehicule).replace(/[-]+/g,' ') %></h4>
             </div>
             <div><small>TOTAL</small>
               <h4><%= paymentInfo.newReserv.totalPrixPlaces %></h4>
