@@ -22,7 +22,6 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
     });
 })
 
-
 router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { id_station, nom_station } = req.session.chefStationInfo
 
@@ -49,7 +48,6 @@ router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
     })
 })
 
-
 router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req, res) {
   let { voyage } = req.query
 
@@ -60,11 +58,9 @@ router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req,
     .catch(error => {
       res.redirect('/chefstation/voyages')
     })
-});
-
+})
 
 router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   let { v } = req.query
   let voyage = (JSON.parse(req.cookies.voyages)).find(vo => vo.uid_voyage === v)
   res.render('chefstation/voyage/modifier', { voyage })

@@ -19,7 +19,7 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
       })      
       res.render('client/profile/notifs', { notifications })
     })
-    .catch(error => {
+    .catch(e => {
       res.render('client/profile')
     })
 })

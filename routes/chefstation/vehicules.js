@@ -15,7 +15,6 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
     })
 })
 
-
 router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   res.render('chefstation/vehicule/ajout')
 })
@@ -33,7 +32,6 @@ router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
       res.redirect('/404')
     })
 })
-
 
 router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req, res) {
   vehiculeDao.deletVehicule(req.query.numserie)
@@ -54,7 +52,6 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], function (req, 
       res.redirect('/404')
     })
 })
-
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], function (req, res) {
 

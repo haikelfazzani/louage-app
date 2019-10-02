@@ -37,14 +37,11 @@ router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
 })
 
 router.get('/voyages.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
-
     voyageDao.getVoyageByNomStation(req.session.chefStationInfo.nom_station)
         .then(function (voyages) {
             res.status(200).json(voyages)
         })
-        .catch(error => {
-            res.status(404).json(voyages)
-        })
+        .catch(e => { res.status(404).json(voyages) })
 })
 
 module.exports = router

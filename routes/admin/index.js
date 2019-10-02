@@ -5,7 +5,7 @@ var { checkUserConnected, checkAdminOrChef } = require('../../middleware/authori
 var utilisateurDao = require('../../dao/utilisateurs.dao')
 var stationDao = require('../../dao/stations.dao')
 
-router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
+router.get('/', [checkUserConnected, checkAdminOrChef], (req, res) => {
 
     let { email } = req.session.userInfo
 
@@ -14,27 +14,22 @@ router.get('/', [checkUserConnected, checkAdminOrChef], function (req, res) {
             req.session.chefStationInfo = resStation[0]
             const promises = [utilisateurDao.getUsers(), stationDao.getStations()]
 
-            Promise.all(promises).then(function (values) {
-                let data = { utilisateurs: values[0], stations: values[1] }
-
-                res.render('admin/index', { data });
-            })
-                .catch(error => {
-                    res.render('admin/index');
-                });
+            Promise.all(promises)
+                .then(function (values) {
+                    let data = { utilisateurs: values[0], stations: values[1] }
+                    res.render('admin/index', { data })
+                })
+                .catch(error => { res.render('admin/index') })
         })
-        .catch(error => error)
-});
+        .catch(e => { res.redirect('/404') })
+})
 
-router.get('/utilisateurs.json', [checkUserConnected, checkAdminOrChef], function (req, res) {
-
+router.get('/utilisateurs.json', [checkUserConnected, checkAdminOrChef], (req, res) => {
     utilisateurDao.getUsers()
         .then(function (utilisateurs) {
-            res.status(200).json(utilisateurs);
+            res.status(200).json(utilisateurs)
         })
-        .catch(error => {
-            res.status(404).json(utilisateurs);
-        })
+        .catch(e => { res.status(404).json(utilisateurs) })
 })
 
 module.exports = router

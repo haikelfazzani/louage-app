@@ -28,19 +28,15 @@ router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
 })
 
 router.get('/annuler', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   let { r } = req.query
-
   Promise.all([
     paymentDao.cancelPayment(r),
     reservDao.updateEtatReserv('annuler', r)
   ])
-    .then(values => {
+    .then(v => {
       res.redirect('/chefstation/reservations')
     })
-    .catch(error => {
-      res.redirect('/404')
-    })
+    .catch(e => { res.redirect('/404') })
 })
 
 module.exports = router

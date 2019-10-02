@@ -33,7 +33,7 @@ module.exports = StationsDao = {
     return knex(table.name).where(table.nomStation, '=', nomStation).del()
   },
   getStation (nomStation) {
-    const rq = `SELECT u.nom, u.prenom , s.nom_station, s.ville, s.station_tel, s.id_station 
+    const rq = `SELECT u.nom, u.prenom , u.email ,s.nom_station, s.ville, s.station_tel, s.id_station 
     FROM stations s JOIN utilisateurs u ON s.chef_station = u.id WHERE s.nom_station = ?`;
 
     const sql = SqlString.format(rq, nomStation)
