@@ -1,6 +1,7 @@
 var router = require('express').Router()
 var { checkUserConnected, checkIsClient } = require('../../middleware/authorisation')
 var uniqid = require('uniqid')
+var checkValidCaptcha = require('../../middleware/checkValidCaptcha')
 
 var reservDao = require('../../dao/reservations.dao')
 var voyageDao = require('../../dao/voyages.dao')
@@ -22,7 +23,7 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
     .catch(e => { res.redirect('/404') })
 })
 
-router.post('/confirmer', [checkUserConnected, checkIsClient], (req, res) => {
+router.post('/confirmer', [checkUserConnected, checkIsClient, checkValidCaptcha], (req, res) => {
   let { numcarte, nbplacesreserv, total, nb_places, uidvoyage } = req.body
   let { id } = req.session.userInfo
   let uid = uniqid()
