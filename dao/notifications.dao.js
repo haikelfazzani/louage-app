@@ -1,4 +1,4 @@
-const db = require('../database/connection')
+var db = require('../database/connection')
 var knex = require('../database/knex')
 
 const table = {

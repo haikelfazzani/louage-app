@@ -1,26 +1,25 @@
-var app = require('../app');
-var debug = require('debug')('loage:server');
-var http = require('http');
+var app = require('../app')
+var debug = require('debug')('loage:server')
+var http = require('http')
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+var port = normalizePort(process.env.PORT || '3000')
+app.set('port', port)
 
-var server = http.createServer(app);
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+var server = http.createServer(app)
+server.listen(port)
+server.on('error', onError)
+server.on('listening', onListening)
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  var port = parseInt(val, 10)
 
   if (isNaN(port)) {
-    return val;
+    return val
   }
-
   if (port >= 0) {
-    return port;
+    return port
   }
-  return false;
+  return false
 }
 
 function onError(error) {
