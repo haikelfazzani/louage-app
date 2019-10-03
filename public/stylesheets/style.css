@@ -266,6 +266,12 @@ textarea {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+.navbar-toggler {
+  background-color: #a7ea9e !important;
+}
+
+.navbar-toggler-icon { color: #fff !important }
+
 @-webkit-keyframes fadein {
   from {
     opacity: 0;
