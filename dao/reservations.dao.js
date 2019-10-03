@@ -1,4 +1,4 @@
-const db = require('../database/connection')
+var db = require('../database/connection')
 var knex = require('../database/knex')
 var SqlString = require('sqlstring')
 var EtatReservation = require('../model/EtatReservation.enum')
@@ -30,12 +30,10 @@ module.exports = ReservationsDao = {
         timestamp_reservation: new Date().toISOString()
       })
   },
-
   updateEtatReserv (etat, uidReservation) {
     return knex(table.name).update({ etat_reservation: etat })
       .where(table.uidReservation, '=', uidReservation)
   },
-
   getReservByUser (email) {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 
@@ -52,7 +50,6 @@ module.exports = ReservationsDao = {
       })
     })
   },
-
   getAllReservationsByStation (idStation) {
     const rq = `SELECT * from ${table.name} r join voyages v ON r.uid_voyage = v.uid_voyage 
     WHERE v.id_station = ? `;
@@ -66,7 +63,6 @@ module.exports = ReservationsDao = {
       })
     })
   },
-
   getReservsVoyagesUsers (idStation) {
     const rq = `select * from ${table.name} t 
     join utilisateurs u on t.id_client = u.id 

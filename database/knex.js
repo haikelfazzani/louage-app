@@ -1,3 +1,10 @@
+var localDB = {
+  host: 'localhost:3306',
+  user: 'root',
+  password: '',
+  database: 'gestion_voyage'
+}
+
 var knex = require('knex')({
   client: 'mysql',
   connection: {

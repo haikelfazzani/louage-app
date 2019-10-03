@@ -1,4 +1,4 @@
-const db = require('../database/connection');
+var db = require('../database/connection');
 var SqlString = require('sqlstring');
 var knex = require('../database/knex')
 
@@ -32,7 +32,6 @@ module.exports = VoyagesDao = {
       timestamp_voyage: new Date().toISOString()
     })
   },
-
   updateVoyage (Voyage) {
     let { uidVoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces } = Voyage
 
@@ -55,7 +54,6 @@ module.exports = VoyagesDao = {
       })
     })
   },
-
   updateNbPlaces (nbPlaces, uidVoyage, flag = 'dec') {
     let sql = '';
     if (flag === 'inc') {
@@ -74,11 +72,9 @@ module.exports = VoyagesDao = {
       })
     })
   },
-
   deletVoyage (uidVoyage) {
     return knex(table.name).where(table.uidVoyage, '=', uidVoyage).del()
   },
-
   getVoyageByStation (idStation) {
     const rq = `SELECT * FROM ${table.name} v JOIN vehicules s 
     ON v.num_serie_vehicule = s.num_serie WHERE v.id_station = ?`;
@@ -107,17 +103,14 @@ module.exports = VoyagesDao = {
       })
     })
   },
-
   getVoyages () {
     return knex(table.name).join('stations', 'voyages.id_station', '=', 'stations.id_station')
   },
-
   getVoyageById (uidVoyage) {
     return knex(table.name)
       .join('stations', 'voyages.id_station', '=', 'stations.id_station')
       .where({ uid_voyage: uidVoyage })
   },
-
   geFulltVoyageById (uidVoyage) {
     const rq = `SELECT * FROM ${table.name} v 
     JOIN vehicules ON vehicules.num_serie = v.num_serie_vehicule
@@ -149,7 +142,6 @@ module.exports = VoyagesDao = {
       })
     })
   },
-
   getVoyageByDateAndStation (destination, timestampVoyage, station) {
     const rq = `select * from ${table.name} v 
     join stations u on v.id_station = u.id_station 
@@ -164,7 +156,6 @@ module.exports = VoyagesDao = {
       })
     })
   },
-
   voyagesByDestAndStationAndDate (station, destination, date) {
     const rq = `SELECT * from ${table.name} v join stations s
     on v.id_station = s.id_station

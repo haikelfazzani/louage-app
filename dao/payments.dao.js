@@ -24,7 +24,6 @@ module.exports = PaymentsDao = {
         timestamp_payment: new Date().toISOString()
       })
   },
-
   cancelPayment (uidPayment) {
     let rq = `DELETE FROM ${table.name} WHERE ${table.uidPayment} = ?`;
 
@@ -37,7 +36,6 @@ module.exports = PaymentsDao = {
       })
     })
   },
-
   getPaymentsByUser (email) {
     const sql = `select * from ${table.name} t 
     JOIN reservation r ON t.uid_reservation = r.uid_reservation
@@ -52,7 +50,6 @@ module.exports = PaymentsDao = {
       })
     })
   },
-
   getPayments (idUser) {
     const rq = `select * from ${table.name} p
     join reservations r on p.uid_reservation = r.uid_reservation
