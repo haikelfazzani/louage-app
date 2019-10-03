@@ -1,10 +1,9 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
 <div class="container-fluid py-5">
-
   <div class="container">
     <%- include('navbar') -%>
-  
+
     <% if(locals.data && locals.userInfo.role === locals.Role.admin) { 
       let myData = [
         { label : 'nombre des utilisateurs', l: data.utilisateurs.length , fa:'fas fa-user'},
@@ -12,7 +11,6 @@
       ]  
     %>
     <div class="row text-uppercase mb-5">
-  
       <% myData.forEach(v => { %>
       <div class="col-md-6 text-center mb-3">
         <div class="card box-light">
@@ -24,10 +22,8 @@
         </div>
       </div>
       <% }) %>
-  
     </div><!-- end row-->
     <% } %>
-    
     <%- include('./stat/utilisateurs') -%>
   </div>
 </div>

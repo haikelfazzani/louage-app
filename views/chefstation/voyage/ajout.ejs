@@ -3,10 +3,8 @@
 <div class="container-fluid py-6">
   <div class="container">
     <%- include('../navbar') -%>
-
     <% if(locals.vehicules) { %>
     <form action="/chefstation/voyages/ajout" method="POST" class="form-general form-bg-gray mb-3">
-
       <input type="text" class="form-control" name="id_station" value="<%= id_station %>" hidden readonly>
 
       <div class="form-group">

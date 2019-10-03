@@ -3,7 +3,6 @@
 <div class="container-fluid py-6">
   <div class="container">
     <%- include('../navbar') -%>
-
     <% if(locals.notification) { %>
     <form action="/chefstation/notifications/modifier" method="POST" class="form-general bg-light p-0 mb-3">
 
@@ -34,7 +33,6 @@
       <button type="reset" class="btn btn-danger">vider</button>
     </form>
     <% } %>
-
     <%- include('../../snackbar') -%>
   </div>
 </div>
