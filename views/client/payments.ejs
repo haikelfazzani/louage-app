@@ -64,10 +64,8 @@
         </div>
       </div>
 
-
       <div class="col-md-6">
         <form action="/payments/confirmer" method="POST" class="form-general form-bg-gray mb-3">
-
           <input type="text" name="uidvoyage" id="uidvoyage" value="<%= uidvoyage %>" required hidden readonly>
 
           <input type="text" class="form-control" id="nb_places" name="nb_places" value="<%= voyage.nb_places %>"
@@ -108,7 +106,8 @@
               </div>
             </div>
           </div>
-          <div class="g-recaptcha mb-3" data-callback="imNotARobot" data-sitekey="6LdptrsUAAAAAHpWDCbQrgpSyPEJ46Jbu5_hPCih"></div>
+          <div class="g-recaptcha mb-3" data-callback="imNotARobot"
+            data-sitekey="6LdptrsUAAAAAHpWDCbQrgpSyPEJ46Jbu5_hPCih"></div>
           <button type="submit" class="btn btn-dark" id="btn-payment">payer</button>
           <button type="reset" class="btn btn-danger">vider</button>
         </form>

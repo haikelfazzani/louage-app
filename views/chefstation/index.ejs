@@ -1,10 +1,8 @@
 <%- include('../partials/head.ejs') -%>
 <%- include('../partials/navbar') -%>
 <div class="container-fluid py-5">
-
   <div class="container">
     <%- include('navbar') -%>
-
     <% if(locals.data) {
     let myData = [
     { label : 'nombre des vehicules' , l : data.vehicules.length , fa:'fas fa-car'},
@@ -14,7 +12,6 @@
     %>
 
     <div class="row text-uppercase mb-5">
-
       <% myData.forEach(v => { %>
       <div class="col-md-4 text-center mb-3">
         <div class="card box-light">
@@ -26,9 +23,7 @@
         </div>
       </div>
       <% }) %>
-
     </div><!-- end row-->
-
     <%- include('./stat/voyages') -%>
     <% } %>
   </div>

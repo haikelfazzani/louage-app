@@ -3,9 +3,7 @@
 <div class="container-fluid py-6">
   <div class="container">
     <%- include('../navbar') -%>
-
     <form action="/chefstation/voyages/modifier" method="POST" class="form-general form-bg-gray mb-3">
-
       <input type="text" name="uidvoyage" id="uidvoyage" value="<%= voyage.uid_voyage %>" hidden readonly>
 
       <div class="form-group">
