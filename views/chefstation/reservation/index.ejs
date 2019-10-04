@@ -5,7 +5,7 @@
     <%- include('../navbar') -%>
     <% if(locals.reservations) { %>
     <div class="table-responsive">
-      <table class="table" id="myTable">
+      <table class="table mb-3" id="myTable">
         <thead>
           <tr>
             <th>nom station</th>
@@ -41,6 +41,7 @@
         </tbody>
       </table>
     </div>
+    <button onclick="tableToExcel('myTable')" class="btn btn-dark"><i class="fas fa-file-excel"></i> Exporter en Excel</button>
     <% } %>
   </div>
 </div>

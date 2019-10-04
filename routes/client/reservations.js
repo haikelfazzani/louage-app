@@ -17,9 +17,7 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
 })
 
 router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
-
   let { email } = req.session.userInfo
-
   reservDao.getReservByUser(email)
     .then(reservations => {
 

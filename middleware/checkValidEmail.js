@@ -1,8 +1,6 @@
 var UtilisateurDao = require('../dao/utilisateurs.dao');
 module.exports = function checkValidEmail (req, res, next) {
-
   let { email } = req.body
-
   UtilisateurDao.getUser(email)
     .then(result => {
       if (result && result.length > 0) {
