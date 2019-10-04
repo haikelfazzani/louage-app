@@ -1,5 +1,4 @@
 var mysql = require('mysql')
-
 var remoteDB = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -13,7 +12,6 @@ var localDB = {
     password: '',
     database: 'gestion_voyage'
 }
-
 var db = mysql.createConnection(remoteDB);
 
 db.connect((err) => {

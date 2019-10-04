@@ -13,7 +13,6 @@ const table = {
 module.exports = PaymentsDao = {
 
   addPayment (Payment) {
-
     let { uidPayment, numCarte, uidReservation } = Payment
 
     return knex(table.name)
