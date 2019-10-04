@@ -1,7 +1,6 @@
 var db = require('../database/connection')
 var knex = require('../database/knex')
 var SqlString = require('sqlstring')
-var EtatReservation = require('../model/EtatReservation.enum')
 
 const table = {
   name: 'reservations',
