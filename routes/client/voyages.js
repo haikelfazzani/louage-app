@@ -2,7 +2,6 @@ var router = require('express').Router()
 var voyagesDao = require('../../dao/voyages.dao')
 
 router.post('/', (req, res) => {
-
   let { nomstation, destination, date } = req.body
 
   Promise.all([

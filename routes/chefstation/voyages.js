@@ -7,7 +7,6 @@ var Voyage = require('../../model/Voyage.model')
 var uniqid = require('uniqid')
 
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   let { id_station, nom_station } = req.session.chefStationInfo
 
   voyagesDao.getVoyageByStation(id_station)
@@ -35,7 +34,6 @@ router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 })
 
 router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   let { id_station, vehicule, destination, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
   let newVoyage = new Voyage(uniqid(), destination, heureDepart, dateDepart, prixPlace, nbPlaces, id_station, vehicule)
 
@@ -67,9 +65,7 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   let { uidvoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
-
   let newVoyage = new Voyage(uidvoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, '', '')
 
   voyagesDao.updateVoyage(newVoyage)

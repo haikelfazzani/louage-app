@@ -5,7 +5,6 @@ var vehiculeDao = require('../../dao/vehicules.dao')
 var Vehicule = require('../../model/Vehicule.model')
 
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   vehiculeDao.getVehicules()
     .then(vehicules => {      
       res.render('chefstation/vehicule/lister', { vehicules })
@@ -20,7 +19,6 @@ router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 })
 
 router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
-
   let { numSerie, proprietaire, nbPlaces } = req.body
   let newVehicule = new Vehicule(numSerie, proprietaire, nbPlaces)
 
@@ -54,7 +52,6 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], function (req, 
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], function (req, res) {
-
   let { numserie, proprietaire, nbPlaces } = req.body
   let newVehicule = new Vehicule(numserie, proprietaire, nbPlaces)
 

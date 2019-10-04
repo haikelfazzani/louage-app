@@ -6,7 +6,6 @@ var express = require('express'),
   objectTrim = require('../../util/objectTrim')
 
 var bcrypt = require('bcrypt'), saltRounds = 10;
-
 var multer = require('multer'), storage = multer.memoryStorage(), upload = multer({ storage: storage });
 var sharp = require('sharp')
 

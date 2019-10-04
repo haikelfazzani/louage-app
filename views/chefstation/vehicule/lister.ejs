@@ -4,7 +4,7 @@
   <div class="container">
     <%- include('../navbar') -%>
     <% if(locals.vehicules) {  %>
-    <div class="table-responsive">
+    <div class="table-responsive mb-3">
       <table class="table table-hover" id="myTable">
         <thead>
           <tr>
@@ -31,6 +31,7 @@
         </tbody>
       </table>
     </div>
+    <button onclick="tableToExcel('myTable')" class="btn btn-dark"><i class="fas fa-file-excel"></i> Exporter en Excel</button>
     <% } %>
   </div>
 </div>
