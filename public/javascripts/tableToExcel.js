@@ -5,8 +5,8 @@ function tableToExcel (tableID, filename = '') {
     tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
   filename = filename ? filename + '.xls' : 'excel_data.xls';
-  downloadLink = document.createElement("a");
-  document.body.appendChild(downloadLink);
+  downloadLink = document.createElement("a")
+  document.body.appendChild(downloadLink)
   if (navigator.msSaveOrOpenBlob) {
     var blob = new Blob(['\ufeff', tableHTML], { type: dataType })
     navigator.msSaveOrOpenBlob(blob, filename);
