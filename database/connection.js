@@ -12,7 +12,7 @@ var localDB = {
     password: '',
     database: 'gestion_voyage'
 }
-var db = mysql.createConnection(remoteDB);
+var db = mysql.createConnection(remoteDB)
 
 db.connect((err) => {
     setInterval(() => { db.query('SELECT 1') }, 1000 * 60 * 5)
