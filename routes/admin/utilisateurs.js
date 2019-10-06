@@ -24,12 +24,9 @@ router.get('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
 
 router.post('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
   let { email, password, role } = req.body;
-
   bcrypt.hash(password, saltRounds)
     .then(function (hash) {
-
       let utilisateur = new Utilisateur('', '', email, hash, '', '', role)
-
       utilisateurDao.addUser(utilisateur)
         .then(result => {
           utilisateurDao.updateEtat(email)

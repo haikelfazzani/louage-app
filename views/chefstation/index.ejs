@@ -10,7 +10,6 @@
     { label : 'nombre des reservations' , l : data.reservations.length , fa:'fas fa-suitcase'}
     ]
     %>
-
     <div class="row text-uppercase mb-5">
       <% myData.forEach(v => { %>
       <div class="col-md-4 text-center mb-3">
@@ -24,7 +23,9 @@
       </div>
       <% }) %>
     </div><!-- end row-->
-    <%- include('./stat/voyages') -%>
+    <div id="voyages-chart"></div>
+    <script src="/javascripts/charts/apexcharts.js" defer></script>
+    <script src="/javascripts/charts/chef-charts.js" defer></script>
     <% } %>
   </div>
 </div>
