@@ -21,9 +21,7 @@ router.get('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
       req.session.chefStations = chefStations
       res.render('admin/station/ajout', { chefStations })
     })
-    .catch(e => {
-      res.redirect('/admin')
-    })
+    .catch(e => { res.redirect('/admin') })
 })
 
 router.post('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
@@ -43,12 +41,8 @@ router.post('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
 router.get('/supprimer', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
   let nomStation = req.query.nom
   stationDao.deletStation(nomStation.trim())
-    .then(r => {
-      res.redirect('/admin/stations')
-    })
-    .catch(e => {
-      res.redirect('/admin/stations')
-    })
+    .then(r => { res.redirect('/admin/stations') })
+    .catch(e => { res.redirect('/admin/stations') })
 })
 
 router.post('/supprimer', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
@@ -61,20 +55,14 @@ router.get('/modifier', [checkUserConnected, checkUserRoleAdmin], (req, res) => 
     .then(station => {
       res.render('admin/station/modifier', { station: station[0] })
     })
-    .catch(e => {
-      res.redirect('/404')
-    })
+    .catch(e => { res.redirect('/404') })
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
   let { idstation, nom, ville, tel } = req.body
   let newStation = new Station(nom, ville, tel, '')
   stationDao.updateStation(newStation, idstation)
-    .then(r => {
-      res.redirect('/admin/stations')
-    })
-    .catch(e => {
-      res.redirect('/404')
-    })
+    .then(r => { res.redirect('/admin/stations') })
+    .catch(e => { res.redirect('/404') })
 })
 module.exports = router

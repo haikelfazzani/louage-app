@@ -31,14 +31,14 @@ router.post('/ajout', [checkUserConnected, checkUserRoleAdmin], (req, res) => {
         .then(result => {
           utilisateurDao.updateEtat(email)
             .then(resultEtat => {
-              res.render('admin/utilisateur/ajout', { msg: 'un utilisateur a été bien ajouté' });
+              res.render('admin/utilisateur/ajout', { msg: 'Un utilisateur a été bien ajouté' });
             })
-            .catch(errorUpdate => {
+            .catch(errUpdate => {
               res.redirect('/404')
             })
         })
         .catch(e => {
-          res.render('admin/utilisateur/ajout', { msg: 'erreur d\'ajout' })
+          res.render('admin/utilisateur/ajout', { msg: 'Utilisateur deja existe' })
         })
     })
     .catch(errHash => { res.redirect('/404') })
