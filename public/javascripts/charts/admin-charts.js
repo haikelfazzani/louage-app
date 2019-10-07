@@ -46,9 +46,7 @@ fetch('/admin/utilisateurs.json')
   .then(res => res.json())
   .then(stations => {
     document.getElementById('len-stations').textContent = stations.length;
-    let userByMonth = stations.reduce((a, c) =>
-      (v = months[new Date(c.timestamp_station).getMonth()], a[v] ? a[v]++ : a[v] = 1, a), []);
-
+    let userByMonth = stations.reduce((a, c) => (v = c.ville, a[v] ? a[v]++ : a[v] = 1, a), [])      
     let objStation = []
 
     for (let i in userByMonth) {
@@ -69,7 +67,7 @@ fetch('/admin/utilisateurs.json')
       dataLabels: { enabled: true },
       stroke: { curve: 'straight' },
       title: {
-        text: 'Nombre des stations par mois', align: 'center'
+        text: 'Nombre des stations par ville', align: 'center'
       },
       colors: ['#28a745'],
       grid: {
