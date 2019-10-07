@@ -28,7 +28,7 @@ router.post('/profile', checkUserConnected, (req, res) => {
     .then(r => {
       res.render('client/profile/index', {
         user: User,
-        msg: 'votre profile a été bien modifiée'
+        msg: 'Votre profile a été bien modifiée'
       });
     })
     .catch(e => {
@@ -41,7 +41,6 @@ router.get('/profile/password', checkUserConnected, (req, res) => {
   res.render('client/profile/password')
 })
 
-
 router.post('/profile/password', checkUserConnected, (req, res) => {
   let { npassword, ancien } = req.body
   let { email, password } = req.session.userInfo
@@ -52,7 +51,7 @@ router.post('/profile/password', checkUserConnected, (req, res) => {
         .then(function (hash) {
           utilisateurDao.updateUserPassword(email, hash)
             .then(r => {
-              res.render('client/profile/password', { msg: 'votre mot de passe a été bien modifiée' })
+              res.render('client/profile/password', { msg: 'Votre mot de passe a été bien modifiée' })
             })
             .catch(e => {
               res.redirect('/404')
@@ -72,14 +71,14 @@ router.post('/profile/avatar', [checkUserConnected, upload.single("avatar")], (r
     .toBuffer()
     .then(function (data) {
 
-      const encoded = data.toString("base64");
+      const encoded = data.toString("base64")
 
       utilisateurDao.updateAvatar(encoded, req.session.userInfo.email)
         .then(result => {
           res.redirect('/utilisateur/profile')
         })
         .catch(error => {
-          res.render('client/profile/index', { msg: 'erreur de modification' })
+          res.render('client/profile/index', { msg: 'Erreur de modification' })
         })
     })
     .catch(errd => { res.redirect('/404') })
@@ -106,11 +105,11 @@ router.post('/profile/desactiver', checkUserConnected, (req, res) => {
             res.redirect('/register')
           })
           .catch(error => {
-            res.render('client/profile/desactiver', { msg: 'erreur de suppression!' })
+            res.render('client/profile/desactiver', { msg: 'Erreur de suppression!' })
           })
       }
       else {
-        res.render('client/profile/desactiver', { msg: 'mot de passe incorrect' })
+        res.render('client/profile/desactiver', { msg: 'Mot de passe incorrect' })
       }
     })
     .catch(e => {

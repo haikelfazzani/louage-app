@@ -27,8 +27,8 @@ router.post('/', [checkValidCaptcha, validContactForm], (req, res) => {
   transporter.sendMail(mailOptions, function (error, info) {
     res.render('contact', {
       msg: error
-        ? "Cette adresse mail n'est pas valide!"
-        : "Votre email a été bien envoyé"
+        ? "Cette adresse e-mail n'est pas valide!"
+        : "Votre e-mail a été bien envoyé"
     })
   })
 })
