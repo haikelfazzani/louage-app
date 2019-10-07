@@ -17,14 +17,14 @@
 
       <div class="form-group">
         <label for="nom">nom station</label>
-        <input type="text" class="form-control" id="nom" name="nom" pattern="[a-zA-Z ]+"
-        placeholder="Enter nom station" required>
+        <input type="text" class="form-control" id="nom" name="nom" pattern="[a-zA-Z ]+" placeholder="Enter nom station"
+          required>
       </div>
 
       <div class="form-group">
         <label for="ville">ville</label>
-        <input type="text" class="form-control" id="ville" name="ville" pattern="[a-zA-Z ]+"
-        placeholder="Enter ville" required>
+        <input type="text" class="form-control" id="ville" name="ville" pattern="[a-zA-Z ]+" placeholder="Enter ville"
+          required>
       </div>
 
       <div class="form-group">
@@ -37,6 +37,10 @@
       <button type="reset" class="btn btn-danger">vider</button>
     </form>
     <%- include('../../snackbar') -%>
+    <% } else { %>
+    <div class="alert alert-danger" role="alert">
+      Tous les chef stations sont affectés..
+    </div>
     <% } %>
   </div>
 </div>

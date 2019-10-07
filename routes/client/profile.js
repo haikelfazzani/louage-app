@@ -54,12 +54,12 @@ router.post('/profile/password', checkUserConnected, (req, res) => {
               res.render('client/profile/password', { msg: 'Votre mot de passe a été bien modifiée' })
             })
             .catch(e => {
-              res.redirect('/404')
+              res.render('client/profile/password', { msg: 'Veuillez verifier votre mot de passe ' })
             })
         })
         .catch(e => { res.redirect('/404') })
     }
-    else res.render('client/profile/password', { msg: 'Mot de passe incorrect ' })
+    else res.render('client/profile/password', { msg: 'Veuillez verifier votre mot de passe ' })
   })
 })
 
@@ -105,11 +105,11 @@ router.post('/profile/desactiver', checkUserConnected, (req, res) => {
             res.redirect('/register')
           })
           .catch(error => {
-            res.render('client/profile/desactiver', { msg: 'Erreur de suppression!' })
+            res.render('client/profile/desactiver', { msg: 'Veuillez verifier votre mot de passe' })
           })
       }
       else {
-        res.render('client/profile/desactiver', { msg: 'Mot de passe incorrect' })
+        res.render('client/profile/desactiver', { msg: 'Veuillez verifier votre mot de passe' })
       }
     })
     .catch(e => {

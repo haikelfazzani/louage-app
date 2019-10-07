@@ -28,7 +28,7 @@ router.get('/all', [checkUserConnected, checkIsClient], (req, res) => {
         v.out = current > d
         return v
       })
-      
+
       res.render('client/profile/reservations', { reservations })
     })
     .catch(e => {
@@ -48,11 +48,7 @@ router.get('/annuler', [checkUserConnected, checkIsClient], function (req, res) 
     reservDao.updateEtatReserv('annuler', r),
     paymentDao.cancelPayment(r)
   ])
-    .then(values => {
-      res.redirect('/reservations/all')
-    })
-    .catch(e => {
-      res.redirect('/404')
-    })
+    .then(values => { res.redirect('/reservations/all') })
+    .catch(e => { res.redirect('/404') })
 })
 module.exports = router

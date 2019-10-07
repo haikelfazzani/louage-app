@@ -10,8 +10,6 @@ router.get('/', [checkUserConnected, checkIsClient], (req, res) => {
     .then(voyages => {
       res.render('client/ticket', { paymentInfo, email, voyage: voyages[0], nom, prenom })
     })
-    .catch(e => {
-      res.redirect('/404')
-    })
+    .catch(e => { res.redirect('/404') })
 })
 module.exports = router
