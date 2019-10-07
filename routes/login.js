@@ -4,11 +4,11 @@ var bcrypt = require('bcrypt')
 var checkValidEmail = require('../middleware/checkValidEmail')
 var checkUserExist = require('../middleware/checkUserExist')
 
-router.get('/', isConnected, function (req, res) {
+router.get('/', isConnected, (req, res) => {
   res.render('login')
 })
 
-router.post('/', [isConnected, checkValidEmail, checkUserExist], function (req, res) {
+router.post('/', [isConnected, checkValidEmail, checkUserExist], (req, res) => {
   let { email, password, connectedUser } = req.body
   bcrypt.compare(password, connectedUser.password)
     .then(async (hashRes) => {
@@ -17,9 +17,9 @@ router.post('/', [isConnected, checkValidEmail, checkUserExist], function (req, 
         res.redirect('/')
       }
       else {
-        res.render('login', { msg: 'vous devez s\'inscire avant de se connecter!' })
+        res.render('login', { msg: 'Veuillez vérifier votre adresse e-mail ou mot de passe' })
       }
     })
-    .catch(e => { res.redirect('/404') })
+    .catch(e => { res.render('login', { msg: 'Vous devez s\'inscire avant de se connecter!' }) })
 })
 module.exports = router

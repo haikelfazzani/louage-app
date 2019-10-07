@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
     .then(stations => {    
       res.render('index', { stations })
     })
-    .catch(error => {
+    .catch(e => {
       res.render('index')
     })
 })

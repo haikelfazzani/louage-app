@@ -50,7 +50,7 @@ router.post('/', isConnected, function (req, res) {
             res.redirect('/register/email/validation')
           })
         })
-        .catch(error => {
+        .catch(e => {
           res.render('register', { msg: 'Vous êtes deja inscrit!' })
         })
     })
@@ -66,7 +66,6 @@ router.post('/email/validation', isConnected, (req, res) => {
   let { key } = req.body
 
   jwt.verify(key, 'shhhhh', function (err, decoded) {
-
     if (!err) {
       knex('utilisateurs').where({ email: decoded.email }).update({ etat_email: 1 })
         .then(result => {
@@ -79,7 +78,7 @@ router.post('/email/validation', isConnected, (req, res) => {
         })
     }
     else {
-      res.render('register-valider', { msg: 'Clé n\'est pas valide! verifier votre boite email', c: 0 })
+      res.render('register-valider', { msg: 'Clé n\'est pas valide! veuillez vérifier votre boîte de réception', c: 0 })
     }
   })
 })
