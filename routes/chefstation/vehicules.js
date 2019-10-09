@@ -6,7 +6,7 @@ var Vehicule = require('../../model/Vehicule.model')
 
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
   vehiculeDao.getVehicules()
-    .then(vehicules => {      
+    .then(vehicules => {
       res.render('chefstation/vehicule/lister', { vehicules })
     })
     .catch(error => {
@@ -23,11 +23,11 @@ router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let newVehicule = new Vehicule(numSerie, proprietaire, nbPlaces)
 
   vehiculeDao.addVehicule(newVehicule)
-    .then(result => {
+    .then(r => {
       res.redirect('/chefstation/vehicules')
     })
-    .catch(error => {
-      res.redirect('/404')
+    .catch(e => {
+      res.render('chefstation/vehicule/ajout', { msg: 'Vehicule deja existe' })
     })
 })
 
