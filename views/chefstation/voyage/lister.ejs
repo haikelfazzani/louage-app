@@ -9,7 +9,7 @@
         <thead>
           <tr>
             <th>station</th>
-            <th>destination</th>
+            <th>arrive</th>
             <th>heure Depart</th>
             <th>date Depart</th>
             <th>prix Place</th>
@@ -22,7 +22,7 @@
           <% voyages.forEach(u => {  %>
           <tr>
             <td><%= nom_station %></td>
-            <td><%= u.destination %></td>
+            <td><%= u.arrive %></td>
             <td><%= u.heure_depart %>h</td>
             <td><%= u.date_depart %></td>
             <td><%= u.prix_place %> DNT</td>

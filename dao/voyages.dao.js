@@ -5,7 +5,7 @@ var knex = require('../database/knex')
 const table = {
   name: 'voyages',
   uidVoyage: 'uid_voyage',
-  destination: 'destination',
+  arrive: 'arrive',
   heureDepart: 'heure_depart',
   dateDepart: 'date_depart',
   prixPlace: 'prix_place',
@@ -18,11 +18,11 @@ const table = {
 module.exports = VoyagesDao = {
 
   addVoyage (Voyage) {
-    let { uidVoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, numSerieVehicule } = Voyage
+    let { uidVoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces, idStation, numSerieVehicule } = Voyage
 
     return knex(table.name).insert({
       uid_voyage: uidVoyage,
-      destination,
+      arrive,
       heure_depart: heureDepart,
       date_depart: dateDepart,
       prix_place: prixPlace,
@@ -33,10 +33,10 @@ module.exports = VoyagesDao = {
     })
   },
   updateVoyage (Voyage) {
-    let { uidVoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces } = Voyage
+    let { uidVoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces } = Voyage
 
     const rq = `update ${table.name} 
-    set ${table.destination} = ? ,
+    set ${table.arrive} = ? ,
         ${table.heureDepart} = ?,
         ${table.dateDepart} = ?,
         ${table.prixPlace} = ?,
@@ -44,7 +44,7 @@ module.exports = VoyagesDao = {
     where ${table.uidVoyage} = ? `;
 
     const sql = SqlString.format(rq,
-      [destination, heureDepart, dateDepart, prixPlace, nbPlaces, uidVoyage]
+      [arrive, heureDepart, dateDepart, prixPlace, nbPlaces, uidVoyage]
     );
 
     return new Promise((resolve, reject) => {
@@ -126,14 +126,14 @@ module.exports = VoyagesDao = {
       })
     })
   },
-  nbPlacesByDestination (destination, timestampVoyage, station) {
+  nbPlacesByDestination (arrive, timestampVoyage, station) {
     const rq = `SELECT sum(v.nb_places) as nb
     FROM ${table.name} v join stations s
     on v.id_station = s.id_station
-    where v.destination = ? and v.timestamp_voyage = ? and s.nom_station = ? 
+    where v.arrive = ? and v.timestamp_voyage = ? and s.nom_station = ? 
     GROUP BY v.nb_places`;
 
-    const sql = SqlString.format(rq, [destination, timestampVoyage, station]);
+    const sql = SqlString.format(rq, [arrive, timestampVoyage, station]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -142,12 +142,12 @@ module.exports = VoyagesDao = {
       })
     })
   },
-  getVoyageByDateAndStation (destination, timestampVoyage, station) {
+  getVoyageByDateAndStation (arrive, timestampVoyage, station) {
     const rq = `select * from ${table.name} v 
     join stations u on v.id_station = u.id_station 
-    WHERE v.destination = ? and v.timestamp_voyage = ? and u.nom_station = ?`;
+    WHERE v.arrive = ? and v.timestamp_voyage = ? and u.nom_station = ?`;
 
-    const sql = SqlString.format(rq, [destination, timestampVoyage, station]);
+    const sql = SqlString.format(rq, [arrive, timestampVoyage, station]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {
@@ -156,12 +156,12 @@ module.exports = VoyagesDao = {
       })
     })
   },
-  voyagesByDestAndStationAndDate (station, destination, date) {
+  voyagesByDestAndStationAndDate (station, arrive, date) {
     const rq = `SELECT * from ${table.name} v join stations s
     on v.id_station = s.id_station
-    where s.nom_station = ? and v.destination = ? and v.date_depart = ? `;
+    where s.nom_station = ? and v.arrive = ? and v.date_depart = ? `;
 
-    const sql = SqlString.format(rq, [station, destination, date]);
+    const sql = SqlString.format(rq, [station, arrive, date]);
 
     return new Promise((resolve, reject) => {
       db.query(sql, (err, result) => {

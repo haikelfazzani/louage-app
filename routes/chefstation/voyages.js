@@ -34,8 +34,8 @@ router.get('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
 })
 
 router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
-  let { id_station, vehicule, destination, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
-  let newVoyage = new Voyage(uniqid(), destination, heureDepart, dateDepart, prixPlace, nbPlaces, id_station, vehicule)
+  let { id_station, vehicule, arrive, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
+  let newVoyage = new Voyage(uniqid(), arrive, heureDepart, dateDepart, prixPlace, nbPlaces, id_station, vehicule)
 
   voyagesDao.addVoyage(newVoyage)
     .then(result => {
@@ -65,8 +65,8 @@ router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
-  let { uidvoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
-  let newVoyage = new Voyage(uidvoyage, destination, heureDepart, dateDepart, prixPlace, nbPlaces, '', '')
+  let { uidvoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
+  let newVoyage = new Voyage(uidvoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces, '', '')
 
   voyagesDao.updateVoyage(newVoyage)
     .then(result => {

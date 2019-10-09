@@ -29,8 +29,8 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>destination</label>
-                <input type="text" class="form-control" value="<%= voyage.destination %>" required disabled>
+                <label>arrive</label>
+                <input type="text" class="form-control" value="<%= voyage.arrive %>" required disabled>
               </div>
             </div>
           </div>
@@ -75,14 +75,14 @@
             </div>
           </div>
   
-          <button type="submit" class="btn btn-dark">reserver</button>
+          <button type="submit" class="btn btn-dark">confirmer</button>
           <button type="reset" class="btn btn-danger">vider</button>
         </form>
       </div>
   
       <div class="col-md-6">
         <iframe id='mapcanvas'
-          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.arrive) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
           frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
         </iframe>
       </div>
