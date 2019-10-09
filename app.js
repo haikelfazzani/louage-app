@@ -19,7 +19,7 @@ app.use(session({
   secret: 'my-secret-code',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false, maxAge: 3600000 }
+  cookie: { secure: false, maxAge: 1209600000 }
 }))
 
 var Role = require('./model/Role.enum')
