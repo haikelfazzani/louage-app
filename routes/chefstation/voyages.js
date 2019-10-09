@@ -8,16 +8,13 @@ var uniqid = require('uniqid')
 
 router.get('/', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let { id_station, nom_station } = req.session.chefStationInfo
-
   voyagesDao.getVoyageByStation(id_station)
-    .then(function (voyages) {
-      res.cookie('voyages', JSON.stringify(voyages), { maxAge: 60 * 1000 * 5, httpOnly: true })
-
+    .then((voyages) => {
       voyages.sort((i, j) => Date.parse(j.timestamp_voyage) - Date.parse(i.timestamp_voyage))
       res.render('chefstation/voyage/lister', { voyages, nom_station })
     })
     .catch(e => {
-      res.render('chefstation/voyage/lister');
+      res.render('chefstation/voyage/lister')
     });
 })
 
@@ -38,42 +35,31 @@ router.post('/ajout', [checkUserConnected, checkUserRoleChef], (req, res) => {
   let newVoyage = new Voyage(uniqid(), arrive, heureDepart, dateDepart, prixPlace, nbPlaces, id_station, vehicule)
 
   voyagesDao.addVoyage(newVoyage)
-    .then(result => {
+    .then(r => {
       res.redirect('/chefstation/voyages')
     })
-    .catch(error => {
+    .catch(e => {
       res.render('chefstation/voyage/ajout', { msg: 'erreur d\'ajout' })
     })
 })
 
 router.get('/supprimer', [checkUserConnected, checkUserRoleChef], function (req, res) {
-  let { voyage } = req.query
-
-  voyagesDao.deletVoyage(voyage)
-    .then(result => {
-      res.redirect('/chefstation/voyages')
-    })
-    .catch(error => {
-      res.redirect('/chefstation/voyages')
-    })
+  voyagesDao.deletVoyage(req.query.voyage)
+    .then(r => { res.redirect('/chefstation/voyages') })
+    .catch(e => { res.redirect('/chefstation/voyages') })
 })
 
 router.get('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
-  let { v } = req.query
-  let voyage = (JSON.parse(req.cookies.voyages)).find(vo => vo.uid_voyage === v)
-  res.render('chefstation/voyage/modifier', { voyage })
+  voyagesDao.getVoyageById(req.query.v)
+    .then(r => { res.render('chefstation/voyage/modifier', { voyage: r[0] }) })
+    .catch(e => { res.render('chefstation/voyage/modifier') })
 })
 
 router.post('/modifier', [checkUserConnected, checkUserRoleChef], (req, res) => {
-  let { uidvoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces, idvoyage } = req.body
+  let { uidvoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces } = req.body
   let newVoyage = new Voyage(uidvoyage, arrive, heureDepart, dateDepart, prixPlace, nbPlaces, '', '')
-
   voyagesDao.updateVoyage(newVoyage)
-    .then(result => {
-      res.redirect('/chefstation/voyages')
-    })
-    .catch(error => {
-      res.redirect('/chefstation/voyages')
-    })
+    .then(r => { res.redirect('/chefstation/voyages') })
+    .catch(e => { res.redirect('/chefstation/voyages') })
 })
 module.exports = router

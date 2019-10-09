@@ -10,7 +10,7 @@ module.exports = class Voayge {
     numSerieVehicule
   ) {
     this.uidVoyage = uidVoyage || ''
-    this.arrive = arrive || ''
+    this.arrive = arrive.toLowerCase() || ''
     this.heureDepart = heureDepart || ''
     this.dateDepart = dateDepart || ''
     this.prixPlace = prixPlace || ''
