@@ -9,7 +9,7 @@
         <thead>
           <tr>
             <th>station</th>
-            <th>destination</th>
+            <th>arrive</th>
             <th>heure depart</th>
             <th>date depart</th>
             <th>nombre place</th>
@@ -22,7 +22,7 @@
           <% reservations.forEach((u, i) => {  %>
           <tr>
             <td><%= u.nom_station %></td>
-            <td><%= u.destination %></td>
+            <td><%= u.arrive %></td>
             <td><%= u.heure_depart %> h</td>
             <td><%= locals.formatDate(u.date_depart) %></td>
             <td><%= u.nb_place_reserver %></td>

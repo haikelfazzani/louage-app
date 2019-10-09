@@ -34,7 +34,7 @@
               <small>DE</small>
               <h4><%= voyage.nom_station %></h4>
               <small>vers</small>
-              <h4><%= voyage.destination %></h4>
+              <h4><%= voyage.arrive %></h4>
             </div>
             <% if(nom && nom.length > 0) { %>
             <div>
@@ -72,7 +72,7 @@
         </iframe>
 
         <iframe id='mapcanvas'
-          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.destination) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
+          src='https://maps.google.com/maps?q=<%= encodeURIComponent(voyage.arrive) %>&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed'
           frameborder='0' scrolling='no' marginheight='0' marginwidth='0'>
         </iframe>
       </div>

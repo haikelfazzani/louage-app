@@ -6,7 +6,7 @@
     box-shadow: 0 2px 5px 0 rgba(19, 41, 104, .2);
   }
 </style>
-<% if(locals.destinations) { %>
+<% if(locals.arrives) { %>
 <form action="/voyages" method="POST" class="form-general chercher-form mb-5">
   <div class="form-row">
 
@@ -23,10 +23,10 @@
 
     <div class="col-md-3">
       <div class="form-group">
-        <label for="destination">destination</label>
-        <select class="form-control" id="destination" name="destination">
-          <% destinations.forEach(v => { %>
-          <option><%= v.destination %></option>
+        <label for="arrive">arrive</label>
+        <select class="form-control" id="arrive" name="arrive">
+          <% arrives.forEach(v => { %>
+          <option><%= v.arrive %></option>
           <% }) %>
         </select>
       </div>
