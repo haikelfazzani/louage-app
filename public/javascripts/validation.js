@@ -9,7 +9,7 @@ function isValidInput (str) {
   return (/^[a-z0-9\xBF-\xFF\s+\@\.\-\_\#\%]*$/gi.test(str) && str.length > 0)
 }
 
-let generalForm = document.querySelector('.form-general')
+let generalForm = document.querySelector('.form-general');
 if (generalForm) {
   generalForm.onsubmit = (e) => {
 
@@ -24,10 +24,10 @@ if (generalForm) {
     }
 
     e.preventDefault()
-    var x = document.querySelector(".error-snack")
-    x.classList.add("showsnack")
-    x.textContent = 'Les données entrées ne sont pas valides!'
-    setTimeout(function () { x.className = x.className.replace("showsnack", "") }, 5000)
+    var x = document.querySelector(".error-snack");
+    x.classList.add("showsnack");
+    x.textContent = 'Les données entrées ne sont pas valides!';
+    setTimeout(function () { x.className = x.className.replace("showsnack", "") }, 5000);
     return false
   }
 }
@@ -35,20 +35,19 @@ if (generalForm) {
 /** form validation for forms contains email and password */
 if (formRegister) {
   formRegister.onsubmit = e => {
-
-    let email = e.target.email.value
-    let pass = e.target.password.value
+    let email = e.target.email.value;
+    let pass = e.target.password.value;
 
     if (isPureStr(email) && isPureStr(pass)) {
       return true
     }
     else {
-      e.preventDefault()
-      let msgForm = document.querySelector('#form-signin')
+      e.preventDefault();
+      let msgForm = document.querySelector('#form-signin');
       msgForm.style.display = 'block';
       msgForm.textContent = 'Email ou mot de passe invalide!';
 
-      setTimeout(() => { msgForm.style.display = 'none' }, 3000)
+      setTimeout(() => { msgForm.style.display = 'none' }, 3000);
       return false
     }
   }
@@ -88,30 +87,30 @@ function previewImage (event) {
 }
 
 /** alert confirm before delete */
-let btnDelete = document.querySelectorAll('.btn-delete')
+let btnDelete = document.querySelectorAll('.btn-delete');
 btnDelete.forEach(b => {
   b.onclick = () => confirm('voulez-vous vraiment supprimer ?')
 })
 
-let btnCancel = document.querySelectorAll('.btn-cancel')
+let btnCancel = document.querySelectorAll('.btn-cancel');
 btnCancel.forEach(b => {
-  b.onclick = () => confirm('voulez-vous vraiment annuler ?')
+  b.onclick = () => confirm('voulez-vous vraiment annuler ?');
 })
 
 /** Contact Page Form */
 let btnSend = document.getElementById('btn-send-mail'), r = '';
 if (btnSend) {
-  btnSend.disabled = true
-  let check = (s) => /^[a-z0-9\;\.\,\+\-\s+ ]+$/gmi.test(s)
+  btnSend.disabled = true;
+  let check = (s) => /^[a-z0-9\;\.\,\+\-\s+ ]+$/gmi.test(s);
 
   document.getElementById('message').onkeyup = (e) => {
-    r = e.target.value
+    r = e.target.value;
     if (check(r.replace(/\r|\n/g, ''))) {
-      if (r.length > 50) btnSend.disabled = false
-      else btnSend.disabled = true
+      if (r.length > 50) btnSend.disabled = false;
+      else btnSend.disabled = true;
     }
     else {
-      btnSend.disabled = true
+      btnSend.disabled = true;
     }
   }
 }
