@@ -284,6 +284,26 @@ textarea {
   bottom: 20px;
   right: 20px;
   display: none;
+  background-color: #28a745;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
 }
 
 @-webkit-keyframes fadein {
@@ -389,3 +409,39 @@ textarea {
     text-align: center;
   }
 }
+
+.but {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  background-color: transparent;  
+  padding: 7px 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: .25rem;  
+
+  text-transform: uppercase;  
+  text-decoration: none;
+  cursor: pointer;    
+  overflow: hidden;  
+  position: relative;
+}
+
+.button1 { color: #ffffff !important; border: 1px solid #ffffff;  }
+    
+.button1::before {    
+  width: 102%;
+  height: 0;  
+  background-color: #28a745;
+  content: "";
+  position: absolute;  
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.button1:hover {     border: 1px solid #28a745; color: #ffffff !important; }
+.button1:hover::before { height: 100%; }

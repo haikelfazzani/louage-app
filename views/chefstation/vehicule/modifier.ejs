@@ -5,7 +5,6 @@
     <%- include('../navbar') -%>
     <% if(locals.vehicule) { %>
     <form action="/chefstation/vehicules/modifier" method="POST" class="form-general form-bg-gray mb-3">
-
       <div class="form-group">
         <label for="numserie">num Serie</label>
         <input type="text" class="form-control" id="numserie" name="numserie" value="<%= vehicule.num_serie %>" required
