@@ -57,25 +57,25 @@
 - [ ] Hot reload and redirect errors. (App never crash)
 
 ## Security
-- [ ] JWT Auth
-- [ ] CORS
+- [x] JWT Auth
+- [x] CORS
 - [x] Password attack (hashing)
 - [x] ClickJacking attack
-- [ ] DDOS attack
-- [ ] DOS attack
-- [ ] CSRF attack
+- [x] DDOS attack
+- [x] DOS attack
+- [x] CSRF attack
 - [x] XSS attack
 
 ## Additional
 - [x] resize image and minimize size (Sharp)
-- [ ] visitor reporting. (Charting)
+- [x] visitor reporting. (Charting)
 - [ ] Facebook login
 - [ ] Google login
 - [x] Google maps station position
 
 ## Notes
 - [x] supprimer tous les voyages si la date est expirée
-- [ ] nombre places voyage === 0 ; voyage sera supprimé auto
+- [x] nombre places voyage === 0 ; voyage sera supprimé auto
 
 ## Bugs
 - [x] Database Connection lost: The server closed the connection. (Fixed)
