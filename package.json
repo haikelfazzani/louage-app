@@ -30,7 +30,7 @@
     "sharp": "^0.23.0",
     "sqlstring": "^2.3.1",
     "uniqid": "^5.0.3",
-    "snyk": "^1.316.1"
+    "snyk": "^1.425.4"
   },
   "devDependencies": {
     "jest": "^24.9.0",
